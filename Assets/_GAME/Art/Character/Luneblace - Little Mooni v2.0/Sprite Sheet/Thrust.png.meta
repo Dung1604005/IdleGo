@@ -189,12 +189,12 @@ TextureImporter:
       name: Thrust_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 62
-        width: 28
-        height: 21
+        x: 0
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -211,12 +211,12 @@ TextureImporter:
       name: Thrust_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 62
-        width: 28
-        height: 20
+        x: 144
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -233,12 +233,12 @@ TextureImporter:
       name: Thrust_2
       rect:
         serializedVersion: 2
-        x: 343
-        y: 62
-        width: 28
-        height: 20
+        x: 288
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -255,12 +255,12 @@ TextureImporter:
       name: Thrust_3
       rect:
         serializedVersion: 2
-        x: 486
-        y: 62
-        width: 28
-        height: 20
+        x: 432
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -277,12 +277,12 @@ TextureImporter:
       name: Thrust_4
       rect:
         serializedVersion: 2
-        x: 629
-        y: 62
-        width: 28
-        height: 20
+        x: 576
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -299,12 +299,12 @@ TextureImporter:
       name: Thrust_5
       rect:
         serializedVersion: 2
-        x: 773
-        y: 62
-        width: 28
-        height: 20
+        x: 720
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -321,12 +321,12 @@ TextureImporter:
       name: Thrust_6
       rect:
         serializedVersion: 2
-        x: 924
-        y: 62
-        width: 61
-        height: 19
+        x: 864
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -343,12 +343,12 @@ TextureImporter:
       name: Thrust_7
       rect:
         serializedVersion: 2
-        x: 1069
-        y: 62
-        width: 61
-        height: 18
+        x: 1008
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -365,12 +365,12 @@ TextureImporter:
       name: Thrust_8
       rect:
         serializedVersion: 2
-        x: 1213
-        y: 62
-        width: 20
-        height: 18
+        x: 1152
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -387,12 +387,12 @@ TextureImporter:
       name: Thrust_9
       rect:
         serializedVersion: 2
-        x: 1230
-        y: 62
-        width: 45
-        height: 15
+        x: 1296
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -409,12 +409,12 @@ TextureImporter:
       name: Thrust_10
       rect:
         serializedVersion: 2
-        x: 1357
-        y: 62
-        width: 20
-        height: 18
+        x: 1440
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -431,12 +431,12 @@ TextureImporter:
       name: Thrust_11
       rect:
         serializedVersion: 2
-        x: 1376
-        y: 61
-        width: 30
-        height: 18
+        x: 1584
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -453,12 +453,12 @@ TextureImporter:
       name: Thrust_12
       rect:
         serializedVersion: 2
-        x: 1405
-        y: 69
-        width: 16
-        height: 8
+        x: 1728
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -475,12 +475,12 @@ TextureImporter:
       name: Thrust_13
       rect:
         serializedVersion: 2
-        x: 1502
-        y: 62
-        width: 45
-        height: 19
+        x: 1872
+        y: 0
+        width: 144
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -493,165 +493,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Thrust_14
-      rect:
-        serializedVersion: 2
-        x: 1555
-        y: 70
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 658be7671184c5f10800000000000000
-      internalID: 2259760352872806486
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_15
-      rect:
-        serializedVersion: 2
-        x: 1647
-        y: 62
-        width: 60
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 10aa14b9392147c40800000000000000
-      internalID: 5509048669355223553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_16
-      rect:
-        serializedVersion: 2
-        x: 1787
-        y: 62
-        width: 65
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63cf40f8fce5ad4f0800000000000000
-      internalID: -803225337981502410
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_17
-      rect:
-        serializedVersion: 2
-        x: 1930
-        y: 62
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fac0b1c555ea99a10800000000000000
-      internalID: 1916754798063586479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_18
-      rect:
-        serializedVersion: 2
-        x: 1403
-        y: 62
-        width: 13
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0998918bd28836fd0800000000000000
-      internalID: -2349884850613679728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_19
-      rect:
-        serializedVersion: 2
-        x: 1540
-        y: 60
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ecc678337853d1b80800000000000000
-      internalID: -8422516873311589170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thrust_20
-      rect:
-        serializedVersion: 2
-        x: 1554
-        y: 62
-        width: 9
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0bb04a8ddeb451620800000000000000
-      internalID: 2744183032866147248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5fbc89a2e7d213545baa7dc826178432
     internalID: 0
     vertices: []
     indices: 
@@ -659,7 +505,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":144.0,"y":144.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Thrust_0: -3971448639319642843
       Thrust_1: 4352637255900294146
@@ -667,14 +515,7 @@ TextureImporter:
       Thrust_11: -831578036501860356
       Thrust_12: -5715331165516060672
       Thrust_13: 2175001740691290529
-      Thrust_14: 2259760352872806486
-      Thrust_15: 5509048669355223553
-      Thrust_16: -803225337981502410
-      Thrust_17: 1916754798063586479
-      Thrust_18: -2349884850613679728
-      Thrust_19: -8422516873311589170
       Thrust_2: 4414150143222128918
-      Thrust_20: 2744183032866147248
       Thrust_3: -3017042825262443818
       Thrust_4: -6271690014876186876
       Thrust_5: -8500993339073808477

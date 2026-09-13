@@ -1,8 +1,13 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] private CharacterStat stats = new CharacterStat();
+
+    [SerializeField] private CharacterCombat combat = new CharacterCombat();
+
+    [SerializeField] private CharacterMovement movement = new CharacterMovement();
 
     public CharacterStat Stats => stats;
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
@@ -13,32 +18,17 @@ public abstract class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
-        if (stats == null)
-        {
-            stats = new CharacterStat();
-        }
-
+    
         stats.OnInit();
+        combat.OnInit();
+        movement.OnInit(this);
+
         IsInitialized = true;
     }
 
-    public virtual void Attack(Character target)
+    public virtual void OnDespawn()
     {
-        DealDamage(target, 1f);
-    }
-
-    public virtual void DealDamage(Character target, float multiplier)
-    {
-        if (!IsInitialized || IsDead || target == null || target.IsDead)
-        {
-            return;
-        }
-
-        float criticalChance = Mathf.Clamp01(stats.CurrentCriticalChance);
-        bool isCritical = criticalChance >= 1f || Random.value < criticalChance;
-        float criticalMultiplier = isCritical ? Mathf.Max(1f, stats.CurrentCriticalDamage) : 1f;
-        int damage = Mathf.Max(0, Mathf.RoundToInt(AttackDamage * Mathf.Max(0f, multiplier) * criticalMultiplier));
-        target.TakeDamage(damage);
+        IsInitialized = false;
     }
 
     public virtual void TakeDamage(int damage)

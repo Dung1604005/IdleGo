@@ -5,16 +5,19 @@ public class HealSkill : CombatSkill
 {
     [SerializeField, Min(1)] private int healAmount = 20;
 
-    public override bool CanUse(Character user, Character target)
+    public override float Range => float.PositiveInfinity;
+
+    public override bool CanUse(CharacterCombat user, Character target)
     {
-        return user != null && !user.IsDead && user.CurrentHealth < user.MaxHealth;
+        return user != null && user.IsInitialized && user.Character != null && !user.Character.IsDead &&
+            user.Character.CurrentHealth < user.Character.MaxHealth;
     }
 
-    public override void Execute(Character user, Character target)
+    public override void Execute(CharacterCombat user, Character target)
     {
         if (CanUse(user, target))
         {
-            user.Heal(Mathf.Max(1, healAmount));
+            user.Character.Heal(Mathf.Max(1, healAmount));
         }
     }
 }

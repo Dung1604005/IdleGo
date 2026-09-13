@@ -4,13 +4,17 @@ using UnityEngine;
 public class DamageSkill : CombatSkill
 {
     [SerializeField, Min(0f)] private float damageMultiplier = 2f;
+    [SerializeField, Min(0f)] private float range = 1.5f;
 
-    public override bool CanUse(Character user, Character target)
+    public override float Range => Mathf.Max(0f, range);
+
+    public override bool CanUse(CharacterCombat user, Character target)
     {
-        return user != null && !user.IsDead && target != null && !target.IsDead;
+        return user != null && user.IsInitialized && user.Character != null &&
+            !user.Character.IsDead && target != null && !target.IsDead;
     }
 
-    public override void Execute(Character user, Character target)
+    public override void Execute(CharacterCombat user, Character target)
     {
         if (!CanUse(user, target))
         {

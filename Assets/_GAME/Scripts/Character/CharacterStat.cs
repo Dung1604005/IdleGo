@@ -14,6 +14,9 @@ public class CharacterStat
     [SerializeField, Min(1f)] private float baseCriticalDamage = 1.5f;
     [SerializeField, Range(0f, 1f)] private float baseCooldownReduction = 0f;
     [SerializeField, Min(0)] private int baseArmor = 0;
+    [SerializeField, Range(0f, 1f)] private float baseLifeSteal = 0f;
+    [SerializeField, Range(0f, 1f)] private float baseDodgeChance = 0f;
+    [SerializeField, Min(0f)] private float baseDamageAmplification = 0f;
 
     public int BaseMaxHealth => Mathf.Max(1, baseMaxHealth);
     public float BaseRunSpeed => Mathf.Max(0f, baseRunSpeed);
@@ -25,39 +28,113 @@ public class CharacterStat
     public float BaseCriticalDamage => Mathf.Max(1f, baseCriticalDamage);
     public float BaseCooldownReduction => Mathf.Clamp01(baseCooldownReduction);
     public int BaseArmor => Mathf.Max(0, baseArmor);
+    public float BaseLifeSteal => Mathf.Clamp01(baseLifeSteal);
+    public float BaseDodgeChance => Mathf.Clamp01(baseDodgeChance);
+    public float BaseDamageAmplification => Mathf.Max(0f, baseDamageAmplification);
 
-    public int CurrentMaxHealth
+    public int CurrentMaxHealth => currentMaxHealth;
+
+    public int GetExpToNextLevel(int level)
     {
-        get => currentMaxHealth;
-        set
-        {
-            currentMaxHealth = Mathf.Max(1, value);
-            CurrentHealth = Mathf.Min(CurrentHealth, currentMaxHealth);
-        }
+        return Mathf.RoundToInt(
+            GameConfig.BASE_EXP * Mathf.Pow(level, GameConfig.POWER_EXP)
+        );
     }
 
     public int CurrentHealth { get; private set; }
-    public float CurrentRunSpeed { get => currentRunSpeed; set => currentRunSpeed = Mathf.Max(0f, value); }
-    public int CurrentDamage { get => currentDamage; set => currentDamage = Mathf.Max(0, value); }
-    public int CurrentLevel { get => currentLevel; set => currentLevel = Mathf.Max(1, value); }
-    public int CurrentExperience { get => currentExperience; set => currentExperience = Mathf.Max(0, value); }
-    public float CurrentAttackSpeed { get => currentAttackSpeed; set => currentAttackSpeed = Mathf.Max(0.01f, value); }
-    public float CurrentCriticalChance { get => currentCriticalChance; set => currentCriticalChance = Mathf.Clamp01(value); }
-    public float CurrentCriticalDamage { get => currentCriticalDamage; set => currentCriticalDamage = Mathf.Max(1f, value); }
-    public float CurrentCooldownReduction { get => currentCooldownReduction; set => currentCooldownReduction = Mathf.Clamp01(value); }
-    public int CurrentArmor { get => currentArmor; set => currentArmor = Mathf.Max(0, value); }
+    public float CurrentRunSpeed => currentRunSpeed;
+    public int CurrentDamage => currentDamage;
+    public int CurrentLevel => currentLevel;
+    public int CurrentExperience => currentExperience;
+    public float CurrentAttackSpeed => currentAttackSpeed;
+    public float CurrentCriticalChance => currentCriticalChance;
+    public float CurrentCriticalDamage => currentCriticalDamage;
+    public float CurrentCooldownReduction => currentCooldownReduction;
+    public int CurrentArmor => currentArmor;
+    public float CurrentLifeSteal => currentLifeSteal;
+    public float CurrentDodgeChance => currentDodgeChance;
+    public float CurrentDamageAmplification => currentDamageAmplification;
     public bool IsDead => CurrentHealth <= 0;
 
-    private int currentMaxHealth;
-    private float currentRunSpeed;
-    private int currentDamage;
-    private int currentLevel;
-    private int currentExperience;
-    private float currentAttackSpeed;
-    private float currentCriticalChance;
-    private float currentCriticalDamage;
-    private float currentCooldownReduction;
-    private int currentArmor;
+    [SerializeField] private int currentMaxHealth;
+    [SerializeField] private float currentRunSpeed;
+    [SerializeField] private int currentDamage;
+    [SerializeField] private int currentLevel;
+    [SerializeField] private int currentExperience;
+    [SerializeField] private float currentAttackSpeed;
+    [SerializeField] private float currentCriticalChance;
+    [SerializeField] private float currentCriticalDamage;
+    [SerializeField] private float currentCooldownReduction;
+    [SerializeField] private int currentArmor;
+    [SerializeField] private float currentLifeSteal;
+    [SerializeField] private float currentDodgeChance;
+    [SerializeField] private float currentDamageAmplification;
+
+    public void SetCurrentMaxHealth(int value)
+    {
+        currentMaxHealth = Mathf.Max(1, value);
+        CurrentHealth = Mathf.Min(CurrentHealth, currentMaxHealth);
+    }
+
+    public void SetCurrentRunSpeed(float value)
+    {
+        currentRunSpeed = Mathf.Max(0f, value);
+    }
+
+    public void SetCurrentDamage(int value)
+    {
+        currentDamage = Mathf.Max(0, value);
+    }
+
+    public void SetCurrentLevel(int value)
+    {
+        currentLevel = Mathf.Max(1, value);
+    }
+
+    public void SetCurrentExperience(int value)
+    {
+        currentExperience = Mathf.Max(0, value);
+    }
+
+    public void SetCurrentAttackSpeed(float value)
+    {
+        currentAttackSpeed = Mathf.Max(0.01f, value);
+    }
+
+    public void SetCurrentCriticalChance(float value)
+    {
+        currentCriticalChance = Mathf.Clamp01(value);
+    }
+
+    public void SetCurrentCriticalDamage(float value)
+    {
+        currentCriticalDamage = Mathf.Max(1f, value);
+    }
+
+    public void SetCurrentCooldownReduction(float value)
+    {
+        currentCooldownReduction = Mathf.Clamp01(value);
+    }
+
+    public void SetCurrentArmor(int value)
+    {
+        currentArmor = Mathf.Max(0, value);
+    }
+
+    public void SetCurrentLifeSteal(float value)
+    {
+        currentLifeSteal = Mathf.Clamp01(value);
+    }
+
+    public void SetCurrentDodgeChance(float value)
+    {
+        currentDodgeChance = Mathf.Clamp01(value);
+    }
+
+    public void SetCurrentDamageAmplification(float value)
+    {
+        currentDamageAmplification = Mathf.Max(0f, value);
+    }
 
     public void OnInit()
     {
@@ -66,17 +143,20 @@ public class CharacterStat
 
     public void ResetToBase()
     {
-        CurrentMaxHealth = BaseMaxHealth;
+        SetCurrentMaxHealth(BaseMaxHealth);
         CurrentHealth = CurrentMaxHealth;
-        CurrentRunSpeed = BaseRunSpeed;
-        CurrentDamage = BaseDamage;
-        CurrentLevel = BaseLevel;
-        CurrentExperience = BaseExperience;
-        CurrentAttackSpeed = BaseAttackSpeed;
-        CurrentCriticalChance = BaseCriticalChance;
-        CurrentCriticalDamage = BaseCriticalDamage;
-        CurrentCooldownReduction = BaseCooldownReduction;
-        CurrentArmor = BaseArmor;
+        SetCurrentRunSpeed(BaseRunSpeed);
+        SetCurrentDamage(BaseDamage);
+        SetCurrentLevel(BaseLevel);
+        SetCurrentExperience(BaseExperience);
+        SetCurrentAttackSpeed(BaseAttackSpeed);
+        SetCurrentCriticalChance(BaseCriticalChance);
+        SetCurrentCriticalDamage(BaseCriticalDamage);
+        SetCurrentCooldownReduction(BaseCooldownReduction);
+        SetCurrentArmor(BaseArmor);
+        SetCurrentLifeSteal(BaseLifeSteal);
+        SetCurrentDodgeChance(BaseDodgeChance);
+        SetCurrentDamageAmplification(BaseDamageAmplification);
     }
 
     public bool TakeDamage(int incomingDamage)
@@ -85,11 +165,19 @@ public class CharacterStat
         {
             return false;
         }
-
+        if (CanDodge())
+        {
+            return false;
+        }
         // Armor is flat reduction; each successful hit still deals at least 1 damage.
         int effectiveDamage = Mathf.Max(1, incomingDamage - Mathf.Max(0, CurrentArmor));
         CurrentHealth = Mathf.Max(0, CurrentHealth - effectiveDamage);
         return IsDead;
+    }
+
+    public bool CanDodge()
+    {
+        return CurrentDodgeChance >= 1f || UnityEngine.Random.value < CurrentDodgeChance;
     }
 
     public void Heal(int amount)
@@ -104,15 +192,23 @@ public class CharacterStat
 
     public void SetLevel(int value)
     {
-        CurrentLevel = Mathf.Max(1, value);
+        SetCurrentLevel(value);
     }
 
     public void AddExperience(int amount)
     {
         if (amount > 0)
         {
-            CurrentExperience = Mathf.Max(0, CurrentExperience);
-            CurrentExperience += Mathf.Min(amount, int.MaxValue - CurrentExperience);
+            SetCurrentExperience(CurrentExperience);
+            SetCurrentExperience(CurrentExperience + Mathf.Min(amount, int.MaxValue - CurrentExperience));
+        }
+    }
+
+    public void CheckLevelUp()
+    {
+        for(int i = 1; i <= 100000; i++)
+        {
+            
         }
     }
 }

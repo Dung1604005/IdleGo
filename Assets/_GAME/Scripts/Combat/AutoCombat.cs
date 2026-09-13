@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AutoCombat : MonoBehaviour
 {
-    [SerializeField] private Character character = null;
-    [SerializeField] private PlayerManager playerManager = null;
-    [SerializeField] private EnemyManager enemyManager = null;
+    [SerializeField] private Character character ;
+    [SerializeField] private CharacterCombat characterCombat ;
+    [SerializeField] private CharacterMovement movement = new CharacterMovement();
     [SerializeField] private CombatSkill[] skills = new CombatSkill[0];
 
     private Character target;
@@ -13,24 +13,16 @@ public class AutoCombat : MonoBehaviour
     private bool isInitialized;
 
     public Character Target => target;
+    public bool IsMoving => movement != null && movement.IsMoving;
 
     public void OnInit()
     {
         isInitialized = false;
 
-        if (character == null ||
-            (character is Player && enemyManager == null) ||
-            (character is Enemy && playerManager == null) ||
-            (!(character is Player) && !(character is Enemy)))
+        if (character == null || characterCombat == null || characterCombat.Character != character ||
+            !character.IsInitialized || !characterCombat.IsInitialized)
         {
-            Debug.LogError("AutoCombat needs a Player or Enemy and the opposing manager assigned in the Inspector.", this);
-            enabled = false;
-            return;
-        }
-
-        if (!character.IsInitialized)
-        {
-            Debug.LogError("Call Character.OnInit() before AutoCombat.OnInit().", this);
+            Debug.LogError("Assign matching Character and CharacterCombat, then call their OnInit() methods before AutoCombat.OnInit().", this);
             return;
         }
 
@@ -39,11 +31,26 @@ public class AutoCombat : MonoBehaviour
             skills = new CombatSkill[0];
         }
 
+        if (movement == null)
+        {
+            movement = new CharacterMovement();
+        }
+
+        movement.OnInit(character);
+
         readyAt = new double[skills.Length];
         nextActionAt = Time.timeAsDouble;
         target = null;
         isInitialized = true;
         enabled = true;
+    }
+
+    public void OnDespawn()
+    {
+        movement?.OnDespawn();
+        target = null;
+        readyAt = null;
+        isInitialized = false;
     }
 
     private void Update()
@@ -54,8 +61,10 @@ public class AutoCombat : MonoBehaviour
         }
 
         double now = Time.timeAsDouble;
-        if (character.IsDead || now < nextActionAt)
+        if (character.IsDead)
         {
+            movement.Stop();
+            target = null;
             return;
         }
 
@@ -63,20 +72,27 @@ public class AutoCombat : MonoBehaviour
 
         if (target == null)
         {
-            nextActionAt = now + ActionInterval;
+            movement.Stop();
             return;
         }
 
         int skillIndex = SelectSkill(now);
+        float range = skillIndex >= 0 ? skills[skillIndex].Range : characterCombat.BasicAttackRange;
+        if (!movement.MoveToward(target, range) || now < nextActionAt)
+        {
+            return;
+        }
+
+        movement.Stop();
         if (skillIndex >= 0)
         {
             CombatSkill skill = skills[skillIndex];
-            skill.Execute(character, target);
+            skill.Execute(characterCombat, target);
             readyAt[skillIndex] = now + Mathf.Max(0.01f, skill.Cooldown * (1f - Mathf.Clamp01(character.Stats.CurrentCooldownReduction)));
         }
         else
         {
-            character.Attack(target);
+            characterCombat.Attack(target);
         }
 
         nextActionAt = now + ActionInterval;
@@ -88,10 +104,10 @@ public class AutoCombat : MonoBehaviour
     {
         if (character is Player)
         {
-            return enemyManager.GetTarget();
+            return EnemyManager.Ins.GetNearestTarget(character.transform.position);
         }
 
-        return playerManager.GetTarget();
+        return PlayerManager.Ins.GetNearestTarget(character.transform.position);
     }
 
     private int SelectSkill(double now)
@@ -102,7 +118,7 @@ public class AutoCombat : MonoBehaviour
         for (int i = 0; i < skills.Length; i++)
         {
             CombatSkill skill = skills[i];
-            if (skill == null || readyAt[i] > now || !skill.CanUse(character, target))
+            if (skill == null || readyAt[i] > now || !skill.CanUse(characterCombat, target))
             {
                 continue;
             }
