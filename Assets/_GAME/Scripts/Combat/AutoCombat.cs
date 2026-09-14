@@ -1,62 +1,92 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoCombat : MonoBehaviour
 {
-    private void Update()
+    public void UpdateAutoCombat(CharacterCombat combat)
     {
+        // Khóa theo frame hiện chỉ cho phép một lần cập nhật combat trong mỗi frame.
         if (!CharacterCombat.TryClaimFrame(Time.frameCount))
         {
             return;
         }
 
-        IReadOnlyList<CharacterCombat> combats = CharacterCombat.ActiveCombats;
-        for (int i = combats.Count - 1; i >= 0; i--)
-        {
-            Execute(combats[i], Time.timeAsDouble, Time.deltaTime);
-        }
+        Execute(combat, Time.timeAsDouble, Time.deltaTime);
     }
 
     public static void Execute(CharacterCombat combat, double now, float deltaTime)
     {
-        if (combat == null || !combat.IsInitialized)
+        if (!TryGetInitializedCharacter(combat, out Character character))
         {
             return;
         }
 
-        Character character = combat.Character;
-        if (character == null || !character.IsInitialized)
-        {
-            combat.OnDespawn();
-            return;
-        }
-
-        combat.EnsureMovementInitialized();
+        // Hồi chiêu vẫn tiếp tục chạy khi nhân vật đang chết.
         combat.TickSkillStates(deltaTime, now);
-
         if (character.IsDead)
         {
-            combat.Movement.Stop();
+            character.Movement.Stop();
             combat.SetTarget(null);
             return;
         }
 
-        Character target = GetNearestOpponent(character);
+        if (!TryAcquireTarget(combat, character, out Character target))
+        {
+            return;
+        }
+
+        // CharacterCombat ưu tiên skill vừa hồi xong gần nhất.
+        CombatSkillState skillState = combat.SelectReadySkill(target);
+        if (!TryReachAttackRange(combat, target, skillState, now))
+        {
+            return;
+        }
+
+        PerformAction(combat, character, target, skillState, now);
+    }
+
+    private static bool TryGetInitializedCharacter(CharacterCombat combat, out Character character)
+    {
+        character = null;
+        if (combat == null || !combat.IsInitialized)
+        {
+            return false;
+        }
+
+        character = combat.Character;
+        if (character == null || !character.IsInitialized)
+        {
+            combat.OnDespawn();
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool TryAcquireTarget(CharacterCombat combat, Character character, out Character target)
+    {
+        target = GetNearestOpponent(character);
         combat.SetTarget(target);
         if (target == null)
         {
-            combat.Movement.Stop();
-            return;
+            character.Movement.Stop();
+            return false;
         }
 
-        CombatSkillState skillState = combat.SelectReadySkill(target);
+        return true;
+    }
+
+    private static bool TryReachAttackRange(CharacterCombat combat, Character target, CombatSkillState skillState, double now)
+    {
         float range = skillState != null ? skillState.Skill.Range : combat.BasicAttackRange;
-        if (!combat.Movement.MoveToward(target, range) || now < combat.NextActionAt)
-        {
-            return;
-        }
 
-        combat.Movement.Stop();
+        // Vẫn tiến về mục tiêu trong lúc chờ nhịp tấn công chung.
+        return combat.Character.Movement.MoveToward(target, range) && now >= combat.NextActionAt;
+    }
+
+    private static void PerformAction(CharacterCombat combat, Character character, Character target, CombatSkillState skillState, double now)
+    {
+        // Dừng di chuyển trước khi dùng skill hoặc đánh thường.
+        character.Movement.Stop();
         if (skillState != null)
         {
             skillState.Skill.Execute(combat, target, skillState.Level);
@@ -67,6 +97,7 @@ public class AutoCombat : MonoBehaviour
             combat.Attack(target);
         }
 
+        // Nhịp tấn công chung tách biệt với thời gian hồi của từng skill.
         combat.MarkAction(now);
     }
 

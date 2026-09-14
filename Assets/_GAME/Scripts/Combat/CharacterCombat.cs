@@ -9,32 +9,19 @@ public class CharacterCombat
 
     [SerializeField] private List<CombatSkillState> combatSkillStates = new List<CombatSkillState>();
 
-    private static readonly List<CharacterCombat> activeCombats = new List<CharacterCombat>();
     private static int lastProcessedFrame = -1;
 
-    private CharacterMovement movement = new CharacterMovement();
     private Character target;
     private double nextActionAt;
 
     public Character Character => character;
     public float BasicAttackRange => Mathf.Max(0f, basicAttackRange);
     public bool IsInitialized { get; private set; }
-    public IReadOnlyList<CombatSkillState> CombatSkillStates => combatSkillStates;
-    public CharacterMovement Movement => movement;
-    public Character Target => target;
     public double NextActionAt => nextActionAt;
-    public static IReadOnlyList<CharacterCombat> ActiveCombats => activeCombats;
 
     public void OnInit(CharacterCombatSO combatSO)
     {
         OnDespawn();
-
-        if (character == null || combatSO == null)
-        {
-            Debug.LogError("CharacterCombat needs a Character and CharacterCombatSO before OnInit().");
-            return;
-        }
-
         basicAttackRange = combatSO.BaseRangeAttack;
         if (combatSkillStates == null)
         {
@@ -53,16 +40,13 @@ public class CharacterCombat
             }
         }
 
-        movement = new CharacterMovement();
         nextActionAt = 0d;
         target = null;
         IsInitialized = true;
-        activeCombats.Add(this);
     }
 
     public void OnDespawn()
     {
-        activeCombats.Remove(this);
         if (combatSkillStates != null)
         {
             for (int i = 0; i < combatSkillStates.Count; i++)
@@ -70,8 +54,6 @@ public class CharacterCombat
                 combatSkillStates[i]?.OnDespawn();
             }
         }
-
-        movement?.OnDespawn();
         target = null;
         nextActionAt = 0d;
         IsInitialized = false;
@@ -88,13 +70,6 @@ public class CharacterCombat
         return true;
     }
 
-    public void EnsureMovementInitialized()
-    {
-        if (!movement.IsInitialized && character != null && character.IsInitialized)
-        {
-            movement.OnInit(character);
-        }
-    }
 
     public void TickSkillStates(float deltaTime, double now)
     {

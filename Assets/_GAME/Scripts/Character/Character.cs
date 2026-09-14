@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 
@@ -11,7 +12,11 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] private CharacterDataSO characterDataSO;
 
+    [SerializeField] private AutoCombat autoCombat;
+
     public CharacterStat Stats => stats;
+
+    public CharacterMovement Movement => movement;
 
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
     public int AttackDamage => stats != null ? Mathf.Max(0, stats.CurrentDamage) : 0;
@@ -57,5 +62,10 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Die()
     {
+    }
+
+    protected virtual void Update()
+    {
+        autoCombat.UpdateAutoCombat(combat);
     }
 }
