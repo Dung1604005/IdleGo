@@ -13,5 +13,5 @@ public class CharacterDataSO : ScriptableObject
 
     public CharacterStatSO StatSO => characterStatSO;
 
-    public CharacterCombatSO CombatSO => CombatSO;
+    public CharacterCombatSO CombatSO => characterCombatSO;
 }

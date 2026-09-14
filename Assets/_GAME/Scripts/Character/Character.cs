@@ -4,15 +4,19 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] private CharacterStat stats = new CharacterStat();
+    [SerializeField] protected CharacterStat stats = new CharacterStat();
 
-    [SerializeField] private CharacterCombat combat = new CharacterCombat();
+    [SerializeField] protected CharacterCombat combat = new CharacterCombat();
 
-    [SerializeField] private CharacterMovement movement = new CharacterMovement();
+    [SerializeField] protected CharacterMovement movement = new CharacterMovement();
 
-    [SerializeField] private CharacterDataSO characterDataSO;
+    [SerializeField] protected CharacterDataSO characterDataSO;
 
-    [SerializeField] private AutoCombat autoCombat;
+    [SerializeField] protected AutoCombat autoCombat;
+
+    [SerializeField]protected Animator animator;
+
+    protected String currentAnim;
 
     public CharacterStat Stats => stats;
 
@@ -26,12 +30,10 @@ public abstract class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
-    
+        IsInitialized = true;
         stats.OnInit(characterDataSO.StatSO);
         combat.OnInit(characterDataSO.CombatSO);
         movement.OnInit(this);
-
-        IsInitialized = true;
     }
 
     public virtual void OnDespawn()
@@ -62,6 +64,16 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Die()
     {
+    }
+
+    public virtual void ChangeAnim(String newAnim)
+    {
+        if (!String.IsNullOrEmpty(newAnim))
+        {
+            animator.ResetTrigger(currentAnim);
+            currentAnim = newAnim;
+            animator.SetTrigger(currentAnim);
+        }
     }
 
     protected virtual void Update()

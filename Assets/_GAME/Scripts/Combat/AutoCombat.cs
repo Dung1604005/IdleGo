@@ -4,12 +4,6 @@ public class AutoCombat : MonoBehaviour
 {
     public void UpdateAutoCombat(CharacterCombat combat)
     {
-        // Khóa theo frame hiện chỉ cho phép một lần cập nhật combat trong mỗi frame.
-        if (!CharacterCombat.TryClaimFrame(Time.frameCount))
-        {
-            return;
-        }
-
         Execute(combat, Time.timeAsDouble, Time.deltaTime);
     }
 

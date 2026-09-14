@@ -49,6 +49,7 @@ public class CharacterMovement
             return false;
         }
 
+        character.ChangeAnim(GameConfig.ANIM_RUN);
         float movement = Mathf.Min(step, distance - range);
         character.transform.position = Vector3.MoveTowards(currentPosition, targetPosition, movement);
         IsMoving = Vector3.Distance(character.transform.position, targetPosition) > range + 0.0001f;
@@ -57,6 +58,7 @@ public class CharacterMovement
 
     public void Stop()
     {
+        character.ChangeAnim(GameConfig.ANIM_IDLE);
         IsMoving = false;
     }
 }

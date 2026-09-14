@@ -9,8 +9,6 @@ public class CharacterCombat
 
     [SerializeField] private List<CombatSkillState> combatSkillStates = new List<CombatSkillState>();
 
-    private static int lastProcessedFrame = -1;
-
     private Character target;
     private double nextActionAt;
 
@@ -58,18 +56,6 @@ public class CharacterCombat
         nextActionAt = 0d;
         IsInitialized = false;
     }
-
-    public static bool TryClaimFrame(int frame)
-    {
-        if (lastProcessedFrame == frame)
-        {
-            return false;
-        }
-
-        lastProcessedFrame = frame;
-        return true;
-    }
-
 
     public void TickSkillStates(float deltaTime, double now)
     {
