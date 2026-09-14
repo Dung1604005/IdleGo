@@ -9,7 +9,10 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] private CharacterMovement movement = new CharacterMovement();
 
+    [SerializeField] private CharacterDataSO characterDataSO;
+
     public CharacterStat Stats => stats;
+
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
     public int AttackDamage => stats != null ? Mathf.Max(0, stats.CurrentDamage) : 0;
     public int CurrentHealth => stats != null ? stats.CurrentHealth : 0;
@@ -19,8 +22,8 @@ public abstract class Character : MonoBehaviour
     public virtual void OnInit()
     {
     
-        stats.OnInit();
-        combat.OnInit();
+        stats.OnInit(characterDataSO.StatSO);
+        combat.OnInit(characterDataSO.CombatSO);
         movement.OnInit(this);
 
         IsInitialized = true;
