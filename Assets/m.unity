@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea891bd2c304ea7864776fb71a5e543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  enemies: []
+  enemies:
+  - {fileID: 1027819422}
 --- !u!1 &953502658
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +176,7 @@ GameObject:
   - component: {fileID: 953502659}
   - component: {fileID: 953502661}
   - component: {fileID: 953502660}
+  - component: {fileID: 953502662}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -278,6 +280,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &953502662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953502658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb90f2c1480ec8499cccc94ebd94798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterAnimationEvent
+  character: {fileID: 1973946102}
 --- !u!1 &1027819421
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 1027819421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.49, y: 0, z: 0}
+  m_LocalPosition: {x: 4.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -725,7 +740,7 @@ Transform:
   m_GameObject: {fileID: 1973946101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -755,6 +770,7 @@ GameObject:
   - component: {fileID: 2022761483}
   - component: {fileID: 2022761482}
   - component: {fileID: 2022761481}
+  - component: {fileID: 2022761484}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -858,6 +874,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1027819424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022761484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022761480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb90f2c1480ec8499cccc94ebd94798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterAnimationEvent
+  character: {fileID: 1027819422}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

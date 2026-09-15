@@ -23,9 +23,13 @@ public class CharacterMovement
         character = null;
     }
 
+    public bool CanMove(Character target)
+    {
+        return !(!IsInitialized || character == null || character.IsDead || target == null || target.IsDead|| character.Combat.IsAttacking);
+    }
     public bool MoveToward(Character target, float stoppingDistance)
     {
-        if (!IsInitialized || character == null || character.IsDead || target == null || target.IsDead)
+        if (!CanMove(target))
         {
             Stop();
             return false;

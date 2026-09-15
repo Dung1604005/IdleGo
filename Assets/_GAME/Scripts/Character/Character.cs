@@ -22,6 +22,8 @@ public abstract class Character : MonoBehaviour
 
     public CharacterMovement Movement => movement;
 
+    public CharacterCombat Combat => combat;
+
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
     public int AttackDamage => stats != null ? Mathf.Max(0, stats.CurrentDamage) : 0;
     public int CurrentHealth => stats != null ? stats.CurrentHealth : 0;
@@ -68,12 +70,16 @@ public abstract class Character : MonoBehaviour
 
     public virtual void ChangeAnim(String newAnim)
     {
-        if (!String.IsNullOrEmpty(newAnim))
+        if (!String.IsNullOrEmpty(newAnim) && newAnim != currentAnim)
         {
             animator.ResetTrigger(currentAnim);
             currentAnim = newAnim;
             animator.SetTrigger(currentAnim);
         }
+    }
+    protected virtual void Awake()
+    {
+        OnInit();
     }
 
     protected virtual void Update()

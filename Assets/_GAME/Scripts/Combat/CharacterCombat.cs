@@ -10,9 +10,14 @@ public class CharacterCombat
     [SerializeField] private List<CombatSkillState> combatSkillStates = new List<CombatSkillState>();
 
     private Character target;
+    private CombatSkillState activeSkillState;
+
+    private bool isAttacking = false;
     private double nextActionAt;
 
     public Character Character => character;
+
+    public bool IsAttacking => isAttacking;
     public float BasicAttackRange => Mathf.Max(0f, basicAttackRange);
     public bool IsInitialized { get; private set; }
     public double NextActionAt => nextActionAt;
@@ -20,6 +25,7 @@ public class CharacterCombat
     public void OnInit(CharacterCombatSO combatSO)
     {
         OnDespawn();
+        isAttacking = false;
         basicAttackRange = combatSO.BaseRangeAttack;
         if (combatSkillStates == null)
         {
@@ -40,6 +46,7 @@ public class CharacterCombat
 
         nextActionAt = 0d;
         target = null;
+        activeSkillState = null;
         IsInitialized = true;
     }
 
@@ -53,6 +60,8 @@ public class CharacterCombat
             }
         }
         target = null;
+        activeSkillState = null;
+        isAttacking = false;
         nextActionAt = 0d;
         IsInitialized = false;
     }
@@ -93,9 +102,40 @@ public class CharacterCombat
         target = opponent;
     }
 
+    public void SetIsAttacking(bool val)
+    {
+        isAttacking = val;
+    }
+
     public void MarkAction(double now)
     {
         nextActionAt = now + 1f / Mathf.Max(0.01f, character.Stats.CurrentAttackSpeed);
+    }
+
+    public void StartAttack(String animAttack, CombatSkillState skillState)
+    {
+        // Giữ lại skill đang thi triển để cooldown chỉ bắt đầu khi animation kết thúc.
+        activeSkillState = skillState;
+        SetIsAttacking(true);
+        character.ChangeAnim(animAttack);
+    }
+
+    public void EndAttack()
+    {
+        if (!isAttacking)
+        {
+            return;
+        }
+
+        // Animation Event là thời điểm xác nhận đòn đánh đã hoàn tất và bắt đầu hồi skill.
+        if (activeSkillState != null)
+        {
+            activeSkillState.StartCooldown(character.Stats.CurrentCooldownReduction);
+            activeSkillState = null;
+        }
+
+        SetIsAttacking(false);
+        character.ChangeAnim(GameConfig.ANIM_IDLE);
     }
 
     public virtual void Attack(Character target)

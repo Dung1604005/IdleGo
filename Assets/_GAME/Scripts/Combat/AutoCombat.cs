@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AutoCombat : MonoBehaviour
@@ -16,6 +17,11 @@ public class AutoCombat : MonoBehaviour
 
         // Hồi chiêu vẫn tiếp tục chạy khi nhân vật đang chết.
         combat.TickSkillStates(deltaTime, now);
+        if (combat.IsAttacking)
+        {
+            return;
+        }
+
         if (character.IsDead)
         {
             character.Movement.Stop();
@@ -81,15 +87,18 @@ public class AutoCombat : MonoBehaviour
     {
         // Dừng di chuyển trước khi dùng skill hoặc đánh thường.
         character.Movement.Stop();
+        String animAttack = GameConfig.ANIM_BASIC_ATTACK;
         if (skillState != null)
         {
             skillState.Skill.Execute(combat, target, skillState.Level);
-            skillState.StartCooldown(character.Stats.CurrentCooldownReduction);
+            animAttack = skillState.Skill.NameAnim;
         }
         else
         {
             combat.Attack(target);
         }
+        // CharacterCombat giữ skill này cho đến khi Animation Event gọi EndAttack.
+        combat.StartAttack(animAttack, skillState);
 
         // Nhịp tấn công chung tách biệt với thời gian hồi của từng skill.
         combat.MarkAction(now);
