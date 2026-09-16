@@ -21,14 +21,6 @@ public class AutoCombat : MonoBehaviour
         {
             return;
         }
-
-        if (character.IsDead)
-        {
-            character.Movement.Stop();
-            combat.SetTarget(null);
-            return;
-        }
-
         if (!TryAcquireTarget(combat, character, out Character target))
         {
             return;

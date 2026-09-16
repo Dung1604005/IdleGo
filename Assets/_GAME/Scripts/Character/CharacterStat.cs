@@ -13,8 +13,9 @@ public class CharacterStat
             GameConfig.BASE_EXP * Mathf.Pow(level, GameConfig.POWER_EXP)
         );
     }
+    [SerializeField]private int currentHealth;
 
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth => currentHealth;
     public float CurrentRunSpeed => currentRunSpeed;
     public int CurrentDamage => currentDamage;
     public int CurrentLevel => currentLevel;
@@ -26,7 +27,7 @@ public class CharacterStat
     public float CurrentLifeSteal => currentLifeSteal;
     public float CurrentDodgeChance => currentDodgeChance;
     public float CurrentDamageAmplification => currentDamageAmplification;
-    public bool IsDead => CurrentHealth <= 0;
+    public bool IsDead => currentHealth <= 0;
 
     [SerializeField] private int currentMaxHealth;
     [SerializeField] private float currentRunSpeed;
@@ -45,7 +46,7 @@ public class CharacterStat
     public void SetCurrentMaxHealth(int value)
     {
         currentMaxHealth = Mathf.Max(1, value);
-        CurrentHealth = Mathf.Min(CurrentHealth, currentMaxHealth);
+        currentHealth = Mathf.Min(currentHealth, currentMaxHealth);
     }
 
     public void SetCurrentRunSpeed(float value)
@@ -117,7 +118,7 @@ public class CharacterStat
     public void ResetToBase(CharacterStatSO characterStatSO)
     {
         SetCurrentMaxHealth(characterStatSO.BaseMaxHealth);
-        CurrentHealth = CurrentMaxHealth;
+        currentHealth = CurrentMaxHealth;
         SetCurrentRunSpeed(characterStatSO.BaseRunSpeed);
         SetCurrentDamage(characterStatSO.BaseDamage);
         SetCurrentLevel(characterStatSO.BaseLevel);
@@ -144,7 +145,7 @@ public class CharacterStat
         }
         // Armor is flat reduction; each successful hit still deals at least 1 damage.
         int effectiveDamage = Mathf.Max(1, incomingDamage - Mathf.Max(0, CurrentArmor));
-        CurrentHealth = Mathf.Max(0, CurrentHealth - effectiveDamage);
+        currentHealth = Mathf.Max(0, currentHealth - effectiveDamage);
         return IsDead;
     }
 
@@ -160,7 +161,7 @@ public class CharacterStat
             return;
         }
 
-        CurrentHealth += Mathf.Min(CurrentMaxHealth - CurrentHealth, amount);
+        currentHealth += Mathf.Min(CurrentMaxHealth - currentHealth, amount);
     }
 
 

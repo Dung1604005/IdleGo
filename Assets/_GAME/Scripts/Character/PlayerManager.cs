@@ -5,6 +5,8 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     [SerializeField] private List<Player> players = new List<Player>();
 
+    public IReadOnlyList<Player> Players => players;
+
     public Player GetTarget()
     {
         if (players == null)

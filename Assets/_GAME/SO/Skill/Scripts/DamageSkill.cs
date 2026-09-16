@@ -6,6 +6,7 @@ public class DamageSkill : CombatSkill
 {
     [SerializeField, Min(0f)] private List<float> damageMultiplierByLevel;
     [SerializeField, Min(0f)] private float range = 1.5f;
+    [SerializeField] private AttackType attackType;
 
     public override float Range => Mathf.Max(0f, range);
 
@@ -22,6 +23,14 @@ public class DamageSkill : CombatSkill
             return;
         }
 
-        user.DealDamage(target, damageMultiplierByLevel[level]);
+        float damageMultiplier = damageMultiplierByLevel[level];
+        if (attackType != null)
+        {
+            attackType.Execute(user, target, damageMultiplier);
+            return;
+        }
+
+        // Skill cũ chưa gán AttackType vẫn hoạt động như một đòn đánh đơn.
+        user.DealDamage(target, damageMultiplier);
     }
 }

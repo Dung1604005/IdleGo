@@ -9,6 +9,7 @@ public class CharacterCombat
 
     [SerializeField] private List<CombatSkillState> combatSkillStates = new List<CombatSkillState>();
 
+    private AttackType basicAttackType;
     private Character target;
     private CombatSkillState activeSkillState;
 
@@ -27,6 +28,7 @@ public class CharacterCombat
         OnDespawn();
         isAttacking = false;
         basicAttackRange = combatSO.BaseRangeAttack;
+        basicAttackType = combatSO.BasicAttackType;
         if (combatSkillStates == null)
         {
             combatSkillStates = new List<CombatSkillState>();
@@ -60,6 +62,7 @@ public class CharacterCombat
             }
         }
         target = null;
+        basicAttackType = null;
         activeSkillState = null;
         isAttacking = false;
         nextActionAt = 0d;
@@ -140,6 +143,13 @@ public class CharacterCombat
 
     public virtual void Attack(Character target)
     {
+        if (basicAttackType != null)
+        {
+            basicAttackType.Execute(this, target, 1f);
+            return;
+        }
+
+        // Giữ hành vi đánh đơn cũ khi CombatData chưa được gán AttackType.
         DealDamage(target, 1f);
     }
 

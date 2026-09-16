@@ -66,6 +66,8 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Die()
     {
+        movement.Stop();
+        combat.SetTarget(null);
     }
 
     public virtual void ChangeAnim(String newAnim)
@@ -84,6 +86,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(IsDead)return;
         autoCombat.UpdateAutoCombat(combat);
     }
 }

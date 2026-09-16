@@ -5,6 +5,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
 
+    public IReadOnlyList<Enemy> Enemies => enemies;
+
     public Enemy GetTarget()
     {
         if (enemies == null)
