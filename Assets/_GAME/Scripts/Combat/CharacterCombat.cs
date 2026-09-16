@@ -11,9 +11,11 @@ public class CharacterCombat
 
     private AttackType basicAttackType;
     private Character target;
+    private Character activeAttackTarget;
     private CombatSkillState activeSkillState;
 
     private bool isAttacking = false;
+    private bool hasExecutedAttack;
     private double nextActionAt;
 
     public Character Character => character;
@@ -45,10 +47,11 @@ public class CharacterCombat
                 combatSkillStates.Add(state);
             }
         }
-
         nextActionAt = 0d;
         target = null;
+        activeAttackTarget = null;
         activeSkillState = null;
+        hasExecutedAttack = false;
         IsInitialized = true;
     }
 
@@ -63,8 +66,10 @@ public class CharacterCombat
         }
         target = null;
         basicAttackType = null;
+        activeAttackTarget = null;
         activeSkillState = null;
         isAttacking = false;
+        hasExecutedAttack = false;
         nextActionAt = 0d;
         IsInitialized = false;
     }
@@ -115,12 +120,32 @@ public class CharacterCombat
         nextActionAt = now + 1f / Mathf.Max(0.01f, character.Stats.CurrentAttackSpeed);
     }
 
-    public void StartAttack(String animAttack, CombatSkillState skillState)
+    public void StartAttack(String animAttack, Character attackTarget, CombatSkillState skillState)
     {
-        // Giữ lại skill đang thi triển để cooldown chỉ bắt đầu khi animation kết thúc.
+        // Chỉ lưu dữ liệu đòn đánh tại đây; damage sẽ được thực thi bởi Animation Event.
+        activeAttackTarget = attackTarget;
         activeSkillState = skillState;
+        hasExecutedAttack = false;
         SetIsAttacking(true);
         character.ChangeAnim(animAttack);
+    }
+
+    public void ExecuteAttack()
+    {
+        if (!isAttacking || hasExecutedAttack)
+        {
+            return;
+        }
+
+        // Đánh dấu trước khi thực thi để một animation không thể gây damage hai lần do event bị gắn trùng.
+        hasExecutedAttack = true;
+        if (activeSkillState != null)
+        {
+            activeSkillState.Skill.Execute(this, activeAttackTarget, activeSkillState.Level);
+            return;
+        }
+
+        Attack(activeAttackTarget);
     }
 
     public void EndAttack()
@@ -134,9 +159,11 @@ public class CharacterCombat
         if (activeSkillState != null)
         {
             activeSkillState.StartCooldown(character.Stats.CurrentCooldownReduction);
-            activeSkillState = null;
         }
 
+        activeAttackTarget = null;
+        activeSkillState = null;
+        hasExecutedAttack = false;
         SetIsAttacking(false);
         character.ChangeAnim(GameConfig.ANIM_IDLE);
     }

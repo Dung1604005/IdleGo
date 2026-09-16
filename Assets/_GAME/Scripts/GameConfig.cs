@@ -18,5 +18,7 @@ public static class GameConfig
 
     public const String ANIM_DIE = "die";
 
+    public const String ANIM_HURT = "hurt";
+
     public const String ANIM_BASIC_ATTACK = "basicAttack";
 }

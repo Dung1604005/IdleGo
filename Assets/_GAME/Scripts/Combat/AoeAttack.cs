@@ -15,7 +15,6 @@ public class AoeAttack : AttackType
         {
             return;
         }
-
         // Tâm AOE nằm tại mục tiêu gần nhất để đòn đánh có thể trúng các đối thủ đứng quanh nó.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             primaryTarget.transform.position,
@@ -52,7 +51,6 @@ public class AoeAttack : AttackType
             {
                 continue;
             }
-
             if (ContainsCharacterCollider(target, colliders))
             {
                 // Mỗi nhân vật chỉ nhận một lần damage dù có nhiều collider trong vùng AOE.

@@ -82,15 +82,11 @@ public class AutoCombat : MonoBehaviour
         String animAttack = GameConfig.ANIM_BASIC_ATTACK;
         if (skillState != null)
         {
-            skillState.Skill.Execute(combat, target, skillState.Level);
             animAttack = skillState.Skill.NameAnim;
         }
-        else
-        {
-            combat.Attack(target);
-        }
-        // CharacterCombat giữ skill này cho đến khi Animation Event gọi EndAttack.
-        combat.StartAttack(animAttack, skillState);
+
+        // StartAttack chỉ lưu đòn đánh; Animation Event sẽ quyết định frame gây damage.
+        combat.StartAttack(animAttack, target, skillState);
 
         // Nhịp tấn công chung tách biệt với thời gian hồi của từng skill.
         combat.MarkAction(now);

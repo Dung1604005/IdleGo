@@ -14,6 +14,8 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] protected AutoCombat autoCombat;
 
+    [SerializeField] protected CharacterHealthBar healthBar;
+
     [SerializeField]protected Animator animator;
 
     protected String currentAnim;
@@ -33,13 +35,15 @@ public abstract class Character : MonoBehaviour
     public virtual void OnInit()
     {
         IsInitialized = true;
-        stats.OnInit(characterDataSO.StatSO);
+        stats.OnInit(characterDataSO.StatSO, this);
         combat.OnInit(characterDataSO.CombatSO);
         movement.OnInit(this);
+        healthBar?.OnInit();
     }
 
     public virtual void OnDespawn()
     {
+        healthBar?.OnDespawn();
         IsInitialized = false;
     }
 

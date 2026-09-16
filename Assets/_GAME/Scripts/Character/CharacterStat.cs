@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterStat
 {
     [SerializeField] private CharacterStatSO statBaseData;
+
+    private Character character;
    public int CurrentMaxHealth => currentMaxHealth;
 
     public int GetExpToNextLevel(int level)
@@ -109,9 +111,10 @@ public class CharacterStat
         currentDamageAmplification = Mathf.Max(0f, value);
     }
 
-    public void OnInit(CharacterStatSO characterStatSO)
+    public void OnInit(CharacterStatSO characterStatSO, Character _character)
     {
         statBaseData = characterStatSO;
+        character = _character;
         ResetToBase(characterStatSO);
     }
 
@@ -144,6 +147,7 @@ public class CharacterStat
             return false;
         }
         // Armor is flat reduction; each successful hit still deals at least 1 damage.
+        character.ChangeAnim(GameConfig.ANIM_HURT);
         int effectiveDamage = Mathf.Max(1, incomingDamage - Mathf.Max(0, CurrentArmor));
         currentHealth = Mathf.Max(0, currentHealth - effectiveDamage);
         return IsDead;
