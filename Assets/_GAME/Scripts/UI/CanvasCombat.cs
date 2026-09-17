@@ -12,24 +12,25 @@ public class CanvasCombat : UICanvas
 
     [SerializeField]private RectTransform canvasRect;
 
-    private void OnEnable()
+    public override void SetUp()
     {
-        CacheWorldCamera();
+        base.SetUp();
+        gameObject.SetActive(true);
+        SetUpCamera();
         if (damagePopupPrefab != null)
         {
             SimplePool.PreLoad(damagePopupPrefab, preloadAmount, transform);
         }
     }
 
-    private void OnDisable()
+    public override void CloseDirectly()
     {
-
-        if (damagePopupPrefab != null)
+        base.CloseDirectly();
+         if (damagePopupPrefab != null)
         {
             SimplePool.Collect(damagePopupPrefab);
         }
     }
-
     public void ShowDamage(int damage, bool isCritical, Transform target)
     {
         if ( target == null || damage <= 0)
@@ -66,7 +67,6 @@ public class CanvasCombat : UICanvas
 
     private bool TryGetPopupPosition(Vector3 targetWorldPosition, out Vector2 popupPosition)
     {
-        CacheWorldCamera();
 
         // Random.insideUnitCircle phan bo popup trong mot hinh tron quanh enemy.
         Vector2 offset = Random.insideUnitCircle * spawnRadius;
@@ -96,11 +96,8 @@ public class CanvasCombat : UICanvas
         }
     }
 
-    private void CacheWorldCamera()
+    private void SetUpCamera()
     {
-        if (worldCamera == null)
-        {
-            worldCamera = Camera.main;
-        }
+        worldCamera = CameraManager.Ins.GetCamera(CameraType.MAIN);
     }
 }
