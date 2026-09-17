@@ -9,6 +9,8 @@ public class CharacterCombat
 
     [SerializeField] private List<CombatSkillState> combatSkillStates = new List<CombatSkillState>();
 
+    [SerializeField] private float delayAttack;
+
     private AttackType basicAttackType;
     private Character target;
     private Character activeAttackTarget;
@@ -35,7 +37,7 @@ public class CharacterCombat
         {
             combatSkillStates = new List<CombatSkillState>();
         }
-
+        delayAttack = combatSO.DelayAttack;
         combatSkillStates.Clear();
         List<CombatSkill> skills = combatSO.GetCombatSkills();
         if (skills != null)
@@ -117,7 +119,7 @@ public class CharacterCombat
 
     public void MarkAction(double now)
     {
-        nextActionAt = now + 1f / Mathf.Max(0.01f, character.Stats.CurrentAttackSpeed);
+        nextActionAt = now + delayAttack / Mathf.Max(0.01f, character.Stats.CurrentAttackSpeed);
     }
 
     public void StartAttack(String animAttack, Character attackTarget, CombatSkillState skillState)

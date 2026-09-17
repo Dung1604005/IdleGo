@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b3e4b7fed021e94a8b1dd394316263f, type: 3}
-  m_Name: MooniCombatData
+  m_Name: SkeletonCombatData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCombatSO
   baseRangeAttack: 1.5
   basicAttackType: {fileID: 11400000, guid: aaa794d9fa4e8d5419e59805b3565a50, type: 2}
-  delayAttack: 1
-  listCombatSkill:
-  - {fileID: 11400000, guid: bcc0995d1e5c8c04fa7d3e6b3dbdc2ca, type: 2}
+  delayAttack: 2.5
+  listCombatSkill: []
