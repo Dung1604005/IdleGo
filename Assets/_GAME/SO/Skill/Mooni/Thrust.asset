@@ -24,3 +24,4 @@ MonoBehaviour:
   - 1.85
   - 2
   range: 1.5
+  attackType: {fileID: 11400000, guid: edc62a5496d93a94481ee419ad5c3926, type: 2}

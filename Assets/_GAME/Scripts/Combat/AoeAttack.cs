@@ -22,6 +22,7 @@ public class AoeAttack : AttackType
             targetLayers
         );
 
+        Debug.Log("ATTACK " + colliders.Length);
         if (user.Character is Player)
         {
             DamageTargets(user, EnemyManager.Ins.Enemies, colliders, damageMultiplier);

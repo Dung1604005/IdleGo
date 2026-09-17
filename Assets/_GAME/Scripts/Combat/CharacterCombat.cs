@@ -197,6 +197,11 @@ public class CharacterCombat
         target.TakeDamage(damage);
 
         int healthLost = Mathf.Max(0, healthBeforeHit - target.CurrentHealth);
+        if (healthLost > 0 && target is Enemy)
+        {
+            UIManager.Ins.GetUI<CanvasCombat>().ShowDamage(damage, isCritical, target.transform);
+        }
+
         if (healthLost > 0 && stats.CurrentLifeSteal > 0f)
         {
             character.Heal(Mathf.RoundToInt(healthLost * stats.CurrentLifeSteal));
