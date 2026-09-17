@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class DamagePopup : GameUnit
 {
     [Header("References")]
-    [SerializeField] private Text damageText;
+    [SerializeField] private TextMeshProUGUI damageText;
 
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
