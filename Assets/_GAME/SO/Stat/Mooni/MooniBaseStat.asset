@@ -18,7 +18,7 @@ MonoBehaviour:
   baseLevel: 1
   baseExperience: 0
   baseAttackSpeed: 1
-  baseCriticalChance: 0.05
+  baseCriticalChance: 0.5
   baseCriticalDamage: 1.5
   baseCooldownReduction: 0
   baseArmor: 0
