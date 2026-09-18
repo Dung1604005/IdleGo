@@ -147,6 +147,8 @@ public class CharacterStat
             return false;
         }
         // Armor is flat reduction; each successful hit still deals at least 1 damage.
+
+        Debug.Log(character.gameObject.name + "BEING HURT");
         character.ChangeAnim(GameConfig.ANIM_HURT);
         int effectiveDamage = Mathf.Max(1, incomingDamage - Mathf.Max(0, CurrentArmor));
         currentHealth = Mathf.Max(0, currentHealth - effectiveDamage);

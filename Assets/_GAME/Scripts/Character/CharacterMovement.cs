@@ -62,7 +62,7 @@ public class CharacterMovement
 
     public void Stop()
     {
-        character.ChangeAnim(GameConfig.ANIM_IDLE);
+        //character.ChangeAnim(GameConfig.ANIM_IDLE);
         IsMoving = false;
     }
 }

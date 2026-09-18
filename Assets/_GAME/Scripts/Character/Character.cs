@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : GameUnit
 {
     [SerializeField] protected CharacterStat stats = new CharacterStat();
 
@@ -41,7 +41,7 @@ public abstract class Character : MonoBehaviour
         healthBar?.OnInit();
     }
 
-    public virtual void OnDespawn()
+    public override void OnDespawn()
     {
         healthBar?.OnDespawn();
         IsInitialized = false;
@@ -71,6 +71,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void Die()
     {
         movement.Stop();
+        ChangeAnim(GameConfig.ANIM_DIE);
         combat.SetTarget(null);
     }
 
