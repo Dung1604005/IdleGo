@@ -7,6 +7,8 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
     [SerializeField] private Transform enemyContainer;
 
+    [SerializeField] private int totalAliveEnemy;
+
     private int nextSpawnPointIndex;
 
     public IReadOnlyList<Enemy> Enemies => enemies;
@@ -26,8 +28,28 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void OnDespawn()
     {
+        if (enemies != null)
+        {
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                Enemy enemy = enemies[i];
+                if (enemy != null && enemy.gameObject.activeSelf)
+                {
+                    SimplePool.Despawn(enemy);
+                }
+            }
+
+            enemies.Clear();
+        }
+
         nextSpawnPointIndex = 0;
         IsInitialized = false;
+    }
+
+    public void DespawnEnemy(Enemy enemy)
+    {
+        SimplePool.Despawn(enemy);
+        totalAliveEnemy -= 1;
     }
 
     public void SpawnWave(WaveData waveData)
@@ -37,9 +59,11 @@ public class EnemyManager : Singleton<EnemyManager>
             return;
         }
 
+        totalAliveEnemy = 0;
         IReadOnlyList<WaveEnemyData> waveEnemies = waveData.Enemies;
         for (int i = 0; i < waveEnemies.Count; i++)
         {
+            totalAliveEnemy += waveEnemies[i].Amount;
             SpawnEnemyGroup(waveEnemies[i]);
         }
     }
@@ -50,6 +74,16 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             return;
         }
+        
+        Enemy prefab = waveEnemyData.EnemyData.EnemyPrefab;
+        if (prefab == null)
+        {
+            Debug.LogWarning($"EnemyData '{waveEnemyData.EnemyData.name}' does not have an Enemy prefab.", this);
+            return;
+        }
+
+        // Tạo sẵn pool theo số lượng của nhóm ở lần đầu prefab xuất hiện.
+        SimplePool.PreLoad(prefab, waveEnemyData.Amount, enemyContainer);
 
         for (int i = 0; i < waveEnemyData.Amount; i++)
         {
@@ -66,14 +100,18 @@ public class EnemyManager : Singleton<EnemyManager>
             return;
         }
 
-        Enemy enemy = Instantiate(
+        Enemy enemy = SimplePool.Spawn(
             prefab,
             GetNextSpawnPosition(),
             prefab.transform.rotation,
             enemyContainer
         );
 
-        enemies.Add(enemy);
+        if (enemy != null && !enemies.Contains(enemy))
+        {
+            // Object tái sử dụng từ pool chỉ được xuất hiện một lần trong danh sách target.
+            enemies.Add(enemy);
+        }
     }
 
     private Vector3 GetNextSpawnPosition()

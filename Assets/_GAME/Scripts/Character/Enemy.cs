@@ -3,10 +3,11 @@ using UnityEngine;
 public class Enemy : Character
 {
 
-    protected override void Die()
+    public override void Despawn()
     {
-        base.Die();
-        SimplePool.Despawn(this);
+        base.Despawn();
+        EnemyManager.Ins.DespawnEnemy(this);
     }
+
 
 }

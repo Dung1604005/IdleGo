@@ -41,10 +41,23 @@ public abstract class Character : GameUnit
         healthBar?.OnInit();
     }
 
+    public override void OnSpawn()
+    {
+        // Object lấy lại từ pool phải reset máu, combat, movement và health bar.
+        OnInit();
+    }
+
     public override void OnDespawn()
     {
+        combat.OnDespawn();
+        movement.OnDespawn();
         healthBar?.OnDespawn();
         IsInitialized = false;
+    }
+
+    public virtual void Despawn()
+    {
+        
     }
 
     public virtual void TakeDamage(int damage)
