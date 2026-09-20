@@ -21,6 +21,7 @@ public class CharacterHealthBar : MonoBehaviour
             Debug.LogError("CharacterHealthBar needs a Character and SpriteRenderer before OnInit().");
             return;
         }
+        healthBarRenderer.transform.localScale = Vector3.one;
         lastHealth = character.CurrentHealth;
         lastMaxHealth = character.MaxHealth;
         targetRatio = CalculateHealthRatio();
@@ -31,7 +32,7 @@ public class CharacterHealthBar : MonoBehaviour
 
     public void OnDespawn()
     {
-        character = null;
+        
         smoothVelocity = 0f;
         IsInitialized = false;
     }

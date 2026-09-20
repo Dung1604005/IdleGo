@@ -35,19 +35,21 @@ public class CharacterMovement
             return false;
         }
 
-        Vector3 currentPosition = character.transform.position;
-        Vector3 targetPosition = target.transform.position;
+        Vector3 currentPosition = character.TF.position;
+        Vector3 targetPosition = target.TF.position;
         float distance = Vector3.Distance(currentPosition, targetPosition);
         float range = Mathf.Max(0f, stoppingDistance);
 
-        if (distance <= range)
+        Debug.Log(character.gameObject.name + " " + distance + " " + range);
+
+        if (distance <= range + 0.01f)
         {
             Stop();
             return true;
         }
 
         float step = character.Stats.CurrentRunSpeed * Time.deltaTime;
-        if (step <= 0f)
+        if (step <= 0.01f)
         {
             Stop();
             return false;
@@ -56,7 +58,7 @@ public class CharacterMovement
         character.ChangeAnim(GameConfig.ANIM_RUN);
         float movement = Mathf.Min(step, distance - range);
         character.transform.position = Vector3.MoveTowards(currentPosition, targetPosition, movement);
-        IsMoving = Vector3.Distance(character.transform.position, targetPosition) > range + 0.0001f;
+        IsMoving = Vector3.Distance(character.TF.position, targetPosition) > range + 0.0001f;
         return !IsMoving;
     }
 

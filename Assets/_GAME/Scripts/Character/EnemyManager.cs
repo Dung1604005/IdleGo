@@ -10,8 +10,11 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private int totalAliveEnemy;
 
     private int nextSpawnPointIndex;
+    private readonly HashSet<Enemy> levelPrefabs = new HashSet<Enemy>();
 
     public IReadOnlyList<Enemy> Enemies => enemies;
+    public int TotalAliveEnemy => Mathf.Max(0, totalAliveEnemy);
+    public bool HasAliveEnemies => TotalAliveEnemy > 0;
     public bool IsInitialized { get; private set; }
 
     public void OnInit()
@@ -23,6 +26,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         enemies.RemoveAll(enemy => enemy == null);
         nextSpawnPointIndex = 0;
+        totalAliveEnemy = 0;
         IsInitialized = true;
     }
 
@@ -42,14 +46,31 @@ public class EnemyManager : Singleton<EnemyManager>
             enemies.Clear();
         }
 
+        // Pool giữ reference tới prefab Addressable, vì vậy phải release trước khi unload level.
+        foreach (Enemy prefab in levelPrefabs)
+        {
+            if (prefab != null)
+            {
+                SimplePool.Release(prefab);
+            }
+        }
+
+        levelPrefabs.Clear();
+
         nextSpawnPointIndex = 0;
+        totalAliveEnemy = 0;
         IsInitialized = false;
     }
 
     public void DespawnEnemy(Enemy enemy)
     {
+        if (enemy == null || !enemy.gameObject.activeSelf || !enemies.Contains(enemy))
+        {
+            return;
+        }
+
         SimplePool.Despawn(enemy);
-        totalAliveEnemy -= 1;
+        totalAliveEnemy = Mathf.Max(0, totalAliveEnemy - 1);
     }
 
     public void SpawnWave(WaveData waveData)
@@ -63,7 +84,6 @@ public class EnemyManager : Singleton<EnemyManager>
         IReadOnlyList<WaveEnemyData> waveEnemies = waveData.Enemies;
         for (int i = 0; i < waveEnemies.Count; i++)
         {
-            totalAliveEnemy += waveEnemies[i].Amount;
             SpawnEnemyGroup(waveEnemies[i]);
         }
     }
@@ -81,6 +101,8 @@ public class EnemyManager : Singleton<EnemyManager>
             Debug.LogWarning($"EnemyData '{waveEnemyData.EnemyData.name}' does not have an Enemy prefab.", this);
             return;
         }
+
+        levelPrefabs.Add(prefab);
 
         // Tạo sẵn pool theo số lượng của nhóm ở lần đầu prefab xuất hiện.
         SimplePool.PreLoad(prefab, waveEnemyData.Amount, enemyContainer);
@@ -111,6 +133,12 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             // Object tái sử dụng từ pool chỉ được xuất hiện một lần trong danh sách target.
             enemies.Add(enemy);
+        }
+
+        if (enemy != null)
+        {
+            // Chỉ enemy spawn thành công mới được tính vào điều kiện hoàn thành wave.
+            totalAliveEnemy++;
         }
     }
 
