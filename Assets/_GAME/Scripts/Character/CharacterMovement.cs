@@ -40,7 +40,7 @@ public class CharacterMovement
         float distance = Vector3.Distance(currentPosition, targetPosition);
         float range = Mathf.Max(0f, stoppingDistance);
 
-        Debug.Log(character.gameObject.name + " " + distance + " " + range);
+        
 
         if (distance <= range + 0.01f)
         {
