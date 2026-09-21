@@ -26,8 +26,3 @@ MonoBehaviour:
     m_Schemas:
     - {fileID: 11400000, guid: 7b46d185a5d81a047b6cf0a395051eb6, type: 2}
     - {fileID: 11400000, guid: 8f6d9c5137d948d44ad43c2effd2d7c4, type: 2}
-    m_SchemaDisplayOrder:
-    - Default Local Group_ContentUpdateGroupSchema
-    - Default Local Group_BundledAssetGroupSchema
-  m_IncludeInBuild: 1
-  m_IncludeInBuildMigrated: 1
