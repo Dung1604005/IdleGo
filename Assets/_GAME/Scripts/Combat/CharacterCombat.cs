@@ -59,6 +59,8 @@ public class CharacterCombat
 
     public void OnDespawn()
     {
+        SetTarget(null);
+
         if (combatSkillStates != null)
         {
             for (int i = 0; i < combatSkillStates.Count; i++)
@@ -66,7 +68,6 @@ public class CharacterCombat
                 combatSkillStates[i]?.OnDespawn();
             }
         }
-        target = null;
         basicAttackType = null;
         activeAttackTarget = null;
         activeSkillState = null;
@@ -109,7 +110,23 @@ public class CharacterCombat
 
     public void SetTarget(Character opponent)
     {
+        if (target == opponent)
+        {
+            return;
+        }
+
+        // Chỉ target do Player chọn mới được đưa lên trên; target của Enemy không đổi sorting của Player.
+        SetPlayerTargetSorting(target, false);
         target = opponent;
+        SetPlayerTargetSorting(target, true);
+    }
+
+    private void SetPlayerTargetSorting(Character opponent, bool isTarget)
+    {
+        if (character is Player && opponent is Enemy enemy)
+        {
+            enemy.SetAsPlayerTarget(isTarget);
+        }
     }
 
     public void SetIsAttacking(bool val)
