@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
-    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
     [SerializeField] private Transform enemyContainer;
 
     [SerializeField] private int totalAliveEnemy;
 
-    private int nextSpawnPointIndex;
     private readonly HashSet<Enemy> levelPrefabs = new HashSet<Enemy>();
 
     public IReadOnlyList<Enemy> Enemies => enemies;
@@ -25,7 +24,6 @@ public class EnemyManager : Singleton<EnemyManager>
         }
 
         enemies.RemoveAll(enemy => enemy == null);
-        nextSpawnPointIndex = 0;
         totalAliveEnemy = 0;
         IsInitialized = true;
     }
@@ -56,8 +54,6 @@ public class EnemyManager : Singleton<EnemyManager>
         }
 
         levelPrefabs.Clear();
-
-        nextSpawnPointIndex = 0;
         totalAliveEnemy = 0;
         IsInitialized = false;
     }
@@ -84,11 +80,11 @@ public class EnemyManager : Singleton<EnemyManager>
         IReadOnlyList<WaveEnemyData> waveEnemies = waveData.Enemies;
         for (int i = 0; i < waveEnemies.Count; i++)
         {
-            SpawnEnemyGroup(waveEnemies[i]);
+            SpawnEnemyGroup(waveData.SpawnPosition, waveEnemies[i]);
         }
     }
 
-    private void SpawnEnemyGroup(WaveEnemyData waveEnemyData)
+    private void SpawnEnemyGroup(Vector3 spawnPos, WaveEnemyData waveEnemyData)
     {
         if (waveEnemyData == null || waveEnemyData.EnemyData == null)
         {
@@ -109,11 +105,11 @@ public class EnemyManager : Singleton<EnemyManager>
 
         for (int i = 0; i < waveEnemyData.Amount; i++)
         {
-            SpawnEnemy(waveEnemyData.EnemyData);
+            SpawnEnemy(spawnPos, waveEnemyData.EnemyData);
         }
     }
 
-    private void SpawnEnemy(EnemyDataSO enemyData)
+    private void SpawnEnemy(UnityEngine.Vector3 spawnPos, EnemyDataSO enemyData)
     {
         Enemy prefab = enemyData.EnemyPrefab;
         if (prefab == null)
@@ -124,7 +120,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         Enemy enemy = SimplePool.Spawn(
             prefab,
-            GetNextSpawnPosition(),
+            spawnPos,
             prefab.transform.rotation,
             enemyContainer
         );
@@ -142,30 +138,6 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
-    private Vector3 GetNextSpawnPosition()
-    {
-        if (spawnPoints == null || spawnPoints.Count == 0)
-        {
-            return transform.position;
-        }
-
-        // Spawn point chạy vòng tròn để một wave có thể dùng lại danh sách điểm spawn.
-        int checkedPointCount = 0;
-        while (checkedPointCount < spawnPoints.Count)
-        {
-            int pointIndex = nextSpawnPointIndex % spawnPoints.Count;
-            nextSpawnPointIndex = (pointIndex + 1) % spawnPoints.Count;
-            checkedPointCount++;
-
-            Transform spawnPoint = spawnPoints[pointIndex];
-            if (spawnPoint != null)
-            {
-                return spawnPoint.position;
-            }
-        }
-
-        return transform.position;
-    }
 
     public Enemy GetTarget()
     {
@@ -186,7 +158,7 @@ public class EnemyManager : Singleton<EnemyManager>
         return null;
     }
 
-    public Enemy GetNearestTarget(Vector3 position)
+    public Enemy GetNearestTarget(UnityEngine.Vector3 position)
     {
         if (enemies == null)
         {

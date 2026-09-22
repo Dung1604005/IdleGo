@@ -9,9 +9,13 @@ public class MapDataSO : ScriptableObject
 
     [SerializeField] private MapController mapPrefab;
 
+    [SerializeField] private Vector3 spawnPos;
+
     [SerializeField] private int totalLevel;
 
     public MapType MapType => mapType;
+
+    public Vector3 SpawnPos => spawnPos;
 
     public int TotalLevel => totalLevel;
 

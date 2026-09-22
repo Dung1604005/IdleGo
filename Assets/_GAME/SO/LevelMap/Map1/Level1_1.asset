@@ -12,14 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d7900d859440dab76dded17493cf1e, type: 3}
   m_Name: Level1_1
   m_EditorClassIdentifier: Assembly-CSharp::LevelDataSO
+  levelIndex: 0
   nameLevel: 1_1
   waves:
-  - enemies:
+  - waveIndex: 0
+    enemies:
     - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
       amount: 3
-  - enemies:
+    spawnPosition: {x: -72, y: 4.65, z: 0}
+  - waveIndex: 1
+    enemies:
     - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
       amount: 5
-  - enemies:
+    spawnPosition: {x: -52, y: 4.65, z: 0}
+  - waveIndex: 2
+    enemies:
     - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
       amount: 7
+    spawnPosition: {x: -32, y: 4.65, z: 0}
+  - waveIndex: 3
+    enemies:
+    - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
+      amount: 10
+    spawnPosition: {x: -12, y: 4.65, z: 0}
+  - waveIndex: 4
+    enemies:
+    - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
+      amount: 15
+    spawnPosition: {x: 12, y: 4.65, z: 0}

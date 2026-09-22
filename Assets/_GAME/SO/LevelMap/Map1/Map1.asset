@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapDataSO
   mapType: 0
   miniMap: {fileID: 0}
-  mapPrefab: {fileID: 0}
+  mapPrefab: {fileID: 1140519659440781956, guid: faa10d9be88e4ae4999651368af3e20c, type: 3}
+  spawnPos: {x: -81.1, y: 4.77544, z: 0}
   totalLevel: 1
