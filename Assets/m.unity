@@ -1642,6 +1642,7 @@ MonoBehaviour:
   - {fileID: 0}
   enemyContainer: {fileID: 738129486}
   totalAliveEnemy: 0
+  spawnInterval: 0.15
 --- !u!1 &798347904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,6 +3239,7 @@ GameObject:
   - component: {fileID: 1692942884}
   - component: {fileID: 1692942883}
   - component: {fileID: 1692942882}
+  - component: {fileID: 1692942887}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3380,13 +3382,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692942881}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -81.32917, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692942887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692942881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ad8935db0400349a818966f70206ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  offSetPlay: {x: 0, y: 0, z: 0}
+  rotationEulerPlay: {x: 0, y: 0, z: 0}
+  tfPlayer: {fileID: 1973946103}
+  speed: 6
+  tf: {fileID: 1692942886}
+  target: {fileID: 0}
+  offSet: {x: 4.239998, y: -4.65, z: -10}
+  targetOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1752273792
 GameObject:
   m_ObjectHideFlags: 0

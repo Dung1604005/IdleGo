@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -8,12 +9,16 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private Transform enemyContainer;
 
     [SerializeField] private int totalAliveEnemy;
+    [SerializeField, Min(0f)] private float spawnInterval = 0.15f;
 
     private readonly HashSet<Enemy> levelPrefabs = new HashSet<Enemy>();
+    private Coroutine spawnWaveCoroutine;
+    private bool hasSpawnedInCurrentWave;
+    private bool isSpawningWave;
 
     public IReadOnlyList<Enemy> Enemies => enemies;
     public int TotalAliveEnemy => Mathf.Max(0, totalAliveEnemy);
-    public bool HasAliveEnemies => TotalAliveEnemy > 0;
+    public bool HasAliveEnemies => TotalAliveEnemy > 0 || isSpawningWave;
     public bool IsInitialized { get; private set; }
 
     public void OnInit()
@@ -30,6 +35,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void OnDespawn()
     {
+        StopSpawnWave();
+
         if (enemies != null)
         {
             for (int i = enemies.Count - 1; i >= 0; i--)
@@ -71,31 +78,43 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void SpawnWave(WaveData waveData)
     {
-        if (!IsInitialized || waveData == null || waveData.Enemies == null)
+        if (!IsInitialized || waveData == null || waveData.Enemies == null || isSpawningWave)
         {
             return;
         }
 
         totalAliveEnemy = 0;
+        hasSpawnedInCurrentWave = false;
+        isSpawningWave = true;
+        Coroutine startedCoroutine = StartCoroutine(SpawnWaveRoutine(waveData));
+        spawnWaveCoroutine = isSpawningWave ? startedCoroutine : null;
+    }
+
+    private IEnumerator SpawnWaveRoutine(WaveData waveData)
+    {
+        WaitForSeconds spawnDelay = spawnInterval > 0f ? new WaitForSeconds(spawnInterval) : null;
         IReadOnlyList<WaveEnemyData> waveEnemies = waveData.Enemies;
         for (int i = 0; i < waveEnemies.Count; i++)
         {
-            SpawnEnemyGroup(waveData.SpawnPosition, waveEnemies[i]);
+            yield return SpawnEnemyGroup(waveData.SpawnPosition, waveEnemies[i], spawnDelay);
         }
+
+        isSpawningWave = false;
+        spawnWaveCoroutine = null;
     }
 
-    private void SpawnEnemyGroup(Vector3 spawnPos, WaveEnemyData waveEnemyData)
+    private IEnumerator SpawnEnemyGroup(Vector3 spawnPos, WaveEnemyData waveEnemyData, WaitForSeconds spawnDelay)
     {
         if (waveEnemyData == null || waveEnemyData.EnemyData == null)
         {
-            return;
+            yield break;
         }
         
         Enemy prefab = waveEnemyData.EnemyData.EnemyPrefab;
         if (prefab == null)
         {
             Debug.LogWarning($"EnemyData '{waveEnemyData.EnemyData.name}' does not have an Enemy prefab.", this);
-            return;
+            yield break;
         }
 
         levelPrefabs.Add(prefab);
@@ -105,8 +124,27 @@ public class EnemyManager : Singleton<EnemyManager>
 
         for (int i = 0; i < waveEnemyData.Amount; i++)
         {
+            if (hasSpawnedInCurrentWave && spawnDelay != null)
+            {
+                // Enemy đầu tiên xuất hiện ngay; từ enemy thứ hai trở đi mới chờ để tạo nhịp spawn trong wave.
+                yield return spawnDelay;
+            }
+
             SpawnEnemy(spawnPos, waveEnemyData.EnemyData);
+            hasSpawnedInCurrentWave = true;
         }
+    }
+
+    private void StopSpawnWave()
+    {
+        if (spawnWaveCoroutine != null)
+        {
+            StopCoroutine(spawnWaveCoroutine);
+            spawnWaveCoroutine = null;
+        }
+
+        hasSpawnedInCurrentWave = false;
+        isSpawningWave = false;
     }
 
     private void SpawnEnemy(UnityEngine.Vector3 spawnPos, EnemyDataSO enemyData)
