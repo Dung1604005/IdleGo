@@ -5,8 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "IdleGo/Level/Level Data")]
 public class LevelDataSO : ScriptableObject
 {
+    [SerializeField] private int levelIndex;
     [SerializeField] private String nameLevel;
     [SerializeField] private List<WaveData> waves = new List<WaveData>();
+
+    public int LevelIndex => levelIndex;
 
     public int WaveCount => waves != null ? waves.Count : 0;
 

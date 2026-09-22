@@ -7,34 +7,29 @@ public class LevelManager : Singleton<LevelManager>
 {
     [Header("Addressables")]
     [SerializeField] private string levelAddressPrefix = "Level_";
-    [SerializeField, Min(0)] private int firstMapIndex;
+    [SerializeField] private MapType firstMapType;
     [SerializeField, Min(0)] private int firstLevelIndex;
 
     [Header("Wave")]
     [SerializeField, Min(0f)] private float waveTransitionDelay = 1f;
 
+    [SerializeField] private LevelInfo levelInfo;
+
     private AsyncOperationHandle<LevelDataSO> currentLevelHandle;
     private Coroutine loadLevelCoroutine;
     private bool hasCurrentLevelHandle;
-    private int currentMapIndex = -1;
-    private int currentLevelIndex = -1;
-    private int currentWaveIndex = -1;
     private float nextWaveStartTime;
 
     public bool IsInitialized { get; private set; }
     public LevelPlayState State { get; private set; }
-    public int CurrentMapNumber => currentMapIndex + 1;
-    public int CurrentLevelNumber => currentLevelIndex + 1;
-    public int CurrentWaveNumber => currentWaveIndex + 1;
-    public LevelDataSO CurrentLevelData { get; private set; }
-    public WaveData CurrentWaveData => CurrentLevelData?.GetWave(currentWaveIndex);
+    
     public bool IsLevelCompleted => State == LevelPlayState.Completed;
 
     public void OnInit()
     {
         OnDespawn();
         IsInitialized = true;
-        StartLevel(firstMapIndex, firstLevelIndex);
+        StartLevel(firstMapType, firstLevelIndex);
     }
 
     public void OnDespawn()
@@ -49,9 +44,7 @@ public class LevelManager : Singleton<LevelManager>
         EnemyManager.Ins.OnDespawn();
         ReleaseCurrentLevel();
 
-        currentMapIndex = -1;
-        currentLevelIndex = -1;
-        currentWaveIndex = -1;
+        levelInfo.OnDespawn();
         nextWaveStartTime = 0f;
         State = LevelPlayState.None;
         IsInitialized = false;
@@ -81,20 +74,20 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    public bool StartLevel(int mapIndex, int levelIndex)
+    public bool StartLevel(MapType mapType, int levelIndex)
     {
-        if (!IsInitialized || mapIndex < 0 || levelIndex < 0 || loadLevelCoroutine != null)
+        if (!IsInitialized || mapType == MapType.NONE || levelIndex < 0 || loadLevelCoroutine != null)
         {
             return false;
         }
 
-        loadLevelCoroutine = StartCoroutine(LoadLevelRoutine(mapIndex, levelIndex));
+        loadLevelCoroutine = StartCoroutine(LoadLevelRoutine(mapType, levelIndex));
         return true;
     }
 
-    public bool StartMap(int mapIndex)
+    public bool StartMap(MapType mapType)
     {
-        return StartLevel(mapIndex, 0);
+        return StartLevel(mapType, 0);
     }
 
     public bool StartNextLevel()
@@ -104,7 +97,7 @@ public class LevelManager : Singleton<LevelManager>
             return false;
         }
 
-        return StartLevel(currentMapIndex, currentLevelIndex + 1);
+        return StartLevel(levelInfo.CurrentMapType, levelInfo.CurrentLevelIndex + 1);
     }
 
     public bool StartNextMap()
@@ -114,37 +107,36 @@ public class LevelManager : Singleton<LevelManager>
             return false;
         }
 
-        return StartLevel(currentMapIndex + 1, 0);
+        return StartLevel(levelInfo.CurrentMapType, 0);
     }
 
     public bool StartNextWave()
     {
-        if (!IsInitialized || CurrentLevelData == null || EnemyManager.Ins.HasAliveEnemies)
+        if (!IsInitialized || levelInfo.IsLevelNull() || EnemyManager.Ins.HasAliveEnemies)
         {
             return false;
         }
 
-        int nextWaveIndex = currentWaveIndex + 1;
-        WaveData nextWave = CurrentLevelData.GetWave(nextWaveIndex);
+        int nextWaveIndex = levelInfo.CurrentWaveIndex + 1;
+        WaveData nextWave = levelInfo.GetLevelData().GetWave(nextWaveIndex);
         if (nextWave == null)
         {
             return false;
         }
-
-        currentWaveIndex = nextWaveIndex;
-
+        levelInfo.SetWaveData(nextWaveIndex);
+  
         // LevelManager quyết định wave, EnemyManager singleton chịu trách nhiệm spawn và despawn.
         EnemyManager.Ins.SpawnWave(nextWave);
         State = LevelPlayState.PlayingWave;
         return true;
     }
 
-    private IEnumerator LoadLevelRoutine(int mapIndex, int levelIndex)
+    private IEnumerator LoadLevelRoutine(MapType mapType, int levelIndex)
     {
         State = LevelPlayState.Loading;
         UnloadCurrentLevel();
 
-        string levelAddress = GetLevelAddress(mapIndex, levelIndex);
+        string levelAddress = GetLevelAddress(mapType, levelIndex);
         currentLevelHandle = Addressables.LoadAssetAsync<LevelDataSO>(levelAddress);
         hasCurrentLevelHandle = true;
         yield return currentLevelHandle;
@@ -163,10 +155,9 @@ public class LevelManager : Singleton<LevelManager>
             yield break;
         }
 
-        currentMapIndex = mapIndex;
-        currentLevelIndex = levelIndex;
-        currentWaveIndex = -1;
-        CurrentLevelData = currentLevelHandle.Result;
+        levelInfo.SetMapData(mapType);
+        levelInfo.SetLevelData(currentLevelHandle.Result);
+        levelInfo.SetWaveData(-1);
         EnemyManager.Ins.OnInit();
 
         if (!StartNextWave())
@@ -179,12 +170,12 @@ public class LevelManager : Singleton<LevelManager>
     {
         EnemyManager.Ins.OnDespawn();
         ReleaseCurrentLevel();
-        currentWaveIndex = -1;
+        levelInfo.SetWaveData(-1);
     }
 
     private void ReleaseCurrentLevel()
     {
-        CurrentLevelData = null;
+        levelInfo.SetLevelData(null);
         if (!hasCurrentLevelHandle)
         {
             return;
@@ -203,10 +194,10 @@ public class LevelManager : Singleton<LevelManager>
         State = LevelPlayState.Completed;
     }
 
-    private string GetLevelAddress(int mapIndex, int levelIndex)
+    private string GetLevelAddress(MapType mapType, int levelIndex)
     {
         // Ví dụ mapIndex 0, levelIndex 1 sẽ tạo address "Level_1-2".
-        return $"{levelAddressPrefix}{mapIndex + 1}-{levelIndex + 1}";
+        return $"{levelAddressPrefix}{(int)mapType + 1}-{levelIndex + 1}";
     }
 }
 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d68c2848805b8745a89885fccbd677a, type: 3}
   m_Name: Map1
   m_EditorClassIdentifier: Assembly-CSharp::MapDataSO
+  mapType: 0
   miniMap: {fileID: 0}
   mapPrefab: {fileID: 0}
-  listLevelData: []
+  totalLevel: 1
