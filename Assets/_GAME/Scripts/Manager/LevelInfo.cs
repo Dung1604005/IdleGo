@@ -10,6 +10,8 @@ public class LevelInfo
 
     [SerializeField] private MapDataSO currentMapData;
 
+    [SerializeField] private MapController currentMapInstance;
+
     [SerializeField] private LevelDataSO currentLevelData;
 
     [SerializeField] private WaveData currentWaveData;
@@ -27,6 +29,7 @@ public class LevelInfo
     {
         SetLevelData(null);
         SetMapData(MapType.NONE);
+        SetMapInstance(null);
         SetWaveData(-1);
     }
 
@@ -56,6 +59,16 @@ public class LevelInfo
     {
         currentMapData = DataManager.Ins.GetMapData(mapType);
         currentMapType= mapType ;
+    }
+
+    public MapController GetMapInstance()
+    {
+        return currentMapInstance;
+    }
+
+    public void SetMapInstance(MapController mapInstance)
+    {
+        currentMapInstance = mapInstance;
     }
 
     public bool IsLevelNull()

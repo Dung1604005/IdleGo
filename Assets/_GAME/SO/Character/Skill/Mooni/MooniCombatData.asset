@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCombatSO
   baseRangeAttack: 1.5
   basicAttackType: {fileID: 11400000, guid: aaa794d9fa4e8d5419e59805b3565a50, type: 2}
-  delayAttack: 1
+  delayAttack: 0.5
   listCombatSkill:
   - {fileID: 11400000, guid: bcc0995d1e5c8c04fa7d3e6b3dbdc2ca, type: 2}

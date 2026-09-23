@@ -13,6 +13,9 @@ public class LevelManager : Singleton<LevelManager>
     [Header("Wave")]
     [SerializeField, Min(0f)] private float waveTransitionDelay = 1f;
 
+    [Header("Map")]
+    [SerializeField] private Transform mapContainer;
+
     [SerializeField] private LevelInfo levelInfo;
 
     private AsyncOperationHandle<LevelDataSO> currentLevelHandle;
@@ -43,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
         // Pool dùng prefab là dependency của LevelData nên phải dọn trước khi release Addressable.
         EnemyManager.Ins.OnDespawn();
         ReleaseCurrentLevel();
+        DespawnCurrentMap();
 
         levelInfo.OnDespawn();
         nextWaveStartTime = 0f;
@@ -107,7 +111,14 @@ public class LevelManager : Singleton<LevelManager>
             return false;
         }
 
-        return StartLevel(levelInfo.CurrentMapType, 0);
+        int nextMapValue = (int)levelInfo.CurrentMapType + 1;
+        if (!System.Enum.IsDefined(typeof(MapType), nextMapValue))
+        {
+            return false;
+        }
+
+        // Map mới luôn bắt đầu từ level đầu tiên.
+        return StartLevel((MapType)nextMapValue, 0);
     }
 
     public bool StartNextWave()
@@ -155,6 +166,13 @@ public class LevelManager : Singleton<LevelManager>
             yield break;
         }
 
+        if (!SpawnMapIfNeeded(mapType))
+        {
+            ReleaseCurrentLevel();
+            State = LevelPlayState.None;
+            yield break;
+        }
+
         levelInfo.SetMapData(mapType);
         levelInfo.SetLevelData(currentLevelHandle.Result);
         levelInfo.SetWaveData(-1);
@@ -192,6 +210,45 @@ public class LevelManager : Singleton<LevelManager>
     private void CompleteLevel()
     {
         State = LevelPlayState.Completed;
+    }
+
+    private bool SpawnMapIfNeeded(MapType mapType)
+    {
+        if (levelInfo.GetMapInstance() != null && levelInfo.CurrentMapType == mapType)
+        {
+            return true;
+        }
+
+        MapDataSO mapData = DataManager.Ins.GetMapData(mapType);
+        MapController mapPrefab = mapData != null ? mapData.GetMapPrefab() : null;
+        if (mapPrefab == null)
+        {
+            Debug.LogError($"MapData of '{mapType}' does not have a MapController prefab.", this);
+            return false;
+        }
+
+        // Chỉ thay map sau khi level mới đã load thành công để không xóa map hiện tại nếu Addressables load lỗi.
+        DespawnCurrentMap();
+        MapController mapInstance = Instantiate(
+            mapPrefab,
+            mapData.SpawnPos,
+            mapPrefab.transform.rotation,
+            mapContainer
+        );
+        levelInfo.SetMapInstance(mapInstance);
+        return true;
+    }
+
+    private void DespawnCurrentMap()
+    {
+        MapController mapInstance = levelInfo.GetMapInstance();
+        if (mapInstance == null)
+        {
+            return;
+        }
+
+        Destroy(mapInstance.gameObject);
+        levelInfo.SetMapInstance(null);
     }
 
     private string GetLevelAddress(MapType mapType, int levelIndex)

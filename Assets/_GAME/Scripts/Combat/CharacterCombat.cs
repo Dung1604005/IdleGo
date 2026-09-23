@@ -16,8 +16,8 @@ public class CharacterCombat
     private Character activeAttackTarget;
     private CombatSkillState activeSkillState;
 
-    private bool isAttacking = false;
-    private bool hasExecutedAttack;
+    [SerializeField] private bool isAttacking = false;
+    [SerializeField] private bool hasExecutedAttack;
     private double nextActionAt;
 
     public Character Character => character;
@@ -169,6 +169,7 @@ public class CharacterCombat
 
     public void EndAttack()
     {
+        character.ChangeAnim(GameConfig.ANIM_IDLE);
         if (!isAttacking)
         {
             return;
@@ -184,7 +185,6 @@ public class CharacterCombat
         activeSkillState = null;
         hasExecutedAttack = false;
         SetIsAttacking(false);
-        character.ChangeAnim(GameConfig.ANIM_IDLE);
     }
 
     public virtual void Attack(Character target)

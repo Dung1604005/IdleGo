@@ -1,5 +1,4 @@
 using System;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public abstract class Character : GameUnit
@@ -18,7 +17,7 @@ public abstract class Character : GameUnit
 
     [SerializeField]protected Animator animator;
 
-    protected String currentAnim;
+    [SerializeField]protected String currentAnim;
 
     public CharacterStat Stats => stats;
 
@@ -90,8 +89,13 @@ public abstract class Character : GameUnit
 
     public virtual void ChangeAnim(String newAnim)
     {
+        if(tf.gameObject.name != "Player1")
+        {
+            Debug.Log(tf.gameObject.name + " " + newAnim);
+        }
         if (!String.IsNullOrEmpty(newAnim) && newAnim != currentAnim)
         {
+            
             animator.ResetTrigger(currentAnim);
             currentAnim = newAnim;
             animator.SetTrigger(currentAnim);
