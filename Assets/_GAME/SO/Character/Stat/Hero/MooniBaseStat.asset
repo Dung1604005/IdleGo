@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b72f7e5d7bb07f4e87562758e1d073a, type: 3}
   m_Name: MooniBaseStat
   m_EditorClassIdentifier: Assembly-CSharp::CharacterStatSO
-  baseMaxHealth: 100
-  baseRunSpeed: 5
-  baseDamage: 10
-  baseLevel: 1
-  baseExperience: 0
-  baseAttackSpeed: 1
-  baseCriticalChance: 0.5
-  baseCriticalDamage: 1.5
-  baseCooldownReduction: 0
-  baseArmor: 0
-  baseLifeSteal: 0
-  baseDodgeChance: 0
-  baseDamageAmplification: 0
+  baseStats:
+  - 100
+  - 5
+  - 10
+  - 1
+  - 0
+  - 1
+  - 0.5
+  - 1.5
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0

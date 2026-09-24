@@ -48,7 +48,7 @@ public class CharacterMovement
             return true;
         }
 
-        float step = character.Stats.CurrentRunSpeed * Time.deltaTime;
+        float step = character.Stats.GetCurrentStat(StatType.RUN_SPEED) * Time.deltaTime;
         if (step <= 0.01f)
         {
             Stop();

@@ -136,7 +136,7 @@ public class CharacterCombat
 
     public void MarkAction(double now)
     {
-        nextActionAt = now + delayAttack / Mathf.Max(0.01f, character.Stats.CurrentAttackSpeed);
+        nextActionAt = now + delayAttack / Mathf.Max(0.01f, character.Stats.GetCurrentStat(StatType.ATTACK_SPEED));
     }
 
     public void StartAttack(String animAttack, Character attackTarget, CombatSkillState skillState)
@@ -178,7 +178,7 @@ public class CharacterCombat
         // Animation Event là thời điểm xác nhận đòn đánh đã hoàn tất và bắt đầu hồi skill.
         if (activeSkillState != null)
         {
-            activeSkillState.StartCooldown(character.Stats.CurrentCooldownReduction);
+            activeSkillState.StartCooldown(character.Stats.GetCurrentStat(StatType.COOLDOWN_REDUCTION));
         }
 
         activeAttackTarget = null;
@@ -207,10 +207,10 @@ public class CharacterCombat
         }
 
         CharacterStat stats = character.Stats;
-        float criticalChance = stats.CurrentCriticalChance;
+        float criticalChance = stats.GetCurrentStat(StatType.CRITICAL_CHANCE);
         bool isCritical = criticalChance >= 1f || UnityEngine.Random.value < criticalChance;
-        float criticalMultiplier = isCritical ? stats.CurrentCriticalDamage : 1f;
-        float amplification = 1f + stats.CurrentDamageAmplification;
+        float criticalMultiplier = isCritical ? stats.GetCurrentStat(StatType.CRITICAL_DAMAGE) : 1f;
+        float amplification = 1f + stats.GetCurrentStat(StatType.DAMAGE_AMPLIFICATION);
         int damage = Mathf.Max(0, Mathf.RoundToInt(character.AttackDamage * Mathf.Max(0f, multiplier) * amplification * criticalMultiplier));
         int healthBeforeHit = target.CurrentHealth;
         target.TakeDamage(damage);
@@ -221,9 +221,9 @@ public class CharacterCombat
             UIManager.Ins.GetUI<CanvasCombat>().ShowDamage(damage, isCritical, target.transform);
         }
 
-        if (healthLost > 0 && stats.CurrentLifeSteal > 0f)
+        if (healthLost > 0 && stats.GetCurrentStat(StatType.LIFE_STEAL) > 0f)
         {
-            character.Heal(Mathf.RoundToInt(healthLost * stats.CurrentLifeSteal));
+            character.Heal(Mathf.RoundToInt(healthLost * stats.GetCurrentStat(StatType.LIFE_STEAL)));
         }
     }
 }

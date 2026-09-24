@@ -26,7 +26,7 @@ public abstract class Character : GameUnit
     public CharacterCombat Combat => combat;
 
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
-    public int AttackDamage => stats != null ? Mathf.Max(0, stats.CurrentDamage) : 0;
+    public int AttackDamage => stats != null ? Mathf.Max(0, (int)stats.GetCurrentStat(StatType.DAMAGE)) : 0;
     public int CurrentHealth => stats != null ? stats.CurrentHealth : 0;
     public bool IsDead => stats == null || stats.IsDead;
     public bool IsInitialized { get; private set; }

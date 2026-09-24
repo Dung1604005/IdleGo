@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b72f7e5d7bb07f4e87562758e1d073a, type: 3}
   m_Name: SkeletonStat
   m_EditorClassIdentifier: Assembly-CSharp::CharacterStatSO
-  baseMaxHealth: 25
-  baseRunSpeed: 5
-  baseDamage: 5
-  baseLevel: 1
-  baseExperience: 0
-  baseAttackSpeed: 1
-  baseCriticalChance: 0.05
-  baseCriticalDamage: 1.5
-  baseCooldownReduction: 0
-  baseArmor: 0
-  baseLifeSteal: 0
-  baseDodgeChance: 0
-  baseDamageAmplification: 0
+  baseStats:
+  - 25
+  - 5
+  - 5
+  - 1
+  - 0
+  - 1
+  - 0.05
+  - 1.5
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0

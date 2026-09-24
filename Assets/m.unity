@@ -1638,11 +1638,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea891bd2c304ea7864776fb71a5e543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  enemies:
-  - {fileID: 0}
+  enemies: []
   enemyContainer: {fileID: 738129486}
   totalAliveEnemy: 0
-  spawnInterval: 0.15
+  spawnInterval: 0.3
 --- !u!1 &798347904
 GameObject:
   m_ObjectHideFlags: 0
