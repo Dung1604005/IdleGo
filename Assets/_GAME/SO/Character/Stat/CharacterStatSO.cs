@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterStat", menuName = "IdleGo/CharacterStatSO")]
 public class CharacterStatSO : ScriptableObject
 {
-    [SerializeField] private List<float> baseStats = new List<float>();
+    [SerializeField, StatList] private List<float> baseStats = new List<float>();
 
     public IReadOnlyList<float> BaseStats => baseStats;
 

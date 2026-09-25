@@ -35,6 +35,7 @@ public abstract class Character : GameUnit
     {
         IsInitialized = true;
         stats.OnInit(characterDataSO.StatSO, this);
+        OnStatsInitialized();
         combat.OnInit(characterDataSO.CombatSO);
         movement.OnInit(this);
         healthBar?.OnInit();
@@ -57,6 +58,10 @@ public abstract class Character : GameUnit
     public virtual void Despawn()
     {
         
+    }
+
+    protected virtual void OnStatsInitialized()
+    {
     }
 
     public virtual void TakeDamage(int damage)

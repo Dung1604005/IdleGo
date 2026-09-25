@@ -28,7 +28,9 @@ public class EquipmentDataSO : ScriptableObject
     public int DecorationSlotCount => Mathf.Max(0, decorationSlotCount);
     public IReadOnlyList<StatValue> Stats => stats;
 
-    public float GetStatValue(StatType statType)
+    public float GetStatValue(
+        StatType statType,
+        StatModifierOperation operation = StatModifierOperation.FLAT)
     {
         if (stats == null)
         {
@@ -39,7 +41,7 @@ public class EquipmentDataSO : ScriptableObject
         for (int i = 0; i < stats.Count; i++)
         {
             StatValue stat = stats[i];
-            if (stat != null && stat.StatType == statType)
+            if (stat != null && stat.StatType == statType && stat.Operation == operation)
             {
                 totalValue += stat.Value;
             }

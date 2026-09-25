@@ -28,6 +28,13 @@ public static class StatTypeUtility
         return statIndex >= 0 && statIndex < StatCount;
     }
 
+    public static bool CanHaveModifiers(StatType statType)
+    {
+        return IsValid(statType)
+            && statType != StatType.LEVEL
+            && statType != StatType.EXPERIENCE;
+    }
+
     public static void EnsureListSize(List<float> stats)
     {
         if (stats == null)
@@ -79,7 +86,7 @@ public static class StatTypeUtility
         }
     }
 
-    private static float GetDefaultValue(StatType statType)
+    public static float GetDefaultValue(StatType statType)
     {
         switch (statType)
         {
