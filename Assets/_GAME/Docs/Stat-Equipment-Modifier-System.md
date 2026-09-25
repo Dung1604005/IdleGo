@@ -2,7 +2,7 @@
 
 ## Tổng quan
 
-Hệ stat đã chuyển từ `equipmentStatBonuses` riêng biệt sang hệ `StatModifier` tổng quát. Equipment, pet, passive và buff đều có thể đóng vai trò là một `Source` cung cấp modifier cho nhân vật.
+Hệ stat đã chuyển từ `equipmentStatBonuses` riêng biệt sang hệ `StatModifier` tổng quát. Equipment, pet, passive và buff đều có thể implement `IStatModifierSource` để cung cấp modifier cho nhân vật.
 
 Luồng khởi tạo Player hiện tại:
 
@@ -17,7 +17,7 @@ Reset base stat
 
 Mỗi modifier gồm:
 
-- `Source`: object tạo ra modifier, ví dụ equipment, pet hoặc buff.
+- `Source`: một `IStatModifierSource` tạo ra modifier, ví dụ equipment, pet hoặc buff.
 - `StatType`: chỉ số bị ảnh hưởng.
 - `Value`: giá trị thay đổi.
 - `Operation`: cách áp giá trị.
@@ -81,7 +81,7 @@ Các hành vi chính:
 
 ## Mở rộng pet, passive và buff
 
-Mỗi hệ thống nên dùng một object có vòng đời ổn định làm `Source`, thêm modifier khi kích hoạt và xóa toàn bộ modifier bằng chính source đó khi kết thúc.
+Mỗi hệ thống nên implement `IStatModifierSource`, dùng instance có vòng đời ổn định làm `Source`, thêm modifier khi kích hoạt và xóa toàn bộ modifier bằng chính source đó khi kết thúc.
 
 Modifier là dữ liệu runtime và không được save trực tiếp. Khi load game, pet/passive/buff/equipment phải tự đăng ký lại modifier từ trạng thái đã lưu.
 

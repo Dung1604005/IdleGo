@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
-  m_Name: NormalSword
+  m_Name: NormalSword_UnCommon
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
+  nameEquipment: Normal Sword
   equipmentType: 0
-  rarityType: 0
-  icon: {fileID: 0}
+  rarityType: 1
+  icon: {fileID: -2774494319427013120, guid: c740ea5253f19ff48a2957cce8cd3c9b, type: 3}
   levelRequired: 1
   socketSlotCount: 0
   enchantmentSlotCount: 0
   decorationSlotCount: 0
   stats:
   - statType: 2
-    value: 0
+    value: 25
     operation: 0
+  - statType: 6
+    value: 1
+    operation: 1

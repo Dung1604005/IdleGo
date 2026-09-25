@@ -87,7 +87,7 @@ public class CharacterStat
         return true;
     }
 
-    public int RemoveModifiersFromSource(object source)
+    public int RemoveModifiersFromSource(IStatModifierSource source)
     {
         EnsureRuntimeCollections();
         if (source == null)
@@ -105,7 +105,7 @@ public class CharacterStat
     }
 
     public void ReplaceModifiersFromSources(
-        IReadOnlyList<object> sourcesToReplace,
+        IReadOnlyList<IStatModifierSource> sourcesToReplace,
         IReadOnlyList<StatModifier> replacementModifiers)
     {
         EnsureRuntimeCollections();
@@ -300,7 +300,7 @@ public class CharacterStat
         areCalculatedStatsDirty = false;
     }
 
-    private int RemoveModifiersFromSourcesInternal(IReadOnlyList<object> sources)
+    private int RemoveModifiersFromSourcesInternal(IReadOnlyList<IStatModifierSource> sources)
     {
         if (sources == null || sources.Count == 0)
         {
@@ -310,7 +310,7 @@ public class CharacterStat
         int removedCount = 0;
         for (int modifierIndex = modifiers.Count - 1; modifierIndex >= 0; modifierIndex--)
         {
-            object modifierSource = modifiers[modifierIndex].Source;
+            IStatModifierSource modifierSource = modifiers[modifierIndex].Source;
             for (int sourceIndex = 0; sourceIndex < sources.Count; sourceIndex++)
             {
                 if (!ReferenceEquals(modifierSource, sources[sourceIndex]))

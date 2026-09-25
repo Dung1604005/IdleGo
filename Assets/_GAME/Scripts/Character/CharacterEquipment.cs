@@ -10,8 +10,8 @@ public class CharacterEquipment
 
     [NonSerialized] private Character character;
     [NonSerialized] private List<StatModifier> modifierBuffer;
-    [NonSerialized] private List<object> appliedModifierSources;
-    [NonSerialized] private List<object> currentModifierSources;
+    [NonSerialized] private List<IStatModifierSource> appliedModifierSources;
+    [NonSerialized] private List<IStatModifierSource> currentModifierSources;
 
     [field: NonSerialized]
     public event Action<EquipmentType, Equipment, Equipment> EquipmentChanged;
@@ -320,12 +320,12 @@ public class CharacterEquipment
 
         if (appliedModifierSources == null)
         {
-            appliedModifierSources = new List<object>();
+            appliedModifierSources = new List<IStatModifierSource>();
         }
 
         if (currentModifierSources == null)
         {
-            currentModifierSources = new List<object>();
+            currentModifierSources = new List<IStatModifierSource>();
         }
     }
 }

@@ -1,5 +1,10 @@
 using System;
 
+public interface IStatModifierSource
+{
+    string ModifierSourceId { get; }
+}
+
 public enum StatModifierOperation
 {
     FLAT = 0,
@@ -12,13 +17,13 @@ public enum StatModifierOperation
 [Serializable]
 public sealed class StatModifier
 {
-    [NonSerialized] private readonly object source;
+    [NonSerialized] private readonly IStatModifierSource source;
     private readonly StatType statType;
     private readonly float value;
     private readonly StatModifierOperation operation;
 
     public StatModifier(
-        object source,
+        IStatModifierSource source,
         StatType statType,
         float value,
         StatModifierOperation operation = StatModifierOperation.FLAT)
@@ -29,7 +34,7 @@ public sealed class StatModifier
         this.operation = operation;
     }
 
-    public object Source => source;
+    public IStatModifierSource Source => source;
     public StatType StatType => statType;
     public float Value => value;
     public StatModifierOperation Operation => operation;

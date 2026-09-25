@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Equipment
+public class Equipment : IStatModifierSource
 {
     [SerializeField] private string instanceId;
     [SerializeField] private EquipmentDataSO data;
@@ -34,6 +34,7 @@ public class Equipment
     }
 
     public EquipmentDataSO Data => data;
+    public string ModifierSourceId => InstanceId;
     public EquipmentType EquipmentType => data != null ? data.EquipmentType : default;
     public CharacterEquipment EquippedBy => equippedBy;
     public bool IsEquipped => equippedBy != null;
