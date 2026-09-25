@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: NormalSword
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
   equipmentType: 0
+  rarityType: 0
   icon: {fileID: 0}
+  levelRequired: 1
   socketSlotCount: 0
   enchantmentSlotCount: 0
   decorationSlotCount: 0
-  stats: []
+  stats:
+  - statType: 2
+    value: 0
+    operation: 0

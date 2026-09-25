@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "IdleGo/Equipment/Equipment Data")]
 public class EquipmentDataSO : ScriptableObject
 {
+    [SerializeField] private String nameEquipment;
     [SerializeField] private EquipmentType equipmentType;
     [SerializeField] private RarityType rarityType;
     [SerializeField] private Sprite icon;
