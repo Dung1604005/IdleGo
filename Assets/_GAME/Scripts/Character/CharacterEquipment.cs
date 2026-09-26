@@ -13,25 +13,19 @@ public class CharacterEquipment
     [NonSerialized] private List<IStatModifierSource> appliedModifierSources;
     [NonSerialized] private List<IStatModifierSource> currentModifierSources;
 
-    [field: NonSerialized]
-    public event Action<EquipmentType, Equipment, Equipment> EquipmentChanged;
-
     public IReadOnlyList<Equipment> EquippedItems =>
         listEquipment ?? (IReadOnlyList<Equipment>)Array.Empty<Equipment>();
 
     public void OnInit(Character owner)
     {
-        UnsubscribeFromAllEquipment();
         EnsureRuntimeState();
         character = owner;
         ClaimCurrentEquipment();
-        SubscribeToAllEquipment();
         ApplyStats();
     }
 
     public void OnDespawn()
     {
-        UnsubscribeFromAllEquipment();
         EnsureRuntimeState();
 
         if (character != null)
@@ -77,14 +71,11 @@ public class CharacterEquipment
         }
 
         replacedEquipment = equippedItem;
-        Unsubscribe(equippedItem);
         equippedItem?.SetEquippedBy(null);
 
         SetEquipment(equipmentType, equipment);
         equipment.SetEquippedBy(this);
-        Subscribe(equipment);
         ApplyStats();
-        EquipmentChanged?.Invoke(equipmentType, replacedEquipment, equipment);
         return true;
     }
 
@@ -109,7 +100,6 @@ public class CharacterEquipment
                 continue;
             }
 
-            Unsubscribe(item);
             if (ReferenceEquals(item.EquippedBy, this))
             {
                 item.SetEquippedBy(null);
@@ -118,7 +108,6 @@ public class CharacterEquipment
         }
 
         ApplyStats();
-        EquipmentChanged?.Invoke(equipmentType, equipment, null);
         return equipment;
     }
 
@@ -130,6 +119,22 @@ public class CharacterEquipment
         }
 
         return Unequip(equipment.EquipmentType) != null;
+    }
+
+    public void UnequipAll()
+    {
+        EnsureRuntimeState();
+        for (int i = 0; i < listEquipment.Count; i++)
+        {
+            Equipment equipment = listEquipment[i];
+            if (equipment != null && ReferenceEquals(equipment.EquippedBy, this))
+            {
+                equipment.SetEquippedBy(null);
+            }
+        }
+
+        listEquipment.Clear();
+        ApplyStats();
     }
 
     public Equipment GetEquipment(EquipmentType equipmentType)
@@ -203,7 +208,6 @@ public class CharacterEquipment
                 continue;
             }
 
-            Unsubscribe(item);
             if (ReferenceEquals(item.EquippedBy, this))
             {
                 item.SetEquippedBy(null);
@@ -212,11 +216,6 @@ public class CharacterEquipment
         }
 
         listEquipment.Add(equipment);
-    }
-
-    private void HandleEquipmentChanged()
-    {
-        ApplyStats();
     }
 
     private void ClaimCurrentEquipment()
@@ -249,52 +248,6 @@ public class CharacterEquipment
             {
                 Debug.LogWarning($"Equipment {equipment.InstanceId} is already equipped by another character.");
             }
-        }
-    }
-
-    private void SubscribeToAllEquipment()
-    {
-        for (int equipmentIndex = 0;
-             equipmentIndex < EquipmentTypeUtility.EquipmentTypeCount;
-             equipmentIndex++)
-        {
-            Equipment equipment = GetEquipment((EquipmentType)equipmentIndex);
-            if (equipment != null && ReferenceEquals(equipment.EquippedBy, this))
-            {
-                Subscribe(equipment);
-            }
-        }
-    }
-
-    private void UnsubscribeFromAllEquipment()
-    {
-        if (listEquipment == null)
-        {
-            return;
-        }
-
-        for (int i = 0; i < listEquipment.Count; i++)
-        {
-            Unsubscribe(listEquipment[i]);
-        }
-    }
-
-    private void Subscribe(Equipment equipment)
-    {
-        if (equipment == null)
-        {
-            return;
-        }
-
-        equipment.Changed -= HandleEquipmentChanged;
-        equipment.Changed += HandleEquipmentChanged;
-    }
-
-    private void Unsubscribe(Equipment equipment)
-    {
-        if (equipment != null)
-        {
-            equipment.Changed -= HandleEquipmentChanged;
         }
     }
 

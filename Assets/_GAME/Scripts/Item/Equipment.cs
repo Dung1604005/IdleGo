@@ -3,39 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Equipment : IStatModifierSource
+public class Equipment : Item, IStatModifierSource
 {
-    [SerializeField] private string instanceId;
-    [SerializeField] private EquipmentDataSO data;
     [SerializeField] private List<StatValue> socketStats = new List<StatValue>();
     [SerializeField] private List<StatValue> enchantmentStats = new List<StatValue>();
     [SerializeField] private List<StatValue> decorationStats = new List<StatValue>();
 
-    [field: NonSerialized] public event Action Changed;
     [NonSerialized] private CharacterEquipment equippedBy;
 
     public Equipment()
     {
     }
 
-    public Equipment(EquipmentDataSO data)
+    public Equipment(EquipmentDataSO data) : base(data)
     {
-        this.data = data;
         EnsureRuntimeState();
     }
 
-    public string InstanceId
-    {
-        get
-        {
-            EnsureInstanceId();
-            return instanceId;
-        }
-    }
-
-    public EquipmentDataSO Data => data;
+    public new EquipmentDataSO Data => base.Data as EquipmentDataSO;
     public string ModifierSourceId => InstanceId;
-    public EquipmentType EquipmentType => data != null ? data.EquipmentType : default;
+    public EquipmentType EquipmentType => Data != null ? Data.EquipmentType : default;
     public CharacterEquipment EquippedBy => equippedBy;
     public bool IsEquipped => equippedBy != null;
 
@@ -72,49 +59,49 @@ public class Equipment : IStatModifierSource
     public bool SetSocketStat(int slotIndex, StatValue stat)
     {
         EnsureRuntimeState();
-        return SetSlotStat(socketStats, data != null ? data.SocketSlotCount : 0, slotIndex, stat);
+        return SetSlotStat(socketStats, Data != null ? Data.SocketSlotCount : 0, slotIndex, stat);
     }
 
     public bool SetEnchantmentStat(int slotIndex, StatValue stat)
     {
         EnsureRuntimeState();
-        return SetSlotStat(enchantmentStats, data != null ? data.EnchantmentSlotCount : 0, slotIndex, stat);
+        return SetSlotStat(enchantmentStats, Data != null ? Data.EnchantmentSlotCount : 0, slotIndex, stat);
     }
 
     public bool SetDecorationStat(int slotIndex, StatValue stat)
     {
         EnsureRuntimeState();
-        return SetSlotStat(decorationStats, data != null ? data.DecorationSlotCount : 0, slotIndex, stat);
+        return SetSlotStat(decorationStats, Data != null ? Data.DecorationSlotCount : 0, slotIndex, stat);
     }
 
     public float GetStatValue(
         StatType statType,
         StatModifierOperation operation = StatModifierOperation.FLAT)
     {
-        if (data == null || !StatTypeUtility.IsValid(statType))
+        if (Data == null || !StatTypeUtility.IsValid(statType))
         {
             return 0f;
         }
 
         EnsureRuntimeState();
-        return data.GetStatValue(statType, operation)
-            + GetStatValue(socketStats, data.SocketSlotCount, statType, operation)
-            + GetStatValue(enchantmentStats, data.EnchantmentSlotCount, statType, operation)
-            + GetStatValue(decorationStats, data.DecorationSlotCount, statType, operation);
+        return Data.GetStatValue(statType, operation)
+            + GetStatValue(socketStats, Data.SocketSlotCount, statType, operation)
+            + GetStatValue(enchantmentStats, Data.EnchantmentSlotCount, statType, operation)
+            + GetStatValue(decorationStats, Data.DecorationSlotCount, statType, operation);
     }
 
     public void CollectStatModifiers(List<StatModifier> output)
     {
-        if (output == null || data == null)
+        if (output == null || Data == null)
         {
             return;
         }
 
         EnsureRuntimeState();
-        AddStatModifiers(output, data.Stats, data.Stats != null ? data.Stats.Count : 0);
-        AddStatModifiers(output, socketStats, data.SocketSlotCount);
-        AddStatModifiers(output, enchantmentStats, data.EnchantmentSlotCount);
-        AddStatModifiers(output, decorationStats, data.DecorationSlotCount);
+        AddStatModifiers(output, Data.Stats, Data.Stats != null ? Data.Stats.Count : 0);
+        AddStatModifiers(output, socketStats, Data.SocketSlotCount);
+        AddStatModifiers(output, enchantmentStats, Data.EnchantmentSlotCount);
+        AddStatModifiers(output, decorationStats, Data.DecorationSlotCount);
     }
 
     private bool SetSlotStat(List<StatValue> stats, int slotCount, int slotIndex, StatValue stat)
@@ -131,7 +118,9 @@ public class Equipment : IStatModifierSource
         }
 
         stats[slotIndex] = stat;
-        Changed?.Invoke();
+        // Khong dung event: equipment dang mac cap nhat lai stat truc tiep sau khi slot thay doi.
+        equippedBy?.ApplyStats();
+        NotifyInventoryDataChanged();
         return true;
     }
 
@@ -148,17 +137,16 @@ public class Equipment : IStatModifierSource
 
     internal void EnsureRuntimeState()
     {
-        EnsureInstanceId();
         EnsureStatLists();
 
-        if (data == null)
+        if (Data == null)
         {
             return;
         }
 
-        EnsureMinimumListSize(socketStats, data.SocketSlotCount);
-        EnsureMinimumListSize(enchantmentStats, data.EnchantmentSlotCount);
-        EnsureMinimumListSize(decorationStats, data.DecorationSlotCount);
+        EnsureMinimumListSize(socketStats, Data.SocketSlotCount);
+        EnsureMinimumListSize(enchantmentStats, Data.EnchantmentSlotCount);
+        EnsureMinimumListSize(decorationStats, Data.DecorationSlotCount);
     }
 
     private static float GetStatValue(
@@ -179,14 +167,6 @@ public class Equipment : IStatModifierSource
         }
 
         return totalValue;
-    }
-
-    private void EnsureInstanceId()
-    {
-        if (string.IsNullOrEmpty(instanceId))
-        {
-            instanceId = Guid.NewGuid().ToString("N");
-        }
     }
 
     private void EnsureStatLists()
@@ -236,6 +216,34 @@ public class Equipment : IStatModifierSource
         while (stats.Count < size)
         {
             stats.Add(null);
+        }
+    }
+
+    internal void RestoreEnhancementState(
+        IReadOnlyList<StatValue> savedSocketStats,
+        IReadOnlyList<StatValue> savedEnchantmentStats,
+        IReadOnlyList<StatValue> savedDecorationStats)
+    {
+        ReplaceStatList(socketStats, savedSocketStats);
+        ReplaceStatList(enchantmentStats, savedEnchantmentStats);
+        ReplaceStatList(decorationStats, savedDecorationStats);
+        EnsureRuntimeState();
+    }
+
+    private static void ReplaceStatList(List<StatValue> target, IReadOnlyList<StatValue> source)
+    {
+        target.Clear();
+        if (source == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < source.Count; i++)
+        {
+            StatValue stat = source[i];
+            target.Add(stat == null
+                ? null
+                : new StatValue(stat.StatType, stat.Value, stat.Operation));
         }
     }
 }

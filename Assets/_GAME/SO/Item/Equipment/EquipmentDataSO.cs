@@ -2,13 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EquipmentData", menuName = "IdleGo/Equipment/Equipment Data")]
-public class EquipmentDataSO : ScriptableObject
+[CreateAssetMenu(fileName = "EquipmentData", menuName = "IdleGo/Item/Equipment/Equipment Data")]
+public class EquipmentDataSO : ItemSO
 {
-    [SerializeField] private String nameEquipment;
     [SerializeField] private EquipmentType equipmentType;
-    [SerializeField] private RarityType rarityType;
-    [SerializeField] private Sprite icon;
 
     [Header("Requirement")]
     [SerializeField, Min(1)] private int levelRequired = 1;
@@ -22,8 +19,6 @@ public class EquipmentDataSO : ScriptableObject
     [SerializeField] private List<StatValue> stats = new List<StatValue>();
 
     public EquipmentType EquipmentType => equipmentType;
-    public RarityType RarityType => rarityType;
-    public Sprite Icon => icon;
     public int LevelRequired => Mathf.Max(1, levelRequired);
     public int SocketSlotCount => Mathf.Max(0, socketSlotCount);
     public int EnchantmentSlotCount => Mathf.Max(0, enchantmentSlotCount);
