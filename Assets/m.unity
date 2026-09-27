@@ -6666,7 +6666,8 @@ MonoBehaviour:
   animator: {fileID: 953502660}
   currentAnim: 
   equipment:
-    listEquipment: []
+    equipmentData:
+      equipments: []
   inventory:
     storage:
       capacity: 30

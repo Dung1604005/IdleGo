@@ -118,8 +118,8 @@ public class Equipment : Item, IStatModifierSource
         }
 
         stats[slotIndex] = stat;
-        // Khong dung event: equipment dang mac cap nhat lai stat truc tiep sau khi slot thay doi.
-        equippedBy?.ApplyStats();
+        // Equipment data đổi trước, CharacterEquipment áp stat rồi mới cho UI đọc phiên bản mới.
+        equippedBy?.OnEquipmentDataChanged(this);
         NotifyInventoryDataChanged();
         return true;
     }
