@@ -45,7 +45,7 @@ public class CharacterEquipment
             && equipment.Data != null
             && EquipmentTypeUtility.IsValid(equipment.EquipmentType)
             && equipment.CanBeEquippedBy(this)
-            && character.Stats.CurrentLevel >= equipment.Data.LevelRequired;
+            && equipment.Data.CanEquip(character);
     }
 
     public bool Equip(Equipment equipment)
@@ -152,24 +152,27 @@ public class CharacterEquipment
 
     private void ClaimCurrentEquipment()
     {
-        IReadOnlyList<Equipment> equipments = equipmentData.Equipments;
-        for (int i = 0; i < equipments.Count; i++)
+        for (int i = 0; i < EquipmentTypeUtility.EquipmentTypeCount; i++)
         {
-            Equipment equipment = equipments[i];
+            EquipmentType equipmentType = (EquipmentType)i;
+            Equipment equipment = equipmentData.GetEquipment(equipmentType);
             if (equipment == null)
             {
                 continue;
             }
 
             equipment.EnsureRuntimeState();
-            if (equipment.CanBeEquippedBy(this))
+            if (equipment.Data != null
+                && equipment.CanBeEquippedBy(this)
+                && equipment.Data.CanEquip(character))
             {
                 equipment.SetEquippedBy(this);
             }
             else
             {
+                equipmentData.RemoveEquipment(equipmentType);
                 Debug.LogWarning(
-                    $"Equipment {equipment.InstanceId} is already equipped by another character."
+                    $"Equipment {equipment.InstanceId} does not meet this character's requirements."
                 );
             }
         }

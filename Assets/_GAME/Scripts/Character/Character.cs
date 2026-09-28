@@ -25,6 +25,10 @@ public abstract class Character : GameUnit
 
     public CharacterCombat Combat => combat;
 
+    public CharacterType CharacterType => characterDataSO != null
+        ? characterDataSO.CharacterType
+        : global::CharacterType.MELEE;
+
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
     public int AttackDamage => stats != null ? Mathf.Max(0, (int)stats.GetCurrentStat(StatType.DAMAGE)) : 0;
     public int CurrentHealth => stats != null ? stats.CurrentHealth : 0;

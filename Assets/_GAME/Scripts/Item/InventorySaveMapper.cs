@@ -5,7 +5,7 @@ public static class InventorySaveMapper
 {
     public static bool TryCreateSaveData(
         InventoryStorage storage,
-        CharacterEquipment characterEquipment,
+        PlayerManager playerManager,
         out InventorySaveData saveData)
     {
         saveData = new InventorySaveData
@@ -31,7 +31,7 @@ public static class InventorySaveMapper
             saveData.slots.Add(slotSaveData);
         }
 
-        AddEquippedItemIds(storage, characterEquipment, saveData.equippedItemInstanceIds);
+        AddPlayerEquipmentData(storage, playerManager, saveData.playerEquipments);
         return true;
     }
 
@@ -57,7 +57,10 @@ public static class InventorySaveMapper
         }
 
         storage.Replace(loadedCapacity, loadedSlots, owner);
-        equipmentHandler.RestoreEquippedItems(saveData.equippedItemInstanceIds);
+        equipmentHandler.RestoreEquippedItems(
+            saveData.playerEquipments,
+            saveData.equippedItemInstanceIds
+        );
         return true;
     }
 
@@ -92,16 +95,43 @@ public static class InventorySaveMapper
         return true;
     }
 
+    private static void AddPlayerEquipmentData(
+        InventoryStorage storage,
+        PlayerManager playerManager,
+        List<PlayerEquipmentSaveData> output)
+    {
+        if (playerManager == null || output == null)
+        {
+            return;
+        }
+
+        for (int playerIndex = 0; playerIndex < playerManager.TeamCount; playerIndex++)
+        {
+            Player player = playerManager.GetPlayer(playerIndex);
+            if (player == null)
+            {
+                continue;
+            }
+
+            PlayerEquipmentSaveData playerSaveData = new PlayerEquipmentSaveData
+            {
+                playerIndex = playerIndex
+            };
+
+            AddEquippedItemIds(
+                storage,
+                player.Equipment,
+                playerSaveData.equippedItemInstanceIds
+            );
+            output.Add(playerSaveData);
+        }
+    }
+
     private static void AddEquippedItemIds(
         InventoryStorage storage,
         CharacterEquipment characterEquipment,
         List<string> output)
     {
-        if (characterEquipment == null)
-        {
-            return;
-        }
-
         IReadOnlyList<Equipment> equippedItems = characterEquipment.EquippedItems;
         for (int i = 0; i < equippedItems.Count; i++)
         {

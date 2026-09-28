@@ -9,9 +9,9 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
     [SerializeField] private RectTransform content;
     [SerializeField] private GridLayoutGroup gridLayout;
     [SerializeField] private ItemSlotUI slotTemplate;
-    [SerializeField] private List<ItemSlotUI> slotViews = new List<ItemSlotUI>();
     [SerializeField] private InventoryContentLayout contentLayout = new InventoryContentLayout();
 
+    private readonly List<ItemSlotUI> activeSlotViews = new List<ItemSlotUI>();
     private Inventory inventory;
     private bool isInitialized;
 
@@ -24,30 +24,37 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
     {
         OnDespawn();
 
-        Player player = PlayerManager.Ins.GetTarget();
-        if (player == null)
+        PlayerManager playerManager = PlayerManager.Ins;
+        if (playerManager == null)
         {
-            Debug.LogWarning("CanvasInventoryHero cannot find an active player in PlayerManager.");
+            Debug.LogWarning("CanvasInventoryHero cannot access PlayerManager.");
             return;
         }
 
-        OnInit(player.Inventory);
+        OnInit(playerManager.Inventory);
     }
 
     public void OnInit(Inventory targetInventory)
     {
         contentLayout ??= new InventoryContentLayout();
-        slotViews ??= new List<ItemSlotUI>();
 
-        if (viewport == null || content == null || gridLayout == null)
+        if (viewport == null || content == null || gridLayout == null || slotTemplate == null)
         {
-            Debug.LogError("CanvasInventoryHero is missing Viewport, Content or GridLayoutGroup.");
+            Debug.LogError(
+                "CanvasInventoryHero is missing Viewport, Content, GridLayoutGroup or ItemSlotUI template."
+            );
             return;
         }
 
         inventory = targetInventory;
         contentLayout.OnInit(viewport, content, gridLayout);
         isInitialized = inventory != null;
+
+        if (isInitialized)
+        {
+            // Pool phai duoc tao truoc khi Inventory dang ky view va yeu cau ve cac slot dau tien.
+            SimplePool.PreLoad(slotTemplate, inventory.Capacity, content);
+        }
 
         // RegisterView goi render tu Inventory de data luon la noi bat dau cap nhat UI.
         inventory?.RegisterView(this);
@@ -56,6 +63,7 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
     public void OnDespawn()
     {
         inventory?.UnregisterView(this);
+        DespawnAllSlotViews();
         inventory = null;
         isInitialized = false;
         contentLayout?.OnDespawn();
@@ -80,7 +88,7 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
             return;
         }
 
-        if (!EnsureSlotViewCount(sourceInventory.Capacity))
+        if (!SyncSlotViewCount(sourceInventory.Capacity))
         {
             return;
         }
@@ -88,7 +96,7 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
         IReadOnlyList<InventorySlot> slots = sourceInventory.Slots;
         for (int i = 0; i < sourceInventory.Capacity; i++)
         {
-            ItemSlotUI slotView = slotViews[i];
+            ItemSlotUI slotView = activeSlotViews[i];
             slotView.OnInit(i);
             slotView.SetData(slots[i]);
         }
@@ -111,39 +119,51 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
         }
     }
 
-    private bool EnsureSlotViewCount(int requiredCount)
+    private bool SyncSlotViewCount(int requiredCount)
     {
-        slotViews.RemoveAll(slotView => slotView == null);
-
-        // Neu template la slot dau tien nam san trong Content thi dung luon, khong clone trung no.
-        if (slotViews.Count == 0
-            && slotTemplate != null
-            && slotTemplate.transform.parent == content)
-        {
-            slotViews.Add(slotTemplate);
-        }
-
-        ItemSlotUI template = slotTemplate != null
-            ? slotTemplate
-            : slotViews.Count > 0 ? slotViews[0] : null;
-
-        if (template == null)
+        if (slotTemplate == null)
         {
             Debug.LogError("CanvasInventoryHero needs an ItemSlotUI template.");
             return false;
         }
 
-        while (slotViews.Count < requiredCount)
+        while (activeSlotViews.Count < requiredCount)
         {
-            ItemSlotUI newSlot = Instantiate(template, content);
-            slotViews.Add(newSlot);
+            ItemSlotUI newSlot = SimplePool.Spawn(
+                slotTemplate,
+                content.position,
+                Quaternion.identity,
+                content
+            );
+
+            if (newSlot == null)
+            {
+                Debug.LogError("SimplePool could not spawn an ItemSlotUI.");
+                return false;
+            }
+
+            activeSlotViews.Add(newSlot);
         }
 
-        for (int i = 0; i < slotViews.Count; i++)
+        while (activeSlotViews.Count > requiredCount)
         {
-            slotViews[i].gameObject.SetActive(i < requiredCount);
+            int lastIndex = activeSlotViews.Count - 1;
+            ItemSlotUI unusedSlot = activeSlotViews[lastIndex];
+            activeSlotViews.RemoveAt(lastIndex);
+            SimplePool.Despawn(unusedSlot);
         }
 
         return true;
+    }
+
+    private void DespawnAllSlotViews()
+    {
+        // Xoa khoi danh sach truoc khi tra ve pool de lan mo UI sau spawn lai dung luong.
+        for (int i = activeSlotViews.Count - 1; i >= 0; i--)
+        {
+            SimplePool.Despawn(activeSlotViews[i]);
+        }
+
+        activeSlotViews.Clear();
     }
 }

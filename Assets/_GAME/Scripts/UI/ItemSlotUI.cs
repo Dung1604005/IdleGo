@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSlotUI : MonoBehaviour
+public class ItemSlotUI : GameUnit
 {
     [SerializeField] private Image rarityImage;
 
@@ -11,6 +11,18 @@ public class ItemSlotUI : MonoBehaviour
     [SerializeField] private TMP_Text amountText;
 
     public int SlotIndex { get; private set; }
+
+    public override void OnSpawn()
+    {
+        SlotIndex = -1;
+        Clear();
+    }
+
+    public override void OnDespawn()
+    {
+        SlotIndex = -1;
+        Clear();
+    }
 
     public void OnInit(int slotIndex)
     {

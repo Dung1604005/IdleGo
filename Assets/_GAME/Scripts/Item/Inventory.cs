@@ -9,7 +9,7 @@ public class Inventory
     [SerializeField] private ItemDatabaseSO itemDatabase;
     [SerializeField] private string saveKey = "PLAYER_INVENTORY";
 
-    [NonSerialized] private CharacterEquipment characterEquipment;
+    [NonSerialized] private PlayerManager playerManager;
     [NonSerialized] private InventoryItemHandler itemHandler;
     [NonSerialized] private InventoryEquipmentHandler equipmentHandler;
     [NonSerialized] private int dataVersion;
@@ -23,9 +23,9 @@ public class Inventory
     public bool LastSaveSucceeded => lastSaveSucceeded;
     public bool IsInitialized { get; private set; }
 
-    public void OnInit(Player owner)
+    public void OnInit(PlayerManager owner)
     {
-        characterEquipment = owner != null ? owner.Equipment : null;
+        playerManager = owner;
         storage ??= new InventoryStorage();
         storage.OnInit(this);
         CreateHandlers();
@@ -58,7 +58,7 @@ public class Inventory
         }
 
         storage.OnDespawn();
-        characterEquipment = null;
+        playerManager = null;
         itemHandler = null;
         equipmentHandler = null;
         canSave = false;
@@ -103,9 +103,9 @@ public class Inventory
         return true;
     }
 
-    public bool Equip(Item item)
+    public bool Equip(Player player, Item item)
     {
-        if (!IsInitialized || !equipmentHandler.Equip(item))
+        if (!IsInitialized || !equipmentHandler.Equip(player, item))
         {
             return false;
         }
@@ -114,9 +114,9 @@ public class Inventory
         return true;
     }
 
-    public bool Unequip(Item item)
+    public bool Unequip(Player player, Item item)
     {
-        if (!IsInitialized || !equipmentHandler.Unequip(item))
+        if (!IsInitialized || !equipmentHandler.Unequip(player, item))
         {
             return false;
         }
@@ -125,9 +125,9 @@ public class Inventory
         return true;
     }
 
-    public bool Unequip(EquipmentType equipmentType)
+    public bool Unequip(Player player, EquipmentType equipmentType)
     {
-        if (!IsInitialized || !equipmentHandler.Unequip(equipmentType))
+        if (!IsInitialized || !equipmentHandler.Unequip(player, equipmentType))
         {
             return false;
         }
@@ -188,7 +188,7 @@ public class Inventory
             || !canSave
             || !InventorySaveMapper.TryCreateSaveData(
                 storage,
-                characterEquipment,
+                playerManager,
                 out InventorySaveData saveData))
         {
             return false;
@@ -228,7 +228,7 @@ public class Inventory
 
     private void CreateHandlers()
     {
-        equipmentHandler = new InventoryEquipmentHandler(storage, characterEquipment);
+        equipmentHandler = new InventoryEquipmentHandler(storage, playerManager);
         itemHandler = new InventoryItemHandler(storage, equipmentHandler);
     }
 

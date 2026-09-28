@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [Serializable]
 public class CharacterCombat 
 {
+    public const int MaxEquippedSkillCount = 2;
+
     [SerializeField] private Character character ;
     [SerializeField, Min(0f)] private float basicAttackRange;
 
@@ -12,6 +14,7 @@ public class CharacterCombat
     [SerializeField] private float delayAttack;
 
     private AttackType basicAttackType;
+    [NonSerialized] private CharacterCombatSO combatData;
     private Character target;
     private Character activeAttackTarget;
     private CombatSkillState activeSkillState;
@@ -26,27 +29,29 @@ public class CharacterCombat
     public float BasicAttackRange => Mathf.Max(0f, basicAttackRange);
     public bool IsInitialized { get; private set; }
     public double NextActionAt => nextActionAt;
+    public IReadOnlyList<CombatSkillState> EquippedSkillStates => combatSkillStates;
 
     public void OnInit(CharacterCombatSO combatSO)
     {
         OnDespawn();
+        combatData = combatSO;
         isAttacking = false;
-        basicAttackRange = combatSO.BaseRangeAttack;
-        basicAttackType = combatSO.BasicAttackType;
+        basicAttackRange = combatSO != null ? combatSO.BaseRangeAttack : 0f;
+        basicAttackType = combatSO != null ? combatSO.BasicAttackType : null;
         if (combatSkillStates == null)
         {
             combatSkillStates = new List<CombatSkillState>();
         }
-        delayAttack = combatSO.DelayAttack;
+        delayAttack = combatSO != null ? combatSO.DelayAttack : 0f;
         combatSkillStates.Clear();
-        List<CombatSkill> skills = combatSO.GetCombatSkills();
+        IReadOnlyList<CombatSkill> skills = combatSO != null
+            ? combatSO.GetCombatSkills()
+            : null;
         if (skills != null)
         {
-            for (int i = 0; i < skills.Count; i++)
+            for (int i = 0; i < skills.Count && combatSkillStates.Count < MaxEquippedSkillCount; i++)
             {
-                CombatSkillState state = new CombatSkillState();
-                state.OnInit(skills[i], character.Stats.CurrentLevel);
-                combatSkillStates.Add(state);
+                TryEquipSkillInternal(skills[i]);
             }
         }
         nextActionAt = 0d;
@@ -55,6 +60,33 @@ public class CharacterCombat
         activeSkillState = null;
         hasExecutedAttack = false;
         IsInitialized = true;
+    }
+
+    public bool CanEquipSkill(CombatSkill skill)
+    {
+        return IsInitialized
+            && combatSkillStates.Count < MaxEquippedSkillCount
+            && IsSkillAvailable(skill)
+            && skill.CanEquip(character)
+            && GetSkillState(skill) == null;
+    }
+
+    public bool EquipSkill(CombatSkill skill)
+    {
+        return CanEquipSkill(skill) && TryEquipSkillInternal(skill);
+    }
+
+    public bool UnequipSkill(CombatSkill skill)
+    {
+        CombatSkillState state = GetSkillState(skill);
+        if (!IsInitialized || state == null || ReferenceEquals(state, activeSkillState))
+        {
+            return false;
+        }
+
+        state.OnDespawn();
+        combatSkillStates.Remove(state);
+        return true;
     }
 
     public void OnDespawn()
@@ -69,6 +101,7 @@ public class CharacterCombat
             }
         }
         basicAttackType = null;
+        combatData = null;
         activeAttackTarget = null;
         activeSkillState = null;
         isAttacking = false;
@@ -106,6 +139,56 @@ public class CharacterCombat
         }
 
         return selected;
+    }
+
+    private bool TryEquipSkillInternal(CombatSkill skill)
+    {
+        if (skill == null
+            || combatSkillStates.Count >= MaxEquippedSkillCount
+            || !skill.CanEquip(character)
+            || GetSkillState(skill) != null)
+        {
+            return false;
+        }
+
+        // Chi skill da dat level va CharacterType requirement moi duoc tao state chien dau.
+        CombatSkillState state = new CombatSkillState();
+        state.OnInit(skill, character.Stats.CurrentLevel);
+        combatSkillStates.Add(state);
+        return true;
+    }
+
+    private bool IsSkillAvailable(CombatSkill skill)
+    {
+        if (skill == null || character == null || combatData == null)
+        {
+            return false;
+        }
+
+        IReadOnlyList<CombatSkill> availableSkills = combatData.GetCombatSkills();
+        for (int i = 0; i < availableSkills.Count; i++)
+        {
+            if (ReferenceEquals(availableSkills[i], skill))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private CombatSkillState GetSkillState(CombatSkill skill)
+    {
+        for (int i = 0; i < combatSkillStates.Count; i++)
+        {
+            CombatSkillState state = combatSkillStates[i];
+            if (state != null && ReferenceEquals(state.Skill, skill))
+            {
+                return state;
+            }
+        }
+
+        return null;
     }
 
     public void SetTarget(Character opponent)

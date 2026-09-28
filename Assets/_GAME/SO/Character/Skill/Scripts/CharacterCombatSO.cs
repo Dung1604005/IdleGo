@@ -14,7 +14,7 @@ public class CharacterCombatSO : ScriptableObject
     public float DelayAttack => delayAttack;
     public AttackType BasicAttackType => basicAttackType;
 
-    public List<CombatSkill> GetCombatSkills()
+    public IReadOnlyList<CombatSkill> GetCombatSkills()
     {
         return listCombatSkill;
     }

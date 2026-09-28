@@ -9,6 +9,8 @@ public class EquipmentDataSO : ItemSO
 
     [Header("Requirement")]
     [SerializeField, Min(1)] private int levelRequired = 1;
+    [SerializeField] private CharacterRequirementType characterRequirement =
+        CharacterRequirementType.ALL;
 
     [Header("Slots")]
     [SerializeField, Min(0)] private int socketSlotCount;
@@ -20,10 +22,18 @@ public class EquipmentDataSO : ItemSO
 
     public EquipmentType EquipmentType => equipmentType;
     public int LevelRequired => Mathf.Max(1, levelRequired);
+    public CharacterRequirementType CharacterRequirement => characterRequirement;
     public int SocketSlotCount => Mathf.Max(0, socketSlotCount);
     public int EnchantmentSlotCount => Mathf.Max(0, enchantmentSlotCount);
     public int DecorationSlotCount => Mathf.Max(0, decorationSlotCount);
     public IReadOnlyList<StatValue> Stats => stats;
+
+    public bool CanEquip(Character character)
+    {
+        return character != null
+            && character.Stats.CurrentLevel >= LevelRequired
+            && CharacterTypeUtility.Matches(characterRequirement, character.CharacterType);
+    }
 
     public float GetStatValue(
         StatType statType,

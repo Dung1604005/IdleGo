@@ -6,6 +6,16 @@ public class InventorySaveData
 {
     public int capacity;
     public List<InventorySlotSaveData> slots = new List<InventorySlotSaveData>();
+    public List<PlayerEquipmentSaveData> playerEquipments = new List<PlayerEquipmentSaveData>();
+
+    // Giu field cu de load save mot Player da tao truoc khi inventory chuyen len PlayerManager.
+    public List<string> equippedItemInstanceIds = new List<string>();
+}
+
+[Serializable]
+public class PlayerEquipmentSaveData
+{
+    public int playerIndex;
     public List<string> equippedItemInstanceIds = new List<string>();
 }
 

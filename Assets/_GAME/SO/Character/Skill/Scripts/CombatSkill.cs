@@ -13,6 +13,9 @@ public abstract class CombatSkill : ScriptableObject
 
     [SerializeField] private int levelRequire;
 
+    [SerializeField] private CharacterRequirementType characterRequirement =
+        CharacterRequirementType.ALL;
+
     public float Cooldown => Mathf.Max(0.01f, cooldown);
     public abstract float Range { get; }
 
@@ -22,11 +25,22 @@ public abstract class CombatSkill : ScriptableObject
 
     public int MaxLevel => maxLevel;
 
+    public int LevelRequire => Mathf.Max(0, levelRequire);
+
+    public CharacterRequirementType CharacterRequirement => characterRequirement;
+
     public abstract bool CanUse(CharacterCombat user, Character target);
     public abstract void Execute(CharacterCombat user, Character target, int level);
 
     public bool IsUnlocked(int level)
     {
-        return level >= levelRequire;
+        return level >= LevelRequire;
+    }
+
+    public bool CanEquip(Character character)
+    {
+        return character != null
+            && IsUnlocked(character.Stats.CurrentLevel)
+            && CharacterTypeUtility.Matches(characterRequirement, character.CharacterType);
     }
 }
