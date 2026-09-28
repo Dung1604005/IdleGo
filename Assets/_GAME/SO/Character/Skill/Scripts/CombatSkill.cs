@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class CombatSkill : ScriptableObject
 {
+    [SerializeField] private string skillId;
     [SerializeField, Min(0.01f)] private float cooldown = 3f;
 
     [SerializeField] protected int maxLevel;
@@ -15,6 +16,8 @@ public abstract class CombatSkill : ScriptableObject
 
     [SerializeField] private CharacterRequirementType characterRequirement =
         CharacterRequirementType.ALL;
+
+    public string SkillId => string.IsNullOrWhiteSpace(skillId) ? name : skillId.Trim();
 
     public float Cooldown => Mathf.Max(0.01f, cooldown);
     public abstract float Range { get; }

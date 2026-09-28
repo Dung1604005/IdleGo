@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3976f81c10544e68fc9c31902d53bef, type: 3}
   m_Name: Thrust
   m_EditorClassIdentifier: Assembly-CSharp::DamageSkill
+  skillId: mooni_thrust
   cooldown: 2.5
   maxLevel: 5
   iconSkill: {fileID: 0}

@@ -148,6 +148,8 @@ public class CharacterEquipment
         // Character đọc EquipmentData mới trước; UI chỉ đọc lại sau khi DataVersion tăng.
         statHandler?.Apply();
         dataVersion++;
+
+        UIManager.Ins.GetUI<CanvasInventoryHero>().RefreshEquipment();
     }
 
     private void ClaimCurrentEquipment()

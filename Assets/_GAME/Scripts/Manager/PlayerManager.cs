@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,25 +6,30 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     public const int MaxTeamSize = 3;
 
-    [SerializeField] private List<Player> players = new List<Player>();
+    [SerializeField] private PlayerRoster roster = new PlayerRoster();
+    [SerializeField] private PlayerTeam team = new PlayerTeam();
     [SerializeField] private Inventory inventory = new Inventory();
 
-    public IReadOnlyList<Player> Players => players;
+    public IReadOnlyList<Player> AllPlayers => roster.Players;
+    public IReadOnlyList<Player> Players => team.Players;
     public Inventory Inventory => inventory;
-    public int TeamCount => Mathf.Min(players != null ? players.Count : 0, MaxTeamSize);
+    public int TeamCount => team.Count;
+    public int TeamProgressLevel => team.ProgressLevel;
+    public int UnlockedTeamSlotCount => team.UnlockedSlotCount;
     public bool IsInitialized { get; private set; }
 
     public void OnInit()
     {
         OnDespawn();
+        roster ??= new PlayerRoster();
+        team ??= new PlayerTeam();
         inventory ??= new Inventory();
-        inventory.OnInit(this);
-        IsInitialized = true;
 
-        if (players != null && players.Count > MaxTeamSize)
-        {
-            Debug.LogWarning($"PlayerManager only uses the first {MaxTeamSize} players.");
-        }
+        roster.OnInit();
+        team.OnInit(roster);
+        IsInitialized = true;
+        inventory.OnInit(this);
+        team.RefreshActiveStates();
     }
 
     public void OnDespawn()
@@ -34,25 +40,92 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public Player GetPlayer(int teamIndex)
     {
-        return teamIndex >= 0 && teamIndex < TeamCount ? players[teamIndex] : null;
+        return team.GetPlayer(teamIndex);
+    }
+
+    public String GetNextPlayerId(String characterId)
+    {
+        return team.GetNextPlayerId(characterId);
+    }
+    public String GetPrevPlayerId(String characterId)
+    {
+        return team.GetPrevPlayerId(characterId);
+    }
+
+    
+
+    public Player GetCharacter(string characterId)
+    {
+        return roster.GetCharacter(characterId);
     }
 
     public bool ContainsPlayer(Player player)
     {
-        if (player == null)
+        return team.Contains(player);
+    }
+
+    public bool ContainsCharacter(Player player)
+    {
+        return roster.Contains(player);
+    }
+
+    public bool IsCharacterUnlocked(Player player)
+    {
+        return roster.IsUnlocked(player);
+    }
+
+    public bool IsTeamSlotUnlocked(int teamSlotIndex)
+    {
+        return team.IsSlotUnlocked(teamSlotIndex);
+    }
+
+    public bool CanAddToTeam(Player player)
+    {
+        return IsInitialized && team.CanAdd(player);
+    }
+
+    public bool UnlockCharacter(Player player)
+    {
+        if (!IsInitialized || !ContainsCharacter(player))
         {
             return false;
         }
 
-        for (int i = 0; i < TeamCount; i++)
+        if (roster.IsUnlocked(player))
         {
-            if (ReferenceEquals(players[i], player))
-            {
-                return true;
-            }
+            return true;
         }
 
-        return false;
+        if (!roster.Unlock(player))
+        {
+            return false;
+        }
+
+        inventory.OnCharacterRosterChanged(true);
+        return true;
+    }
+
+    public bool AddToTeam(Player player)
+    {
+        if (!IsInitialized || !team.Add(player, true))
+        {
+            return false;
+        }
+
+        inventory.OnCharacterRosterChanged(false);
+        return true;
+    }
+
+    public bool RemoveFromTeam(Player player)
+    {
+        if (!IsInitialized || !team.Remove(player, true))
+        {
+            return false;
+        }
+
+        // Roi team chi thay doi trang thai chien dau, khong xoa data cua nhan vat.
+        inventory.OnCharacterRosterChanged(false);
+        return true;
     }
 
     public bool Equip(Player player, Item item)
@@ -70,51 +143,71 @@ public class PlayerManager : Singleton<PlayerManager>
         return inventory != null && inventory.Unequip(player, equipmentType);
     }
 
+    public bool EquipSkill(Player player, CombatSkill skill)
+    {
+        if (!CanChangeSkill(player) || !player.Combat.EquipSkill(skill))
+        {
+            return false;
+        }
+
+        inventory.OnCharacterRosterChanged(false);
+        return true;
+    }
+
+    public bool UnequipSkill(Player player, CombatSkill skill)
+    {
+        if (!CanChangeSkill(player) || !player.Combat.UnequipSkill(skill))
+        {
+            return false;
+        }
+
+        inventory.OnCharacterRosterChanged(false);
+        return true;
+    }
+
+    public bool SaveGame()
+    {
+        return inventory != null && inventory.SaveGame();
+    }
+
     public Player GetTarget()
     {
-        if (players == null)
-        {
-            return null;
-        }
-
-        for (int i = 0; i < TeamCount; i++)
-        {
-            Player player = players[i];
-            if (player != null && player.isActiveAndEnabled && !player.IsDead)
-            {
-                return player;
-            }
-        }
-
-        return null;
+        return team.GetTarget();
     }
 
     public Player GetNearestTarget(Vector3 position)
     {
-        if (players == null)
-        {
-            return null;
-        }
+        return team.GetNearestTarget(position);
+    }
 
-        Player nearest = null;
-        float nearestDistance = float.PositiveInfinity;
+    internal void ResetRosterForLoad()
+    {
+        roster.ResetUnlocks();
+        team.ResetForLoad();
+    }
 
-        for (int i = 0; i < TeamCount; i++)
-        {
-            Player player = players[i];
-            if (player == null || !player.isActiveAndEnabled || player.IsDead)
-            {
-                continue;
-            }
+    internal bool UnlockCharacterForLoad(Player player)
+    {
+        return roster.IsUnlocked(player) || roster.Unlock(player);
+    }
 
-            float distance = (player.transform.position - position).sqrMagnitude;
-            if (distance < nearestDistance)
-            {
-                nearest = player;
-                nearestDistance = distance;
-            }
-        }
+    internal bool AddToTeamForLoad(Player player)
+    {
+        return team.Add(player, false);
+    }
 
-        return nearest;
+    internal void RefreshTeamActiveStates()
+    {
+        team.RefreshActiveStates();
+    }
+
+    internal void RestoreAllCharactersHealth()
+    {
+        roster.RestoreAllHealth();
+    }
+
+    private bool CanChangeSkill(Player player)
+    {
+        return IsInitialized && roster.IsUnlocked(player);
     }
 }

@@ -89,6 +89,53 @@ public class CharacterCombat
         return true;
     }
 
+    public void ClearEquippedSkills()
+    {
+        if (combatSkillStates == null || isAttacking)
+        {
+            return;
+        }
+
+        for (int i = 0; i < combatSkillStates.Count; i++)
+        {
+            combatSkillStates[i]?.OnDespawn();
+        }
+
+        combatSkillStates.Clear();
+    }
+
+    public CombatSkill GetAvailableSkill(string skillId)
+    {
+        if (combatData == null || string.IsNullOrWhiteSpace(skillId))
+        {
+            return null;
+        }
+
+        IReadOnlyList<CombatSkill> availableSkills = combatData.GetCombatSkills();
+        for (int i = 0; i < availableSkills.Count; i++)
+        {
+            CombatSkill skill = availableSkills[i];
+            if (skill != null && skill.SkillId == skillId)
+            {
+                return skill;
+            }
+        }
+
+        return null;
+    }
+
+    public bool SetEquippedSkillLevel(CombatSkill skill, int level)
+    {
+        CombatSkillState state = GetSkillState(skill);
+        if (state == null)
+        {
+            return false;
+        }
+
+        state.SetLevel(level);
+        return true;
+    }
+
     public void OnDespawn()
     {
         SetTarget(null);

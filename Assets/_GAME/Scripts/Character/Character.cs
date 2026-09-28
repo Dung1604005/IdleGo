@@ -25,6 +25,10 @@ public abstract class Character : GameUnit
 
     public CharacterCombat Combat => combat;
 
+    public string CharacterId => characterDataSO != null
+        ? characterDataSO.CharacterId
+        : string.Empty;
+
     public CharacterType CharacterType => characterDataSO != null
         ? characterDataSO.CharacterType
         : global::CharacterType.MELEE;
@@ -110,11 +114,6 @@ public abstract class Character : GameUnit
             animator.SetTrigger(currentAnim);
         }
     }
-    protected virtual void Awake()
-    {
-        OnInit();
-    }
-
     protected virtual void Update()
     {
         if(IsDead)return;

@@ -37,6 +37,8 @@ public class EquipmentData
         int equipmentIndex = (int)equipment.EquipmentType;
         Equipment replacedEquipment = equipments[equipmentIndex];
         equipments[equipmentIndex] = equipment;
+
+        
         return replacedEquipment;
     }
 

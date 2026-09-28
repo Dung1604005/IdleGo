@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 13886336}
   - component: {fileID: 13886338}
   - component: {fileID: 13886337}
+  - component: {fileID: 2100000110}
   m_Layer: 5
   m_Name: Panel-Inventory
   m_TagString: Untagged
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -196,6 +197,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13886335}
   m_CullTransparentMesh: 1
+--- !u!114 &2100000110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13886335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16ee27c537d45c8bf521a0847515605, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PanelInventoryView
+  viewport: {fileID: 1120546766}
+  content: {fileID: 990383000}
+  gridLayout: {fileID: 990383001}
+  slotTemplate: {fileID: 3256508365701653167, guid: 5483c7e464bda594b8b13d7fb260d4b2, type: 3}
+  contentLayout:
+    slotSize: {x: 100, y: 100}
 --- !u!1 &15042911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,8 +2814,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693f43b71932457da4093df708351c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  players:
-  - {fileID: 1973946102}
+  roster:
+    players:
+    - {fileID: 1973946102}
+  team:
+    teamPlayers: []
+    teamSlotLevelOwner: {fileID: 1973946102}
+    secondMemberUnlockLevel: 10
+    thirdMemberUnlockLevel: 20
   inventory:
     storage:
       capacity: 30
@@ -4150,6 +4175,7 @@ GameObject:
   - component: {fileID: 1829920273}
   - component: {fileID: 1829920275}
   - component: {fileID: 1829920274}
+  - component: {fileID: 2100000111}
   m_Layer: 5
   m_Name: Panel-Hero
   m_TagString: Untagged
@@ -4223,6 +4249,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829920272}
   m_CullTransparentMesh: 1
+--- !u!114 &2100000111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829920272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da80a9aebb1fc64fb34357663bbee81, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PanelHeroView
+  characterId: mooni
+  tf: {fileID: 1829920273}
+  skillSlotUIs: []
+  equipmentSlotUIs: []
 --- !u!1 &1850579683
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,12 +5029,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasInventoryHero
   IsDestroyOnClose: 0
-  viewport: {fileID: 1120546766}
-  content: {fileID: 990383000}
-  gridLayout: {fileID: 990383001}
-  slotTemplate: {fileID: 3256508365701653167, guid: 5483c7e464bda594b8b13d7fb260d4b2, type: 3}
-  contentLayout:
-    slotSize: {x: 100, y: 100}
+  panelInventoryView: {fileID: 2100000110}
+  panelHeroView: {fileID: 2100000111}
 --- !u!1 &2102638169
 GameObject:
   m_ObjectHideFlags: 0

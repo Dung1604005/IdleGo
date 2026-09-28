@@ -16,7 +16,7 @@ public class InventoryEquipmentHandler
 
     public bool Equip(Player player, Item item)
     {
-        return IsValidTeamPlayer(player)
+        return IsValidCharacter(player)
             && item is Equipment equipment
             && storage.GetSlot(item) != null
             && player.Equipment.TryEquip(equipment, out _);
@@ -24,7 +24,7 @@ public class InventoryEquipmentHandler
 
     public bool Unequip(Player player, Item item)
     {
-        return IsValidTeamPlayer(player)
+        return IsValidCharacter(player)
             && item is Equipment equipment
             && storage.GetSlot(item) != null
             && player.Equipment.Unequip(equipment);
@@ -32,7 +32,7 @@ public class InventoryEquipmentHandler
 
     public bool Unequip(Player player, EquipmentType equipmentType)
     {
-        return IsValidTeamPlayer(player)
+        return IsValidCharacter(player)
             && player.Equipment.Unequip(equipmentType) != null;
     }
 
@@ -54,10 +54,11 @@ public class InventoryEquipmentHandler
             return;
         }
 
-        for (int playerIndex = 0; playerIndex < playerManager.TeamCount; playerIndex++)
+        IReadOnlyList<Player> characters = playerManager.AllPlayers;
+        for (int playerIndex = 0; playerIndex < characters.Count; playerIndex++)
         {
-            Player player = playerManager.GetPlayer(playerIndex);
-            if (player != null)
+            Player player = characters[playerIndex];
+            if (playerManager.IsCharacterUnlocked(player))
             {
                 ImportPlayerEquipment(player, owner);
             }
@@ -65,12 +66,21 @@ public class InventoryEquipmentHandler
     }
 
     public void RestoreEquippedItems(
+        PlayerRosterSaveData rosterSaveData,
         IReadOnlyList<PlayerEquipmentSaveData> savedPlayerEquipments,
         IReadOnlyList<string> legacyEquippedItemInstanceIds)
     {
-        UnequipAllPlayers();
         if (playerManager == null)
         {
+            return;
+        }
+
+        if (PlayerRosterSaveMapper.HasData(rosterSaveData))
+        {
+            for (int i = 0; i < rosterSaveData.characters.Count; i++)
+            {
+                RestoreCharacterEquipment(rosterSaveData.characters[i]);
+            }
             return;
         }
 
@@ -110,18 +120,30 @@ public class InventoryEquipmentHandler
         }
     }
 
-    private void UnequipAllPlayers()
+    public void UnequipAllCharacters()
     {
         if (playerManager == null)
         {
             return;
         }
 
-        for (int i = 0; i < playerManager.TeamCount; i++)
+        IReadOnlyList<Player> characters = playerManager.AllPlayers;
+        for (int i = 0; i < characters.Count; i++)
         {
-            Player player = playerManager.GetPlayer(i);
+            Player player = characters[i];
             player?.Equipment.UnequipAll();
         }
+    }
+
+    private void RestoreCharacterEquipment(PlayerCharacterSaveData characterSave)
+    {
+        if (characterSave == null)
+        {
+            return;
+        }
+
+        Player player = playerManager.GetCharacter(characterSave.characterId);
+        RestoreEquipmentIds(player, characterSave.equippedItemInstanceIds);
     }
 
     private void RestorePlayerEquipment(PlayerEquipmentSaveData playerEquipmentSave)
@@ -137,7 +159,7 @@ public class InventoryEquipmentHandler
 
     private void RestoreEquipmentIds(Player player, IReadOnlyList<string> instanceIds)
     {
-        if (!IsValidTeamPlayer(player) || instanceIds == null)
+        if (!IsValidCharacter(player) || instanceIds == null)
         {
             return;
         }
@@ -154,10 +176,11 @@ public class InventoryEquipmentHandler
         }
     }
 
-    private bool IsValidTeamPlayer(Player player)
+    private bool IsValidCharacter(Player player)
     {
         return playerManager != null
-            && playerManager.ContainsPlayer(player)
+            && playerManager.ContainsCharacter(player)
+            && playerManager.IsCharacterUnlocked(player)
             && player.Equipment != null
             && player.Equipment.IsInitialized;
     }

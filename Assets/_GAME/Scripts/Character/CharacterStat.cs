@@ -74,6 +74,41 @@ public class CharacterStat
         SetCurrentStat(statType, currentStats[(int)statType] + amount);
     }
 
+    public void CopyProgressTo(List<float> output)
+    {
+        if (output == null)
+        {
+            return;
+        }
+
+        EnsureCurrentStats();
+        output.Clear();
+        for (int i = 0; i < StatTypeUtility.StatCount; i++)
+        {
+            // Chi luu stat goc da nang. Modifier cua equipment se duoc gan lai sau khi load.
+            output.Add(currentStats[i]);
+        }
+    }
+
+    public void RestoreProgress(IReadOnlyList<float> savedStats)
+    {
+        if (savedStats == null)
+        {
+            return;
+        }
+
+        EnsureCurrentStats();
+        int count = Mathf.Min(savedStats.Count, StatTypeUtility.StatCount);
+        for (int i = 0; i < count; i++)
+        {
+            StatType statType = (StatType)i;
+            currentStats[i] = StatTypeUtility.NormalizeValue(statType, savedStats[i]);
+        }
+
+        areCalculatedStatsDirty = true;
+        currentHealth = CurrentMaxHealth;
+    }
+
     public bool AddModifier(StatModifier modifier)
     {
         EnsureRuntimeCollections();

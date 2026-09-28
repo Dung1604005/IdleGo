@@ -206,6 +206,7 @@ public class Inventory
                 itemDatabase,
                 storage,
                 equipmentHandler,
+                playerManager,
                 this))
         {
             return false;
@@ -224,6 +225,21 @@ public class Inventory
         {
             CompleteDataFlow();
         }
+    }
+
+    internal void OnCharacterRosterChanged(bool importStartingEquipment)
+    {
+        if (!IsInitialized)
+        {
+            return;
+        }
+
+        if (importStartingEquipment)
+        {
+            equipmentHandler.ImportCurrentEquipment(this);
+        }
+
+        CompleteDataFlow();
     }
 
     private void CreateHandlers()

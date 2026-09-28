@@ -31,7 +31,16 @@ public static class InventorySaveMapper
             saveData.slots.Add(slotSaveData);
         }
 
-        AddPlayerEquipmentData(storage, playerManager, saveData.playerEquipments);
+        if (!PlayerRosterSaveMapper.TryCreate(
+            playerManager,
+            storage,
+            out PlayerRosterSaveData rosterSaveData))
+        {
+            saveData = null;
+            return false;
+        }
+
+        saveData.playerRoster = rosterSaveData;
         return true;
     }
 
@@ -40,12 +49,16 @@ public static class InventorySaveMapper
         ItemDatabaseSO itemDatabase,
         InventoryStorage storage,
         InventoryEquipmentHandler equipmentHandler,
+        PlayerManager playerManager,
         Inventory owner)
     {
         if (!CanApplySaveData(saveData, itemDatabase))
         {
             return false;
         }
+
+        // Go modifier equipment cu truoc khi khoi phuc stat goc cua tung nhan vat.
+        equipmentHandler.UnequipAllCharacters();
 
         int loadedCapacity = Mathf.Max(1, saveData.capacity);
         List<InventorySlot> loadedSlots = InventoryStorage.CreateEmptySlots(loadedCapacity);
@@ -57,10 +70,14 @@ public static class InventorySaveMapper
         }
 
         storage.Replace(loadedCapacity, loadedSlots, owner);
+        PlayerRosterSaveMapper.ApplyProgress(saveData.playerRoster, playerManager);
         equipmentHandler.RestoreEquippedItems(
+            saveData.playerRoster,
             saveData.playerEquipments,
             saveData.equippedItemInstanceIds
         );
+        playerManager?.RestoreAllCharactersHealth();
+        playerManager?.RefreshTeamActiveStates();
         return true;
     }
 
@@ -93,54 +110,6 @@ public static class InventorySaveMapper
         }
 
         return true;
-    }
-
-    private static void AddPlayerEquipmentData(
-        InventoryStorage storage,
-        PlayerManager playerManager,
-        List<PlayerEquipmentSaveData> output)
-    {
-        if (playerManager == null || output == null)
-        {
-            return;
-        }
-
-        for (int playerIndex = 0; playerIndex < playerManager.TeamCount; playerIndex++)
-        {
-            Player player = playerManager.GetPlayer(playerIndex);
-            if (player == null)
-            {
-                continue;
-            }
-
-            PlayerEquipmentSaveData playerSaveData = new PlayerEquipmentSaveData
-            {
-                playerIndex = playerIndex
-            };
-
-            AddEquippedItemIds(
-                storage,
-                player.Equipment,
-                playerSaveData.equippedItemInstanceIds
-            );
-            output.Add(playerSaveData);
-        }
-    }
-
-    private static void AddEquippedItemIds(
-        InventoryStorage storage,
-        CharacterEquipment characterEquipment,
-        List<string> output)
-    {
-        IReadOnlyList<Equipment> equippedItems = characterEquipment.EquippedItems;
-        for (int i = 0; i < equippedItems.Count; i++)
-        {
-            Equipment equipment = equippedItems[i];
-            if (equipment != null && storage.GetSlot(equipment) != null)
-            {
-                output.Add(equipment.InstanceId);
-            }
-        }
     }
 
     private static bool CanApplySaveData(InventorySaveData saveData, ItemDatabaseSO itemDatabase)
