@@ -1,11 +1,77 @@
-using Microsoft.Unity.VisualStudio.Editor;
+
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] private Image rarityImage;
 
     [SerializeField] private Image iconImage;
+    [SerializeField] private TMP_Text amountText;
+
+    public int SlotIndex { get; private set; }
+
+    public void OnInit(int slotIndex)
+    {
+        SlotIndex = slotIndex;
+    }
+
+    public void SetData(InventorySlot slot)
+    {
+        if (slot == null || slot.IsEmpty || slot.Item.Data == null)
+        {
+            Clear();
+            return;
+        }
+
+        ChangeItem(slot.Item.RarityType, slot.Item.Data.Icon);
+        SetAmount(slot.Amount);
+    }
+
+
+    public void ChangeItem(RarityType rarityType, Sprite iconSprite)
+    {
+        if (rarityImage == null || iconImage == null)
+        {
+            Debug.LogError("ItemSlotUI is missing its rarity or icon Image reference.");
+            return;
+        }
+
+        rarityImage.sprite = DataManager.Ins.GetRarityBGSprite(rarityType);
+
+        iconImage.sprite = iconSprite;
+        rarityImage.enabled = rarityImage.sprite != null;
+        iconImage.enabled = iconImage.sprite != null;
+    }
+
+    public void Clear()
+    {
+        if (rarityImage != null)
+        {
+            rarityImage.sprite = null;
+            rarityImage.enabled = false;
+        }
+
+        if (iconImage != null)
+        {
+            iconImage.sprite = null;
+            iconImage.enabled = false;
+        }
+
+        if (amountText != null)
+        {
+            amountText.text = string.Empty;
+        }
+    }
+
+    private void SetAmount(int amount)
+    {
+        if (amountText != null)
+        {
+            amountText.text = amount > 1 ? amount.ToString() : string.Empty;
+        }
+    }
 
     
 

@@ -15,6 +15,7 @@ public class Inventory
     [NonSerialized] private int dataVersion;
     [NonSerialized] private bool lastSaveSucceeded;
     [NonSerialized] private bool canSave;
+    [NonSerialized] private IInventoryView inventoryView;
 
     public IReadOnlyList<InventorySlot> Slots => storage.Slots;
     public int Capacity => storage.Capacity;
@@ -135,6 +136,17 @@ public class Inventory
         return true;
     }
 
+    public bool IncreaseCapacity(int additionalSlots)
+    {
+        if (!IsInitialized || !storage.IncreaseCapacity(additionalSlots))
+        {
+            return false;
+        }
+
+        CompleteDataFlow();
+        return true;
+    }
+
     public void SortByRarityDescending()
     {
         if (!IsInitialized)
@@ -154,6 +166,20 @@ public class Inventory
     public InventorySlot GetSlot(Item item)
     {
         return storage.GetSlot(item);
+    }
+
+    public void RegisterView(IInventoryView view)
+    {
+        inventoryView = view;
+        RefreshView();
+    }
+
+    public void UnregisterView(IInventoryView view)
+    {
+        if (ReferenceEquals(inventoryView, view))
+        {
+            inventoryView = null;
+        }
     }
 
     public bool SaveGame()
@@ -185,10 +211,10 @@ public class Inventory
             return false;
         }
 
-        // UI sau nay chi can so sanh DataVersion, khong can dang ky event.
         dataVersion++;
         lastSaveSucceeded = true;
         canSave = true;
+        RefreshView();
         return true;
     }
 
@@ -208,11 +234,18 @@ public class Inventory
 
     private void CompleteDataFlow()
     {
-        // Moi thay doi deu ket thuc theo thu tu: runtime data -> PlayerPrefs JSON -> DataVersion.
+        // Luong bat buoc: sua runtime data -> luu JSON -> data chu dong yeu cau UI ve lai.
+        // UI van phai hien runtime data moi neu buoc save that bai; ket qua save duoc giu rieng.
         lastSaveSucceeded = SaveGame();
-        if (lastSaveSucceeded)
+        dataVersion++;
+        RefreshView();
+    }
+
+    private void RefreshView()
+    {
+        if (IsInitialized)
         {
-            dataVersion++;
+            inventoryView?.RefreshInventory(this);
         }
     }
 }

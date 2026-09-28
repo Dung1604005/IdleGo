@@ -100,6 +100,18 @@ public class InventoryStorage
         slots.Sort(CompareSlotsByRarity);
     }
 
+    internal bool IncreaseCapacity(int additionalSlots)
+    {
+        if (additionalSlots <= 0 || capacity > int.MaxValue - additionalSlots)
+        {
+            return false;
+        }
+
+        capacity += additionalSlots;
+        EnsureSlotCount();
+        return true;
+    }
+
     internal void Replace(int newCapacity, List<InventorySlot> newSlots, Inventory owner)
     {
         // Bỏ liên kết ở item cũ trước khi thay toàn bộ dữ liệu bằng kết quả load.
