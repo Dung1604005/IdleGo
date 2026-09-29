@@ -10,18 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
-  m_Name: NormalSword_Common
+  m_Name: BeginBow_Uncommon
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
-  itemId: normal_sword_common
-  nameItem: Normal Sword
-  rarityType: 0
+  itemId: beginner_bow_uncommon
+  nameItem: Beginner Bow
+  rarityType: 1
   itemType: 0
-  icon: {fileID: -2774494319427013120, guid: c740ea5253f19ff48a2957cce8cd3c9b, type: 3}
+  icon: {fileID: -1681893176428541049, guid: 58cf3a1b39753c54abe8e56d84a05976, type: 3}
   maxQuantity: 1
   equipmentType: 0
   levelRequired: 1
-  characterRequirement: 1
-  socketSlotCount: 0
+  characterRequirement: 2
+  socketSlotCount: 1
   enchantmentSlotCount: 0
   decorationSlotCount: 0
-  stats: []
+  stats:
+  - statType: 2
+    value: 12
+    operation: 0
+  - statType: 6
+    value: 0.0975
+    operation: 0

@@ -59,7 +59,7 @@ internal static class EquipmentBalanceCalculator
         preview.BaseStatBudget = preview.ItemPower
             * EquipmentBalanceRules.GetBaseBudgetShare(equipment.RarityType);
         preview.EnhancementBudget = preview.ItemPower - preview.BaseStatBudget;
-        AllocateStats(preview, equipment.RarityType, mainStat, subStats);
+        AllocateStats(preview, equipment, mainStat, subStats);
         return preview;
     }
 
@@ -134,34 +134,36 @@ internal static class EquipmentBalanceCalculator
 
     private static void AllocateStats(
         EquipmentBalancePreview preview,
-        RarityType rarity,
+        EquipmentDataSO equipment,
         StatType mainStat,
         IReadOnlyList<StatType> subStats)
     {
         float mainShare = subStats.Count > 0
-            ? EquipmentBalanceRules.GetMainBudgetShare(rarity)
+            ? EquipmentBalanceRules.GetMainBudgetShare(equipment.RarityType)
             : 1f;
         float mainPower = preview.BaseStatBudget * mainShare;
-        AddStat(preview, mainStat, mainPower);
+        AddStat(preview, equipment, mainStat, mainPower);
 
         float subPower = subStats.Count > 0
             ? (preview.BaseStatBudget - mainPower) / subStats.Count
             : 0f;
         for (int i = 0; i < subStats.Count; i++)
         {
-            AddStat(preview, subStats[i], subPower);
+            AddStat(preview, equipment, subStats[i], subPower);
         }
     }
 
     private static void AddStat(
         EquipmentBalancePreview preview,
+        EquipmentDataSO equipment,
         StatType statType,
         float allocatedPower)
     {
         float value = EquipmentBalanceRules.ConvertPowerToValue(
             statType,
             allocatedPower,
-            preview.LevelPower);
+            preview.LevelPower,
+            equipment.CharacterRequirement);
         preview.Stats.Add(new EquipmentBalanceStatResult(
             statType,
             EquipmentBalanceRules.GetOperation(statType),

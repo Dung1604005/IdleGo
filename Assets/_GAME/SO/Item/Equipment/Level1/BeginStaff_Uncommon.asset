@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
-  m_Name: NormalSword_UnCommon
+  m_Name: BeginStaff_Uncommon
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
-  itemId: normal_sword_uncommon
-  nameItem: Normal Sword
+  itemId: beginner_staff_uncommon
+  nameItem: Beginner Staff
   rarityType: 1
   itemType: 0
-  icon: {fileID: -2774494319427013120, guid: c740ea5253f19ff48a2957cce8cd3c9b, type: 3}
+  icon: {fileID: -4950313415204098201, guid: 74e91e2bd05dd5a429b344fab427ec4b, type: 3}
   maxQuantity: 1
   equipmentType: 0
   levelRequired: 1
-  characterRequirement: 1
-  socketSlotCount: 0
+  characterRequirement: 3
+  socketSlotCount: 1
   enchantmentSlotCount: 0
   decorationSlotCount: 0
   stats: []

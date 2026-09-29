@@ -115,8 +115,11 @@ các công thức còn lại.
 ItemPower là ngân sách để tạo hoặc kiểm tra stat, không phải tổng raw stat.
 
 ~~~text
+EquipmentTier(L) =
+    floor(L / LEVELS_PER_EQUIPMENT_TIER)
+
 LevelPower(L) =
-    BASE_ITEM_POWER × LEVEL_GROWTH^(L - 1)
+    BASE_ITEM_POWER × EQUIPMENT_TIER_GROWTH^EquipmentTier(L)
 
 ItemPower =
     LevelPower(LevelRequired)
@@ -129,28 +132,48 @@ Giá trị khởi đầu:
 
 ~~~text
 BASE_ITEM_POWER = 10
-LEVEL_GROWTH = 1.05
+LEVELS_PER_EQUIPMENT_TIER = 5
+EQUIPMENT_TIER_GROWTH = 1.84
 ROLL_MIN = 0.90
 ROLL_MAX = 1.10
 ~~~
 
-Với tăng trưởng 5%, chênh 5 level tương đương x1.28, 10 level x1.63 và 20 level x2.65.
+Trang bị mới xuất hiện mỗi 5 level. Level 1 thuộc tier 0, level 5 thuộc tier 1,
+level 10 thuộc tier 2. Các level nằm giữa hai mốc không tạo thêm một bậc sức mạnh item.
+
+~~~text
+Lv1 LevelPower  = 10
+Lv5 LevelPower  = 18.4
+Lv10 LevelPower = 33.856
+~~~
+
+Với cùng slot và xét cả Quality Roll:
+
+~~~text
+Lv1 Uncommon cao nhất = 10 × 1.50 × 1.10 = 16.50
+Lv5 Common thấp nhất  = 18.4 × 1.00 × 0.90 = 16.56
+Lv5 Common cao nhất   = 18.4 × 1.00 × 1.10 = 20.24
+Lv1 Rare thấp nhất    = 10 × 2.25 × 0.90 = 20.25
+~~~
+
+Do đó Lv5 Common luôn mạnh hơn Lv1 Uncommon nhưng luôn yếu hơn Lv1 Rare.
 
 ## 5. Rarity multiplier
 
-| RarityType | Multiplier |
-|---|---:|
-| COMMON | 1.00 |
-| UNCOMMON | 1.25 |
-| RARE | 1.56 |
-| LEGEND | 1.95 |
-| DEMON | 2.44 |
-| ARCANA | 3.05 |
-| BEYOND | 3.81 |
-| CELESTIAL | 4.77 |
+| RarityType | Multiplier tích lũy | So với bậc trước |
+|---|---:|---:|
+| COMMON | 1.000 | - |
+| UNCOMMON | 1.500 | x1.50 |
+| RARE | 2.250 | x1.50 |
+| LEGEND | 3.375 | x1.50 |
+| DEMON | 5.906 | x1.75 |
+| ARCANA | 11.813 | x2.00 |
+| BEYOND | 26.578 | x2.25 |
+| CELESTIAL | 66.445 | x2.50 |
 
-Một bậc rarity tương đương khoảng 4 đến 5 BalanceLevel. Không dùng multiplier cực lớn
-như Celestial x20 vì nó sẽ phá progression theo level.
+Khoảng cách rarity tăng dần. Các rarity đầu chênh tối thiểu x1.50; khoảng cách cuối
+cùng đạt tối đa x2.50. Đây là multiplier tích lũy trên ItemPower, không phải cộng dồn
+thêm lần nữa khi áp stat.
 
 ## 6. Slot multiplier
 
@@ -255,14 +278,30 @@ Trong BaseStatBudget, chia cho main và sub stat như sau. Phần còn lại sau
 ### 10.1 Flat stat
 
 ~~~text
-StatValue = AllocatedPower / PowerCost
+BaseStatValue = AllocatedPower / PowerCost
+
+DamageValue =
+    BaseDamageValue × CharacterRequirementDamageScale
 ~~~
 
 | StatType | Power cost | Kết quả với 20 Power |
 |---|---:|---:|
-| DAMAGE | 1 Power / 1 Damage | +20 Damage |
+| DAMAGE | 1 Power / 1 Damage trước class scale | xem bảng bên dưới |
 | MAX_HEALTH | 1 Power / 10 HP | +200 HP |
 | ARMOR | 2 Power / 1 Armor | +10 Armor |
+
+Damage của vũ khí được phân cấp theo CharacterRequirementType:
+
+| CharacterRequirementType | Damage scale | 20 Power tạo ra |
+|---|---:|---:|
+| RANGER | 0.80 | 16 Damage |
+| MELEE | 1.00 | 20 Damage |
+| MAGE | 1.25 | 25 Damage |
+| ALL | 1.00 | 20 Damage |
+
+Thứ tự luôn là RANGER < MELEE < MAGE với cùng level, rarity, slot, roll và phần Power
+được cấp cho DAMAGE. Ranger bù lại bằng Attack Speed/range; Mage có damage mỗi hit cao
+nhưng Attack Speed thấp hơn.
 
 Armor phải được đánh giá bằng phần trăm giảm damage, không so raw Armor trực tiếp với HP.
 
@@ -499,7 +538,7 @@ Special effect, set item và upgrade chỉ thêm sau khi có data runtime tươn
 
 Khi bắt đầu code generator, gom các giá trị sau vào một BalanceConfig SO:
 
-- BASE_ITEM_POWER và LEVEL_GROWTH.
+- BASE_ITEM_POWER, LEVELS_PER_EQUIPMENT_TIER và EQUIPMENT_TIER_GROWTH.
 - RarityMultiplier cho 8 rarity.
 - SlotMultiplier cho 8 equipment type.
 - RollRange theo rarity.
@@ -519,6 +558,9 @@ RarityType, EquipmentType và CharacterRequirementType.
 Phải kiểm tra:
 
 - Average power tăng theo rarity và BalanceLevel.
+- Mọi cặp rarity đầu có tỉ lệ ít nhất x1.50 và cặp cuối không vượt x2.50.
+- Lv5 Common luôn nằm giữa Lv1 Uncommon và Lv1 Rare ở toàn bộ dải Quality Roll.
+- DAMAGE cùng Power phải thỏa RANGER < MELEE < MAGE.
 - High-roll bậc dưới chỉ thỉnh thoảng vượt low-roll bậc kế tiếp.
 - Không có LEVEL hoặc EXPERIENCE trên item.
 - Không duplicate StatType + Operation.

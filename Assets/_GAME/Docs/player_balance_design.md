@@ -257,6 +257,19 @@ CharacterRequirementType quyết định có được equip hay không. Đây l�
 Equipment dùng công thức trong equipment_balance_design.md. Hai player nhìn cùng một
 item sẽ thấy cùng ItemPower và raw StatValue.
 
+Khi generator tạo DAMAGE, CharacterRequirementType đã áp hệ số nền:
+
+~~~text
+RANGER = x0.80
+MELEE  = x1.00
+MAGE   = x1.25
+ALL    = x1.00
+~~~
+
+Đây là phân cấp damage theo nhóm vũ khí. Affinity ở bước tiếp theo chỉ tạo khác biệt
+giữa các player trong cùng nhóm và không được dùng để đảo ngược phân cấp này một cách
+vô tình.
+
 ### 8.3 Bước 3: Player Weapon Affinity
 
 Mỗi player có profile riêng để chuyển stat của MAIN_WEAPON và OFF_HAND_WEAPON thành

@@ -95,10 +95,16 @@ public partial class EquipmentBalanceGeneratorWindow : EditorWindow
         EditorGUILayout.LabelField("Thông tin đầu vào", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         DrawMetric("Level", equipment.LevelRequired.ToString());
+        DrawMetric("Tier", EquipmentBalanceRules.GetEquipmentTier(
+            equipment.LevelRequired).ToString());
         DrawMetric("Rarity", equipment.RarityType.ToString());
         DrawMetric("Slot", equipment.EquipmentType.ToString());
-        DrawMetric("Dành cho", equipment.CharacterRequirement.ToString());
         EditorGUILayout.EndHorizontal();
+        float damageScale = EquipmentBalanceRules.GetDamageMultiplier(
+            equipment.CharacterRequirement);
+        EditorGUILayout.LabelField(
+            $"Class: {equipment.CharacterRequirement}   •   Damage scale: x{damageScale:0.##}",
+            EditorStyles.miniBoldLabel);
         EditorGUILayout.EndVertical();
     }
 
