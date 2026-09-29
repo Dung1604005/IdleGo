@@ -10,7 +10,8 @@ public static class InventorySaveMapper
     {
         saveData = new InventorySaveData
         {
-            capacity = storage.Capacity
+            capacity = storage.Capacity,
+            globalPlayerLevel = playerManager != null ? playerManager.GlobalLevel : 1
         };
 
         IReadOnlyList<InventorySlot> slots = storage.Slots;
@@ -70,6 +71,7 @@ public static class InventorySaveMapper
         }
 
         storage.Replace(loadedCapacity, loadedSlots, owner);
+        playerManager?.RestoreGlobalLevel(saveData.globalPlayerLevel);
         PlayerRosterSaveMapper.ApplyProgress(saveData.playerRoster, playerManager);
         equipmentHandler.RestoreEquippedItems(
             saveData.playerRoster,
@@ -104,6 +106,7 @@ public static class InventorySaveMapper
 
         if (item is Equipment equipment)
         {
+            slotSaveData.qualityRoll = equipment.QualityRoll;
             CopyStats(equipment.SocketStats, slotSaveData.socketStats);
             CopyStats(equipment.EnchantmentStats, slotSaveData.enchantmentStats);
             CopyStats(equipment.DecorationStats, slotSaveData.decorationStats);
@@ -172,6 +175,7 @@ public static class InventorySaveMapper
 
         if (item is Equipment equipment)
         {
+            equipment.RestoreQualityRoll(slotSaveData.qualityRoll);
             equipment.RestoreEnhancementState(
                 RestoreStats(slotSaveData.socketStats),
                 RestoreStats(slotSaveData.enchantmentStats),

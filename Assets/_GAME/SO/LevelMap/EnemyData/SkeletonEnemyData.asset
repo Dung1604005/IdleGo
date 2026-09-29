@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SkeletonEnemyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
   enemyPrefab: {fileID: 472605006093533303, guid: 3ee117401feeaf441aef167fe70b371a, type: 3}
+  enemyType: 0

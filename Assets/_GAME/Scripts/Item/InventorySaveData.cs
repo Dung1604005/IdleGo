@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class InventorySaveData
 {
     public int capacity;
+    public int globalPlayerLevel = 1;
     public List<InventorySlotSaveData> slots = new List<InventorySlotSaveData>();
     public PlayerRosterSaveData playerRoster = new PlayerRosterSaveData();
 
@@ -53,6 +54,7 @@ public class InventorySlotSaveData
     public string itemId;
     public string instanceId;
     public int amount;
+    public float qualityRoll = 1f;
     public List<StatValueSaveData> socketStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> enchantmentStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> decorationStats = new List<StatValueSaveData>();

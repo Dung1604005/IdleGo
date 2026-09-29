@@ -15,9 +15,10 @@ MonoBehaviour:
   skillId: mooni_thrust
   cooldown: 2.5
   maxLevel: 5
-  iconSkill: {fileID: 0}
+  iconSkill: {fileID: -7012151887548525605, guid: efcbecde69422fc40b84394856c5e223, type: 3}
   nameAnim: thrust
   levelRequire: 0
+  characterRequirement: 0
   damageMultiplierByLevel:
   - 1.2
   - 1.35

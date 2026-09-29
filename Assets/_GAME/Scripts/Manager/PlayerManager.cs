@@ -9,12 +9,14 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] private PlayerRoster roster = new PlayerRoster();
     [SerializeField] private PlayerTeam team = new PlayerTeam();
     [SerializeField] private Inventory inventory = new Inventory();
+    [SerializeField] private PlayerProgression progression = new PlayerProgression();
 
     public IReadOnlyList<Player> AllPlayers => roster.Players;
     public IReadOnlyList<Player> Players => team.Players;
     public Inventory Inventory => inventory;
     public int TeamCount => team.Count;
     public int TeamProgressLevel => team.ProgressLevel;
+    public int GlobalLevel => progression.GlobalLevel;
     public int UnlockedTeamSlotCount => team.UnlockedSlotCount;
     public bool IsInitialized { get; private set; }
 
@@ -24,6 +26,7 @@ public class PlayerManager : Singleton<PlayerManager>
         roster ??= new PlayerRoster();
         team ??= new PlayerTeam();
         inventory ??= new Inventory();
+        progression ??= new PlayerProgression();
 
         roster.OnInit();
         team.OnInit(roster);
@@ -170,6 +173,21 @@ public class PlayerManager : Singleton<PlayerManager>
         return inventory != null && inventory.SaveGame();
     }
 
+    public bool SetGlobalLevel(int level)
+    {
+        if (!IsInitialized)
+        {
+            return false;
+        }
+
+        if (progression.SetLevel(level))
+        {
+            inventory.OnPlayerProgressChanged();
+        }
+
+        return true;
+    }
+
     public Player GetTarget()
     {
         return team.GetTarget();
@@ -204,6 +222,12 @@ public class PlayerManager : Singleton<PlayerManager>
     internal void RestoreAllCharactersHealth()
     {
         roster.RestoreAllHealth();
+    }
+
+    internal void RestoreGlobalLevel(int level)
+    {
+        progression ??= new PlayerProgression();
+        progression.SetLevel(level);
     }
 
     private bool CanChangeSkill(Player player)

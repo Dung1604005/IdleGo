@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class EnemyManager : Singleton<EnemyManager>
+public partial class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
     [SerializeField] private Transform enemyContainer;
@@ -61,6 +61,7 @@ public class EnemyManager : Singleton<EnemyManager>
         }
 
         levelPrefabs.Clear();
+        ClearEnemyLootData();
         totalAliveEnemy = 0;
         IsInitialized = false;
     }
@@ -72,6 +73,7 @@ public class EnemyManager : Singleton<EnemyManager>
             return;
         }
 
+        DropLootForDefeatedEnemy(enemy);
         SimplePool.Despawn(enemy);
         totalAliveEnemy = Mathf.Max(0, totalAliveEnemy - 1);
     }
@@ -172,6 +174,7 @@ public class EnemyManager : Singleton<EnemyManager>
         if (enemy != null)
         {
             // Chỉ enemy spawn thành công mới được tính vào điều kiện hoàn thành wave.
+            TrackEnemyLootData(enemy, enemyData);
             totalAliveEnemy++;
         }
     }

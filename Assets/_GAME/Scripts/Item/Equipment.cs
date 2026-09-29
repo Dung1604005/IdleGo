@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Equipment : Item, IStatModifierSource
+public partial class Equipment : Item, IStatModifierSource
 {
     [SerializeField] private List<StatValue> socketStats = new List<StatValue>();
     [SerializeField] private List<StatValue> enchantmentStats = new List<StatValue>();
@@ -84,7 +84,7 @@ public class Equipment : Item, IStatModifierSource
         }
 
         EnsureRuntimeState();
-        return Data.GetStatValue(statType, operation)
+        return GetRolledBaseStatValue(statType, operation)
             + GetStatValue(socketStats, Data.SocketSlotCount, statType, operation)
             + GetStatValue(enchantmentStats, Data.EnchantmentSlotCount, statType, operation)
             + GetStatValue(decorationStats, Data.DecorationSlotCount, statType, operation);
@@ -98,7 +98,7 @@ public class Equipment : Item, IStatModifierSource
         }
 
         EnsureRuntimeState();
-        AddStatModifiers(output, Data.Stats, Data.Stats != null ? Data.Stats.Count : 0);
+        AddRolledBaseStatModifiers(output);
         AddStatModifiers(output, socketStats, Data.SocketSlotCount);
         AddStatModifiers(output, enchantmentStats, Data.EnchantmentSlotCount);
         AddStatModifiers(output, decorationStats, Data.DecorationSlotCount);

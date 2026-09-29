@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class LevelManager : Singleton<LevelManager>
+public partial class LevelManager : Singleton<LevelManager>
 {
     [Header("Addressables")]
     [SerializeField] private string levelAddressPrefix = "Level_";
@@ -45,6 +45,7 @@ public class LevelManager : Singleton<LevelManager>
 
         // Pool dùng prefab là dependency của LevelData nên phải dọn trước khi release Addressable.
         EnemyManager.Ins.OnDespawn();
+        LootManager.Ins.ClearLevelData();
         ReleaseCurrentLevel();
         DespawnCurrentMap();
 
@@ -158,24 +159,16 @@ public class LevelManager : Singleton<LevelManager>
             yield break;
         }
 
-        if (currentLevelHandle.Status != AsyncOperationStatus.Succeeded || currentLevelHandle.Result == null)
+        if (!CanUseLoadedLevel(levelAddress, mapType))
         {
-            Debug.LogError($"Cannot load LevelDataSO with address '{levelAddress}'.", this);
-            ReleaseCurrentLevel();
-            State = LevelPlayState.None;
-            yield break;
-        }
-
-        if (!SpawnMapIfNeeded(mapType))
-        {
-            ReleaseCurrentLevel();
-            State = LevelPlayState.None;
+            AbortLevelLoad();
             yield break;
         }
 
         levelInfo.SetMapData(mapType);
         levelInfo.SetLevelData(currentLevelHandle.Result);
         levelInfo.SetWaveData(-1);
+        LootManager.Ins.SetLevelData(currentLevelHandle.Result);
         EnemyManager.Ins.OnInit();
 
         if (!StartNextWave())
@@ -187,6 +180,7 @@ public class LevelManager : Singleton<LevelManager>
     private void UnloadCurrentLevel()
     {
         EnemyManager.Ins.OnDespawn();
+        LootManager.Ins.ClearLevelData();
         ReleaseCurrentLevel();
         levelInfo.SetWaveData(-1);
     }
@@ -212,50 +206,6 @@ public class LevelManager : Singleton<LevelManager>
         State = LevelPlayState.Completed;
     }
 
-    private bool SpawnMapIfNeeded(MapType mapType)
-    {
-        if (levelInfo.GetMapInstance() != null && levelInfo.CurrentMapType == mapType)
-        {
-            return true;
-        }
-
-        MapDataSO mapData = DataManager.Ins.GetMapData(mapType);
-        MapController mapPrefab = mapData != null ? mapData.GetMapPrefab() : null;
-        if (mapPrefab == null)
-        {
-            Debug.LogError($"MapData of '{mapType}' does not have a MapController prefab.", this);
-            return false;
-        }
-
-        // Chỉ thay map sau khi level mới đã load thành công để không xóa map hiện tại nếu Addressables load lỗi.
-        DespawnCurrentMap();
-        MapController mapInstance = Instantiate(
-            mapPrefab,
-            mapData.SpawnPos,
-            mapPrefab.transform.rotation,
-            mapContainer
-        );
-        levelInfo.SetMapInstance(mapInstance);
-        return true;
-    }
-
-    private void DespawnCurrentMap()
-    {
-        MapController mapInstance = levelInfo.GetMapInstance();
-        if (mapInstance == null)
-        {
-            return;
-        }
-
-        Destroy(mapInstance.gameObject);
-        levelInfo.SetMapInstance(null);
-    }
-
-    private string GetLevelAddress(MapType mapType, int levelIndex)
-    {
-        // Ví dụ mapIndex 0, levelIndex 1 sẽ tạo address "Level_1-2".
-        return $"{levelAddressPrefix}{(int)mapType + 1}-{levelIndex + 1}";
-    }
 }
 
 public enum LevelPlayState
