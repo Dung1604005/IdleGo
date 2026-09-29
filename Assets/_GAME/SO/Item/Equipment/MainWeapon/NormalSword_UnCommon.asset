@@ -20,13 +20,8 @@ MonoBehaviour:
   maxQuantity: 1
   equipmentType: 0
   levelRequired: 1
+  characterRequirement: 1
   socketSlotCount: 0
   enchantmentSlotCount: 0
   decorationSlotCount: 0
-  stats:
-  - statType: 2
-    value: 25
-    operation: 0
-  - statType: 6
-    value: 1
-    operation: 1
+  stats: []

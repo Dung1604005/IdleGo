@@ -29,6 +29,14 @@ public abstract class Character : GameUnit
         ? characterDataSO.CharacterId
         : string.Empty;
 
+    public string CharacterName => characterDataSO != null
+        ? characterDataSO.CharacterName
+        : string.Empty;
+
+    public Sprite Portrait => characterDataSO != null
+        ? characterDataSO.Portrait
+        : null;
+
     public CharacterType CharacterType => characterDataSO != null
         ? characterDataSO.CharacterType
         : global::CharacterType.MELEE;

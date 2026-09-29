@@ -6,6 +6,7 @@ public class CombatSkillState
 {
     [SerializeField] private CombatSkill skill;
     [SerializeField] private float currentCooldown;
+    [SerializeField] private float cooldownDuration;
     [SerializeField] private int level;
     [SerializeField] private bool isUnlocked;
 
@@ -13,6 +14,9 @@ public class CombatSkillState
 
     public CombatSkill Skill => skill;
     public float CurrentCooldown => currentCooldown;
+    public float CooldownProgress => cooldownDuration > 0f
+        ? Mathf.Clamp01(currentCooldown / cooldownDuration)
+        : 0f;
     public int Level => level;
     public bool IsUnlocked => isUnlocked;
     public bool IsReady => skill != null && isUnlocked && currentCooldown <= 0f;
@@ -22,6 +26,7 @@ public class CombatSkillState
     {
         skill = combatSkill;
         currentCooldown = 0f;
+        cooldownDuration = 0f;
         level = 0;
         isUnlocked = skill != null && skill.IsUnlocked(characterLevel);
         lastReadyAt = double.NegativeInfinity;
@@ -30,6 +35,7 @@ public class CombatSkillState
     public void OnDespawn()
     {
         currentCooldown = 0f;
+        cooldownDuration = 0f;
         isUnlocked = false;
     }
 
@@ -63,6 +69,7 @@ public class CombatSkillState
 
         if (currentCooldown <= 0f)
         {
+            cooldownDuration = 0f;
             lastReadyAt = now - Mathf.Max(0f, elapsed - remaining);
         }
     }
@@ -74,6 +81,8 @@ public class CombatSkillState
             return;
         }
 
-        currentCooldown = Mathf.Max(0.01f, skill.Cooldown * (1f - Mathf.Clamp01(cooldownReduction)));
+        // Luu tong cooldown sau CDR de moi noi deu doc cung mot tien do tu combat.
+        cooldownDuration = Mathf.Max(0.01f, skill.Cooldown * (1f - Mathf.Clamp01(cooldownReduction)));
+        currentCooldown = cooldownDuration;
     }
 }

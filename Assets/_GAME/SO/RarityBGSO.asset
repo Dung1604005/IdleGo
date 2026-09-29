@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b530f0688739ba46bab6bc702472ed9, type: 3}
+  m_Name: RarityBGSO
+  m_EditorClassIdentifier: Assembly-CSharp::RarityBGSO
+  listRarityBG:
+  - {fileID: -3472682859151291090, guid: d6c24eaec61d4b54cadc51e2c511b147, type: 3}
+  - {fileID: 3366556027267500363, guid: f6fbddd3c3ca9344b9f7ced701f9d708, type: 3}
+  - {fileID: -7924899608644915060, guid: fb8c25f638e0be84dbc749993fac75ef, type: 3}
+  - {fileID: -2911292664809157955, guid: a47c728691300c845bce6fc1d59fe5d4, type: 3}
+  - {fileID: -673718803268876992, guid: e60085a648bc03340a83a2a0d3803c48, type: 3}
+  - {fileID: 9217862090775719277, guid: bd34bdb457879d241b3d3e42bd03a7cd, type: 3}
+  - {fileID: 4725608897172809074, guid: bf742e548defd2348b2e5bcd1053b22a, type: 3}
+  - {fileID: -2123518562358802760, guid: ee55a7ad88ba2da4e98dae2a613efc71, type: 3}

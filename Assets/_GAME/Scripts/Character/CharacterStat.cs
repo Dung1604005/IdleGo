@@ -218,9 +218,13 @@ public class CharacterStat
             return false;
         }
 
-        // Armor giảm damage theo giá trị cố định; một đòn đánh trúng luôn gây ít nhất 1 damage.
+        // Armor được đổi thành phần trăm giảm damage; một đòn đánh trúng vẫn gây ít nhất 1 damage.
         character.ChangeAnim(GameConfig.ANIM_HURT);
-        int effectiveDamage = Mathf.Max(1, incomingDamage - (int)GetCurrentStat(StatType.ARMOR));
+        float damageReduction = CombatFormula.CalculateArmorDamageReduction(
+            GetCurrentStat(StatType.ARMOR));
+        int effectiveDamage = Mathf.Max(
+            1,
+            Mathf.RoundToInt(incomingDamage * (1f - damageReduction)));
         currentHealth = Mathf.Max(0, currentHealth - effectiveDamage);
         return IsDead;
     }

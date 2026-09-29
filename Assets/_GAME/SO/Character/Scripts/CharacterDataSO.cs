@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterDataSO", menuName = "IdleGo/CharacterDataSO")]
@@ -6,6 +7,8 @@ public class CharacterDataSO : ScriptableObject
 {
     [SerializeField] private string characterId;
     [SerializeField] private String characterName;
+
+    [SerializeField] private Sprite portrait;
     [SerializeField] private CharacterType characterType;
     [SerializeField] private CharacterStatSO characterStatSO;
 
@@ -22,4 +25,6 @@ public class CharacterDataSO : ScriptableObject
     public CharacterStatSO StatSO => characterStatSO;
 
     public CharacterCombatSO CombatSO => characterCombatSO;
+
+    public Sprite Portrait => portrait;
 }
