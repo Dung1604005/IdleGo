@@ -95,7 +95,7 @@ public class InventoryItemHandler
         return remainingAmount == 0;
     }
 
-    private bool CanAddItem(Item item, int amount)
+    public bool CanAddItem(Item item, int amount)
     {
         if (item == null
             || item.Data == null

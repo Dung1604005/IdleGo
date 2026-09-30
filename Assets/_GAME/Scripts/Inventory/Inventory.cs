@@ -81,6 +81,16 @@ public partial class Inventory
         return true;
     }
 
+    public bool CanAddItem(Item item, int amount = 1)
+    {
+        return IsInitialized && itemHandler.CanAddItem(item, amount);
+    }
+
+    public ItemSO GetItemData(string itemId)
+    {
+        return itemDatabase != null ? itemDatabase.GetItem(itemId) : null;
+    }
+
     public bool RemoveItem(Item item, int amount)
     {
         if (!IsInitialized || !itemHandler.RemoveItem(item, amount))

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LootManager : Singleton<LootManager>
@@ -7,7 +6,6 @@ public class LootManager : Singleton<LootManager>
 
     private LevelDataSO currentLevelData;
 
-    public IReadOnlyList<DroppedChest> DroppedChests => lootController.DroppedChests;
     public bool IsInitialized { get; private set; }
 
     public void OnInit()
@@ -35,21 +33,6 @@ public class LootManager : Singleton<LootManager>
         currentLevelData = null;
     }
 
-    public bool TryOpenChest(int chestIndex, out Equipment equipment)
-    {
-        if (!IsInitialized)
-        {
-            equipment = null;
-            return false;
-        }
-
-        return lootController.TryOpenChest(
-            chestIndex,
-            PlayerManager.Ins.Inventory,
-            out equipment
-        );
-    }
-
     public float GetChestDropRate(ChestType chestType)
     {
         return lootController.GetDropRate(chestType);
@@ -67,7 +50,13 @@ public class LootManager : Singleton<LootManager>
             return;
         }
 
-        // LootManager tu quyet dinh source va drop rate tu data cua level dang choi.
-        lootController.TryDropChest(enemyData.EnemyType, currentLevelData);
+        // Roll reward ngay luc drop; queue day thi ChestManager tu choi va reward bi bo.
+        if (lootController.TryRollReward(
+            enemyData.EnemyType,
+            currentLevelData,
+            out ChestReward reward))
+        {
+            ChestManager.Ins.TryEnqueue(reward);
+        }
     }
 }

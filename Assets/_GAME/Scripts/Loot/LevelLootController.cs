@@ -1,31 +1,28 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class LevelLootController
 {
     [SerializeField] private ChestDropRates chestDropRates = new ChestDropRates();
-    [SerializeField] private List<DroppedChest> droppedChests = new List<DroppedChest>();
-
-    public IReadOnlyList<DroppedChest> DroppedChests => droppedChests;
 
     public void OnInit()
     {
-        droppedChests ??= new List<DroppedChest>();
-        droppedChests.Clear();
         chestDropRates ??= new ChestDropRates();
         chestDropRates.ResetBonuses();
     }
 
     public void OnDespawn()
     {
-        droppedChests?.Clear();
         chestDropRates?.ResetBonuses();
     }
 
-    public bool TryDropChest(EnemyType enemyType, LevelDataSO levelData)
+    public bool TryRollReward(
+        EnemyType enemyType,
+        LevelDataSO levelData,
+        out ChestReward reward)
     {
+        reward = null;
         if (levelData == null || !TryGetChestType(enemyType, out ChestType chestType))
         {
             return false;
@@ -43,29 +40,15 @@ public class LevelLootController
             return false;
         }
 
-        droppedChests.Add(new DroppedChest(chestType, source));
-        return true;
-    }
-
-    public bool TryOpenChest(int chestIndex, Inventory inventory, out Equipment equipment)
-    {
-        equipment = null;
-        if (inventory == null
-            || chestIndex < 0
-            || chestIndex >= droppedChests.Count
-            || !droppedChests[chestIndex].TryCreateEquipment(out Equipment rolledEquipment))
+        if (!source.TryRollEquipment(out EquipmentDataSO equipmentData))
         {
             return false;
         }
 
-        // Inventory tu save JSON roi moi refresh UI; chi xoa chest khi item da them thanh cong.
-        if (!inventory.AddItem(rolledEquipment, 1))
-        {
-            return false;
-        }
-
-        equipment = rolledEquipment;
-        droppedChests.RemoveAt(chestIndex);
+        // Reward duoc roll mot lan khi roi va giu nguyen den luc mo chest.
+        Equipment equipment = new Equipment(equipmentData);
+        equipment.SetQualityRoll(EquipmentQualityRoll.Roll(equipmentData.RarityType));
+        reward = new ChestReward(chestType, equipment);
         return true;
     }
 
