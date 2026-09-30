@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
-  m_Name: BeginStaff_Common
+  m_Name: BeginCoat_Common
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
-  itemId: beginner_staff_common
-  nameItem: Beginner Staff
+  itemId: 2a5cdd45ea444978a5b6beccc20b7b0f
+  nameItem: Beginner Boot
   rarityType: 0
   itemType: 0
-  icon: {fileID: -4950313415204098201, guid: 74e91e2bd05dd5a429b344fab427ec4b, type: 3}
+  icon: {fileID: -8689749505063999675, guid: b574e0c6f05ba474db019f38176ac3a0, type: 3}
   maxQuantity: 1
-  equipmentType: 0
+  equipmentType: 4
   levelRequired: 1
-  characterRequirement: 3
+  characterRequirement: 0
   socketSlotCount: 0
   enchantmentSlotCount: 0
   decorationSlotCount: 0
-  stats: []
+  stats:
+  - statType: 1
+    value: 0.3333
+    operation: 1

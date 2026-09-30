@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
+  m_Name: BeginBoot_Common
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
+  itemId: 2a5cdd45ea444978a5b6beccc20b7b0f
+  nameItem: Beginner Boot
+  rarityType: 0
+  itemType: 0
+  icon: {fileID: 3322634196961029351, guid: ff746521b276bef4392fed8c88f6f6cc, type: 3}
+  maxQuantity: 1
+  equipmentType: 5
+  levelRequired: 1
+  characterRequirement: 0
+  socketSlotCount: 0
+  enchantmentSlotCount: 0
+  decorationSlotCount: 0
+  stats:
+  - statType: 1
+    value: 0.3333
+    operation: 1

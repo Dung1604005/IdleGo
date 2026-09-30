@@ -3,9 +3,9 @@ public enum EquipmentType
     MAIN_WEAPON = 0,
     OFF_HAND_WEAPON = 1,
     BODY_ARMOR = 2,
-    HEAD_ARMOR = 3,
+    HELMET = 3,
     COAT = 4,
-    SHOES = 5,
+    BOOT = 5,
     RING = 6,
     NECKLACE = 7
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
+  m_Name: BeginChest_Uncommon
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
+  itemId: fb868480d8084d3b89bafa058fc90cc2
+  nameItem: Beginner Chest
+  rarityType: 1
+  itemType: 0
+  icon: {fileID: 3554267790342401684, guid: f4086cc8e190e514bafc0857d0bb4139, type: 3}
+  maxQuantity: 1
+  equipmentType: 2
+  levelRequired: 1
+  characterRequirement: 0
+  socketSlotCount: 0
+  enchantmentSlotCount: 0
+  decorationSlotCount: 0
+  stats:
+  - statType: 0
+    value: 144
+    operation: 0
+  - statType: 9
+    value: 1.8
+    operation: 0

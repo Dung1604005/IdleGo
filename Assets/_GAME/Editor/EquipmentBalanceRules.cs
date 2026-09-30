@@ -28,9 +28,9 @@ internal static partial class EquipmentBalanceRules
             case EquipmentType.BODY_ARMOR:
             case EquipmentType.COAT:
                 return StatType.MAX_HEALTH;
-            case EquipmentType.HEAD_ARMOR:
+            case EquipmentType.HELMET:
                 return StatType.ARMOR;
-            case EquipmentType.SHOES:
+            case EquipmentType.BOOT:
                 return StatType.RUN_SPEED;
             case EquipmentType.RING:
                 return StatType.CRITICAL_CHANCE;
@@ -112,13 +112,13 @@ internal static partial class EquipmentBalanceRules
             case EquipmentType.BODY_ARMOR:
                 return new[] { StatType.ARMOR, StatType.DODGE_CHANCE,
                     StatType.LIFE_STEAL, StatType.RUN_SPEED, StatType.MAX_HEALTH };
-            case EquipmentType.HEAD_ARMOR:
+            case EquipmentType.HELMET:
                 return new[] { StatType.MAX_HEALTH, StatType.COOLDOWN_REDUCTION,
                     StatType.DAMAGE_AMPLIFICATION, StatType.CRITICAL_CHANCE };
             case EquipmentType.COAT:
                 return new[] { StatType.ARMOR, StatType.DODGE_CHANCE,
                     StatType.RUN_SPEED, StatType.LIFE_STEAL };
-            case EquipmentType.SHOES:
+            case EquipmentType.BOOT:
                 return new[] { StatType.DODGE_CHANCE, StatType.ATTACK_SPEED,
                     StatType.MAX_HEALTH, StatType.ARMOR };
             case EquipmentType.RING:

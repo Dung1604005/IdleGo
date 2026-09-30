@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
+  m_Name: BeginHelmet_Uncommon
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
+  itemId: 4758dc36d238412d8fc3d64622e8ef21
+  nameItem: Beginner Chest
+  rarityType: 1
+  itemType: 0
+  icon: {fileID: -2558979392993613730, guid: 59b2ca0c94eabb94fabaf3ccaeb4ebaa, type: 3}
+  maxQuantity: 1
+  equipmentType: 3
+  levelRequired: 1
+  characterRequirement: 0
+  socketSlotCount: 0
+  enchantmentSlotCount: 0
+  decorationSlotCount: 0
+  stats:
+  - statType: 9
+    value: 6
+    operation: 0
+  - statType: 11
+    value: 0.05
+    operation: 0
