@@ -11,15 +11,12 @@ public class CanvasCombat : UICanvas
     [SerializeField] private Camera uiCamera;
 
     [SerializeField]private RectTransform canvasRect;
-    [Header("Chest")]
-    [SerializeField] private PanelChestView panelChestView;
 
     public override void SetUp()
     {
         base.SetUp();
         gameObject.SetActive(true);
         SetUpCamera();
-        panelChestView?.OnInit();
         if (damagePopupPrefab != null)
         {
             SimplePool.PreLoad(damagePopupPrefab, preloadAmount, transform);
@@ -28,7 +25,6 @@ public class CanvasCombat : UICanvas
 
     public override void CloseDirectly()
     {
-        panelChestView?.OnDespawn();
         base.CloseDirectly();
          if (damagePopupPrefab != null)
         {

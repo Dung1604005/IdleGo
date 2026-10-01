@@ -1,6 +1,20 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+[Serializable]
+public class ChestVisualData
+{
+    [SerializeField] private ChestType chestType;
+    [SerializeField] private Sprite chestSprite;
+    [SerializeField] private RuntimeAnimatorController animatorController;
+
+    public ChestType ChestType => chestType;
+    public Sprite ChestSprite => chestSprite;
+    public RuntimeAnimatorController AnimatorController => animatorController;
+}
 
 public class ChestSlotUI : MonoBehaviour
 {
@@ -8,8 +22,10 @@ public class ChestSlotUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI chestTypeText;
     [SerializeField] private TextMeshProUGUI queuedCountText;
     [SerializeField] private Button openButton;
+    [SerializeField] private Image chestImage;
     [SerializeField] private GameObject fullIcon;
     [SerializeField] private GameObject openingBlocker;
+    [SerializeField] private List<ChestVisualData> chestVisuals = new List<ChestVisualData>();
 
     [Header("Open Effect")]
     [SerializeField] private Animator chestAnimator;
@@ -23,18 +39,22 @@ public class ChestSlotUI : MonoBehaviour
 
     public ChestType ChestType => chestType;
 
-    public void SetVisible(bool visible)
+    public void SetChestType(ChestType type)
     {
-        if (gameObject.activeSelf != visible)
+        if (isPlayingOpenAnimation)
         {
-            gameObject.SetActive(visible);
+            return;
         }
+
+        chestType = type;
+        ApplyChestVisual();
     }
 
     public void OnInit()
     {
         isPlayingOpenAnimation = false;
         StopOpenVisual();
+        ApplyChestVisual();
     }
 
     public void OnDespawn()
@@ -54,6 +74,11 @@ public class ChestSlotUI : MonoBehaviour
         {
             SetUnavailable();
             return;
+        }
+
+        if (state.ChestType != chestType)
+        {
+            SetChestType(state.ChestType);
         }
 
         if (chestTypeText != null)
@@ -128,6 +153,29 @@ public class ChestSlotUI : MonoBehaviour
 
         openLightParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         openingBlocker?.SetActive(false);
+    }
+
+    private void ApplyChestVisual()
+    {
+        for (int i = 0; i < chestVisuals.Count; i++)
+        {
+            ChestVisualData visual = chestVisuals[i];
+            if (visual == null || visual.ChestType != chestType)
+            {
+                continue;
+            }
+
+            if (chestImage != null)
+            {
+                chestImage.sprite = visual.ChestSprite;
+                chestImage.enabled = chestImage.sprite != null;
+            }
+            if (chestAnimator != null && visual.AnimatorController != null)
+            {
+                chestAnimator.runtimeAnimatorController = visual.AnimatorController;
+            }
+            return;
+        }
     }
 
     private void SetUnavailable()

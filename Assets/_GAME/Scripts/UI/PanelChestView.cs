@@ -1,52 +1,54 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PanelChestView : PanelView, IChestView
 {
     [SerializeField] private ChestType selectedChestType = ChestType.NORMAL;
-    [SerializeField] private List<ChestTypeTabUI> chestTabs = new List<ChestTypeTabUI>();
-    [SerializeField] private List<ChestSlotUI> chestSlots = new List<ChestSlotUI>();
+    [SerializeField] private ChestSlotUI chestSlot;
+    [SerializeField] private Button previousChestButton;
+    [SerializeField] private Button nextChestButton;
+    [SerializeField] private GameObject previousNewChestIcon;
+    [SerializeField] private GameObject nextNewChestIcon;
+
+    private ChestType[] orderedChestTypes;
+    private int[] lastSeenReceivedVersions;
 
     public ChestType SelectedChestType => selectedChestType;
 
     public override void OnInit()
     {
-        for (int i = 0; i < chestSlots.Count; i++)
-        {
-            ChestSlotUI slot = chestSlots[i];
-            if (slot != null)
-            {
-                slot.OnInit();
-                slot.SetVisible(slot.ChestType == selectedChestType);
-            }
-        }
-
-        for (int i = 0; i < chestTabs.Count; i++)
-        {
-            chestTabs[i]?.OnInit(this);
-        }
-
+        BuildChestOrder();
+        EnsureSelectedChestType();
+        chestSlot?.OnInit();
+        chestSlot?.SetChestType(selectedChestType);
         ChestManager.Ins.RegisterView(this);
     }
 
     public override void OnDespawn()
     {
         // Slot dang chay phai mo khoa state truoc khi panel ngung nhan refresh.
-        for (int i = 0; i < chestSlots.Count; i++)
-        {
-            chestSlots[i]?.OnDespawn();
-        }
-
-        for (int i = 0; i < chestTabs.Count; i++)
-        {
-            chestTabs[i]?.OnDespawn();
-        }
-
+        chestSlot?.OnDespawn();
         ChestManager.Ins.UnregisterView(this);
+    }
+
+    public void OnButtonPreviousChest()
+    {
+        MoveSelection(-1);
+    }
+
+    public void OnButtonNextChest()
+    {
+        MoveSelection(1);
     }
 
     public bool SelectChestType(ChestType chestType)
     {
+        if (orderedChestTypes == null || orderedChestTypes.Length == 0)
+        {
+            return false;
+        }
+
         ChestManager manager = ChestManager.Ins;
         ChestState currentState = manager.GetState(selectedChestType);
         if (currentState != null && currentState.IsOpening)
@@ -54,81 +56,131 @@ public class PanelChestView : PanelView, IChestView
             return false;
         }
 
-        if (manager.GetState(chestType) == null)
+        if (Array.IndexOf(orderedChestTypes, chestType) < 0
+            || manager.GetState(chestType) == null)
         {
             return false;
         }
 
         selectedChestType = chestType;
+        chestSlot?.SetChestType(selectedChestType);
         RefreshChests(manager);
         return true;
     }
 
     public void RefreshChests(ChestManager chestManager)
     {
-        if (chestManager == null)
+        if (chestManager == null || orderedChestTypes == null)
         {
             return;
         }
 
-        bool selectionLocked = IsSelectionLocked(chestManager);
-        RefreshSlots(chestManager);
-        RefreshTabs(chestManager, selectionLocked);
+        MarkSelectedChestViewed(chestManager);
+        ChestState selectedState = chestManager.GetState(selectedChestType);
+        chestSlot?.Refresh(selectedState);
+        RefreshNavigation(chestManager, selectedState);
     }
 
     public bool PlayChestOpen(ChestType chestType, Equipment equipment)
     {
-        if (chestType != selectedChestType)
+        return chestType == selectedChestType
+            && chestSlot != null
+            && chestSlot.PlayOpen(equipment);
+    }
+
+    private void MoveSelection(int direction)
+    {
+        if (orderedChestTypes == null || orderedChestTypes.Length < 2)
+        {
+            return;
+        }
+
+        int currentIndex = Array.IndexOf(orderedChestTypes, selectedChestType);
+        if (currentIndex < 0)
+        {
+            currentIndex = 0;
+        }
+
+        // Cong them Length giup Previous/Next quay vong o hai dau danh sach.
+        int nextIndex = (currentIndex + direction + orderedChestTypes.Length)
+            % orderedChestTypes.Length;
+        SelectChestType(orderedChestTypes[nextIndex]);
+    }
+
+    private void RefreshNavigation(ChestManager manager, ChestState selectedState)
+    {
+        bool canNavigate = orderedChestTypes.Length > 1
+            && (selectedState == null || !selectedState.IsOpening);
+        if (previousChestButton != null)
+        {
+            previousChestButton.interactable = canNavigate;
+        }
+        if (nextChestButton != null)
+        {
+            nextChestButton.interactable = canNavigate;
+        }
+
+        ChestType previousType = GetRelativeChestType(-1);
+        ChestType nextType = GetRelativeChestType(1);
+        previousNewChestIcon?.SetActive(HasUnseenChest(manager, previousType));
+        nextNewChestIcon?.SetActive(HasUnseenChest(manager, nextType));
+    }
+
+    private bool HasUnseenChest(ChestManager manager, ChestType chestType)
+    {
+        int index = Array.IndexOf(orderedChestTypes, chestType);
+        ChestState state = manager.GetState(chestType);
+        if (index < 0 || state == null || state.Count == 0)
         {
             return false;
         }
 
-        for (int i = 0; i < chestSlots.Count; i++)
+        if (state.ReceivedVersion < lastSeenReceivedVersions[index])
         {
-            ChestSlotUI slot = chestSlots[i];
-            if (slot != null && slot.ChestType == chestType)
-            {
-                return slot.PlayOpen(equipment);
-            }
+            lastSeenReceivedVersions[index] = 0;
         }
-
-        return false;
+        return state.ReceivedVersion > lastSeenReceivedVersions[index];
     }
 
-    private void RefreshSlots(ChestManager manager)
+    private void MarkSelectedChestViewed(ChestManager manager)
     {
-        for (int i = 0; i < chestSlots.Count; i++)
-        {
-            ChestSlotUI slot = chestSlots[i];
-            if (slot == null)
-            {
-                continue;
-            }
-
-            bool isSelected = slot.ChestType == selectedChestType;
-            slot.SetVisible(isSelected);
-            slot.Refresh(manager.GetState(slot.ChestType));
-        }
-    }
-
-    private void RefreshTabs(ChestManager manager, bool selectionLocked)
-    {
-        for (int i = 0; i < chestTabs.Count; i++)
-        {
-            ChestTypeTabUI tab = chestTabs[i];
-            if (tab == null)
-            {
-                continue;
-            }
-
-            bool isSelected = tab.ChestType == selectedChestType;
-            tab.Refresh(manager.GetState(tab.ChestType), isSelected, selectionLocked);
-        }
-    }
-
-    private bool IsSelectionLocked(ChestManager manager)
-    {
+        int index = Array.IndexOf(orderedChestTypes, selectedChestType);
         ChestState state = manager.GetState(selectedChestType);
-        return state != null && state.IsOpening;
+        if (index >= 0 && state != null)
+        {
+            // Dang hien thi nghia la thong bao moi cua loai ruong nay da duoc xem.
+            lastSeenReceivedVersions[index] = state.ReceivedVersion;
+        }
+    }
+
+    private ChestType GetRelativeChestType(int offset)
+    {
+        int index = Array.IndexOf(orderedChestTypes, selectedChestType);
+        index = index < 0 ? 0 : index;
+        int targetIndex = (index + offset + orderedChestTypes.Length)
+            % orderedChestTypes.Length;
+        return orderedChestTypes[targetIndex];
+    }
+
+    private void BuildChestOrder()
+    {
+        // Gia tri so cua ChestType quyet dinh thu tu carousel.
+        orderedChestTypes = (ChestType[])Enum.GetValues(typeof(ChestType));
+        Array.Sort(orderedChestTypes, (left, right) =>
+            ((int)left).CompareTo((int)right));
+        if (lastSeenReceivedVersions == null
+            || lastSeenReceivedVersions.Length != orderedChestTypes.Length)
+        {
+            lastSeenReceivedVersions = new int[orderedChestTypes.Length];
+        }
+    }
+
+    private void EnsureSelectedChestType()
+    {
+        if (orderedChestTypes.Length > 0
+            && Array.IndexOf(orderedChestTypes, selectedChestType) < 0)
+        {
+            selectedChestType = orderedChestTypes[0];
+        }
     }
 }
