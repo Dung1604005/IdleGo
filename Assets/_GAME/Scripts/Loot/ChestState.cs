@@ -15,6 +15,7 @@ public class ChestState
 
     [NonSerialized] private bool isInventoryFull;
     [NonSerialized] private bool isOpening;
+    [NonSerialized] private int receivedVersion;
 
     public ChestState(ChestType type, int storage, float interval)
     {
@@ -34,6 +35,7 @@ public class ChestState
     public float RemainingAutoOpenTime => Mathf.Max(0f, remainingAutoOpenTime);
     public bool IsInventoryFull => isInventoryFull;
     public bool IsOpening => isOpening;
+    public int ReceivedVersion => receivedVersion;
     public bool CanOpen => Count > 0 && !isInventoryFull && !isOpening;
     public bool CanAutoOpen => AutoOpenEnabled && CanOpen;
     public IReadOnlyList<ChestReward> Rewards => rewards;
@@ -48,6 +50,7 @@ public class ChestState
             : autoOpenInterval;
         isInventoryFull = false;
         isOpening = false;
+        receivedVersion = 0;
     }
 
     public bool TryEnqueue(ChestReward reward)
@@ -59,6 +62,8 @@ public class ChestState
 
         bool wasEmpty = Count == 0;
         rewards.Add(reward);
+        // Chi reward vua nhan trong gameplay moi tang moc thong bao UI.
+        receivedVersion++;
         if (wasEmpty)
         {
             ResetAutoTimer();

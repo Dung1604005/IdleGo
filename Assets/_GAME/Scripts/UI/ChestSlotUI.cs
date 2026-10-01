@@ -23,6 +23,14 @@ public class ChestSlotUI : MonoBehaviour
 
     public ChestType ChestType => chestType;
 
+    public void SetVisible(bool visible)
+    {
+        if (gameObject.activeSelf != visible)
+        {
+            gameObject.SetActive(visible);
+        }
+    }
+
     public void OnInit()
     {
         isPlayingOpenAnimation = false;
