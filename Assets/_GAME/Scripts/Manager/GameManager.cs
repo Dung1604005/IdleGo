@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
         LootManager.Ins.OnInit();
         UIManager.Ins.OpenUI<CanvasCombat>();
         UIManager.Ins.OpenUI<CanvasInventoryHero>();
+        UIManager.Ins.OpenUI<CanvasNavigation>();
+        
         LevelManager.Ins.OnInit();
     }
 }

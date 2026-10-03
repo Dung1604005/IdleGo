@@ -18,7 +18,6 @@ public class ChestSlotUI : MonoBehaviour
     [SerializeField] private ParticleSystem lootEffect;
     [Tooltip("Bat len neu muon goi OnRevealReward bang Animation Event.")]
     [SerializeField] private bool revealAtAnimationEvent;
-    [HideInInspector, SerializeField] private ParticleSystem openLightParticle;
 
     private bool isPlayingOpenAnimation;
     private bool isInteractionLocked;
@@ -191,7 +190,7 @@ public class ChestSlotUI : MonoBehaviour
         }
 
         
-        openLightParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        
         pendingEquipment = null;
         hasRevealedReward = false;
     }
@@ -201,7 +200,7 @@ public class ChestSlotUI : MonoBehaviour
         
 
         // Giu tuong thich voi scene cu neu van con ParticleSystem don le.
-        openLightParticle?.Play();
+        
     }
 
     private void RefreshOpenButton()

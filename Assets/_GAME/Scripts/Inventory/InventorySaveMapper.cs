@@ -159,6 +159,7 @@ public static class InventorySaveMapper
     {
         // JSON chỉ giữ ID ổn định; ItemDatabase chịu trách nhiệm trả lại reference ItemSO.
         ItemSO itemData = itemDatabase.GetItem(slotSaveData.itemId);
+        
         if (itemData == null)
         {
             Debug.LogWarning($"Cannot restore item id '{slotSaveData.itemId}'.");

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public partial class ChestManager
 {
     public bool TryOpenChest(ChestType chestType)
