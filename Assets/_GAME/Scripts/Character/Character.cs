@@ -110,10 +110,7 @@ public abstract class Character : GameUnit
 
     public virtual void ChangeAnim(String newAnim)
     {
-        if(tf.gameObject.name != "Player1")
-        {
-            Debug.Log(tf.gameObject.name + " " + newAnim);
-        }
+        
         if (!String.IsNullOrEmpty(newAnim) && newAnim != currentAnim)
         {
             

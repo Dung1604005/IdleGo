@@ -34,7 +34,18 @@ public class LevelLootController
             return false;
         }
 
-        EquipmentSourceSO source = levelData.GetEquipmentSource(chestType);
+        return TryCreateReward(chestType, levelData, out reward);
+    }
+
+    public bool TryCreateReward(
+        ChestType chestType,
+        LevelDataSO levelData,
+        out ChestReward reward)
+    {
+        reward = null;
+        EquipmentSourceSO source = levelData != null
+            ? levelData.GetEquipmentSource(chestType)
+            : null;
         if (source == null)
         {
             return false;

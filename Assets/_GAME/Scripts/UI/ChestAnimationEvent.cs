@@ -2,11 +2,25 @@ using UnityEngine;
 
 public class ChestAnimationEvent : MonoBehaviour
 {
-    [SerializeField] private ChestSlotUI chestSlot;
+    [SerializeField] private ChestSlotUI chestSlotUI;
 
-    // Goi boi Animation Event tai frame cuoi cua clip mo ruong.
+    public void OnInit()
+    {
+    }
+
+    public void OnDespawn()
+    {
+    }
+
+    // Animation Event tren ChestIcon goi ham nay tai frame item xuat hien.
+    public void OnRevealReward()
+    {
+        chestSlotUI?.OnRevealReward();
+    }
+
+    // Animation Event cuoi clip goi ham nay de mo khoa ruong.
     public void OnOpenAnimationFinished()
     {
-        chestSlot?.OnOpenAnimationFinished();
+        chestSlotUI?.OnOpenAnimationFinished();
     }
 }

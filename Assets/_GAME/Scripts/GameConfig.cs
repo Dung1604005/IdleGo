@@ -21,4 +21,8 @@ public static class GameConfig
     public const String ANIM_HURT = "hurt";
 
     public const String ANIM_BASIC_ATTACK = "basicAttack";
+
+    // Animation for chest
+
+    public const String ANIM_OPEN_CHEST = "open";
 }

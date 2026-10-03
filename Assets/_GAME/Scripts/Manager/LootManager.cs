@@ -43,6 +43,21 @@ public class LootManager : Singleton<LootManager>
         lootController.IncreaseDropRate(chestType, amount);
     }
 
+    public bool TryCreateTestReward(ChestType chestType, out ChestReward reward)
+    {
+        reward = null;
+        if (!IsInitialized || currentLevelData == null)
+        {
+            return false;
+        }
+
+        // Tool test bo qua drop rate nhung van roll dung source va quality cua level.
+        return lootController.TryCreateReward(
+            chestType,
+            currentLevelData,
+            out reward);
+    }
+
     public void OnEnemyDefeated(EnemyDataSO enemyData)
     {
         if (!IsInitialized || enemyData == null || currentLevelData == null)

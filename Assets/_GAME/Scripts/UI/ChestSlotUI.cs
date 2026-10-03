@@ -1,66 +1,60 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public class ChestVisualData
-{
-    [SerializeField] private ChestType chestType;
-    [SerializeField] private Sprite chestSprite;
-    [SerializeField] private RuntimeAnimatorController animatorController;
-
-    public ChestType ChestType => chestType;
-    public Sprite ChestSprite => chestSprite;
-    public RuntimeAnimatorController AnimatorController => animatorController;
-}
-
 public class ChestSlotUI : MonoBehaviour
 {
     [SerializeField] private ChestType chestType;
-    [SerializeField] private TextMeshProUGUI chestTypeText;
+    [SerializeField] private RectTransform slotRectTransform;
     [SerializeField] private TextMeshProUGUI queuedCountText;
     [SerializeField] private Button openButton;
-    [SerializeField] private Image chestImage;
     [SerializeField] private GameObject fullIcon;
-    [SerializeField] private GameObject openingBlocker;
-    [SerializeField] private List<ChestVisualData> chestVisuals = new List<ChestVisualData>();
 
     [Header("Open Effect")]
     [SerializeField] private Animator chestAnimator;
-    [SerializeField] private string openTrigger = "Open";
     [Tooltip("Dat Image nay phia tren hinh ruong trong Hierarchy.")]
     [SerializeField] private Image rewardIcon;
-    [Tooltip("Dat Particle nay phia sau hinh ruong trong Hierarchy.")]
-    [SerializeField] private ParticleSystem openLightParticle;
+    [Tooltip("Dat LootRevealEffect phia sau rewardIcon trong Hierarchy.")]
+    [SerializeField] private ParticleSystem lootEffect;
+    [Tooltip("Bat len neu muon goi OnRevealReward bang Animation Event.")]
+    [SerializeField] private bool revealAtAnimationEvent;
+    [HideInInspector, SerializeField] private ParticleSystem openLightParticle;
 
     private bool isPlayingOpenAnimation;
+    private bool isInteractionLocked;
+    private bool hasRevealedReward;
+    private Equipment pendingEquipment;
 
     public ChestType ChestType => chestType;
-
-    public void SetChestType(ChestType type)
+    public RectTransform SlotRectTransform => slotRectTransform != null
+        ? slotRectTransform
+        : transform as RectTransform;
+    public bool IsPlayingOpenAnimation => isPlayingOpenAnimation;
+    public bool CanOpen
     {
-        if (isPlayingOpenAnimation)
+        get
         {
-            return;
+            ChestState state = ChestManager.Ins.GetState(chestType);
+            return !isInteractionLocked
+                && !isPlayingOpenAnimation
+                && state != null
+                && state.CanOpen;
         }
-
-        chestType = type;
-        ApplyChestVisual();
     }
 
     public void OnInit()
     {
         isPlayingOpenAnimation = false;
+        isInteractionLocked = false;
+
         StopOpenVisual();
-        ApplyChestVisual();
     }
 
     public void OnDespawn()
     {
         bool mustUnlock = isPlayingOpenAnimation;
         isPlayingOpenAnimation = false;
+        isInteractionLocked = false;
         StopOpenVisual();
         if (mustUnlock && ChestManager.Ins.IsInitialized)
         {
@@ -70,20 +64,10 @@ public class ChestSlotUI : MonoBehaviour
 
     public void Refresh(ChestState state)
     {
-        if (state == null)
+        if (state == null || state.ChestType != chestType)
         {
             SetUnavailable();
             return;
-        }
-
-        if (state.ChestType != chestType)
-        {
-            SetChestType(state.ChestType);
-        }
-
-        if (chestTypeText != null)
-        {
-            chestTypeText.text = state.ChestType.ToString();
         }
 
         if (queuedCountText != null)
@@ -92,16 +76,38 @@ public class ChestSlotUI : MonoBehaviour
         }
 
         fullIcon?.SetActive(state.IsInventoryFull);
-        openingBlocker?.SetActive(state.IsOpening);
-        if (openButton != null)
+        RefreshOpenButton();
+    }
+
+    public void SetInteractionLocked(bool locked)
+    {
+        isInteractionLocked = locked;
+        RefreshOpenButton();
+    }
+
+    public void SetCarouselActive(bool active)
+    {
+        if (gameObject.activeSelf != active)
         {
-            openButton.interactable = state.CanOpen;
+            gameObject.SetActive(active);
         }
+    }
+
+    public void SetCarouselPose(Vector2 anchoredPosition, float scale)
+    {
+        RectTransform target = SlotRectTransform;
+        if (target == null)
+        {
+            return;
+        }
+
+        target.anchoredPosition = anchoredPosition;
+        target.localScale = Vector3.one * Mathf.Max(0f, scale);
     }
 
     public void OnButtonOpen()
     {
-        if (!isPlayingOpenAnimation)
+        if (CanOpen)
         {
             ChestManager.Ins.TryOpenChest(chestType);
         }
@@ -109,24 +115,19 @@ public class ChestSlotUI : MonoBehaviour
 
     public bool PlayOpen(Equipment equipment)
     {
-        if (isPlayingOpenAnimation
+        if (isInteractionLocked
+            || isPlayingOpenAnimation
             || chestAnimator == null
-            || string.IsNullOrWhiteSpace(openTrigger)
             || equipment?.Data == null)
         {
             return false;
         }
 
         isPlayingOpenAnimation = true;
-        if (rewardIcon != null)
-        {
-            rewardIcon.sprite = equipment.Data.Icon;
-            rewardIcon.enabled = rewardIcon.sprite != null;
-        }
-
-        openLightParticle?.Play();
-        chestAnimator.ResetTrigger(openTrigger);
-        chestAnimator.SetTrigger(openTrigger);
+        PrepareRewardReveal(equipment);
+        chestAnimator.ResetTrigger(GameConfig.ANIM_OPEN_CHEST);
+        chestAnimator.SetTrigger(GameConfig.ANIM_OPEN_CHEST);
+        RefreshOpenButton();
         return true;
     }
 
@@ -141,6 +142,44 @@ public class ChestSlotUI : MonoBehaviour
         isPlayingOpenAnimation = false;
         StopOpenVisual();
         ChestManager.Ins.CompleteOpenAnimation(chestType);
+        RefreshOpenButton();
+    }
+
+    // Gan vao Animation Event tai frame item bat dau xuat hien.
+    public void OnRevealReward()
+    {
+        if (!isPlayingOpenAnimation
+            || hasRevealedReward
+            || pendingEquipment?.Data == null)
+        {
+            return;
+        }
+
+        hasRevealedReward = true;
+        ShowReward(pendingEquipment);
+        PlayRevealEffect(pendingEquipment.RarityType);
+    }
+
+    private void PrepareRewardReveal(Equipment equipment)
+    {
+        StopOpenVisual();
+        pendingEquipment = equipment;
+        hasRevealedReward = false;
+        if (!revealAtAnimationEvent)
+        {
+            OnRevealReward();
+        }
+    }
+
+    private void ShowReward(Equipment equipment)
+    {
+        if (rewardIcon == null)
+        {
+            return;
+        }
+
+        rewardIcon.sprite = equipment.Data.Icon;
+        rewardIcon.enabled = rewardIcon.sprite != null;
     }
 
     private void StopOpenVisual()
@@ -151,30 +190,25 @@ public class ChestSlotUI : MonoBehaviour
             rewardIcon.enabled = false;
         }
 
+        
         openLightParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        openingBlocker?.SetActive(false);
+        pendingEquipment = null;
+        hasRevealedReward = false;
     }
 
-    private void ApplyChestVisual()
+    private void PlayRevealEffect(RarityType rarityType)
     {
-        for (int i = 0; i < chestVisuals.Count; i++)
-        {
-            ChestVisualData visual = chestVisuals[i];
-            if (visual == null || visual.ChestType != chestType)
-            {
-                continue;
-            }
+        
 
-            if (chestImage != null)
-            {
-                chestImage.sprite = visual.ChestSprite;
-                chestImage.enabled = chestImage.sprite != null;
-            }
-            if (chestAnimator != null && visual.AnimatorController != null)
-            {
-                chestAnimator.runtimeAnimatorController = visual.AnimatorController;
-            }
-            return;
+        // Giu tuong thich voi scene cu neu van con ParticleSystem don le.
+        openLightParticle?.Play();
+    }
+
+    private void RefreshOpenButton()
+    {
+        if (openButton != null)
+        {
+            openButton.interactable = CanOpen;
         }
     }
 
@@ -186,7 +220,6 @@ public class ChestSlotUI : MonoBehaviour
         }
 
         fullIcon?.SetActive(false);
-        openingBlocker?.SetActive(false);
         if (openButton != null)
         {
             openButton.interactable = false;
