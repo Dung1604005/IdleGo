@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
   m_Name: BeginCoat_Common
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
-  itemId: 2a5cdd45ea444978a5b6beccc20b7b0f
+  itemId: 24be3442fcab44789cfc238dbd46d95b
   nameItem: Beginner Boot
   rarityType: 0
   itemType: 0

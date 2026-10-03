@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c28c39cd22d4ce58aeef8abb7f4e871, type: 3}
   m_Name: BeginHelmet_Common
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
-  itemId: 625b4976b070442b8b41d530cac71093
+  itemId: 4c5d3207a5b24ebeaa28344a378c4dda
   nameItem: Beginner Chest
   rarityType: 0
   itemType: 0
