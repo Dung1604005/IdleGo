@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: 4ab32e421eb98834ba7c493c909071a2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1129187713482577674
+    second: blue_shield_0
+  - first:
+      213: 5124569262779313538
+    second: blue_shield_1
+  - first:
+      213: 4705638378798171123
+    second: blue_shield_2
+  - first:
+      213: 825457182252668259
+    second: blue_shield_3
+  - first:
+      213: -9217582175467572564
+    second: blue_shield_4
+  - first:
+      213: 7383160997655995655
+    second: blue_shield_5
+  - first:
+      213: 5364182351553535449
+    second: blue_shield_6
+  - first:
+      213: 7044258871649885349
+    second: blue_shield_7
+  - first:
+      213: 8508201775127518480
+    second: blue_shield_8
+  - first:
+      213: -2714096194935597101
+    second: blue_shield_9
+  - first:
+      213: 8532960641269655281
+    second: blue_shield_10
+  - first:
+      213: 2963301016619114492
+    second: blue_shield_11
+  - first:
+      213: 2362781921852047293
+    second: blue_shield_12
+  - first:
+      213: -4446566881767122776
+    second: blue_shield_13
+  - first:
+      213: -5405626369134193900
+    second: blue_shield_14
+  - first:
+      213: 7752126382160398945
+    second: blue_shield_15
+  - first:
+      213: 2720650120555052057
+    second: blue_shield_16
+  - first:
+      213: 3570748232821320629
+    second: blue_shield_17
+  - first:
+      213: 8843902255696950421
+    second: blue_shield_18
+  - first:
+      213: 5003314073050056409
+    second: blue_shield_19
+  - first:
+      213: -294201373621932326
+    second: blue_shield_20
+  - first:
+      213: 7138796094277618011
+    second: blue_shield_21
+  - first:
+      213: -7950573757004386646
+    second: blue_shield_22
+  - first:
+      213: 72936496282525032
+    second: blue_shield_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: blue_shield_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 528
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a075dd22e3eabaf00800000000000000
+      internalID: 1129187713482577674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 528
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28da8d6e7902e1740800000000000000
+      internalID: 5124569262779313538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_2
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 527
+        width: 226
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f3c5b98c29cd4140800000000000000
+      internalID: 4705638378798171123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_3
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 526
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365177d0fec947b00800000000000000
+      internalID: 825457182252668259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_4
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 526
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca2784729d1941080800000000000000
+      internalID: -9217582175467572564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_5
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 526
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 705edc84fc1467660800000000000000
+      internalID: 7383160997655995655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_6
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 526
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd94c69d67617a40800000000000000
+      internalID: 5364182351553535449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_7
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 526
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5acd5962f1c32c160800000000000000
+      internalID: 7044258871649885349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 270
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01dd2d3af64331670800000000000000
+      internalID: 8508201775127518480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_9
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 270
+        width: 228
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d7df9ef3e7955ad0800000000000000
+      internalID: -2714096194935597101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_10
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 271
+        width: 226
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f664416e7a2b6670800000000000000
+      internalID: 8532960641269655281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_11
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 272
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffd22a0392cf1920800000000000000
+      internalID: 2963301016619114492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_12
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 272
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbfb4bda3a94ac020800000000000000
+      internalID: 2362781921852047293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_13
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 273
+        width: 222
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a8114edafe9a42c0800000000000000
+      internalID: -4446566881767122776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_14
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 274
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413954f157b5bf4b0800000000000000
+      internalID: -5405626369134193900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_15
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 274
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16aca9e3fd5159b60800000000000000
+      internalID: 7752126382160398945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_16
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 18
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91cbec9bed0b1c520800000000000000
+      internalID: 2720650120555052057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_17
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 19
+        width: 218
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb2baf5998dd8130800000000000000
+      internalID: 3570748232821320629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_18
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 19
+        width: 218
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 594b71b9e3adbba70800000000000000
+      internalID: 8843902255696950421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_19
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 19
+        width: 218
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d68cd704a75f6540800000000000000
+      internalID: 5003314073050056409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_20
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 18
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade25d0d869caebf0800000000000000
+      internalID: -294201373621932326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_21
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 18
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b590d5b8939121360800000000000000
+      internalID: 7138796094277618011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_22
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 18
+        width: 220
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaee53dba43e9a190800000000000000
+      internalID: -7950573757004386646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_shield_23
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 17
+        width: 222
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86dd4106b5f130100800000000000000
+      internalID: 72936496282525032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      blue_shield_0: 1129187713482577674
+      blue_shield_1: 5124569262779313538
+      blue_shield_10: 8532960641269655281
+      blue_shield_11: 2963301016619114492
+      blue_shield_12: 2362781921852047293
+      blue_shield_13: -4446566881767122776
+      blue_shield_14: -5405626369134193900
+      blue_shield_15: 7752126382160398945
+      blue_shield_16: 2720650120555052057
+      blue_shield_17: 3570748232821320629
+      blue_shield_18: 8843902255696950421
+      blue_shield_19: 5003314073050056409
+      blue_shield_2: 4705638378798171123
+      blue_shield_20: -294201373621932326
+      blue_shield_21: 7138796094277618011
+      blue_shield_22: -7950573757004386646
+      blue_shield_23: 72936496282525032
+      blue_shield_3: 825457182252668259
+      blue_shield_4: -9217582175467572564
+      blue_shield_5: 7383160997655995655
+      blue_shield_6: 5364182351553535449
+      blue_shield_7: 7044258871649885349
+      blue_shield_8: 8508201775127518480
+      blue_shield_9: -2714096194935597101
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

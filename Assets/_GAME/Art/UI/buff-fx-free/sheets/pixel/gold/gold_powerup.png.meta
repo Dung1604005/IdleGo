@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: ab48cce8d626632439d08f02d714cebd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1737855771007273571
+    second: gold_powerup_0
+  - first:
+      213: 290154654295945000
+    second: gold_powerup_1
+  - first:
+      213: -5156695347789159502
+    second: gold_powerup_2
+  - first:
+      213: -4560473556791437596
+    second: gold_powerup_3
+  - first:
+      213: 9057093190006803423
+    second: gold_powerup_4
+  - first:
+      213: -4143635189235343953
+    second: gold_powerup_5
+  - first:
+      213: 8833826239477159510
+    second: gold_powerup_6
+  - first:
+      213: 7891710125980240620
+    second: gold_powerup_7
+  - first:
+      213: 3353036533057381682
+    second: gold_powerup_8
+  - first:
+      213: 1945756098513401845
+    second: gold_powerup_9
+  - first:
+      213: -4104445044650462711
+    second: gold_powerup_10
+  - first:
+      213: 6377619530136539951
+    second: gold_powerup_11
+  - first:
+      213: -7504248053840498932
+    second: gold_powerup_12
+  - first:
+      213: -7947358888949829608
+    second: gold_powerup_13
+  - first:
+      213: 2380551717442243314
+    second: gold_powerup_14
+  - first:
+      213: 8054800138898934705
+    second: gold_powerup_15
+  - first:
+      213: 3279581182732539140
+    second: gold_powerup_16
+  - first:
+      213: 3000230485723826676
+    second: gold_powerup_17
+  - first:
+      213: -107650032288033613
+    second: gold_powerup_18
+  - first:
+      213: -1981264219662625110
+    second: gold_powerup_19
+  - first:
+      213: -7087599477816586566
+    second: gold_powerup_20
+  - first:
+      213: 8364686365655820727
+    second: gold_powerup_21
+  - first:
+      213: 720487587648142415
+    second: gold_powerup_22
+  - first:
+      213: -214029783510029626
+    second: gold_powerup_23
+  - first:
+      213: 1635507721441827088
+    second: gold_powerup_24
+  - first:
+      213: 8103392613494842976
+    second: gold_powerup_25
+  - first:
+      213: 305448227725190364
+    second: gold_powerup_26
+  - first:
+      213: 561398681133964424
+    second: gold_powerup_27
+  - first:
+      213: -4404830145415720685
+    second: gold_powerup_28
+  - first:
+      213: -2426076791597210484
+    second: gold_powerup_29
+  - first:
+      213: 5278779030523033786
+    second: gold_powerup_30
+  - first:
+      213: 4625617263824483968
+    second: gold_powerup_31
+  - first:
+      213: 6277531776930631323
+    second: gold_powerup_32
+  - first:
+      213: -6680930562122727476
+    second: gold_powerup_33
+  - first:
+      213: -7911029959019645868
+    second: gold_powerup_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gold_powerup_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 147
+        width: 36
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d95bf324265e1e7e0800000000000000
+      internalID: -1737855771007273571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 146
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82f6c3bee16d60400800000000000000
+      internalID: 290154654295945000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_2
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 155
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b32e1c07ecbf68b0800000000000000
+      internalID: -5156695347789159502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_3
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 152
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e652e76671f5b0c0800000000000000
+      internalID: -4560473556791437596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_4
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 146
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdb07ff054241bd70800000000000000
+      internalID: 9057093190006803423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_5
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 152
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad91d2dfb9de76c0800000000000000
+      internalID: -4143635189235343953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 154
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6569f83492e089a70800000000000000
+      internalID: 8833826239477159510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 145
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceac7692c8cf48d60800000000000000
+      internalID: 7891710125980240620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_8
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 145
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 235eacf26f0688e20800000000000000
+      internalID: 3353036533057381682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_9
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 145
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f7f07fccd6b00b10800000000000000
+      internalID: 1945756098513401845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_10
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 145
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9023f796af41a07c0800000000000000
+      internalID: -4104445044650462711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_11
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 145
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23d16e2c2bd18850800000000000000
+      internalID: 6377619530136539951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 81
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0fab6c772e8bd790800000000000000
+      internalID: -7504248053840498932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_13
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 81
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8103a99823f45b190800000000000000
+      internalID: -7947358888949829608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_14
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 90
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa479f9c2b690120800000000000000
+      internalID: 2380551717442243314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_15
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 88
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bb86d7dc0668cf60800000000000000
+      internalID: 8054800138898934705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_16
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 82
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40514d0b5b9638d20800000000000000
+      internalID: 3279581182732539140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_17
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 88
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f9cdd91bb5f2a920800000000000000
+      internalID: 3000230485723826676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_18
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 91
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b49961bddc818ef0800000000000000
+      internalID: -107650032288033613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_19
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 82
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa651dc70b22184e0800000000000000
+      internalID: -1981264219662625110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_20
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 83
+        width: 36
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abe8f7e93d9c3ad90800000000000000
+      internalID: -7087599477816586566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_21
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 83
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9e77a7ee5551470800000000000000
+      internalID: 8364686365655820727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_22
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 84
+        width: 38
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c78d6c4afaff900800000000000000
+      internalID: 720487587648142415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_23
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 84
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cae78ebb0d970df0800000000000000
+      internalID: -214029783510029626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_24
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 21
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 019d2fb7b9d72b610800000000000000
+      internalID: 1635507721441827088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_25
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 21
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06662eaf5a8057070800000000000000
+      internalID: 8103392613494842976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_26
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 29
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd425d67b8b2d3400800000000000000
+      internalID: 305448227725190364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_27
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 27
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88cdc56402d7ac700800000000000000
+      internalID: 561398681133964424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_28
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 21
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311509e0256eed2c0800000000000000
+      internalID: -4404830145415720685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_29
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 27
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c84670f0308d45ed0800000000000000
+      internalID: -2426076791597210484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_30
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 21
+        width: 43
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab83b126f8df14940800000000000000
+      internalID: 5278779030523033786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_31
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 21
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0863c25d46e713040800000000000000
+      internalID: 4625617263824483968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_32
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 20
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9e4d2e24e54e1750800000000000000
+      internalID: 6277531776930631323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_33
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 20
+        width: 38
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccfbf930d019843a0800000000000000
+      internalID: -6680930562122727476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gold_powerup_34
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 19
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 454392daa20663290800000000000000
+      internalID: -7911029959019645868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      gold_powerup_0: -1737855771007273571
+      gold_powerup_1: 290154654295945000
+      gold_powerup_10: -4104445044650462711
+      gold_powerup_11: 6377619530136539951
+      gold_powerup_12: -7504248053840498932
+      gold_powerup_13: -7947358888949829608
+      gold_powerup_14: 2380551717442243314
+      gold_powerup_15: 8054800138898934705
+      gold_powerup_16: 3279581182732539140
+      gold_powerup_17: 3000230485723826676
+      gold_powerup_18: -107650032288033613
+      gold_powerup_19: -1981264219662625110
+      gold_powerup_2: -5156695347789159502
+      gold_powerup_20: -7087599477816586566
+      gold_powerup_21: 8364686365655820727
+      gold_powerup_22: 720487587648142415
+      gold_powerup_23: -214029783510029626
+      gold_powerup_24: 1635507721441827088
+      gold_powerup_25: 8103392613494842976
+      gold_powerup_26: 305448227725190364
+      gold_powerup_27: 561398681133964424
+      gold_powerup_28: -4404830145415720685
+      gold_powerup_29: -2426076791597210484
+      gold_powerup_3: -4560473556791437596
+      gold_powerup_30: 5278779030523033786
+      gold_powerup_31: 4625617263824483968
+      gold_powerup_32: 6277531776930631323
+      gold_powerup_33: -6680930562122727476
+      gold_powerup_34: -7911029959019645868
+      gold_powerup_4: 9057093190006803423
+      gold_powerup_5: -4143635189235343953
+      gold_powerup_6: 8833826239477159510
+      gold_powerup_7: 7891710125980240620
+      gold_powerup_8: 3353036533057381682
+      gold_powerup_9: 1945756098513401845
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

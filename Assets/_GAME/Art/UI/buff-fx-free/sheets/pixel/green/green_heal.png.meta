@@ -1,0 +1,1859 @@
+fileFormatVersion: 2
+guid: 8ad003c46c5464b45b5fe4d81e23e2aa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6038254810316564260
+    second: green_heal_0
+  - first:
+      213: 2277045911953473980
+    second: green_heal_1
+  - first:
+      213: -9195277571192110904
+    second: green_heal_2
+  - first:
+      213: -2153042852640920028
+    second: green_heal_3
+  - first:
+      213: 8169406995267586772
+    second: green_heal_4
+  - first:
+      213: 9181775928211210301
+    second: green_heal_5
+  - first:
+      213: -743612380653234353
+    second: green_heal_6
+  - first:
+      213: 9100138838696031050
+    second: green_heal_7
+  - first:
+      213: 8293377354949695472
+    second: green_heal_8
+  - first:
+      213: 7878239247278511864
+    second: green_heal_9
+  - first:
+      213: -2760841926713254680
+    second: green_heal_10
+  - first:
+      213: -3321426730873270485
+    second: green_heal_11
+  - first:
+      213: 7266176739867307123
+    second: green_heal_12
+  - first:
+      213: 739451687981004842
+    second: green_heal_13
+  - first:
+      213: -5968937151247966676
+    second: green_heal_14
+  - first:
+      213: -2560249953560414369
+    second: green_heal_15
+  - first:
+      213: 8272895220491689369
+    second: green_heal_16
+  - first:
+      213: 5812554739000464943
+    second: green_heal_17
+  - first:
+      213: -788309743386091562
+    second: green_heal_18
+  - first:
+      213: 8321325399555865831
+    second: green_heal_19
+  - first:
+      213: 1535637012388527622
+    second: green_heal_20
+  - first:
+      213: 4631300177959870896
+    second: green_heal_21
+  - first:
+      213: -3362723191453231578
+    second: green_heal_22
+  - first:
+      213: 6015954097820409392
+    second: green_heal_23
+  - first:
+      213: 1873761617458693466
+    second: green_heal_24
+  - first:
+      213: 268715716201233453
+    second: green_heal_25
+  - first:
+      213: 5532305724596847646
+    second: green_heal_26
+  - first:
+      213: 1969025856396903481
+    second: green_heal_27
+  - first:
+      213: -273637355104082828
+    second: green_heal_28
+  - first:
+      213: -4539922761838048513
+    second: green_heal_29
+  - first:
+      213: -2669372639263301772
+    second: green_heal_30
+  - first:
+      213: 6677252702653101762
+    second: green_heal_31
+  - first:
+      213: 7072984843170876854
+    second: green_heal_32
+  - first:
+      213: 2529455992097642101
+    second: green_heal_33
+  - first:
+      213: 6714093990853012462
+    second: green_heal_34
+  - first:
+      213: 9083025052100745642
+    second: green_heal_35
+  - first:
+      213: 8178232806481858440
+    second: green_heal_36
+  - first:
+      213: -8039444856824526032
+    second: green_heal_37
+  - first:
+      213: -909941404845990401
+    second: green_heal_38
+  - first:
+      213: 7486583045634766994
+    second: green_heal_39
+  - first:
+      213: -2350556674439632298
+    second: green_heal_40
+  - first:
+      213: -5024878428461022189
+    second: green_heal_41
+  - first:
+      213: 4917360924550907419
+    second: green_heal_42
+  - first:
+      213: -1221150606083986739
+    second: green_heal_43
+  - first:
+      213: 2467121824617851131
+    second: green_heal_44
+  - first:
+      213: 8906142056584118425
+    second: green_heal_45
+  - first:
+      213: -61788870640487066
+    second: green_heal_46
+  - first:
+      213: -1625200313966991090
+    second: green_heal_47
+  - first:
+      213: -9103259472075797872
+    second: green_heal_48
+  - first:
+      213: 5803585412376845340
+    second: green_heal_49
+  - first:
+      213: 8213237049245634034
+    second: green_heal_50
+  - first:
+      213: -1819940434043749230
+    second: green_heal_51
+  - first:
+      213: 4222091155836227671
+    second: green_heal_52
+  - first:
+      213: -3004275485876826367
+    second: green_heal_53
+  - first:
+      213: -1562835324918654165
+    second: green_heal_54
+  - first:
+      213: -3910951767324329103
+    second: green_heal_55
+  - first:
+      213: -4546849989535786137
+    second: green_heal_56
+  - first:
+      213: -6139966470497359857
+    second: green_heal_57
+  - first:
+      213: 7307564634806958520
+    second: green_heal_58
+  - first:
+      213: 4805294483115916521
+    second: green_heal_59
+  - first:
+      213: -6131863282847563631
+    second: green_heal_60
+  - first:
+      213: -8604471417611763588
+    second: green_heal_61
+  - first:
+      213: 4072796241230748847
+    second: green_heal_62
+  - first:
+      213: 5056685547470861758
+    second: green_heal_63
+  - first:
+      213: -8819064109859903923
+    second: green_heal_64
+  - first:
+      213: 7203469026489024089
+    second: green_heal_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: green_heal_0
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 152
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd899c7fd3fc33ca0800000000000000
+      internalID: -6038254810316564260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_1
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 156
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb10e3f4131b99f10800000000000000
+      internalID: 2277045911953473980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_2
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 160
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c04af584cfc36080800000000000000
+      internalID: -9195277571192110904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 150
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42ee42eceeade12e0800000000000000
+      internalID: -2153042852640920028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 128
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4da048af0609f5170800000000000000
+      internalID: 8169406995267586772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_5
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 143
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3003404f883c6f70800000000000000
+      internalID: 9181775928211210301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_6
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 128
+        width: 42
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f47d498ca782ea5f0800000000000000
+      internalID: -743612380653234353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_7
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 147
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4376372f003a4e70800000000000000
+      internalID: 9100138838696031050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_8
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 141
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f79b0e93cef71370800000000000000
+      internalID: 8293377354949695472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_9
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 145
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f6939dcad0255d60800000000000000
+      internalID: 7878239247278511864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_10
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 128
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec504d25e48fa9d0800000000000000
+      internalID: -2760841926713254680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_11
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 143
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2fcfc66cfbe7e1d0800000000000000
+      internalID: -3321426730873270485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 139
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37c2ffe3f35a6d460800000000000000
+      internalID: 7266176739867307123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_13
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 128
+        width: 40
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a28bba6746f034a00800000000000000
+      internalID: 739451687981004842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_14
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 128
+        width: 46
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2e9b3529431a2da0800000000000000
+      internalID: -5968937151247966676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_15
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 128
+        width: 48
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5732d56b3a287cd0800000000000000
+      internalID: -2560249953560414369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_16
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 98
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99d1f611f5a3fc270800000000000000
+      internalID: 8272895220491689369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_17
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 94
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f26d2a72db75aa050800000000000000
+      internalID: 5812554739000464943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_18
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 80
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df1e7c077c5f05f0800000000000000
+      internalID: -788309743386091562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_19
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 92
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ec76f4dc594b7370800000000000000
+      internalID: 8321325399555865831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_20
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 107
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e3c530abdaf4510800000000000000
+      internalID: 1535637012388527622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_21
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 96
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1608369fea54040800000000000000
+      internalID: 4631300177959870896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_22
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 91
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6265677e2153551d0800000000000000
+      internalID: -3362723191453231578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_23
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 103
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e14a9c066fc7350800000000000000
+      internalID: 6015954097820409392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_24
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 108
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5503627340f00a10800000000000000
+      internalID: 1873761617458693466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_25
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 106
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c3db9258baab300800000000000000
+      internalID: 268715716201233453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_26
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 81
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e14847fbeb2b6cc40800000000000000
+      internalID: 5532305724596847646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_27
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 64
+        width: 50
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 934c8148592635b10800000000000000
+      internalID: 1969025856396903481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_28
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 88
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4746ebb7648d33cf0800000000000000
+      internalID: -273637355104082828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_29
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 90
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffacee83d44fef0c0800000000000000
+      internalID: -4539922761838048513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_30
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 94
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47f509f3abb74fad0800000000000000
+      internalID: -2669372639263301772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_31
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 88
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c6b72994fd5aac50800000000000000
+      internalID: 6677252702653101762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_32
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 93
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd0ce69d3a482260800000000000000
+      internalID: 7072984843170876854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_33
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 97
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57696fbb2de6a1320800000000000000
+      internalID: 2529455992097642101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_34
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 92
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eebe06179e04d2d50800000000000000
+      internalID: 6714093990853012462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_35
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 78
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa9507439236d0e70800000000000000
+      internalID: 9083025052100745642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_36
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 83
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88f0cc8486bee7170800000000000000
+      internalID: 8178232806481858440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_37
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 64
+        width: 50
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b02ad5f772e6090800000000000000
+      internalID: -8039444856824526032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_38
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 78
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd1cb50d1d3f53f0800000000000000
+      internalID: -909941404845990401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_39
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 84
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 298b5884d9fa5e760800000000000000
+      internalID: 7486583045634766994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_40
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 82
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65a2a9b8825216fd0800000000000000
+      internalID: -2350556674439632298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_41
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 79
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 314ce0831bb044ab0800000000000000
+      internalID: -5024878428461022189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_42
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 86
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b164e3425b9fd3440800000000000000
+      internalID: 4917360924550907419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_43
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 84
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dca6c136ef99d0fe0800000000000000
+      internalID: -1221150606083986739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_44
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 64
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8e5f56a3afc3220800000000000000
+      internalID: 2467121824617851131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_45
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 64
+        width: 50
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9900dd18309f89b70800000000000000
+      internalID: 8906142056584118425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_46
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 64
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 665b66a795b742ff0800000000000000
+      internalID: -61788870640487066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_47
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 64
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e09e425dce02279e0800000000000000
+      internalID: -1625200313966991090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_48
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 64
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09a46b4cdb9baa180800000000000000
+      internalID: -9103259472075797872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_49
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 64
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1c5c501f2a7a8050800000000000000
+      internalID: 5803585412376845340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_50
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 44
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fd0d58a4974bf170800000000000000
+      internalID: 8213237049245634034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_51
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 36
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29cb37451d54eb6e0800000000000000
+      internalID: -1819940434043749230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_52
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 32
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 750dfe06981e79a30800000000000000
+      internalID: 4222091155836227671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_53
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 34
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10fc5e8ec5bae46d0800000000000000
+      internalID: -3004275485876826367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_54
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 38
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2b9acf5d81bf4ae0800000000000000
+      internalID: -1562835324918654165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_55
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 35
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17b72f6b61289b9c0800000000000000
+      internalID: -3910951767324329103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_56
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 36
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76b1bb6560856e0c0800000000000000
+      internalID: -4546849989535786137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_57
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 38
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f082239a6057acaa0800000000000000
+      internalID: -6139966470497359857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_58
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 39
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b930e6715fa96560800000000000000
+      internalID: 7307564634806958520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_59
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 41
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ecb4437fd5dfa240800000000000000
+      internalID: 4805294483115916521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_60
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 43
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1904c9e05de37eaa0800000000000000
+      internalID: -6131863282847563631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_61
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 32
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70cf3985d6c69880800000000000000
+      internalID: -8604471417611763588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_62
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: facda115a9a758830800000000000000
+      internalID: 4072796241230748847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_63
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb53ad5c6b4fc2640800000000000000
+      internalID: 5056685547470861758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_64
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d466760eae36c9580800000000000000
+      internalID: -8819064109859903923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_heal_65
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 0
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95e386af9ecd7f360800000000000000
+      internalID: 7203469026489024089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      green_heal_0: -6038254810316564260
+      green_heal_1: 2277045911953473980
+      green_heal_10: -2760841926713254680
+      green_heal_11: -3321426730873270485
+      green_heal_12: 7266176739867307123
+      green_heal_13: 739451687981004842
+      green_heal_14: -5968937151247966676
+      green_heal_15: -2560249953560414369
+      green_heal_16: 8272895220491689369
+      green_heal_17: 5812554739000464943
+      green_heal_18: -788309743386091562
+      green_heal_19: 8321325399555865831
+      green_heal_2: -9195277571192110904
+      green_heal_20: 1535637012388527622
+      green_heal_21: 4631300177959870896
+      green_heal_22: -3362723191453231578
+      green_heal_23: 6015954097820409392
+      green_heal_24: 1873761617458693466
+      green_heal_25: 268715716201233453
+      green_heal_26: 5532305724596847646
+      green_heal_27: 1969025856396903481
+      green_heal_28: -273637355104082828
+      green_heal_29: -4539922761838048513
+      green_heal_3: -2153042852640920028
+      green_heal_30: -2669372639263301772
+      green_heal_31: 6677252702653101762
+      green_heal_32: 7072984843170876854
+      green_heal_33: 2529455992097642101
+      green_heal_34: 6714093990853012462
+      green_heal_35: 9083025052100745642
+      green_heal_36: 8178232806481858440
+      green_heal_37: -8039444856824526032
+      green_heal_38: -909941404845990401
+      green_heal_39: 7486583045634766994
+      green_heal_4: 8169406995267586772
+      green_heal_40: -2350556674439632298
+      green_heal_41: -5024878428461022189
+      green_heal_42: 4917360924550907419
+      green_heal_43: -1221150606083986739
+      green_heal_44: 2467121824617851131
+      green_heal_45: 8906142056584118425
+      green_heal_46: -61788870640487066
+      green_heal_47: -1625200313966991090
+      green_heal_48: -9103259472075797872
+      green_heal_49: 5803585412376845340
+      green_heal_5: 9181775928211210301
+      green_heal_50: 8213237049245634034
+      green_heal_51: -1819940434043749230
+      green_heal_52: 4222091155836227671
+      green_heal_53: -3004275485876826367
+      green_heal_54: -1562835324918654165
+      green_heal_55: -3910951767324329103
+      green_heal_56: -4546849989535786137
+      green_heal_57: -6139966470497359857
+      green_heal_58: 7307564634806958520
+      green_heal_59: 4805294483115916521
+      green_heal_6: -743612380653234353
+      green_heal_60: -6131863282847563631
+      green_heal_61: -8604471417611763588
+      green_heal_62: 4072796241230748847
+      green_heal_63: 5056685547470861758
+      green_heal_64: -8819064109859903923
+      green_heal_65: 7203469026489024089
+      green_heal_7: 9100138838696031050
+      green_heal_8: 8293377354949695472
+      green_heal_9: 7878239247278511864
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

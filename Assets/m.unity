@@ -166,6 +166,7 @@ MonoBehaviour:
   listMapData:
   - {fileID: 11400000, guid: c3ab6f17a4677014783f8ba83036475b, type: 2}
   rarityBGData: {fileID: 11400000, guid: 113dad35f59c5154ab1887d7ea35354a, type: 2}
+  rarityColorData: {fileID: 11400000, guid: 8851adeb4636bba49921c57e407bd118, type: 2}
 --- !u!1001 &142326099
 PrefabInstance:
   m_ObjectHideFlags: 0

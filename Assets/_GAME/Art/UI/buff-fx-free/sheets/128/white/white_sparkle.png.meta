@@ -1,0 +1,4069 @@
+fileFormatVersion: 2
+guid: c055e371201f32541804d250110eadf7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5320224923138768210
+    second: white_sparkle_0
+  - first:
+      213: -5586789082502815822
+    second: white_sparkle_1
+  - first:
+      213: 4704983293225540394
+    second: white_sparkle_2
+  - first:
+      213: -272963641051631848
+    second: white_sparkle_3
+  - first:
+      213: 1971602739065309331
+    second: white_sparkle_4
+  - first:
+      213: -7950574602920387809
+    second: white_sparkle_5
+  - first:
+      213: 3907700196439059132
+    second: white_sparkle_6
+  - first:
+      213: -4973744168877148847
+    second: white_sparkle_7
+  - first:
+      213: 603382021133712494
+    second: white_sparkle_8
+  - first:
+      213: -6009835424476512076
+    second: white_sparkle_9
+  - first:
+      213: -3518500094491722908
+    second: white_sparkle_10
+  - first:
+      213: -3726166350318679470
+    second: white_sparkle_11
+  - first:
+      213: 1939481767207161397
+    second: white_sparkle_12
+  - first:
+      213: 8905543326652039330
+    second: white_sparkle_13
+  - first:
+      213: -2533134041780648439
+    second: white_sparkle_14
+  - first:
+      213: -877759830599166539
+    second: white_sparkle_15
+  - first:
+      213: -2364592076905196713
+    second: white_sparkle_16
+  - first:
+      213: -8548529246275905406
+    second: white_sparkle_17
+  - first:
+      213: 6739541417386972551
+    second: white_sparkle_18
+  - first:
+      213: -1794039500736209032
+    second: white_sparkle_19
+  - first:
+      213: 6155329941297145519
+    second: white_sparkle_20
+  - first:
+      213: 9014269692381507685
+    second: white_sparkle_21
+  - first:
+      213: -8610523061125227136
+    second: white_sparkle_22
+  - first:
+      213: -8042368337203730906
+    second: white_sparkle_23
+  - first:
+      213: 7206478220845086389
+    second: white_sparkle_24
+  - first:
+      213: 168063787274684064
+    second: white_sparkle_25
+  - first:
+      213: 3582668532039197788
+    second: white_sparkle_26
+  - first:
+      213: -5330814237056072333
+    second: white_sparkle_27
+  - first:
+      213: -664308746316423978
+    second: white_sparkle_28
+  - first:
+      213: -3959509577925051372
+    second: white_sparkle_29
+  - first:
+      213: -1014620712099991480
+    second: white_sparkle_30
+  - first:
+      213: 2761744613720611143
+    second: white_sparkle_31
+  - first:
+      213: -5372958136763867380
+    second: white_sparkle_32
+  - first:
+      213: -5754355137659352756
+    second: white_sparkle_33
+  - first:
+      213: 1184037797580971644
+    second: white_sparkle_34
+  - first:
+      213: -2692633818112270678
+    second: white_sparkle_35
+  - first:
+      213: 2667103102308622397
+    second: white_sparkle_36
+  - first:
+      213: -7581856641874155633
+    second: white_sparkle_37
+  - first:
+      213: -6253517325592645741
+    second: white_sparkle_38
+  - first:
+      213: -2731550550553990425
+    second: white_sparkle_39
+  - first:
+      213: -7462858666015999892
+    second: white_sparkle_40
+  - first:
+      213: 6186408143102649012
+    second: white_sparkle_41
+  - first:
+      213: -5880700254175766044
+    second: white_sparkle_42
+  - first:
+      213: -9020583662276780723
+    second: white_sparkle_43
+  - first:
+      213: 1139547073347009919
+    second: white_sparkle_44
+  - first:
+      213: 2792652481801648107
+    second: white_sparkle_45
+  - first:
+      213: -2311500475640060339
+    second: white_sparkle_46
+  - first:
+      213: 6848669289423647844
+    second: white_sparkle_47
+  - first:
+      213: -4195859003470851141
+    second: white_sparkle_48
+  - first:
+      213: 7342450110756390120
+    second: white_sparkle_49
+  - first:
+      213: -3893204974473551608
+    second: white_sparkle_50
+  - first:
+      213: 8112783915162173895
+    second: white_sparkle_51
+  - first:
+      213: 1155125232257363034
+    second: white_sparkle_52
+  - first:
+      213: 3757879830863516713
+    second: white_sparkle_53
+  - first:
+      213: 3231331121603780100
+    second: white_sparkle_54
+  - first:
+      213: 292225895302584249
+    second: white_sparkle_55
+  - first:
+      213: -9061091909154562410
+    second: white_sparkle_56
+  - first:
+      213: -1713669269681810031
+    second: white_sparkle_57
+  - first:
+      213: 7848878653820385241
+    second: white_sparkle_58
+  - first:
+      213: 8247065272397225461
+    second: white_sparkle_59
+  - first:
+      213: 5308269619151435105
+    second: white_sparkle_60
+  - first:
+      213: -5652717009421231489
+    second: white_sparkle_61
+  - first:
+      213: 3963926685288692319
+    second: white_sparkle_62
+  - first:
+      213: -363291460071865631
+    second: white_sparkle_63
+  - first:
+      213: -5882404610213932196
+    second: white_sparkle_64
+  - first:
+      213: -9198390478844844208
+    second: white_sparkle_65
+  - first:
+      213: -8854810943145438540
+    second: white_sparkle_66
+  - first:
+      213: -1711998951874933939
+    second: white_sparkle_67
+  - first:
+      213: 2390405974477842575
+    second: white_sparkle_68
+  - first:
+      213: 2202519940027087295
+    second: white_sparkle_69
+  - first:
+      213: -2827495158813547128
+    second: white_sparkle_70
+  - first:
+      213: 3456331112221307117
+    second: white_sparkle_71
+  - first:
+      213: -3273623236922492818
+    second: white_sparkle_72
+  - first:
+      213: 5807378817419762750
+    second: white_sparkle_73
+  - first:
+      213: 4086925621511680734
+    second: white_sparkle_74
+  - first:
+      213: -5233619937059003039
+    second: white_sparkle_75
+  - first:
+      213: -3564001161475739338
+    second: white_sparkle_76
+  - first:
+      213: 8547275633784530444
+    second: white_sparkle_77
+  - first:
+      213: -8546906838347424700
+    second: white_sparkle_78
+  - first:
+      213: 2966306431794311947
+    second: white_sparkle_79
+  - first:
+      213: 2356262665821445614
+    second: white_sparkle_80
+  - first:
+      213: -302793501705817581
+    second: white_sparkle_81
+  - first:
+      213: -6029916879355867556
+    second: white_sparkle_82
+  - first:
+      213: -8431476548817085604
+    second: white_sparkle_83
+  - first:
+      213: 5060378375080540182
+    second: white_sparkle_84
+  - first:
+      213: 4087233790865003053
+    second: white_sparkle_85
+  - first:
+      213: 4552605331538749920
+    second: white_sparkle_86
+  - first:
+      213: 7320487301255034994
+    second: white_sparkle_87
+  - first:
+      213: 7632447385265922221
+    second: white_sparkle_88
+  - first:
+      213: -3894715994963868089
+    second: white_sparkle_89
+  - first:
+      213: -4619088805780938886
+    second: white_sparkle_90
+  - first:
+      213: 6837050300887592993
+    second: white_sparkle_91
+  - first:
+      213: -7442485167479576607
+    second: white_sparkle_92
+  - first:
+      213: 6435204647297071981
+    second: white_sparkle_93
+  - first:
+      213: 1609725948210175174
+    second: white_sparkle_94
+  - first:
+      213: 973157412743070014
+    second: white_sparkle_95
+  - first:
+      213: 618956914212090337
+    second: white_sparkle_96
+  - first:
+      213: -3229743768696624093
+    second: white_sparkle_97
+  - first:
+      213: -967057096645008490
+    second: white_sparkle_98
+  - first:
+      213: 4796651343415351201
+    second: white_sparkle_99
+  - first:
+      213: 7991581726534468413
+    second: white_sparkle_100
+  - first:
+      213: -4330623860857991626
+    second: white_sparkle_101
+  - first:
+      213: -2210230024868196413
+    second: white_sparkle_102
+  - first:
+      213: 7550269162793564385
+    second: white_sparkle_103
+  - first:
+      213: -7430110096889386678
+    second: white_sparkle_104
+  - first:
+      213: 2551599969323371356
+    second: white_sparkle_105
+  - first:
+      213: 2083793052889397228
+    second: white_sparkle_106
+  - first:
+      213: -7886880057851671228
+    second: white_sparkle_107
+  - first:
+      213: -346506764474706223
+    second: white_sparkle_108
+  - first:
+      213: 5805258138471494500
+    second: white_sparkle_109
+  - first:
+      213: 7890707256767483804
+    second: white_sparkle_110
+  - first:
+      213: 2261758938123190819
+    second: white_sparkle_111
+  - first:
+      213: -5204323164731080354
+    second: white_sparkle_112
+  - first:
+      213: -567000932202481832
+    second: white_sparkle_113
+  - first:
+      213: 7589603679400298794
+    second: white_sparkle_114
+  - first:
+      213: 1247853353274219254
+    second: white_sparkle_115
+  - first:
+      213: -7521912622277236637
+    second: white_sparkle_116
+  - first:
+      213: 6229061928242792013
+    second: white_sparkle_117
+  - first:
+      213: 6144501532326009210
+    second: white_sparkle_118
+  - first:
+      213: -7265802851150640015
+    second: white_sparkle_119
+  - first:
+      213: 5827404025270320399
+    second: white_sparkle_120
+  - first:
+      213: -3101893463755846206
+    second: white_sparkle_121
+  - first:
+      213: -6311826772717899342
+    second: white_sparkle_122
+  - first:
+      213: 8667775271363450080
+    second: white_sparkle_123
+  - first:
+      213: 8626694508443031219
+    second: white_sparkle_124
+  - first:
+      213: 756658936296837029
+    second: white_sparkle_125
+  - first:
+      213: 6182909242161673083
+    second: white_sparkle_126
+  - first:
+      213: 1713106510298958636
+    second: white_sparkle_127
+  - first:
+      213: -5203509773109990674
+    second: white_sparkle_128
+  - first:
+      213: -9135551036106081955
+    second: white_sparkle_129
+  - first:
+      213: 5049162103951079336
+    second: white_sparkle_130
+  - first:
+      213: -774238086958081601
+    second: white_sparkle_131
+  - first:
+      213: -2745918669531086727
+    second: white_sparkle_132
+  - first:
+      213: -2270650000513483569
+    second: white_sparkle_133
+  - first:
+      213: -1807719375160676690
+    second: white_sparkle_134
+  - first:
+      213: -5178818378957303871
+    second: white_sparkle_135
+  - first:
+      213: 167253875685168293
+    second: white_sparkle_136
+  - first:
+      213: -1432332865555955884
+    second: white_sparkle_137
+  - first:
+      213: 3697000320418066732
+    second: white_sparkle_138
+  - first:
+      213: 7254714253055138127
+    second: white_sparkle_139
+  - first:
+      213: 2106105711860124754
+    second: white_sparkle_140
+  - first:
+      213: -1952528143824172640
+    second: white_sparkle_141
+  - first:
+      213: 6966089935476526196
+    second: white_sparkle_142
+  - first:
+      213: 6539195768979997308
+    second: white_sparkle_143
+  - first:
+      213: -6977165265560481454
+    second: white_sparkle_144
+  - first:
+      213: -7782148738066738620
+    second: white_sparkle_145
+  - first:
+      213: -5016970273501246446
+    second: white_sparkle_146
+  - first:
+      213: -6062998800090194679
+    second: white_sparkle_147
+  - first:
+      213: 390350704045367979
+    second: white_sparkle_148
+  - first:
+      213: 4620327112605640369
+    second: white_sparkle_149
+  - first:
+      213: -4129681505493201236
+    second: white_sparkle_150
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: white_sparkle_0
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 333
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25dbddc316c35d940800000000000000
+      internalID: 5320224923138768210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_1
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 352
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bf9366fdecb772b0800000000000000
+      internalID: -5586789082502815822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_2
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 353
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b1bda80657b4140800000000000000
+      internalID: 4704983293225540394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_3
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 356
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81f2582c30d363cf0800000000000000
+      internalID: -272963641051631848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_4
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 333
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398cc24ce3a8c5b10800000000000000
+      internalID: 1971602739065309331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_5
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 326
+        width: 49
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b10b8c582e9a190800000000000000
+      internalID: -7950574602920387809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_6
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 325
+        width: 58
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba6971ff90fa3630800000000000000
+      internalID: 3907700196439059132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_7
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 358
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 155386ac706b9fab0800000000000000
+      internalID: -4973744168877148847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_8
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 332
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6c388950c4af5800800000000000000
+      internalID: 603382021133712494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_9
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 357
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0c48dd586c89ca0800000000000000
+      internalID: -6009835424476512076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_10
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 321
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b74ad4ec6cb2fc0800000000000000
+      internalID: -3518500094491722908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_11
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 338
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25acd3b427ff94cc0800000000000000
+      internalID: -3726166350318679470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_12
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ecab6346c6aea10800000000000000
+      internalID: 1939481767207161397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_13
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 310
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a002f4d878d69b70800000000000000
+      internalID: 8905543326652039330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_14
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 342
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9060737920088dcd0800000000000000
+      internalID: -2533134041780648439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_15
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 342
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5970ba51291d3f0800000000000000
+      internalID: -877759830599166539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_16
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 309
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 753dc51c8084f2fd0800000000000000
+      internalID: -2364592076905196713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_17
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 314
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 288dfab41f58d5980800000000000000
+      internalID: -8548529246275905406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_18
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 332
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78512642639a78d50800000000000000
+      internalID: 6739541417386972551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_19
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 340
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87f599d449a4a17e0800000000000000
+      internalID: -1794039500736209032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_20
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 341
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa6a75228ff1c6550800000000000000
+      internalID: 6155329941297145519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_21
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 331
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56038fb868e191d70800000000000000
+      internalID: 9014269692381507685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_22
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 308
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d525b75e6418880800000000000000
+      internalID: -8610523061125227136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_23
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 327
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6266f1c8b94c36090800000000000000
+      internalID: -8042368337203730906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_24
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 328
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b67f03a2cd820460800000000000000
+      internalID: 7206478220845086389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_25
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 331
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a64d14cf15155200800000000000000
+      internalID: 168063787274684064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_26
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 325
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c54aa205c0238b130800000000000000
+      internalID: 3582668532039197788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_27
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 333
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3758dacf1b42506b0800000000000000
+      internalID: -5330814237056072333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_28
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 274
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dcdf9207b6e7c6f0800000000000000
+      internalID: -664308746316423978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_29
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 308
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c350b640ffc09c0800000000000000
+      internalID: -3959509577925051372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_30
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 278
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 840b68986d75be1f0800000000000000
+      internalID: -1014620712099991480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_31
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 274
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7495a250810b35620800000000000000
+      internalID: 2761744613720611143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_32
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 269
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0f1521ba0b6f65b0800000000000000
+      internalID: -5372958136763867380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_33
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 267
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49ce5c7d7c6420b0800000000000000
+      internalID: -5754355137659352756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_34
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 271
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7e13758a1c8e6010800000000000000
+      internalID: 1184037797580971644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_35
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 268
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaed6310fc7d1aad0800000000000000
+      internalID: -2692633818112270678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_36
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 291
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30a2700424730520800000000000000
+      internalID: 2667103102308622397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_37
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 273
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f87a72bfd85d7c690800000000000000
+      internalID: -7581856641874155633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_38
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 270
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39fac4bff1b0739a0800000000000000
+      internalID: -6253517325592645741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_39
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 274
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eae4342f35971ad0800000000000000
+      internalID: -2731550550553990425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_40
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 273
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c68bb2b45999e6890800000000000000
+      internalID: -7462858666015999892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_41
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 267
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2a73ddd698ad550800000000000000
+      internalID: 6186408143102649012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_42
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 277
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e9dd4fa64e836ea0800000000000000
+      internalID: -5880700254175766044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_43
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 290
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ddc47c3f270d280800000000000000
+      internalID: -9020583662276780723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_44
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 266
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7d3faf860c70df00800000000000000
+      internalID: 1139547073347009919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_45
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 281
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be776e6d2ae71c620800000000000000
+      internalID: 2792652481801648107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_46
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 272
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d46e3537096ebefd0800000000000000
+      internalID: -2311500475640060339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_47
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 273
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4643934de6c5b0f50800000000000000
+      internalID: 6848669289423647844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_48
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 273
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb3de7a877055c5c0800000000000000
+      internalID: -4195859003470851141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_49
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 273
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e489a8497f95e560800000000000000
+      internalID: 7342450110756390120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_50
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 274
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80168bae3be88f9c0800000000000000
+      internalID: -3893204974473551608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_51
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 276
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c18ebaccf5669070800000000000000
+      internalID: 8112783915162173895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_52
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 277
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5c6ac35744d70010800000000000000
+      internalID: 1155125232257363034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_53
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 281
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924993bcbcba62430800000000000000
+      internalID: 3757879830863516713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_54
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 228
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40e9bd6e88ef7dc20800000000000000
+      internalID: 3231331121603780100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_55
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 227
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b75eab47e13e0400800000000000000
+      internalID: 292225895302584249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_56
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 226
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e1da59ae8804280800000000000000
+      internalID: -9061091909154562410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_57
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 221
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 195dc1ee0e2d738e0800000000000000
+      internalID: -1713669269681810031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_58
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 226
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d73c1eec81dcec60800000000000000
+      internalID: 7848878653820385241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_59
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 229
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fd52b0ab26737270800000000000000
+      internalID: 8247065272397225461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_60
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 217
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165f48d1813caa940800000000000000
+      internalID: 5308269619151435105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_61
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 227
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7a93ad44d38d81b0800000000000000
+      internalID: -5652717009421231489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_62
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 226
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5af2588152b20730800000000000000
+      internalID: 3963926685288692319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_63
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 213
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e2cb74875455faf0800000000000000
+      internalID: -363291460071865631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_64
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 228
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53141f5c208d5ea0800000000000000
+      internalID: -5882404610213932196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_65
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 224
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0572e1b3890c85080800000000000000
+      internalID: -9198390478844844208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_66
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 206
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2139cac546d1580800000000000000
+      internalID: -8854810943145438540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_67
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 229
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4b47a91602cd38e0800000000000000
+      internalID: -1711998951874933939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_68
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 225
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8829b1a19d6c2120800000000000000
+      internalID: 2390405974477842575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_69
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 207
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb9770c473ce09e10800000000000000
+      internalID: 2202519940027087295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_70
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 181
+        width: 46
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88528ce3228b2c8d0800000000000000
+      internalID: -2827495158813547128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_71
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 205
+        width: 31
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de0f41a85da57ff20800000000000000
+      internalID: 3456331112221307117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_72
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 228
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6835caa201c192d0800000000000000
+      internalID: -3273623236922492818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_73
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 207
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3cde600444f79050800000000000000
+      internalID: 5807378817419762750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_74
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 211
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed275a5033da7b830800000000000000
+      internalID: 4086925621511680734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_75
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 202
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165223a65627e57b0800000000000000
+      internalID: -5233619937059003039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_76
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 209
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631b82793df1a8ec0800000000000000
+      internalID: -3564001161475739338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_77
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 202
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c06241d47e50e9670800000000000000
+      internalID: 8547275633784530444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_78
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 208
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cd1f39389436980800000000000000
+      internalID: -8546906838347424700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_79
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 202
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b037e0acbff6a2920800000000000000
+      internalID: 2966306431794311947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_80
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed5dc9196023b020800000000000000
+      internalID: 2356262665821445614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_81
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 203
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 312378a1ae24ccbf0800000000000000
+      internalID: -302793501705817581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_82
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 208
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e8cdccb8e615ca0800000000000000
+      internalID: -6029916879355867556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_83
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 205
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b98bf20c06dfa80800000000000000
+      internalID: -8431476548817085604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_84
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 193
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6187eb332531a3640800000000000000
+      internalID: 5060378375080540182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_85
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 209
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d225b7a4a75c8b830800000000000000
+      internalID: 4087233790865003053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_86
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 198
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e9aae4ad6a1e2f30800000000000000
+      internalID: 4552605331538749920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_87
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 182
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27870163a68979560800000000000000
+      internalID: 7320487301255034994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_88
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 210
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da062ad5576ebe960800000000000000
+      internalID: 7632447385265922221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_89
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 214
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 746852b007033f9c0800000000000000
+      internalID: -3894715994963868089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_90
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 202
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f91714433b5efb0800000000000000
+      internalID: -4619088805780938886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_91
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 180
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 120f1ef360512ee50800000000000000
+      internalID: 6837050300887592993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_92
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 199
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e724421c2bf6b890800000000000000
+      internalID: -7442485167479576607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_93
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 200
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bb51318807e4950800000000000000
+      internalID: 6435204647297071981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_94
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 203
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ccdbc0a835e65610800000000000000
+      internalID: 1609725948210175174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_95
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 147
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e31c619c289518d00800000000000000
+      internalID: 973157412743070014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_96
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 164
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e132eab80af69800800000000000000
+      internalID: 618956914212090337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_97
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 182
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32c6e4f7725ad23d0800000000000000
+      internalID: -3229743768696624093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_98
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 146
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69324fcb1b25492f0800000000000000
+      internalID: -967057096645008490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_99
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 180
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a71cababf0219240800000000000000
+      internalID: 4796651343415351201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_100
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 177
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3307933d3dc7ee60800000000000000
+      internalID: 7991581726534468413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_101
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 175
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e8abd0b8886e3c0800000000000000
+      internalID: -4330623860857991626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_102
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 174
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf04dfa08fa351e0800000000000000
+      internalID: -2210230024868196413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_103
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 155
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e875eeecc1f7c860800000000000000
+      internalID: 7550269162793564385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_104
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 153
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a496dd8bb32f2e890800000000000000
+      internalID: -7430110096889386678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_105
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5bca6437aa196320800000000000000
+      internalID: 2551599969323371356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_106
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 145
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce736eebdbe1bec10800000000000000
+      internalID: 2083793052889397228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_107
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 146
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d83a5bf5c2c8290800000000000000
+      internalID: -7886880057851671228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_108
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 70
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d6173ffee5f03bf0800000000000000
+      internalID: -346506764474706223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_109
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 80
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 463f905f48b609050800000000000000
+      internalID: 5805258138471494500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_110
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 69
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f093a717c618d60800000000000000
+      internalID: 7890707256767483804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_111
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 83
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322c56a55c1636f10800000000000000
+      internalID: 2261758938123190819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_112
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 75
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e510ed5c7a786c7b0800000000000000
+      internalID: -5204323164731080354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_113
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 87
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85771c008ab9128f0800000000000000
+      internalID: -567000932202481832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_114
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 72
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2907a0c550b35960800000000000000
+      internalID: 7589603679400298794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_115
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 91
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fa90bd6304415110800000000000000
+      internalID: 1247853353274219254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_116
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 69
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36863a5a25ccc9790800000000000000
+      internalID: -7521912622277236637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_117
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 95
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4642dc12d2127650800000000000000
+      internalID: 6229061928242792013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_118
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 69
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a799224b697a54550800000000000000
+      internalID: 6144501532326009210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_119
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 57
+        width: 49
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c45218dceaa2b90800000000000000
+      internalID: -7265802851150640015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_120
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 73
+        width: 31
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0d3be806191fd050800000000000000
+      internalID: 5827404025270320399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_121
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 58
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd0ab9445cd3f4d0800000000000000
+      internalID: -3101893463755846206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_122
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 69
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b17950edf2e768a0800000000000000
+      internalID: -6311826772717899342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_123
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 74
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4988a7faf1a4870800000000000000
+      internalID: 8667775271363450080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_124
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 45
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b65f8103fc28b770800000000000000
+      internalID: 8626694508443031219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_125
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 45
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5af091a2b41308a00800000000000000
+      internalID: 756658936296837029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_126
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 46
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b73b681823b1ec550800000000000000
+      internalID: 6182909242161673083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_127
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 18
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2b47c07b4d26c710800000000000000
+      internalID: 1713106510298958636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_128
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 41
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea61844e6b69c7b0800000000000000
+      internalID: -5203509773109990674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_129
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 19
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d59f1712cb0083180800000000000000
+      internalID: -9135551036106081955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_130
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 48
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a73e539e2a321640800000000000000
+      internalID: 5049162103951079336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_131
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 49
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb9194fdf8a5145f0800000000000000
+      internalID: -774238086958081601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_132
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 36
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9708c70c48984e9d0800000000000000
+      internalID: -2745918669531086727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_133
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 54
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc372edad70d70e0800000000000000
+      internalID: -2270650000513483569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_134
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 11
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaee4f55ec0b9e6e0800000000000000
+      internalID: -1807719375160676690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_135
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 23
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf4cf57f142128b0800000000000000
+      internalID: -5178818378957303871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_136
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 10
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a495878384325200800000000000000
+      internalID: 167253875685168293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_137
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 22
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45f7b6cf8d45f1ce0800000000000000
+      internalID: -1432332865555955884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_138
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 16
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21360134326e4330800000000000000
+      internalID: 3697000320418066732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_139
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 39
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4990501d2ceda460800000000000000
+      internalID: 7254714253055138127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_140
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 19
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c08de7cf36a3d10800000000000000
+      internalID: 2106105711860124754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_141
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 38
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a948658ff937e4e0800000000000000
+      internalID: -1952528143824172640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_142
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 19
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c808d63e58ca060800000000000000
+      internalID: 6966089935476526196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_143
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 36
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c724aced7e3efba50800000000000000
+      internalID: 6539195768979997308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_144
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 15
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251d21758212c2f90800000000000000
+      internalID: -6977165265560481454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_145
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442174e44f0400490800000000000000
+      internalID: -7782148738066738620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_146
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 25
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c83470e14206ab0800000000000000
+      internalID: -5016970273501246446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_147
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 24
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90d1107e6b6ebdba0800000000000000
+      internalID: -6062998800090194679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_148
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 18
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2a27ca5edca6500800000000000000
+      internalID: 390350704045367979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_149
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 18
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b627f48703be1040800000000000000
+      internalID: 4620327112605640369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_sparkle_150
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 25
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caec39dfc8c60b6c0800000000000000
+      internalID: -4129681505493201236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      white_sparkle_0: 5320224923138768210
+      white_sparkle_1: -5586789082502815822
+      white_sparkle_10: -3518500094491722908
+      white_sparkle_100: 7991581726534468413
+      white_sparkle_101: -4330623860857991626
+      white_sparkle_102: -2210230024868196413
+      white_sparkle_103: 7550269162793564385
+      white_sparkle_104: -7430110096889386678
+      white_sparkle_105: 2551599969323371356
+      white_sparkle_106: 2083793052889397228
+      white_sparkle_107: -7886880057851671228
+      white_sparkle_108: -346506764474706223
+      white_sparkle_109: 5805258138471494500
+      white_sparkle_11: -3726166350318679470
+      white_sparkle_110: 7890707256767483804
+      white_sparkle_111: 2261758938123190819
+      white_sparkle_112: -5204323164731080354
+      white_sparkle_113: -567000932202481832
+      white_sparkle_114: 7589603679400298794
+      white_sparkle_115: 1247853353274219254
+      white_sparkle_116: -7521912622277236637
+      white_sparkle_117: 6229061928242792013
+      white_sparkle_118: 6144501532326009210
+      white_sparkle_119: -7265802851150640015
+      white_sparkle_12: 1939481767207161397
+      white_sparkle_120: 5827404025270320399
+      white_sparkle_121: -3101893463755846206
+      white_sparkle_122: -6311826772717899342
+      white_sparkle_123: 8667775271363450080
+      white_sparkle_124: 8626694508443031219
+      white_sparkle_125: 756658936296837029
+      white_sparkle_126: 6182909242161673083
+      white_sparkle_127: 1713106510298958636
+      white_sparkle_128: -5203509773109990674
+      white_sparkle_129: -9135551036106081955
+      white_sparkle_13: 8905543326652039330
+      white_sparkle_130: 5049162103951079336
+      white_sparkle_131: -774238086958081601
+      white_sparkle_132: -2745918669531086727
+      white_sparkle_133: -2270650000513483569
+      white_sparkle_134: -1807719375160676690
+      white_sparkle_135: -5178818378957303871
+      white_sparkle_136: 167253875685168293
+      white_sparkle_137: -1432332865555955884
+      white_sparkle_138: 3697000320418066732
+      white_sparkle_139: 7254714253055138127
+      white_sparkle_14: -2533134041780648439
+      white_sparkle_140: 2106105711860124754
+      white_sparkle_141: -1952528143824172640
+      white_sparkle_142: 6966089935476526196
+      white_sparkle_143: 6539195768979997308
+      white_sparkle_144: -6977165265560481454
+      white_sparkle_145: -7782148738066738620
+      white_sparkle_146: -5016970273501246446
+      white_sparkle_147: -6062998800090194679
+      white_sparkle_148: 390350704045367979
+      white_sparkle_149: 4620327112605640369
+      white_sparkle_15: -877759830599166539
+      white_sparkle_150: -4129681505493201236
+      white_sparkle_16: -2364592076905196713
+      white_sparkle_17: -8548529246275905406
+      white_sparkle_18: 6739541417386972551
+      white_sparkle_19: -1794039500736209032
+      white_sparkle_2: 4704983293225540394
+      white_sparkle_20: 6155329941297145519
+      white_sparkle_21: 9014269692381507685
+      white_sparkle_22: -8610523061125227136
+      white_sparkle_23: -8042368337203730906
+      white_sparkle_24: 7206478220845086389
+      white_sparkle_25: 168063787274684064
+      white_sparkle_26: 3582668532039197788
+      white_sparkle_27: -5330814237056072333
+      white_sparkle_28: -664308746316423978
+      white_sparkle_29: -3959509577925051372
+      white_sparkle_3: -272963641051631848
+      white_sparkle_30: -1014620712099991480
+      white_sparkle_31: 2761744613720611143
+      white_sparkle_32: -5372958136763867380
+      white_sparkle_33: -5754355137659352756
+      white_sparkle_34: 1184037797580971644
+      white_sparkle_35: -2692633818112270678
+      white_sparkle_36: 2667103102308622397
+      white_sparkle_37: -7581856641874155633
+      white_sparkle_38: -6253517325592645741
+      white_sparkle_39: -2731550550553990425
+      white_sparkle_4: 1971602739065309331
+      white_sparkle_40: -7462858666015999892
+      white_sparkle_41: 6186408143102649012
+      white_sparkle_42: -5880700254175766044
+      white_sparkle_43: -9020583662276780723
+      white_sparkle_44: 1139547073347009919
+      white_sparkle_45: 2792652481801648107
+      white_sparkle_46: -2311500475640060339
+      white_sparkle_47: 6848669289423647844
+      white_sparkle_48: -4195859003470851141
+      white_sparkle_49: 7342450110756390120
+      white_sparkle_5: -7950574602920387809
+      white_sparkle_50: -3893204974473551608
+      white_sparkle_51: 8112783915162173895
+      white_sparkle_52: 1155125232257363034
+      white_sparkle_53: 3757879830863516713
+      white_sparkle_54: 3231331121603780100
+      white_sparkle_55: 292225895302584249
+      white_sparkle_56: -9061091909154562410
+      white_sparkle_57: -1713669269681810031
+      white_sparkle_58: 7848878653820385241
+      white_sparkle_59: 8247065272397225461
+      white_sparkle_6: 3907700196439059132
+      white_sparkle_60: 5308269619151435105
+      white_sparkle_61: -5652717009421231489
+      white_sparkle_62: 3963926685288692319
+      white_sparkle_63: -363291460071865631
+      white_sparkle_64: -5882404610213932196
+      white_sparkle_65: -9198390478844844208
+      white_sparkle_66: -8854810943145438540
+      white_sparkle_67: -1711998951874933939
+      white_sparkle_68: 2390405974477842575
+      white_sparkle_69: 2202519940027087295
+      white_sparkle_7: -4973744168877148847
+      white_sparkle_70: -2827495158813547128
+      white_sparkle_71: 3456331112221307117
+      white_sparkle_72: -3273623236922492818
+      white_sparkle_73: 5807378817419762750
+      white_sparkle_74: 4086925621511680734
+      white_sparkle_75: -5233619937059003039
+      white_sparkle_76: -3564001161475739338
+      white_sparkle_77: 8547275633784530444
+      white_sparkle_78: -8546906838347424700
+      white_sparkle_79: 2966306431794311947
+      white_sparkle_8: 603382021133712494
+      white_sparkle_80: 2356262665821445614
+      white_sparkle_81: -302793501705817581
+      white_sparkle_82: -6029916879355867556
+      white_sparkle_83: -8431476548817085604
+      white_sparkle_84: 5060378375080540182
+      white_sparkle_85: 4087233790865003053
+      white_sparkle_86: 4552605331538749920
+      white_sparkle_87: 7320487301255034994
+      white_sparkle_88: 7632447385265922221
+      white_sparkle_89: -3894715994963868089
+      white_sparkle_9: -6009835424476512076
+      white_sparkle_90: -4619088805780938886
+      white_sparkle_91: 6837050300887592993
+      white_sparkle_92: -7442485167479576607
+      white_sparkle_93: 6435204647297071981
+      white_sparkle_94: 1609725948210175174
+      white_sparkle_95: 973157412743070014
+      white_sparkle_96: 618956914212090337
+      white_sparkle_97: -3229743768696624093
+      white_sparkle_98: -967057096645008490
+      white_sparkle_99: 4796651343415351201
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

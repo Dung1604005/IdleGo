@@ -15,7 +15,7 @@ public class ChestSlotUI : MonoBehaviour
     [Tooltip("Dat Image nay phia tren hinh ruong trong Hierarchy.")]
     [SerializeField] private Image rewardIcon;
     [Tooltip("Dat LootRevealEffect phia sau rewardIcon trong Hierarchy.")]
-    [SerializeField] private ParticleSystem lootEffect;
+    [SerializeField] private Image lootEffect;
     [Tooltip("Bat len neu muon goi OnRevealReward bang Animation Event.")]
     [SerializeField] private bool revealAtAnimationEvent;
 
@@ -177,6 +177,9 @@ public class ChestSlotUI : MonoBehaviour
             return;
         }
 
+
+
+
         rewardIcon.sprite = equipment.Data.Icon;
         rewardIcon.enabled = rewardIcon.sprite != null;
     }
@@ -189,6 +192,11 @@ public class ChestSlotUI : MonoBehaviour
             rewardIcon.enabled = false;
         }
 
+        if(lootEffect != null)
+        {
+            lootEffect.gameObject.SetActive(false);
+        }
+
         
         
         pendingEquipment = null;
@@ -199,7 +207,11 @@ public class ChestSlotUI : MonoBehaviour
     {
         
 
-        // Giu tuong thich voi scene cu neu van con ParticleSystem don le.
+        if(lootEffect != null)
+        {
+            lootEffect.color = DataManager.Ins.GetRarityColor(rarityType);
+            lootEffect.gameObject.SetActive(true);
+        }
         
     }
 

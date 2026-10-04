@@ -7,6 +7,8 @@ public class DataManager : Singleton<DataManager>
 
    [SerializeField] private RarityBGSO rarityBGData;
 
+   [SerializeField] private RarityColorSO rarityColorData;
+
    public MapDataSO GetMapData(MapType mapType)
     {
         
@@ -16,5 +18,10 @@ public class DataManager : Singleton<DataManager>
     public Sprite GetRarityBGSprite(RarityType rarityType)
     {
         return rarityBGData.GetRarityBG(rarityType);
+    }
+
+    public Color GetRarityColor(RarityType rarityType)
+    {
+        return rarityColorData.GetRarityColor(rarityType);
     }
 }
