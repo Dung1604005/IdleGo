@@ -90,12 +90,9 @@ public class DataManager : Singleton<DataManager>
        selectedEquipment = equipment;
    }
 
-   public void ClearSelectedEquipment(Equipment equipment)
+   public void ClearSelectedEquipment()
    {
-       if (ReferenceEquals(selectedEquipment, equipment))
-       {
-           selectedEquipment = null;
-       }
+       selectedEquipment = null;
    }
 
    public MapDataSO GetMapData(MapType mapType)

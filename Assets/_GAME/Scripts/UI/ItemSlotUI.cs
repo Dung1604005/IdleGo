@@ -8,7 +8,7 @@ public class ItemSlotUI : GameUnit
     [SerializeField] private Image rarityImage;
 
     [SerializeField] private Image iconImage;
-    [SerializeField] private TMP_Text amountText;
+    [SerializeField] private TextMeshProUGUI amountText;
 
     public int SlotIndex { get; private set; }
 

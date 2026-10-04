@@ -1,0 +1,133 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public enum ItemInformationPanelType
+{
+    SELECTED_ITEM = 0,
+    EQUIPPED_COMPARISON = 1
+}
+
+public class PanelItemInformation : PanelView
+{
+    [SerializeField] private ItemInformationPanelType panelType;
+    [SerializeField] private Image itemIcon;
+    [SerializeField] private TextMeshProUGUI itemNameText;
+    [SerializeField] private TextMeshProUGUI rarityText;
+    [SerializeField] private TextMeshProUGUI mainStatsText;
+    [SerializeField] private TextMeshProUGUI subStatsText;
+    [SerializeField] private TextMeshProUGUI enhancementSlotsText;
+    [SerializeField] private TextMeshProUGUI levelRequirementText;
+    [SerializeField] private TextMeshProUGUI characterRequirementText;
+
+    private Equipment displayedEquipment;
+
+    public override void OnInit()
+    {
+        displayedEquipment = ResolveEquipment();
+        RefreshInformation();
+        gameObject.SetActive(displayedEquipment?.Data != null);
+    }
+
+    public override void OnDespawn()
+    {
+        displayedEquipment = null;
+        ClearView();
+    }
+
+    private Equipment ResolveEquipment()
+    {
+        Equipment selected = DataManager.Ins.SelectedEquipment;
+        if (panelType == ItemInformationPanelType.SELECTED_ITEM)
+        {
+            return selected;
+        }
+
+        Equipment equipped = selected?.Data != null
+            ? DataManager.Ins.SelectedCharacter?.Equipment?.GetEquipment(
+                selected.EquipmentType)
+            : null;
+        return ReferenceEquals(selected, equipped) ? null : equipped;
+    }
+
+    private void RefreshInformation()
+    {
+        EquipmentDataSO data = displayedEquipment?.Data;
+        if (data == null)
+        {
+            ClearView();
+            return;
+        }
+
+        Color rarityColor = DataManager.Ins.GetRarityColor(data.RarityType);
+        SetIcon(data.Icon);
+        SetColoredText(itemNameText, data.NameItem, rarityColor);
+        SetColoredText(rarityText,
+            EquipmentInformationText.GetRarityName(data.RarityType), rarityColor);
+        SetText(mainStatsText,
+            EquipmentInformationText.BuildMainStats(displayedEquipment));
+        SetText(subStatsText,
+            EquipmentInformationText.BuildSubStats(displayedEquipment));
+        SetText(enhancementSlotsText,
+            EquipmentInformationText.BuildEnhancementSlots(displayedEquipment));
+        SetText(levelRequirementText, $"Yêu cầu cấp: {data.LevelRequired}");
+        SetCharacterRequirement(data.CharacterRequirement);
+    }
+
+    private void SetCharacterRequirement(CharacterRequirementType requirement)
+    {
+        string characterType = EquipmentInformationText.GetRequirementName(requirement);
+        SetText(characterRequirementText, string.IsNullOrEmpty(characterType)
+            ? string.Empty
+            : $"Yêu cầu nhân vật: {characterType}");
+    }
+
+    private void SetIcon(Sprite icon)
+    {
+        if (itemIcon == null)
+        {
+            return;
+        }
+
+        itemIcon.sprite = icon;
+        itemIcon.enabled = icon != null;
+    }
+
+    private static void SetColoredText(
+        TextMeshProUGUI target,
+        string value,
+        Color color)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        target.text = value;
+        target.color = color;
+        target.gameObject.SetActive(!string.IsNullOrEmpty(value));
+    }
+
+    private static void SetText(TextMeshProUGUI target, string value)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        target.text = value;
+        target.gameObject.SetActive(!string.IsNullOrEmpty(value));
+    }
+
+    private void ClearView()
+    {
+        SetIcon(null);
+        SetText(itemNameText, string.Empty);
+        SetText(rarityText, string.Empty);
+        SetText(mainStatsText, string.Empty);
+        SetText(subStatsText, string.Empty);
+        SetText(enhancementSlotsText, string.Empty);
+        SetText(levelRequirementText, string.Empty);
+        SetText(characterRequirementText, string.Empty);
+    }
+}

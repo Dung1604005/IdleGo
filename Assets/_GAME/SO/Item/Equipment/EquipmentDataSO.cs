@@ -30,7 +30,8 @@ public class EquipmentDataSO : ItemSO
     public IReadOnlyList<StatValue> Stats => stats;
     public bool IsWeapon => equipmentType == EquipmentType.MAIN_WEAPON
         || equipmentType == EquipmentType.OFF_HAND_WEAPON;
-    public float AttacksPerSecond => IsWeapon
+    public bool HasAttacksPerSecond => equipmentType == EquipmentType.MAIN_WEAPON;
+    public float AttacksPerSecond => HasAttacksPerSecond
         ? Mathf.Max(0.01f, attacksPerSecond)
         : 0f;
 
@@ -38,7 +39,7 @@ public class EquipmentDataSO : ItemSO
     {
         return new EquipmentMainStats(
             GetMainStat(),
-            IsWeapon,
+            HasAttacksPerSecond,
             AttacksPerSecond);
     }
 
