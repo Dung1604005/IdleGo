@@ -41,6 +41,22 @@ public class ItemSlotUI : GameUnit
         SetAmount(slot.Amount);
     }
 
+    public void OnButtonClick()
+    {
+        Inventory inventory = DataManager.Ins.InventoryData;
+        if (inventory == null
+            || SlotIndex < 0
+            || SlotIndex >= inventory.Slots.Count
+            || inventory.Slots[SlotIndex].Item is not Equipment equipment)
+        {
+            return;
+        }
+
+        // Slot chi chon data; Canvas se tu doc equipment qua DataManager.
+        DataManager.Ins.SetSelectedEquipment(equipment);
+        UIManager.Ins.OpenUI<CanvasItemInfomationUI>();
+    }
+
 
     public void ChangeItem(RarityType rarityType, Sprite iconSprite)
     {

@@ -12,10 +12,14 @@ public class DataManager : Singleton<DataManager>
    private Inventory inventoryData;
    private PlayerManager playerData;
    private ChestManager chestData;
+   private string selectedCharacterId;
+   private Equipment selectedEquipment;
 
    public Inventory InventoryData => inventoryData;
    public PlayerManager PlayerData => playerData;
    public ChestManager ChestData => chestData;
+   public Equipment SelectedEquipment => selectedEquipment;
+   public Player SelectedCharacter => GetCharacter(selectedCharacterId);
 
    public void SetInventoryData(Inventory inventory)
    {
@@ -74,6 +78,24 @@ public class DataManager : Singleton<DataManager>
    public string GetPreviousCharacterId(string characterId)
    {
        return playerData?.GetPrevPlayerId(characterId);
+   }
+
+   public void SetSelectedCharacter(string characterId)
+   {
+       selectedCharacterId = characterId;
+   }
+
+   public void SetSelectedEquipment(Equipment equipment)
+   {
+       selectedEquipment = equipment;
+   }
+
+   public void ClearSelectedEquipment(Equipment equipment)
+   {
+       if (ReferenceEquals(selectedEquipment, equipment))
+       {
+           selectedEquipment = null;
+       }
    }
 
    public MapDataSO GetMapData(MapType mapType)

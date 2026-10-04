@@ -19,6 +19,7 @@ public class EquipmentDataSO : ItemSO
 
     [Header("Stats")]
     [SerializeField] private List<StatValue> stats = new List<StatValue>();
+    [SerializeField, Min(0.01f)] private float attacksPerSecond = 1f;
 
     public EquipmentType EquipmentType => equipmentType;
     public int LevelRequired => Mathf.Max(1, levelRequired);
@@ -27,6 +28,43 @@ public class EquipmentDataSO : ItemSO
     public int EnchantmentSlotCount => Mathf.Max(0, enchantmentSlotCount);
     public int DecorationSlotCount => Mathf.Max(0, decorationSlotCount);
     public IReadOnlyList<StatValue> Stats => stats;
+    public bool IsWeapon => equipmentType == EquipmentType.MAIN_WEAPON
+        || equipmentType == EquipmentType.OFF_HAND_WEAPON;
+    public float AttacksPerSecond => IsWeapon
+        ? Mathf.Max(0.01f, attacksPerSecond)
+        : 0f;
+
+    public EquipmentMainStats GetMainStats()
+    {
+        return new EquipmentMainStats(
+            GetMainStat(),
+            IsWeapon,
+            AttacksPerSecond);
+    }
+
+    public StatValue GetMainStat()
+    {
+        // Tool balance luon ghi main stat o index 0.
+        return stats != null && stats.Count > 0 ? stats[0] : null;
+    }
+
+    public IReadOnlyList<StatValue> GetSubStats()
+    {
+        if (stats == null || stats.Count <= 1)
+        {
+            return Array.Empty<StatValue>();
+        }
+
+        List<StatValue> subStats = new List<StatValue>(stats.Count - 1);
+        for (int i = 1; i < stats.Count; i++)
+        {
+            if (stats[i] != null)
+            {
+                subStats.Add(stats[i]);
+            }
+        }
+        return subStats;
+    }
 
     public bool CanEquip(Character character)
     {
@@ -55,5 +93,22 @@ public class EquipmentDataSO : ItemSO
         }
 
         return totalValue;
+    }
+}
+
+public sealed class EquipmentMainStats
+{
+    public StatValue MainStat { get; }
+    public bool HasAttacksPerSecond { get; }
+    public float AttacksPerSecond { get; }
+
+    public EquipmentMainStats(
+        StatValue mainStat,
+        bool hasAttacksPerSecond,
+        float attacksPerSecond)
+    {
+        MainStat = mainStat;
+        HasAttacksPerSecond = hasAttacksPerSecond;
+        AttacksPerSecond = hasAttacksPerSecond ? attacksPerSecond : 0f;
     }
 }

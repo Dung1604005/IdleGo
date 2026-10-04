@@ -49,7 +49,12 @@ public class PanelHeroView : PanelView
 
     public void RefreshEquipmentSlotUI()
     {
-        RefreshEquipmentSlotUI(GetSelectedPlayer());
+        for (int i = 0; i < equipmentSlotUIs.Count; i++)
+        {
+            EquipmentSlotUI slot = equipmentSlotUIs[i];
+            slot?.OnSpawn();
+            slot?.SetData();
+        }
     }
 
     public void RefreshHeroView()
@@ -57,7 +62,7 @@ public class PanelHeroView : PanelView
         Player player = GetSelectedPlayer();
         RefreshHeroInformation(player);
         RefreshSkillSlotUI(player);
-        RefreshEquipmentSlotUI(player);
+        RefreshEquipmentSlotUI();
     }
 
     public void OnButtonNextPlayer()
@@ -131,29 +136,17 @@ public class PanelHeroView : PanelView
         }
     }
 
-    private void RefreshEquipmentSlotUI(Player player)
-    {
-        IReadOnlyList<Equipment> equipments = player?.Equipment?.EquippedItems;
-        for (int i = 0; i < equipmentSlotUIs.Count; i++)
-        {
-            EquipmentSlotUI slot = equipmentSlotUIs[i];
-            Equipment equipment = equipments != null && i < equipments.Count
-                ? equipments[i]
-                : null;
-            slot?.OnSpawn();
-            slot?.SetData(equipment?.Data);
-        }
-    }
-
     private void EnsureSelectedPlayer()
     {
         if (GetSelectedPlayer() != null)
         {
+            DataManager.Ins.SetSelectedCharacter(characterId);
             return;
         }
 
         Player firstPlayer = DataManager.Ins.GetTeamPlayer(0);
         characterId = firstPlayer != null ? firstPlayer.CharacterId : string.Empty;
+        DataManager.Ins.SetSelectedCharacter(characterId);
     }
 
     private Player GetSelectedPlayer()
@@ -169,6 +162,7 @@ public class PanelHeroView : PanelView
         }
 
         characterId = nextCharacterId;
+        DataManager.Ins.SetSelectedCharacter(characterId);
         RefreshHeroView();
     }
 }

@@ -19,14 +19,27 @@ public class EquipmentSlotUI : GameUnit
         Clear();
     }
 
-    public void SetData(EquipmentDataSO data)
+    public void SetData()
     {
-        if (data == null )
+        Equipment equipment = GetEquipment();
+        if (equipment?.Data == null)
         {
             Clear();
             return;
         }
-        ChangeItem(data.RarityType, data.Icon);
+        ChangeItem(equipment.RarityType, equipment.Data.Icon);
+    }
+
+    public void OnButtonClick()
+    {
+        Equipment equipment = GetEquipment();
+        if (equipment == null)
+        {
+            return;
+        }
+
+        DataManager.Ins.SetSelectedEquipment(equipment);
+        UIManager.Ins.OpenUI<CanvasItemInfomationUI>();
     }
 
 
@@ -59,5 +72,10 @@ public class EquipmentSlotUI : GameUnit
             iconImage.enabled = false;
         }
 
+    }
+
+    private Equipment GetEquipment()
+    {
+        return DataManager.Ins.SelectedCharacter?.Equipment?.GetEquipment(equipmentType);
     }
 }
