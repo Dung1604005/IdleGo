@@ -33,7 +33,7 @@ public class ChestSlotUI : MonoBehaviour
     {
         get
         {
-            ChestState state = ChestManager.Ins.GetState(chestType);
+            ChestState state = DataManager.Ins.ChestData?.GetState(chestType);
             return !isInteractionLocked
                 && !isPlayingOpenAnimation
                 && state != null
@@ -55,9 +55,10 @@ public class ChestSlotUI : MonoBehaviour
         isPlayingOpenAnimation = false;
         isInteractionLocked = false;
         StopOpenVisual();
-        if (mustUnlock && ChestManager.Ins.IsInitialized)
+        ChestManager chestData = DataManager.Ins.ChestData;
+        if (mustUnlock && chestData != null && chestData.IsInitialized)
         {
-            ChestManager.Ins.CompleteOpenAnimation(chestType);
+            chestData.CompleteOpenAnimation(chestType);
         }
     }
 
@@ -108,7 +109,7 @@ public class ChestSlotUI : MonoBehaviour
     {
         if (CanOpen)
         {
-            ChestManager.Ins.TryOpenChest(chestType);
+            DataManager.Ins.ChestData?.TryOpenChest(chestType);
         }
     }
 
@@ -140,7 +141,7 @@ public class ChestSlotUI : MonoBehaviour
 
         isPlayingOpenAnimation = false;
         StopOpenVisual();
-        ChestManager.Ins.CompleteOpenAnimation(chestType);
+        DataManager.Ins.ChestData?.CompleteOpenAnimation(chestType);
         RefreshOpenButton();
     }
 

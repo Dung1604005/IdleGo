@@ -9,6 +9,73 @@ public class DataManager : Singleton<DataManager>
 
    [SerializeField] private RarityColorSO rarityColorData;
 
+   private Inventory inventoryData;
+   private PlayerManager playerData;
+   private ChestManager chestData;
+
+   public Inventory InventoryData => inventoryData;
+   public PlayerManager PlayerData => playerData;
+   public ChestManager ChestData => chestData;
+
+   public void SetInventoryData(Inventory inventory)
+   {
+       inventoryData = inventory;
+   }
+
+   public void ClearInventoryData(Inventory inventory)
+   {
+       if (ReferenceEquals(inventoryData, inventory))
+       {
+           inventoryData = null;
+       }
+   }
+
+   public void SetPlayerData(PlayerManager playerManager)
+   {
+       playerData = playerManager;
+   }
+
+   public void ClearPlayerData(PlayerManager playerManager)
+   {
+       if (ReferenceEquals(playerData, playerManager))
+       {
+           playerData = null;
+       }
+   }
+
+   public void SetChestData(ChestManager chestManager)
+   {
+       chestData = chestManager;
+   }
+
+   public void ClearChestData(ChestManager chestManager)
+   {
+       if (ReferenceEquals(chestData, chestManager))
+       {
+           chestData = null;
+       }
+   }
+
+   public Player GetTeamPlayer(int teamIndex)
+   {
+       return playerData?.GetPlayer(teamIndex);
+   }
+
+   public Player GetCharacter(string characterId)
+   {
+       return playerData?.GetCharacter(characterId);
+   }
+
+   public string GetNextCharacterId(string characterId)
+   {
+       return playerData?.GetNextPlayerId(characterId);
+   }
+
+   public string GetPreviousCharacterId(string characterId)
+   {
+       return playerData?.GetPrevPlayerId(characterId);
+   }
+
    public MapDataSO GetMapData(MapType mapType)
     {
         

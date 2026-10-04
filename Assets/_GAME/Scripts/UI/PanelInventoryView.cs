@@ -11,7 +11,6 @@ public class PanelInventoryView : PanelView
     [SerializeField] private InventoryContentLayout contentLayout = new InventoryContentLayout();
 
     private readonly List<ItemSlotUI> activeSlotViews = new List<ItemSlotUI>();
-    private Inventory inventory;
     private bool isInitialized;
 
     public override void OnInit()
@@ -23,8 +22,7 @@ public class PanelInventoryView : PanelView
             return;
         }
 
-        PlayerManager playerManager = PlayerManager.Ins;
-        inventory = playerManager != null ? playerManager.Inventory : null;
+        Inventory inventory = DataManager.Ins.InventoryData;
         if (inventory == null)
         {
             Debug.LogWarning("PanelInventoryView cannot access Inventory.");
@@ -56,33 +54,35 @@ public class PanelInventoryView : PanelView
     public override void OnDespawn()
     {
         DespawnAllSlotViews();
-        inventory = null;
         isInitialized = false;
         contentLayout?.OnDespawn();
     }
 
-    public void RefreshInventory(Inventory sourceInventory)
+    public void RefreshInventory()
     {
-        if (!CanRefresh(sourceInventory)
-            || !SyncSlotViewCount(sourceInventory.Capacity))
+        // UI chi doc ban data runtime ma DataManager dang quan ly.
+        Inventory inventory = DataManager.Ins.InventoryData;
+        if (!CanRefresh(inventory)
+            || !SyncSlotViewCount(inventory.Capacity))
         {
             return;
         }
 
-        IReadOnlyList<InventorySlot> slots = sourceInventory.Slots;
-        for (int i = 0; i < sourceInventory.Capacity; i++)
+        IReadOnlyList<InventorySlot> slots = inventory.Slots;
+        for (int i = 0; i < inventory.Capacity; i++)
         {
             ItemSlotUI slotView = activeSlotViews[i];
             slotView.OnInit(i);
             slotView.SetData(slots[i]);
         }
 
-        contentLayout.Refresh(sourceInventory.Capacity);
+        contentLayout.Refresh(inventory.Capacity);
     }
 
     public bool RequestIncreaseCapacity(int additionalSlots)
     {
-        // Inventory save data truoc, sau do tu goi RefreshInventory ve panel nay.
+        // Data tu save va goi nguoc RefreshInventory sau khi thay doi thanh cong.
+        Inventory inventory = DataManager.Ins.InventoryData;
         return inventory != null && inventory.IncreaseCapacity(additionalSlots);
     }
 
@@ -99,9 +99,9 @@ public class PanelInventoryView : PanelView
         return isValid;
     }
 
-    private bool CanRefresh(Inventory sourceInventory)
+    private bool CanRefresh(Inventory inventory)
     {
-        return isInitialized && ReferenceEquals(inventory, sourceInventory);
+        return isInitialized && inventory != null;
     }
 
     private bool SyncSlotViewCount(int requiredCount)

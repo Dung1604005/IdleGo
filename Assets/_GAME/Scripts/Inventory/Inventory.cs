@@ -34,6 +34,7 @@ public partial class Inventory
         lastSaveSucceeded = true;
         canSave = true;
         IsInitialized = true;
+        DataManager.Ins.SetInventoryData(this);
 
         if (InventorySaveSystem.HasSave(saveKey))
         {
@@ -63,6 +64,7 @@ public partial class Inventory
         equipmentHandler = null;
         canSave = false;
         IsInitialized = false;
+        DataManager.Ins.ClearInventoryData(this);
     }
 
     public bool AddItem(ItemSO itemData, int amount)

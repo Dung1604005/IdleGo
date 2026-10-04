@@ -101,7 +101,8 @@ public partial class Inventory
     {
         if (IsInitialized)
         {
-            inventoryView?.RefreshInventory(this);
+            // View tu doc Inventory hien tai qua DataManager, khong nhan data qua callback.
+            inventoryView?.RefreshInventory();
         }
     }
 }

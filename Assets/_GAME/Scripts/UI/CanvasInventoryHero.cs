@@ -16,7 +16,7 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
         panelInventoryView?.OnInit();
         panelHeroView?.OnInit();
 
-        // Inventory chi biet Canvas; Canvas chuyen data xuong dung panel phu trach hien thi.
+        // Canvas chi dang ky nhan lenh; panel se tu doc data qua DataManager.
         GetInventory()?.RegisterView(this);
     }
 
@@ -39,14 +39,10 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
             && panelInventoryView.RequestIncreaseCapacity(additionalSlots);
     }
 
-    public void RefreshInventory(Inventory sourceInventory)
+    public void RefreshInventory()
     {
-        panelInventoryView?.RefreshInventory(sourceInventory);
-    }
-
-    public void RefreshEquipment()
-    {
-        panelHeroView?.RefreshEquipmentSlotUI();
+        panelInventoryView?.RefreshInventory();
+        panelHeroView?.RefreshHeroView();
     }
 
     public void OnDespawn()
@@ -64,7 +60,6 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
 
     private static Inventory GetInventory()
     {
-        PlayerManager playerManager = PlayerManager.Ins;
-        return playerManager != null ? playerManager.Inventory : null;
+        return DataManager.Ins.InventoryData;
     }
 }

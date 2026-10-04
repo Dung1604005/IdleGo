@@ -31,6 +31,7 @@ public class PlayerManager : Singleton<PlayerManager>
         roster.OnInit();
         team.OnInit(roster);
         IsInitialized = true;
+        DataManager.Ins.SetPlayerData(this);
         inventory.OnInit(this);
         team.RefreshActiveStates();
     }
@@ -39,6 +40,7 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         inventory?.OnDespawn();
         IsInitialized = false;
+        DataManager.Ins.ClearPlayerData(this);
     }
 
     public Player GetPlayer(int teamIndex)

@@ -21,10 +21,11 @@ public class ChestRuntimeTestTool : MonoBehaviour
                 return false;
             }
 
-            ChestState state = ChestManager.Ins.GetState(
-                panelChestView.SelectedChestType);
+            ChestManager chestData = DataManager.Ins.ChestData;
+            ChestState state = chestData?.GetState(panelChestView.SelectedChestType);
             return LootManager.Ins.IsInitialized
-                && ChestManager.Ins.IsInitialized
+                && chestData != null
+                && chestData.IsInitialized
                 && state != null
                 && !state.IsStorageFull;
         }
@@ -56,7 +57,8 @@ public class ChestRuntimeTestTool : MonoBehaviour
             return;
         }
 
-        if (!ChestManager.Ins.TryEnqueue(reward))
+        ChestManager chestData = DataManager.Ins.ChestData;
+        if (chestData == null || !chestData.TryEnqueue(reward))
         {
             SetResult($"Queue {chestType} da day.");
             return;

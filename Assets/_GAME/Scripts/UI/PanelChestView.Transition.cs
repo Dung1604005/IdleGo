@@ -45,7 +45,7 @@ public partial class PanelChestView
         outgoingSlot.SetCarouselPose(centerPosition, 1f);
         incomingSlot.SetCarouselActive(true);
         incomingSlot.SetCarouselPose(GetIncomingStartPosition(), sideScale);
-        RefreshNavigation(ChestManager.Ins);
+        RefreshNavigation(DataManager.Ins.ChestData);
         CreateTransitionSequence();
     }
 
@@ -82,7 +82,7 @@ public partial class PanelChestView
 
         ClearTransitionState();
         UnlockSelectedSlot();
-        RefreshChests(ChestManager.Ins);
+        RefreshChests();
     }
 
     private void ResetCarousel()

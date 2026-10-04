@@ -29,8 +29,10 @@ public partial class PanelChestView : PanelView, IChestView
     {
         get
         {
-            ChestState state = ChestManager.Ins.GetState(selectedChestType);
-            return !isTransitioning
+            ChestManager chestData = DataManager.Ins.ChestData;
+            ChestState state = chestData?.GetState(selectedChestType);
+            return chestData != null
+                && !isTransitioning
                 && orderedChestTypes != null
                 && orderedChestTypes.Length > 1
                 && (state == null || !state.IsOpening);
@@ -44,7 +46,7 @@ public partial class PanelChestView : PanelView, IChestView
         EnsureSelectedChestType();
         InitSlots();
         ResetCarousel();
-        ChestManager.Ins.RegisterView(this);
+        DataManager.Ins.ChestData?.RegisterView(this);
     }
 
     public override void OnDespawn()
@@ -54,7 +56,7 @@ public partial class PanelChestView : PanelView, IChestView
         {
             chestSlots[i]?.OnDespawn();
         }
-        ChestManager.Ins.UnregisterView(this);
+        DataManager.Ins.ChestData?.UnregisterView(this);
     }
 
     public void OnButtonPreviousChest()
@@ -67,8 +69,10 @@ public partial class PanelChestView : PanelView, IChestView
         TryStartTransition(1);
     }
 
-    public void RefreshChests(ChestManager chestManager)
+    public void RefreshChests()
     {
+        // Panel luon lay state moi nhat tu lop trung gian DataManager.
+        ChestManager chestManager = DataManager.Ins.ChestData;
         if (chestManager == null || orderedChestTypes == null)
         {
             return;
@@ -82,8 +86,13 @@ public partial class PanelChestView : PanelView, IChestView
         RefreshNavigation(chestManager);
     }
 
-    public bool PlayChestOpen(ChestType chestType, Equipment equipment)
+    public bool PlayChestOpen()
     {
+        ChestManager chestData = DataManager.Ins.ChestData;
+        ChestType chestType = chestData != null
+            ? chestData.RevealChestType
+            : selectedChestType;
+        Equipment equipment = chestData?.RevealEquipment;
         ChestSlotUI slot = GetSlot(chestType);
         return !isTransitioning
             && chestType == selectedChestType
@@ -148,6 +157,13 @@ public partial class PanelChestView : PanelView, IChestView
         if (nextChestButton != null)
         {
             nextChestButton.interactable = CanNavigate;
+        }
+
+        if (manager == null)
+        {
+            previousNewChestIcon?.SetActive(false);
+            nextNewChestIcon?.SetActive(false);
+            return;
         }
 
         ChestType previousType = GetRelativeChestType(-1);

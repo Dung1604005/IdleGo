@@ -6,7 +6,7 @@ public partial class ChestManager
     {
         ChestState state = GetState(chestType);
         ChestReward reward = state?.Peek();
-        Inventory inventory = PlayerManager.Ins.Inventory;
+        Inventory inventory = DataManager.Ins.InventoryData;
         if (!IsInitialized || reward == null || inventory == null || !state.CanOpen)
         {
             return false;
@@ -54,8 +54,12 @@ public partial class ChestManager
 
     private void StartOpenVisual(ChestType chestType, Equipment equipment)
     {
+        // UI nhan lenh rong va tu doc reward reveal hien tai qua DataManager.
+        revealChestType = chestType;
+        revealEquipment = equipment;
         bool isAnimationPlaying = chestView != null
-            && chestView.PlayChestOpen(chestType, equipment);
+            && chestView.PlayChestOpen();
+        revealEquipment = null;
         if (!isAnimationPlaying)
         {
             // Khong co UI/Animator thi bo khoa ngay de auto-open khong bi ket.

@@ -36,7 +36,7 @@ public partial class ChestManager
             return false;
         }
 
-        ChestSaveMapper.Apply(saveData, this, PlayerManager.Ins.Inventory);
+        ChestSaveMapper.Apply(saveData, this, DataManager.Ins.InventoryData);
         dataVersion++;
         lastSaveSucceeded = true;
         return true;
@@ -54,7 +54,8 @@ public partial class ChestManager
     {
         if (IsInitialized)
         {
-            chestView?.RefreshChests(this);
+            // View tu doc ChestManager hien tai qua DataManager.
+            chestView?.RefreshChests();
         }
     }
 }

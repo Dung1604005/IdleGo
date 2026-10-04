@@ -62,12 +62,12 @@ public class PanelHeroView : PanelView
 
     public void OnButtonNextPlayer()
     {
-        ChangeSelectedPlayer(PlayerManager.Ins?.GetNextPlayerId(characterId));
+        ChangeSelectedPlayer(DataManager.Ins.GetNextCharacterId(characterId));
     }
 
     public void OnButtonPrevPlayer()
     {
-        ChangeSelectedPlayer(PlayerManager.Ins?.GetPrevPlayerId(characterId));
+        ChangeSelectedPlayer(DataManager.Ins.GetPreviousCharacterId(characterId));
     }
 
     private void RefreshHeroInformation(Player player)
@@ -152,17 +152,13 @@ public class PanelHeroView : PanelView
             return;
         }
 
-        Player firstPlayer = PlayerManager.Ins != null
-            ? PlayerManager.Ins.GetPlayer(0)
-            : null;
+        Player firstPlayer = DataManager.Ins.GetTeamPlayer(0);
         characterId = firstPlayer != null ? firstPlayer.CharacterId : string.Empty;
     }
 
     private Player GetSelectedPlayer()
     {
-        return PlayerManager.Ins != null
-            ? PlayerManager.Ins.GetCharacter(characterId)
-            : null;
+        return DataManager.Ins.GetCharacter(characterId);
     }
 
     private void ChangeSelectedPlayer(string nextCharacterId)

@@ -15,10 +15,14 @@ public partial class ChestManager : Singleton<ChestManager>
     [NonSerialized] private int dataVersion;
     [NonSerialized] private bool lastSaveSucceeded;
     [NonSerialized] private IChestView chestView;
+    [NonSerialized] private ChestType revealChestType;
+    [NonSerialized] private Equipment revealEquipment;
 
     public IReadOnlyList<ChestState> ChestStates => chestStates;
     public int DataVersion => dataVersion;
     public bool LastSaveSucceeded => lastSaveSucceeded;
+    public ChestType RevealChestType => revealChestType;
+    public Equipment RevealEquipment => revealEquipment;
     public bool IsInitialized { get; private set; }
 
     public void OnInit()
@@ -37,11 +41,12 @@ public partial class ChestManager : Singleton<ChestManager>
         dataVersion = 0;
         lastSaveSucceeded = true;
         IsInitialized = true;
+        DataManager.Ins.SetChestData(this);
         if (!LoadGame())
         {
             lastSaveSucceeded = SaveGame();
         }
-        RefreshInventoryFullStates(PlayerManager.Ins.Inventory);
+        RefreshInventoryFullStates(DataManager.Ins.InventoryData);
         RefreshView();
     }
 
@@ -54,6 +59,8 @@ public partial class ChestManager : Singleton<ChestManager>
 
         IsInitialized = false;
         chestView = null;
+        revealEquipment = null;
+        DataManager.Ins.ClearChestData(this);
     }
 
     private void Update()
@@ -63,7 +70,7 @@ public partial class ChestManager : Singleton<ChestManager>
             return;
         }
 
-        Inventory inventory = PlayerManager.Ins.Inventory;
+        Inventory inventory = DataManager.Ins.InventoryData;
         RefreshInventoryFullStates(inventory);
         for (int i = 0; i < chestStates.Count; i++)
         {
@@ -102,7 +109,7 @@ public partial class ChestManager : Singleton<ChestManager>
             return false;
         }
 
-        RefreshInventoryFullState(state, PlayerManager.Ins.Inventory);
+        RefreshInventoryFullState(state, DataManager.Ins.InventoryData);
         CompleteDataFlow();
         return true;
     }

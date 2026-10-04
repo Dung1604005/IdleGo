@@ -1,4 +1,4 @@
 public interface IInventoryView
 {
-    void RefreshInventory(Inventory inventory);
+    void RefreshInventory();
 }

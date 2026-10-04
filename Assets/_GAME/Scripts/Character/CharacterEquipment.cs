@@ -26,7 +26,7 @@ public class CharacterEquipment
         statHandler = new EquipmentStatHandler(character, equipmentData, this);
         dataVersion = 0;
         IsInitialized = true;
-        RefreshCharacterAndView();
+        RefreshCharacterData();
     }
 
     public void OnDespawn()
@@ -71,7 +71,7 @@ public class CharacterEquipment
         replacedEquipment = equipmentData.SetEquipment(equipment);
         ReleaseOwnership(replacedEquipment);
         equipment.SetEquippedBy(this);
-        RefreshCharacterAndView();
+        RefreshCharacterData();
         return true;
     }
 
@@ -89,7 +89,7 @@ public class CharacterEquipment
         }
 
         ReleaseOwnership(removedEquipment);
-        RefreshCharacterAndView();
+        RefreshCharacterData();
         return removedEquipment;
     }
 
@@ -113,7 +113,7 @@ public class CharacterEquipment
         }
 
         equipmentData.Clear();
-        RefreshCharacterAndView();
+        RefreshCharacterData();
     }
 
     public Equipment GetEquipment(EquipmentType equipmentType)
@@ -140,16 +140,14 @@ public class CharacterEquipment
             return;
         }
 
-        RefreshCharacterAndView();
+        RefreshCharacterData();
     }
 
-    private void RefreshCharacterAndView()
+    private void RefreshCharacterData()
     {
-        // Character đọc EquipmentData mới trước; UI chỉ đọc lại sau khi DataVersion tăng.
+        // Character ap dung EquipmentData moi truoc khi Inventory save va refresh UI.
         statHandler?.Apply();
         dataVersion++;
-
-        UIManager.Ins.GetUI<CanvasInventoryHero>().RefreshEquipment();
     }
 
     private void ClaimCurrentEquipment()
