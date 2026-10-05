@@ -9,7 +9,7 @@ public static class InventoryBuffStatSaveMapper
         for (int i = 0; i < BuffStatTypeUtility.Count; i++)
         {
             BuffStatGroupSaveData group = new BuffStatGroupSaveData();
-            CopyStats(equipment.GetBuffStats((BuffStatType)i), group.stats);
+            CopySlots(equipment.GetBuffStats((BuffStatType)i), group.slots);
             target.buffStats.Add(group);
         }
     }
@@ -19,12 +19,16 @@ public static class InventoryBuffStatSaveMapper
         for (int i = 0; i < BuffStatTypeUtility.Count; i++)
         {
             BuffStatType buffType = (BuffStatType)i;
-            IReadOnlyList<StatValueSaveData> savedStats = GetSavedStats(source, buffType);
-            equipment.RestoreBuffStats(buffType, RestoreStats(savedStats));
+            BuffStatGroupSaveData group = GetSavedGroup(source, buffType);
+            IReadOnlyList<StatValue> restoredStats = group?.slots != null
+                && group.slots.Count > 0
+                ? RestoreSlots(group.slots)
+                : RestoreLegacyStats(GetLegacyStats(source, group, buffType));
+            equipment.RestoreBuffStats(buffType, restoredStats);
         }
     }
 
-    private static IReadOnlyList<StatValueSaveData> GetSavedStats(
+    private static BuffStatGroupSaveData GetSavedGroup(
         InventorySlotSaveData source,
         BuffStatType buffStatType)
     {
@@ -33,9 +37,20 @@ public static class InventoryBuffStatSaveMapper
             && index < source.buffStats.Count
             && source.buffStats[index] != null)
         {
-            return source.buffStats[index].stats;
+            return source.buffStats[index];
         }
+        return null;
+    }
 
+    private static IReadOnlyList<StatValueSaveData> GetLegacyStats(
+        InventorySlotSaveData source,
+        BuffStatGroupSaveData group,
+        BuffStatType buffStatType)
+    {
+        if (group?.stats != null && group.stats.Count > 0)
+        {
+            return group.stats;
+        }
         // Save cu duoc doc mot lan roi se duoc ghi lai theo list BuffStatType moi.
         switch (buffStatType)
         {
@@ -46,9 +61,9 @@ public static class InventoryBuffStatSaveMapper
         }
     }
 
-    private static void CopyStats(
+    private static void CopySlots(
         IReadOnlyList<StatValue> source,
-        List<StatValueSaveData> target)
+        List<BuffStatSlotSaveData> target)
     {
         if (source == null)
         {
@@ -57,11 +72,23 @@ public static class InventoryBuffStatSaveMapper
 
         for (int i = 0; i < source.Count; i++)
         {
-            target.Add(source[i] == null ? null : new StatValueSaveData(source[i]));
+            // Khong luu null truc tiep trong List vi JsonUtility co the tao object mac dinh.
+            target.Add(new BuffStatSlotSaveData(source[i]));
         }
     }
 
-    private static List<StatValue> RestoreStats(
+    private static List<StatValue> RestoreSlots(
+        IReadOnlyList<BuffStatSlotSaveData> savedSlots)
+    {
+        List<StatValue> result = new List<StatValue>();
+        for (int i = 0; i < savedSlots.Count; i++)
+        {
+            result.Add(savedSlots[i]?.ToStatValue());
+        }
+        return result;
+    }
+
+    private static List<StatValue> RestoreLegacyStats(
         IReadOnlyList<StatValueSaveData> savedStats)
     {
         List<StatValue> result = new List<StatValue>();
@@ -73,7 +100,8 @@ public static class InventoryBuffStatSaveMapper
         for (int i = 0; i < savedStats.Count; i++)
         {
             StatValueSaveData stat = savedStats[i];
-            result.Add(stat != null ? stat.ToStatValue() : null);
+            bool isEmpty = stat == null || stat.IsLegacyEmptySlot();
+            result.Add(isEmpty ? null : stat.ToStatValue());
         }
         return result;
     }

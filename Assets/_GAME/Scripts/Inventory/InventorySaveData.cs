@@ -66,7 +66,32 @@ public class InventorySlotSaveData
 [Serializable]
 public class BuffStatGroupSaveData
 {
+    public List<BuffStatSlotSaveData> slots = new List<BuffStatSlotSaveData>();
+
+    // Field cu chi dung de doc save da tao truoc khi slot co co isEmpty.
     public List<StatValueSaveData> stats = new List<StatValueSaveData>();
+}
+
+[Serializable]
+public class BuffStatSlotSaveData
+{
+    public bool isEmpty = true;
+    public StatValueSaveData stat;
+
+    public BuffStatSlotSaveData()
+    {
+    }
+
+    public BuffStatSlotSaveData(StatValue value)
+    {
+        isEmpty = value == null;
+        stat = value != null ? new StatValueSaveData(value) : null;
+    }
+
+    public StatValue ToStatValue()
+    {
+        return isEmpty || stat == null ? null : stat.ToStatValue();
+    }
 }
 
 [Serializable]
@@ -90,5 +115,10 @@ public class StatValueSaveData
     public StatValue ToStatValue()
     {
         return new StatValue(statType, value, operation);
+    }
+
+    public bool IsLegacyEmptySlot()
+    {
+        return statType == default && value == 0f && operation == default;
     }
 }

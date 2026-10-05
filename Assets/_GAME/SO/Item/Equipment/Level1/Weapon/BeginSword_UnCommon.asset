@@ -31,3 +31,4 @@ MonoBehaviour:
   - statType: 6
     value: 0.0974
     operation: 0
+  attacksPerSecond: 1
