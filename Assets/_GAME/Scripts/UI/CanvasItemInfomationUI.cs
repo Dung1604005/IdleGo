@@ -12,8 +12,10 @@ public class CanvasItemInfomationUI : UICanvas
 
     public void OnInit()
     {
-        selectedItemPanel?.OnInit();
-        equippedComparisonPanel?.OnInit();
+        Equipment selectedEquipment = DataManager.Ins.SelectedEquipment;
+        selectedItemPanel?.OnInit(selectedEquipment);
+        equippedComparisonPanel?.OnInit(
+            GetEquippedComparison(selectedEquipment));
     }
 
     public void OnDespawn()
@@ -28,9 +30,26 @@ public class CanvasItemInfomationUI : UICanvas
         CloseDirectly();
     }
 
+    public void OnBackgroundClick()
+    {
+        CloseDirectly();
+    }
+
     public override void CloseDirectly()
     {
         OnDespawn();
         base.CloseDirectly();
+    }
+
+    private static Equipment GetEquippedComparison(Equipment selectedEquipment)
+    {
+        if (selectedEquipment?.Data == null)
+        {
+            return null;
+        }
+
+        // Equipped panel chi doc dung slot cung loai cua hero dang duoc chon.
+        return DataManager.Ins.SelectedCharacter?.Equipment?.GetEquipment(
+            selectedEquipment.EquipmentType);
     }
 }

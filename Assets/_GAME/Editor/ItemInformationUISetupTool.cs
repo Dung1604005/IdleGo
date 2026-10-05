@@ -31,8 +31,7 @@ public static class ItemInformationUISetupTool
         }
 
         ItemInformationUISetupFactory.PrepareLayoutPrefabs();
-        PanelItemInformation selectedPanel = SetupPanel(
-            selected.gameObject, ItemInformationPanelType.SELECTED_ITEM);
+        PanelItemInformation selectedPanel = SetupPanel(selected.gameObject);
         PanelItemInformation comparisonPanel = GetOrCreateComparison(
             canvas, selected.gameObject);
         AssignCanvasPanels(canvas, selectedPanel, comparisonPanel);
@@ -65,9 +64,7 @@ public static class ItemInformationUISetupTool
             SetupActiveScene();
         }
     }
-    private static PanelItemInformation SetupPanel(
-        GameObject root,
-        ItemInformationPanelType panelType)
+    private static PanelItemInformation SetupPanel(GameObject root)
     {
         PanelItemInformation panel = root.GetComponent<PanelItemInformation>();
         EquipmentStatsContentUI stats =
@@ -87,14 +84,13 @@ public static class ItemInformationUISetupTool
         RectTransform dynamicContent = ItemInformationUISetupFactory.GetOrCreateRect(
             layout, "DynamicContent");
         ItemInformationUISetupFactory.ConfigureVerticalLayout(dynamicContent, 4f);
-        SetupDynamicContent(panel, stats, panelType, rootRect,
+        SetupDynamicContent(panel, stats, rootRect,
             layout, dynamicContent);
         return panel;
     }
     private static void SetupDynamicContent(
         PanelItemInformation panel,
         EquipmentStatsContentUI stats,
-        ItemInformationPanelType panelType,
         RectTransform rootRect,
         RectTransform layout,
         RectTransform dynamicContent)
@@ -105,7 +101,7 @@ public static class ItemInformationUISetupTool
             dynamicContent, "Image-Line-SubToEnhancement");
         BuffStatHeaderUI[] headers = CreateBuffHeaders(dynamicContent, panel);
         TextMeshProUGUI[] requirements = CreateRequirementTexts(layout, panel);
-        AssignPanelFields(panel, stats, panelType, requirements);
+        AssignPanelFields(panel, stats, requirements);
         AssignStatsFields(stats, rootRect, layout, dynamicContent,
             firstLine, secondLine, headers);
     }
@@ -127,8 +123,7 @@ public static class ItemInformationUISetupTool
             rect.anchoredPosition = new Vector2(
                 -Mathf.Abs(rect.anchoredPosition.x), rect.anchoredPosition.y);
         }
-        return SetupPanel(
-            comparison, ItemInformationPanelType.EQUIPPED_COMPARISON);
+        return SetupPanel(comparison);
     }
 
     private static void MovePanelHeader(
@@ -193,11 +188,9 @@ public static class ItemInformationUISetupTool
     private static void AssignPanelFields(
         PanelItemInformation panel,
         EquipmentStatsContentUI stats,
-        ItemInformationPanelType type,
         TextMeshProUGUI[] requirements)
     {
         SerializedObject serialized = new SerializedObject(panel);
-        serialized.FindProperty("panelType").enumValueIndex = (int)type;
         serialized.FindProperty("levelRequirementText").objectReferenceValue =
             requirements[0];
         serialized.FindProperty("characterRequirementText").objectReferenceValue =

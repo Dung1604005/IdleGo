@@ -2,15 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemInformationPanelType
-{
-    SELECTED_ITEM = 0,
-    EQUIPPED_COMPARISON = 1
-}
-
 public class PanelItemInformation : PanelView
 {
-    [SerializeField] private ItemInformationPanelType panelType;
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI rarityText;
@@ -23,8 +16,13 @@ public class PanelItemInformation : PanelView
 
     public override void OnInit()
     {
+        OnInit(null);
+    }
+
+    public void OnInit(Equipment equipment)
+    {
         statsContent?.OnInit();
-        displayedEquipment = ResolveEquipment();
+        displayedEquipment = equipment;
         RefreshInformation();
         gameObject.SetActive(displayedEquipment?.Data != null);
     }
@@ -33,21 +31,6 @@ public class PanelItemInformation : PanelView
     {
         displayedEquipment = null;
         ClearView();
-    }
-
-    private Equipment ResolveEquipment()
-    {
-        Equipment selected = DataManager.Ins.SelectedEquipment;
-        if (panelType == ItemInformationPanelType.SELECTED_ITEM)
-        {
-            return selected;
-        }
-
-        Equipment equipped = selected?.Data != null
-            ? DataManager.Ins.SelectedCharacter?.Equipment?.GetEquipment(
-                selected.EquipmentType)
-            : null;
-        return ReferenceEquals(selected, equipped) ? null : equipped;
     }
 
     private void RefreshInformation()
