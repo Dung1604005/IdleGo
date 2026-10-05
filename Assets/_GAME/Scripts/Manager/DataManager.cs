@@ -9,6 +9,10 @@ public class DataManager : Singleton<DataManager>
 
    [SerializeField] private RarityColorSO rarityColorData;
 
+   [SerializeField] private BuffStatVisualSO buffStatVisualSO;
+
+
+
    private Inventory inventoryData;
    private PlayerManager playerData;
    private ChestManager chestData;
@@ -20,6 +24,8 @@ public class DataManager : Singleton<DataManager>
    public ChestManager ChestData => chestData;
    public Equipment SelectedEquipment => selectedEquipment;
    public Player SelectedCharacter => GetCharacter(selectedCharacterId);
+
+   public BuffStatVisualSO BuffStatVisualSO => buffStatVisualSO;
 
    public void SetInventoryData(Inventory inventory)
    {

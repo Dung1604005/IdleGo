@@ -107,9 +107,7 @@ public static class InventorySaveMapper
         if (item is Equipment equipment)
         {
             slotSaveData.qualityRoll = equipment.QualityRoll;
-            CopyStats(equipment.SocketStats, slotSaveData.socketStats);
-            CopyStats(equipment.EnchantmentStats, slotSaveData.enchantmentStats);
-            CopyStats(equipment.DecorationStats, slotSaveData.decorationStats);
+            InventoryBuffStatSaveMapper.Copy(equipment, slotSaveData);
         }
 
         return true;
@@ -177,42 +175,10 @@ public static class InventorySaveMapper
         if (item is Equipment equipment)
         {
             equipment.RestoreQualityRoll(slotSaveData.qualityRoll);
-            equipment.RestoreEnhancementState(
-                RestoreStats(slotSaveData.socketStats),
-                RestoreStats(slotSaveData.enchantmentStats),
-                RestoreStats(slotSaveData.decorationStats)
-            );
+            InventoryBuffStatSaveMapper.Restore(equipment, slotSaveData);
         }
 
         return item;
     }
 
-    private static void CopyStats(IReadOnlyList<StatValue> source, List<StatValueSaveData> target)
-    {
-        if (source == null)
-        {
-            return;
-        }
-
-        for (int i = 0; i < source.Count; i++)
-        {
-            target.Add(source[i] == null ? null : new StatValueSaveData(source[i]));
-        }
-    }
-
-    private static List<StatValue> RestoreStats(IReadOnlyList<StatValueSaveData> savedStats)
-    {
-        List<StatValue> result = new List<StatValue>();
-        if (savedStats == null)
-        {
-            return result;
-        }
-
-        for (int i = 0; i < savedStats.Count; i++)
-        {
-            result.Add(savedStats[i] != null ? savedStats[i].ToStatValue() : null);
-        }
-
-        return result;
-    }
 }

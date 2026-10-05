@@ -67,6 +67,17 @@ public class EquipmentDataSO : ItemSO
         return subStats;
     }
 
+    public int GetBuffSlotCount(BuffStatType buffStatType)
+    {
+        switch (buffStatType)
+        {
+            case BuffStatType.SOCKET: return SocketSlotCount;
+            case BuffStatType.ENCHANTMENT: return EnchantmentSlotCount;
+            case BuffStatType.DECORATION: return DecorationSlotCount;
+            default: return 0;
+        }
+    }
+
     public bool CanEquip(Character character)
     {
         return character != null

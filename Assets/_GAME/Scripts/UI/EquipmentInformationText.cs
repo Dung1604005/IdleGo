@@ -15,7 +15,8 @@ public static class EquipmentInformationText
         AppendStat(builder, mainStats?.MainStat);
         if (mainStats != null && mainStats.HasAttacksPerSecond)
         {
-            AppendLine(builder, $"Số đòn mỗi giây: {mainStats.AttacksPerSecond:0.##}");
+            AppendLine(builder,
+                $"Attacks Per Second: {mainStats.AttacksPerSecond:0.##}");
         }
         return builder.ToString();
     }
@@ -25,7 +26,7 @@ public static class EquipmentInformationText
         IReadOnlyList<StatValue> stats = equipment?.GetSubStats();
         if (stats == null || stats.Count == 0)
         {
-            return "Không có chỉ số phụ";
+            return "No Substats";
         }
 
         StringBuilder builder = new StringBuilder();
@@ -45,11 +46,15 @@ public static class EquipmentInformationText
 
         equipment.EnsureRuntimeState();
         StringBuilder builder = new StringBuilder();
-        AppendSlots(builder, "Khảm", equipment.Data.SocketSlotCount, equipment.SocketStats);
-        AppendSlots(builder, "Phù phép", equipment.Data.EnchantmentSlotCount,
-            equipment.EnchantmentStats);
-        AppendSlots(builder, "Trang trí", equipment.Data.DecorationSlotCount,
-            equipment.DecorationStats);
+        for (int i = 0; i < BuffStatTypeUtility.Count; i++)
+        {
+            BuffStatType buffType = (BuffStatType)i;
+            AppendSlots(
+                builder,
+                GetBuffStatName(buffType),
+                equipment.Data.GetBuffSlotCount(buffType),
+                equipment.GetBuffStats(buffType));
+        }
         return builder.ToString();
     }
 
@@ -78,8 +83,19 @@ public static class EquipmentInformationText
         for (int i = 0; i < slotCount; i++)
         {
             StatValue stat = stats != null && i < stats.Count ? stats[i] : null;
-            string value = stat != null ? FormatStat(stat) : "Trống";
+            string value = stat != null ? FormatStat(stat) : "Empty";
             AppendLine(builder, $"{label} {i + 1}: {value}");
+        }
+    }
+
+    public static string GetBuffStatName(BuffStatType buffStatType)
+    {
+        switch (buffStatType)
+        {
+            case BuffStatType.SOCKET: return "Socket";
+            case BuffStatType.ENCHANTMENT: return "Enchantment";
+            case BuffStatType.DECORATION: return "Decoration";
+            default: return buffStatType.ToString();
         }
     }
 
@@ -100,8 +116,13 @@ public static class EquipmentInformationText
         builder.Append(line);
     }
 
-    private static string FormatStat(StatValue stat)
+    public static string FormatStat(StatValue stat)
     {
+        if (stat == null)
+        {
+            return string.Empty;
+        }
+
         bool isPercent = stat.Operation != StatModifierOperation.FLAT
             || IsRatioStat(stat.StatType);
         float displayValue = isPercent ? stat.Value * 100f : stat.Value;
@@ -123,17 +144,17 @@ public static class EquipmentInformationText
     {
         switch (statType)
         {
-            case StatType.MAX_HEALTH: return "Máu tối đa";
-            case StatType.RUN_SPEED: return "Tốc độ chạy";
-            case StatType.DAMAGE: return "Sát thương";
-            case StatType.ATTACK_SPEED: return "Tốc độ tấn công";
-            case StatType.CRITICAL_CHANCE: return "Tỉ lệ chí mạng";
-            case StatType.CRITICAL_DAMAGE: return "Sát thương chí mạng";
-            case StatType.COOLDOWN_REDUCTION: return "Giảm hồi chiêu";
-            case StatType.ARMOR: return "Giáp";
-            case StatType.LIFE_STEAL: return "Hút máu";
-            case StatType.DODGE_CHANCE: return "Tỉ lệ né";
-            case StatType.DAMAGE_AMPLIFICATION: return "Khuếch đại sát thương";
+            case StatType.MAX_HEALTH: return "Max Health";
+            case StatType.RUN_SPEED: return "Run Speed";
+            case StatType.DAMAGE: return "Damage";
+            case StatType.ATTACK_SPEED: return "Attack Speed";
+            case StatType.CRITICAL_CHANCE: return "Critical Chance";
+            case StatType.CRITICAL_DAMAGE: return "Critical Damage";
+            case StatType.COOLDOWN_REDUCTION: return "Cooldown Reduction";
+            case StatType.ARMOR: return "Armor";
+            case StatType.LIFE_STEAL: return "Life Steal";
+            case StatType.DODGE_CHANCE: return "Dodge Chance";
+            case StatType.DAMAGE_AMPLIFICATION: return "Damage Amplification";
             default: return statType.ToString();
         }
     }

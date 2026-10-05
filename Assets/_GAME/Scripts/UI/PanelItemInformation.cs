@@ -15,15 +15,15 @@ public class PanelItemInformation : PanelView
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI rarityText;
     [SerializeField] private TextMeshProUGUI mainStatsText;
-    [SerializeField] private TextMeshProUGUI subStatsText;
-    [SerializeField] private TextMeshProUGUI enhancementSlotsText;
     [SerializeField] private TextMeshProUGUI levelRequirementText;
     [SerializeField] private TextMeshProUGUI characterRequirementText;
+    [SerializeField] private EquipmentStatsContentUI statsContent;
 
     private Equipment displayedEquipment;
 
     public override void OnInit()
     {
+        statsContent?.OnInit();
         displayedEquipment = ResolveEquipment();
         RefreshInformation();
         gameObject.SetActive(displayedEquipment?.Data != null);
@@ -66,11 +66,8 @@ public class PanelItemInformation : PanelView
             EquipmentInformationText.GetRarityName(data.RarityType), rarityColor);
         SetText(mainStatsText,
             EquipmentInformationText.BuildMainStats(displayedEquipment));
-        SetText(subStatsText,
-            EquipmentInformationText.BuildSubStats(displayedEquipment));
-        SetText(enhancementSlotsText,
-            EquipmentInformationText.BuildEnhancementSlots(displayedEquipment));
-        SetText(levelRequirementText, $"Yêu cầu cấp: {data.LevelRequired}");
+        statsContent?.Refresh(displayedEquipment);
+        SetText(levelRequirementText, $"Level Required: {data.LevelRequired}");
         SetCharacterRequirement(data.CharacterRequirement);
     }
 
@@ -79,7 +76,7 @@ public class PanelItemInformation : PanelView
         string characterType = EquipmentInformationText.GetRequirementName(requirement);
         SetText(characterRequirementText, string.IsNullOrEmpty(characterType)
             ? string.Empty
-            : $"Yêu cầu nhân vật: {characterType}");
+            : $"Class Required: {characterType}");
     }
 
     private void SetIcon(Sprite icon)
@@ -125,9 +122,8 @@ public class PanelItemInformation : PanelView
         SetText(itemNameText, string.Empty);
         SetText(rarityText, string.Empty);
         SetText(mainStatsText, string.Empty);
-        SetText(subStatsText, string.Empty);
-        SetText(enhancementSlotsText, string.Empty);
         SetText(levelRequirementText, string.Empty);
         SetText(characterRequirementText, string.Empty);
+        statsContent?.OnDespawn();
     }
 }

@@ -55,9 +55,18 @@ public class InventorySlotSaveData
     public string instanceId;
     public int amount;
     public float qualityRoll = 1f;
+    public List<BuffStatGroupSaveData> buffStats = new List<BuffStatGroupSaveData>();
+
+    // Ba field cu chi dung de migrate PlayerPrefs da luu truoc khi co BuffStatType.
     public List<StatValueSaveData> socketStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> enchantmentStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> decorationStats = new List<StatValueSaveData>();
+}
+
+[Serializable]
+public class BuffStatGroupSaveData
+{
+    public List<StatValueSaveData> stats = new List<StatValueSaveData>();
 }
 
 [Serializable]
