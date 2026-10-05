@@ -60,6 +60,13 @@ public static class ItemInformationUISetupFactory
         layout.childForceExpandHeight = false;
     }
 
+    public static void ConfigureContentSizeFitter(RectTransform rect)
+    {
+        ContentSizeFitter fitter = GetOrAdd<ContentSizeFitter>(rect.gameObject);
+        fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+    }
+
     public static void ConfigureHeaderLayout(HorizontalLayoutGroup layout)
     {
         layout.padding = new RectOffset(35, 35, 2, 2);

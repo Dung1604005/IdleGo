@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,15 @@ public class EquipmentStatsContentUI : MonoBehaviour
     [SerializeField] private StatLineUI statLinePrefab;
     [SerializeField] private GameObject mainToSubStatLine;
     [SerializeField] private GameObject subStatToEnhancementLine;
-    [SerializeField] private List<BuffStatHeaderUI> buffStatHeaders =
+    [SerializeField]
+    private List<BuffStatHeaderUI> buffStatHeaders =
         new List<BuffStatHeaderUI>();
 
     [Header("Resize")]
     [SerializeField] private RectTransform panelRect;
     [SerializeField] private RectTransform panelLayoutContent;
+    [SerializeField, Min(0f)] private float minimumPanelHeight = 421f;
+    [SerializeField, Min(0f)] private float footerReservedHeight = 112f;
 
     private readonly List<StatLineUI> activeStatLines =
         new List<StatLineUI>();
@@ -186,15 +190,18 @@ public class EquipmentStatsContentUI : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate(dynamicContent);
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(panelLayoutContent);
-        float preferredHeight = LayoutUtility.GetPreferredHeight(panelLayoutContent);
-        if (preferredHeight > 0f)
+        float layoutHeight = panelLayoutContent.rect.height;
+        if (layoutHeight > 0f)
         {
+            // PanelLayoutContent da gom header 220, dynamic content va spacing.
+            float contentHeight = layoutHeight + footerReservedHeight;
+            float targetHeight = Mathf.Max(minimumPanelHeight, contentHeight);
             panelRect.SetSizeWithCurrentAnchors(
                 RectTransform.Axis.Vertical,
-                preferredHeight);
+                targetHeight);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
         }
     }
-
     private BuffStatHeaderUI GetHeader(int index)
     {
         return index >= 0 && index < buffStatHeaders.Count

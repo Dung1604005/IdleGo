@@ -21,10 +21,18 @@ public class PanelItemInformation : PanelView
 
     public void OnInit(Equipment equipment)
     {
-        statsContent?.OnInit();
         displayedEquipment = equipment;
+        bool hasEquipment = displayedEquipment?.Data != null;
+        gameObject.SetActive(hasEquipment);
+        if (!hasEquipment)
+        {
+            ClearView();
+            return;
+        }
+
+        // Layout chi tinh dung kich thuoc khi panel dang active.
+        statsContent?.OnInit();
         RefreshInformation();
-        gameObject.SetActive(displayedEquipment?.Data != null);
     }
 
     public override void OnDespawn()

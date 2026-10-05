@@ -76,6 +76,7 @@ public static class ItemInformationUISetupTool
         RectTransform layout = ItemInformationUISetupFactory.GetOrCreateRect(
             root.transform, "PanelLayoutContent");
         ItemInformationUISetupFactory.ConfigureVerticalLayout(layout, 5f);
+        ItemInformationUISetupFactory.ConfigureContentSizeFitter(layout);
         RectTransform fixedHeader = ItemInformationUISetupFactory.GetOrCreateRect(
             layout, "FixedHeader");
         ItemInformationUISetupFactory.SetLayoutHeight(

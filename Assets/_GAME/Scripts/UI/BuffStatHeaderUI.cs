@@ -32,7 +32,6 @@ public class BuffStatHeaderUI : MonoBehaviour
         }
 
         iconImage.sprite = icon;
-        iconImage.color = color;
         iconImage.enabled = icon != null;
     }
 

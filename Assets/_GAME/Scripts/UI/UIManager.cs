@@ -25,6 +25,7 @@ public class UIManager : Singleton<UIManager>
     {
         
         T canvas = GetUI<T>();
+        canvas.gameObject.SetActive(true);
 
         canvas.SetUp();
         canvas.Open();
@@ -35,7 +36,7 @@ public class UIManager : Singleton<UIManager>
     public T OpenUI<T>(UICanvas ui) where T: UICanvas
     {
          T canvas = GetUI<T>();
-
+         canvas.gameObject.SetActive(true);
         canvas.SetUp();
         canvas.Open(ui);
         
