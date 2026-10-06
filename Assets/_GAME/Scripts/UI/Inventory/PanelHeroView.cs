@@ -163,6 +163,5 @@ public class PanelHeroView : PanelView
 
         characterId = nextCharacterId;
         DataManager.Ins.SetSelectedCharacter(characterId);
-        RefreshHeroView();
     }
 }

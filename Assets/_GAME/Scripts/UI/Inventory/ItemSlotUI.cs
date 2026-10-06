@@ -10,6 +10,8 @@ public class ItemSlotUI : GameUnit
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI amountText;
 
+    [SerializeField] private Image iconCantEquip;
+
     public int SlotIndex { get; private set; }
 
     public override void OnSpawn()
@@ -36,9 +38,11 @@ public class ItemSlotUI : GameUnit
             Clear();
             return;
         }
+        
 
         ChangeItem(slot.Item.RarityType, slot.Item.Data.Icon);
         SetAmount(slot.Amount);
+        RefreshCantEquipIcon(slot.Item);
     }
 
     public void OnButtonClick()
@@ -93,6 +97,8 @@ public class ItemSlotUI : GameUnit
         {
             amountText.text = string.Empty;
         }
+
+        SetCantEquipIcon(false);
     }
 
     private void SetAmount(int amount)
@@ -100,6 +106,29 @@ public class ItemSlotUI : GameUnit
         if (amountText != null)
         {
             amountText.text = amount > 1 ? amount.ToString() : string.Empty;
+        }
+    }
+
+    private void RefreshCantEquipIcon(Item item)
+    {
+        if (item is not Equipment equipment)
+        {
+            SetCantEquipIcon(false);
+            return;
+        }
+
+        CharacterEquipment characterEquipment =
+            DataManager.Ins.SelectedCharacter?.Equipment;
+        bool canEquip = characterEquipment != null
+            && characterEquipment.CanEquip(equipment);
+        SetCantEquipIcon(!canEquip);
+    }
+
+    private void SetCantEquipIcon(bool isActive)
+    {
+        if (iconCantEquip != null)
+        {
+            iconCantEquip.gameObject.SetActive(isActive);
         }
     }
 

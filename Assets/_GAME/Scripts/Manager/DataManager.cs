@@ -90,7 +90,14 @@ public class DataManager : Singleton<DataManager>
 
    public void SetSelectedCharacter(string characterId)
    {
+       if (selectedCharacterId == characterId)
+       {
+           return;
+       }
+
        selectedCharacterId = characterId;
+       // Dieu kien equip phu thuoc hero dang chon, nen Inventory phai ve lai cac slot.
+       inventoryData?.RefreshViews();
    }
 
    public void SetSelectedEquipment(

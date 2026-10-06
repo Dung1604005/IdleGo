@@ -117,4 +117,9 @@ public partial class Inventory
             inventoryViews[i]?.RefreshInventory();
         }
     }
+
+    internal void RefreshViews()
+    {
+        RefreshView();
+    }
 }
