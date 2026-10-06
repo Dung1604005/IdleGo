@@ -68,14 +68,7 @@ public class PanelInventoryView : PanelView
             return;
         }
 
-        IReadOnlyList<InventorySlot> slots = inventory.Slots;
-        for (int i = 0; i < inventory.Capacity; i++)
-        {
-            ItemSlotUI slotView = activeSlotViews[i];
-            slotView.OnInit(i);
-            slotView.SetData(slots[i]);
-        }
-
+        RefreshVisibleSlots(inventory);
         contentLayout.Refresh(inventory.Capacity);
     }
 
@@ -102,6 +95,47 @@ public class PanelInventoryView : PanelView
     private bool CanRefresh(Inventory inventory)
     {
         return isInitialized && inventory != null;
+    }
+
+    private void RefreshVisibleSlots(Inventory inventory)
+    {
+        IReadOnlyList<InventorySlot> slots = inventory.Slots;
+        int viewIndex = 0;
+        for (int sourceIndex = 0; sourceIndex < slots.Count; sourceIndex++)
+        {
+            InventorySlot slot = slots[sourceIndex];
+            if (!ShouldDisplay(slot))
+            {
+                continue;
+            }
+
+            ItemSlotUI slotView = activeSlotViews[viewIndex++];
+            // Giu sourceIndex de click vao UI van lay dung slot data goc.
+            slotView.OnInit(sourceIndex);
+            slotView.SetData(slot);
+        }
+
+        ClearUnusedViews(viewIndex);
+    }
+
+    private void ClearUnusedViews(int firstUnusedIndex)
+    {
+        for (int i = firstUnusedIndex; i < activeSlotViews.Count; i++)
+        {
+            activeSlotViews[i].OnInit(-1);
+            activeSlotViews[i].Clear();
+        }
+    }
+
+    private static bool ShouldDisplay(InventorySlot slot)
+    {
+        if (slot == null || slot.IsEmpty)
+        {
+            return false;
+        }
+
+        // Equipment van duoc giu trong data de save, nhung UI an khi dang duoc trang bi.
+        return slot.Item is not Equipment equipment || !equipment.IsEquipped;
     }
 
     private bool SyncSlotViewCount(int requiredCount)

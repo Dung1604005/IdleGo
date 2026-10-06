@@ -38,7 +38,9 @@ public class EquipmentSlotUI : GameUnit
             return;
         }
 
-        DataManager.Ins.SetSelectedEquipment(equipment);
+        DataManager.Ins.SetSelectedEquipment(
+            equipment,
+            EquipmentSelectionSource.EQUIPMENT_SLOT);
         UIManager.Ins.OpenUI<CanvasItemInfomationUI>();
     }
 

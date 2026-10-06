@@ -53,7 +53,9 @@ public class ItemSlotUI : GameUnit
         }
 
         // Slot chi chon data; Canvas se tu doc equipment qua DataManager.
-        DataManager.Ins.SetSelectedEquipment(equipment);
+        DataManager.Ins.SetSelectedEquipment(
+            equipment,
+            EquipmentSelectionSource.INVENTORY_SLOT);
         UIManager.Ins.OpenUI<CanvasItemInfomationUI>();
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CanvasItemInfomationUI : UICanvas
+public class CanvasItemInfomationUI : UICanvas, IInventoryView
 {
     [SerializeField] private PanelItemInformation selectedItemPanel;
     [SerializeField] private PanelItemInformation equippedComparisonPanel;
@@ -13,6 +13,12 @@ public class CanvasItemInfomationUI : UICanvas
 
     public void OnInit()
     {
+        RefreshInventory();
+        DataManager.Ins.InventoryData?.RegisterView(this);
+    }
+
+    public void RefreshInventory()
+    {
         Equipment selectedEquipment = DataManager.Ins.SelectedEquipment;
         Equipment equippedEquipment = GetEquippedComparison(selectedEquipment);
         selectedItemPanel?.OnInit(selectedEquipment);
@@ -22,6 +28,7 @@ public class CanvasItemInfomationUI : UICanvas
 
     public void OnDespawn()
     {
+        DataManager.Ins.InventoryData?.UnregisterView(this);
         selectedItemPanel?.OnDespawn();
         equippedComparisonPanel?.OnDespawn();
         DataManager.Ins.ClearSelectedEquipment();
@@ -45,12 +52,14 @@ public class CanvasItemInfomationUI : UICanvas
 
     private static Equipment GetEquippedComparison(Equipment selectedEquipment)
     {
-        if (selectedEquipment?.Data == null)
+        if (selectedEquipment?.Data == null
+            || DataManager.Ins.SelectedEquipmentSource
+                != EquipmentSelectionSource.INVENTORY_SLOT)
         {
             return null;
         }
 
-        // Equipped panel chi doc dung slot cung loai cua hero dang duoc chon.
+        // Panel so sanh chi hien khi nguoi choi mo item tu InventorySlot.
         return DataManager.Ins.SelectedCharacter?.Equipment?.GetEquipment(
             selectedEquipment.EquipmentType);
     }
@@ -74,6 +83,8 @@ public class CanvasItemInfomationUI : UICanvas
 
         Vector2 position = rect.anchoredPosition;
         position.x = positionX;
+        // Pivot nam o canh tren, nen dat Y bang nua chieu cao se dua tam panel ve Y = 0.
+        position.y = rect.rect.height * 0.5f;
         rect.anchoredPosition = position;
     }
 }

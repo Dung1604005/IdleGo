@@ -11,6 +11,8 @@ public class PanelItemInformation : PanelView
     [SerializeField] private TextMeshProUGUI levelRequirementText;
     [SerializeField] private TextMeshProUGUI characterRequirementText;
     [SerializeField] private EquipmentStatsContentUI statsContent;
+    [SerializeField] private Button equipButton;
+    [SerializeField] private Button unequipButton;
 
     private Equipment displayedEquipment;
 
@@ -33,12 +35,29 @@ public class PanelItemInformation : PanelView
         // Layout chi tinh dung kich thuoc khi panel dang active.
         statsContent?.OnInit();
         RefreshInformation();
+        RefreshActionButtons();
     }
 
     public override void OnDespawn()
     {
         displayedEquipment = null;
         ClearView();
+    }
+
+    public void OnButtonEquip()
+    {
+        if (DataManager.Ins.EquipSelectedEquipment())
+        {
+            UIManager.Ins.CloseUIDirectly<CanvasItemInfomationUI>();
+        }
+    }
+
+    public void OnButtonUnequip()
+    {
+        if (DataManager.Ins.UnequipSelectedEquipment())
+        {
+            UIManager.Ins.CloseUIDirectly<CanvasItemInfomationUI>();
+        }
     }
 
     private void RefreshInformation()
@@ -81,6 +100,23 @@ public class PanelItemInformation : PanelView
         itemIcon.enabled = icon != null;
     }
 
+    private void RefreshActionButtons()
+    {
+        EquipmentSelectionSource source = DataManager.Ins.SelectedEquipmentSource;
+        SetButtonActive(equipButton,
+            source == EquipmentSelectionSource.INVENTORY_SLOT);
+        SetButtonActive(unequipButton,
+            source == EquipmentSelectionSource.EQUIPMENT_SLOT);
+    }
+
+    private static void SetButtonActive(Button button, bool isActive)
+    {
+        if (button != null)
+        {
+            button.gameObject.SetActive(isActive);
+        }
+    }
+
     private static void SetColoredText(
         TextMeshProUGUI target,
         string value,
@@ -116,5 +152,7 @@ public class PanelItemInformation : PanelView
         SetText(levelRequirementText, string.Empty);
         SetText(characterRequirementText, string.Empty);
         statsContent?.OnDespawn();
+        SetButtonActive(equipButton, false);
+        SetButtonActive(unequipButton, false);
     }
 }

@@ -15,7 +15,7 @@ public partial class Inventory
     [NonSerialized] private int dataVersion;
     [NonSerialized] private bool lastSaveSucceeded;
     [NonSerialized] private bool canSave;
-    [NonSerialized] private IInventoryView inventoryView;
+    [NonSerialized] private List<IInventoryView> inventoryViews = new List<IInventoryView>();
 
     public IReadOnlyList<InventorySlot> Slots => storage.Slots;
     public int Capacity => storage.Capacity;
@@ -62,6 +62,7 @@ public partial class Inventory
         playerManager = null;
         itemHandler = null;
         equipmentHandler = null;
+        inventoryViews?.Clear();
         canSave = false;
         IsInitialized = false;
         DataManager.Ins.ClearInventoryData(this);

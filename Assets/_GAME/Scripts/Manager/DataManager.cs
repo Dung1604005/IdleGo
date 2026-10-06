@@ -18,11 +18,13 @@ public class DataManager : Singleton<DataManager>
    private ChestManager chestData;
    private string selectedCharacterId;
    private Equipment selectedEquipment;
+   private EquipmentSelectionSource selectedEquipmentSource;
 
    public Inventory InventoryData => inventoryData;
    public PlayerManager PlayerData => playerData;
    public ChestManager ChestData => chestData;
    public Equipment SelectedEquipment => selectedEquipment;
+   public EquipmentSelectionSource SelectedEquipmentSource => selectedEquipmentSource;
    public Player SelectedCharacter => GetCharacter(selectedCharacterId);
 
    public BuffStatVisualSO BuffStatVisualSO => buffStatVisualSO;
@@ -91,14 +93,66 @@ public class DataManager : Singleton<DataManager>
        selectedCharacterId = characterId;
    }
 
-   public void SetSelectedEquipment(Equipment equipment)
+   public void SetSelectedEquipment(
+       Equipment equipment,
+       EquipmentSelectionSource selectionSource)
    {
        selectedEquipment = equipment;
+       selectedEquipmentSource = equipment != null
+           ? selectionSource
+           : EquipmentSelectionSource.NONE;
    }
 
    public void ClearSelectedEquipment()
    {
        selectedEquipment = null;
+       selectedEquipmentSource = EquipmentSelectionSource.NONE;
+   }
+
+   public bool EquipSelectedEquipment()
+   {
+       Player player = SelectedCharacter;
+       if (selectedEquipmentSource != EquipmentSelectionSource.INVENTORY_SLOT
+           || player == null
+           || selectedEquipment == null
+           || playerData == null)
+       {
+           return false;
+       }
+
+       EquipmentSelectionSource previousSource = selectedEquipmentSource;
+       // Doi source truoc de Inventory refresh cac view voi trang thai sau khi equip.
+       selectedEquipmentSource = EquipmentSelectionSource.EQUIPMENT_SLOT;
+       if (playerData.Equip(player, selectedEquipment))
+       {
+           return true;
+       }
+
+       selectedEquipmentSource = previousSource;
+       return false;
+   }
+
+   public bool UnequipSelectedEquipment()
+   {
+       Player player = SelectedCharacter;
+       if (selectedEquipmentSource != EquipmentSelectionSource.EQUIPMENT_SLOT
+           || player == null
+           || selectedEquipment == null
+           || playerData == null)
+       {
+           return false;
+       }
+
+       EquipmentSelectionSource previousSource = selectedEquipmentSource;
+       // Doi source truoc de Inventory refresh cac view voi trang thai sau khi unequip.
+       selectedEquipmentSource = EquipmentSelectionSource.INVENTORY_SLOT;
+       if (playerData.Unequip(player, selectedEquipment))
+       {
+           return true;
+       }
+
+       selectedEquipmentSource = previousSource;
+       return false;
    }
 
    public MapDataSO GetMapData(MapType mapType)

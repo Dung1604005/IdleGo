@@ -2,16 +2,23 @@ public partial class Inventory
 {
     public void RegisterView(IInventoryView view)
     {
-        inventoryView = view;
+        if (view == null)
+        {
+            return;
+        }
+
+        inventoryViews ??= new System.Collections.Generic.List<IInventoryView>();
+        if (!inventoryViews.Contains(view))
+        {
+            inventoryViews.Add(view);
+        }
+
         RefreshView();
     }
 
     public void UnregisterView(IInventoryView view)
     {
-        if (ReferenceEquals(inventoryView, view))
-        {
-            inventoryView = null;
-        }
+        inventoryViews?.Remove(view);
     }
 
     public bool SaveGame()
@@ -99,10 +106,15 @@ public partial class Inventory
 
     private void RefreshView()
     {
-        if (IsInitialized)
+        if (!IsInitialized || inventoryViews == null)
         {
-            // View tu doc Inventory hien tai qua DataManager, khong nhan data qua callback.
-            inventoryView?.RefreshInventory();
+            return;
+        }
+
+        // Moi view tu doc Inventory qua DataManager, khong nhan data truc tiep tu callback.
+        for (int i = inventoryViews.Count - 1; i >= 0; i--)
+        {
+            inventoryViews[i]?.RefreshInventory();
         }
     }
 }
