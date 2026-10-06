@@ -29,6 +29,10 @@ public class PlayerCharacterSaveData
 {
     public string characterId;
     public List<float> currentStats = new List<float>();
+    public List<EquippedEquipmentSaveData> equippedEquipments =
+        new List<EquippedEquipmentSaveData>();
+
+    // Field cu chi dung de migrate save khi equipment con nam trong InventorySlot.
     public List<string> equippedItemInstanceIds = new List<string>();
     public List<EquippedSkillSaveData> equippedSkills = new List<EquippedSkillSaveData>();
 }
@@ -48,12 +52,10 @@ public class PlayerEquipmentSaveData
 }
 
 [Serializable]
-public class InventorySlotSaveData
+public class ItemInstanceSaveData
 {
-    public int slotIndex;
     public string itemId;
     public string instanceId;
-    public int amount;
     public float qualityRoll = 1f;
     public List<BuffStatGroupSaveData> buffStats = new List<BuffStatGroupSaveData>();
 
@@ -61,6 +63,18 @@ public class InventorySlotSaveData
     public List<StatValueSaveData> socketStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> enchantmentStats = new List<StatValueSaveData>();
     public List<StatValueSaveData> decorationStats = new List<StatValueSaveData>();
+}
+
+[Serializable]
+public class InventorySlotSaveData : ItemInstanceSaveData
+{
+    public int slotIndex;
+    public int amount;
+}
+
+[Serializable]
+public class EquippedEquipmentSaveData : ItemInstanceSaveData
+{
 }
 
 [Serializable]

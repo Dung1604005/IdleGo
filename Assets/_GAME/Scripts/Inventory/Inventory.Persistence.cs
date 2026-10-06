@@ -60,7 +60,9 @@ public partial class Inventory
 
     internal void OnItemDataChanged(Item item)
     {
-        if (IsInitialized && storage.GetSlot(item) != null)
+        bool isStored = storage.GetSlot(item) != null;
+        bool isEquipped = item is Equipment equipment && equipment.IsEquipped;
+        if (IsInitialized && (isStored || isEquipped))
         {
             CompleteDataFlow();
         }
@@ -91,7 +93,7 @@ public partial class Inventory
 
     private void CreateHandlers()
     {
-        equipmentHandler = new InventoryEquipmentHandler(storage, playerManager);
+        equipmentHandler = new InventoryEquipmentHandler(storage, playerManager, this);
         itemHandler = new InventoryItemHandler(storage, equipmentHandler);
     }
 

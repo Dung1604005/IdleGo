@@ -1,4 +1,4 @@
-public enum CharacterType
+public enum CharacaterClassType
 {
     MELEE = 0,
     RANGER = 1,
@@ -13,11 +13,11 @@ public enum CharacterRequirementType
     MAGE = 3
 }
 
-public static class CharacterTypeUtility
+public static class CharacaterClassTypeUtility
 {
     public static bool Matches(
         CharacterRequirementType requirement,
-        CharacterType characterType)
+        CharacaterClassType characaterClassType)
     {
         // So sanh ro tung dieu kien de enum co duoc mo rong sau nay cung khong phu thuoc vao phep tru chi so.
         switch (requirement)
@@ -25,11 +25,11 @@ public static class CharacterTypeUtility
             case CharacterRequirementType.ALL:
                 return true;
             case CharacterRequirementType.MELEE:
-                return characterType == CharacterType.MELEE;
+                return characaterClassType == CharacaterClassType.MELEE;
             case CharacterRequirementType.RANGER:
-                return characterType == CharacterType.RANGER;
+                return characaterClassType == CharacaterClassType.RANGER;
             case CharacterRequirementType.MAGE:
-                return characterType == CharacterType.MAGE;
+                return characaterClassType == CharacaterClassType.MAGE;
             default:
                 return false;
         }

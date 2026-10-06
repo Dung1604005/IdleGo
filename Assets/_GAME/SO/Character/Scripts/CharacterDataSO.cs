@@ -1,6 +1,7 @@
 using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "CharacterDataSO", menuName = "IdleGo/CharacterDataSO")]
 public class CharacterDataSO : ScriptableObject
@@ -9,7 +10,8 @@ public class CharacterDataSO : ScriptableObject
     [SerializeField] private String characterName;
 
     [SerializeField] private Sprite portrait;
-    [SerializeField] private CharacterType characterType;
+    [FormerlySerializedAs("characterType")]
+    [SerializeField] private CharacaterClassType characaterClassType;
     [SerializeField] private CharacterStatSO characterStatSO;
 
     [SerializeField] private CharacterCombatSO characterCombatSO;
@@ -20,7 +22,7 @@ public class CharacterDataSO : ScriptableObject
 
     public String CharacterName => characterName;
 
-    public CharacterType CharacterType => characterType;
+    public CharacaterClassType CharacaterClassType => characaterClassType;
 
     public CharacterStatSO StatSO => characterStatSO;
 

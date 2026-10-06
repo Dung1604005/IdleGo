@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public static class InventoryBuffStatSaveMapper
 {
-    public static void Copy(Equipment equipment, InventorySlotSaveData target)
+    public static void Copy(Equipment equipment, ItemInstanceSaveData target)
     {
         target.buffStats ??= new List<BuffStatGroupSaveData>();
         target.buffStats.Clear();
@@ -14,7 +14,7 @@ public static class InventoryBuffStatSaveMapper
         }
     }
 
-    public static void Restore(Equipment equipment, InventorySlotSaveData source)
+    public static void Restore(Equipment equipment, ItemInstanceSaveData source)
     {
         for (int i = 0; i < BuffStatTypeUtility.Count; i++)
         {
@@ -29,7 +29,7 @@ public static class InventoryBuffStatSaveMapper
     }
 
     private static BuffStatGroupSaveData GetSavedGroup(
-        InventorySlotSaveData source,
+        ItemInstanceSaveData source,
         BuffStatType buffStatType)
     {
         int index = (int)buffStatType;
@@ -43,7 +43,7 @@ public static class InventoryBuffStatSaveMapper
     }
 
     private static IReadOnlyList<StatValueSaveData> GetLegacyStats(
-        InventorySlotSaveData source,
+        ItemInstanceSaveData source,
         BuffStatGroupSaveData group,
         BuffStatType buffStatType)
     {

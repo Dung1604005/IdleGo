@@ -82,7 +82,9 @@ public class EquipmentDataSO : ItemSO
     {
         return character != null
             && character.Stats.CurrentLevel >= LevelRequired
-            && CharacterTypeUtility.Matches(characterRequirement, character.CharacterType);
+            && CharacaterClassTypeUtility.Matches(
+                characterRequirement,
+                character.CharacaterClassType);
     }
 
     public float GetStatValue(

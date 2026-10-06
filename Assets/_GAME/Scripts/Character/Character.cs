@@ -37,9 +37,9 @@ public abstract class Character : GameUnit
         ? characterDataSO.Portrait
         : null;
 
-    public CharacterType CharacterType => characterDataSO != null
-        ? characterDataSO.CharacterType
-        : global::CharacterType.MELEE;
+    public CharacaterClassType CharacaterClassType => characterDataSO != null
+        ? characterDataSO.CharacaterClassType
+        : global::CharacaterClassType.MELEE;
 
     public int MaxHealth => stats != null ? stats.CurrentMaxHealth : 0;
     public int AttackDamage => stats != null ? Mathf.Max(0, (int)stats.GetCurrentStat(StatType.DAMAGE)) : 0;

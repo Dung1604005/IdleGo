@@ -44,6 +44,8 @@ public abstract class CombatSkill : ScriptableObject
     {
         return character != null
             && IsUnlocked(character.Stats.CurrentLevel)
-            && CharacterTypeUtility.Matches(characterRequirement, character.CharacterType);
+            && CharacaterClassTypeUtility.Matches(
+                characterRequirement,
+                character.CharacaterClassType);
     }
 }

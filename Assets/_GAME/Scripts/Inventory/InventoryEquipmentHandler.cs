@@ -5,49 +5,70 @@ public class InventoryEquipmentHandler
 {
     private readonly InventoryStorage storage;
     private readonly PlayerManager playerManager;
-
+    private readonly Inventory owner;
     public InventoryEquipmentHandler(
         InventoryStorage inventoryStorage,
-        PlayerManager ownerPlayerManager)
+        PlayerManager ownerPlayerManager,
+        Inventory ownerInventory)
     {
         storage = inventoryStorage;
         playerManager = ownerPlayerManager;
+        owner = ownerInventory;
     }
-
     public bool Equip(Player player, Item item)
     {
-        return IsValidCharacter(player)
-            && item is Equipment equipment
-            && storage.GetSlot(item) != null
-            && player.Equipment.TryEquip(equipment, out _);
+        if (!IsValidCharacter(player)
+            || item is not Equipment equipment
+            || !player.Equipment.CanEquip(equipment))
+        {
+            return false;
+        }
+        InventorySlot sourceSlot = storage.GetSlot(equipment);
+        if (sourceSlot == null || sourceSlot.RemoveItem(1) != 1)
+        {
+            return false;
+        }
+
+        if (!player.Equipment.TryEquip(equipment, out Equipment replacedEquipment))
+        {
+            sourceSlot.AddItem(equipment, 1);
+            return false;
+        }
+
+        // Item moi roi kho; item bi thay the dung chinh slot vua duoc giai phong.
+        if (replacedEquipment != null)
+        {
+            sourceSlot.AddItem(replacedEquipment, 1);
+            replacedEquipment.SetInventory(owner);
+        }
+
+        equipment.SetInventory(owner);
+        return true;
     }
 
     public bool Unequip(Player player, Item item)
     {
-        return IsValidCharacter(player)
-            && item is Equipment equipment
-            && storage.GetSlot(item) != null
-            && player.Equipment.Unequip(equipment);
+        return item is Equipment equipment
+            && TryUnequip(player, equipment);
     }
 
     public bool Unequip(Player player, EquipmentType equipmentType)
     {
-        return IsValidCharacter(player)
-            && player.Equipment.Unequip(equipmentType) != null;
+        Equipment equipment = IsValidCharacter(player)
+            ? player.Equipment.GetEquipment(equipmentType)
+            : null;
+        return TryUnequip(player, equipment);
     }
 
     public void UnequipBeforeRemoving(Item item)
     {
-        if (item is not Equipment equipment || !equipment.IsEquipped)
+        if (item is Equipment equipment && equipment.IsEquipped)
         {
-            return;
+            equipment.EquippedBy?.Unequip(equipment);
         }
-
-        // Equipment tu biet CharacterEquipment dang so huu nen remove khong can doan Player nao.
-        equipment.EquippedBy?.Unequip(equipment);
     }
 
-    public void ImportCurrentEquipment(Inventory owner)
+    public void ImportCurrentEquipment(Inventory inventory)
     {
         if (playerManager == null)
         {
@@ -55,20 +76,22 @@ public class InventoryEquipmentHandler
         }
 
         IReadOnlyList<Player> characters = playerManager.AllPlayers;
-        for (int playerIndex = 0; playerIndex < characters.Count; playerIndex++)
+        for (int i = 0; i < characters.Count; i++)
         {
-            Player player = characters[playerIndex];
-            if (playerManager.IsCharacterUnlocked(player))
+            IReadOnlyList<Equipment> equipments = characters[i].Equipment.EquippedItems;
+            for (int equipmentIndex = 0; equipmentIndex < equipments.Count; equipmentIndex++)
             {
-                ImportPlayerEquipment(player, owner);
+                equipments[equipmentIndex]?.SetInventory(inventory);
             }
         }
     }
 
     public void RestoreEquippedItems(
         PlayerRosterSaveData rosterSaveData,
-        IReadOnlyList<PlayerEquipmentSaveData> savedPlayerEquipments,
-        IReadOnlyList<string> legacyEquippedItemInstanceIds)
+        IReadOnlyList<PlayerEquipmentSaveData> legacyPlayerEquipments,
+        IReadOnlyList<string> legacyEquipmentIds,
+        ItemDatabaseSO itemDatabase,
+        HashSet<string> loadedInstanceIds)
     {
         if (playerManager == null)
         {
@@ -77,47 +100,11 @@ public class InventoryEquipmentHandler
 
         if (PlayerRosterSaveMapper.HasData(rosterSaveData))
         {
-            for (int i = 0; i < rosterSaveData.characters.Count; i++)
-            {
-                RestoreCharacterEquipment(rosterSaveData.characters[i]);
-            }
+            RestoreCharacterEquipments(rosterSaveData.characters, itemDatabase, loadedInstanceIds);
             return;
         }
 
-        if (savedPlayerEquipments != null && savedPlayerEquipments.Count > 0)
-        {
-            for (int i = 0; i < savedPlayerEquipments.Count; i++)
-            {
-                RestorePlayerEquipment(savedPlayerEquipments[i]);
-            }
-            return;
-        }
-
-        // Save cu chi co mot Player: gan danh sach cu cho Player o team index 0.
-        RestoreEquipmentIds(playerManager.GetPlayer(0), legacyEquippedItemInstanceIds);
-    }
-
-    private void ImportPlayerEquipment(Player player, Inventory owner)
-    {
-        List<Equipment> currentEquipment = new List<Equipment>(player.Equipment.EquippedItems);
-        for (int i = 0; i < currentEquipment.Count; i++)
-        {
-            Equipment equipment = currentEquipment[i];
-            if (equipment == null || storage.GetSlot(equipment) != null)
-            {
-                continue;
-            }
-
-            InventorySlot emptySlot = storage.GetFirstEmptySlot();
-            if (emptySlot == null)
-            {
-                Debug.LogWarning("Team inventory does not have room for starting equipment.");
-                return;
-            }
-
-            emptySlot.AddItem(equipment, 1);
-            equipment.SetInventory(owner);
-        }
+        RestoreLegacyEquipment(legacyPlayerEquipments, legacyEquipmentIds);
     }
 
     public void UnequipAllCharacters()
@@ -130,34 +117,109 @@ public class InventoryEquipmentHandler
         IReadOnlyList<Player> characters = playerManager.AllPlayers;
         for (int i = 0; i < characters.Count; i++)
         {
-            Player player = characters[i];
-            player?.Equipment.UnequipAll();
+            IReadOnlyList<Equipment> equipments = characters[i].Equipment.EquippedItems;
+            for (int equipmentIndex = 0; equipmentIndex < equipments.Count; equipmentIndex++)
+            {
+                equipments[equipmentIndex]?.SetInventory(null);
+            }
+            characters[i]?.Equipment.UnequipAll();
         }
     }
 
-    private void RestoreCharacterEquipment(PlayerCharacterSaveData characterSave)
+    private bool TryUnequip(Player player, Equipment equipment)
     {
-        if (characterSave == null)
+        if (!IsValidCharacter(player)
+            || equipment == null
+            || !ReferenceEquals(
+                player.Equipment.GetEquipment(equipment.EquipmentType), equipment))
         {
+            return false;
+        }
+
+        InventorySlot emptySlot = storage.GetFirstEmptySlot();
+        if (emptySlot == null || !player.Equipment.Unequip(equipment))
+        {
+            return false;
+        }
+
+        if (emptySlot.AddItem(equipment, 1) == 1)
+        {
+            equipment.SetInventory(owner);
+            return true;
+        }
+
+        player.Equipment.Equip(equipment);
+        return false;
+    }
+
+    private void RestoreCharacterEquipments(
+        IReadOnlyList<PlayerCharacterSaveData> characterSaves,
+        ItemDatabaseSO itemDatabase,
+        HashSet<string> loadedInstanceIds)
+    {
+        for (int i = 0; i < characterSaves.Count; i++)
+        {
+            PlayerCharacterSaveData characterSave = characterSaves[i];
+            Player player = characterSave != null
+                ? playerManager.GetCharacter(characterSave.characterId)
+                : null;
+            if (player?.Equipment == null || !player.Equipment.IsInitialized)
+            {
+                continue;
+            }
+
+            if (characterSave.equippedEquipments != null
+                && characterSave.equippedEquipments.Count > 0)
+            {
+                RestoreEquipmentData(
+                    player, characterSave.equippedEquipments,
+                    itemDatabase, loadedInstanceIds);
+            }
+            else
+            {
+                RestoreLegacyIds(player, characterSave.equippedItemInstanceIds);
+            }
+        }
+    }
+
+    private void RestoreEquipmentData(
+        Player player,
+        IReadOnlyList<EquippedEquipmentSaveData> equipmentSaves,
+        ItemDatabaseSO itemDatabase,
+        HashSet<string> loadedInstanceIds)
+    {
+        for (int i = 0; i < equipmentSaves.Count; i++)
+        {
+            Equipment equipment = EquipmentInstanceSaveMapper.Restore(
+                equipmentSaves[i], itemDatabase, loadedInstanceIds, owner);
+            if (equipment != null && !player.Equipment.Equip(equipment))
+            {
+                equipment.SetInventory(null);
+                Debug.LogWarning($"Cannot restore equipment for {player.name}.");
+            }
+        }
+    }
+
+    private void RestoreLegacyEquipment(
+        IReadOnlyList<PlayerEquipmentSaveData> playerEquipmentSaves,
+        IReadOnlyList<string> singlePlayerIds)
+    {
+        if (playerEquipmentSaves != null && playerEquipmentSaves.Count > 0)
+        {
+            for (int i = 0; i < playerEquipmentSaves.Count; i++)
+            {
+                PlayerEquipmentSaveData save = playerEquipmentSaves[i];
+                RestoreLegacyIds(
+                    playerManager.GetPlayer(save.playerIndex),
+                    save.equippedItemInstanceIds);
+            }
             return;
         }
 
-        Player player = playerManager.GetCharacter(characterSave.characterId);
-        RestoreEquipmentIds(player, characterSave.equippedItemInstanceIds);
+        RestoreLegacyIds(playerManager.GetPlayer(0), singlePlayerIds);
     }
 
-    private void RestorePlayerEquipment(PlayerEquipmentSaveData playerEquipmentSave)
-    {
-        if (playerEquipmentSave == null)
-        {
-            return;
-        }
-
-        Player player = playerManager.GetPlayer(playerEquipmentSave.playerIndex);
-        RestoreEquipmentIds(player, playerEquipmentSave.equippedItemInstanceIds);
-    }
-
-    private void RestoreEquipmentIds(Player player, IReadOnlyList<string> instanceIds)
+    private void RestoreLegacyIds(Player player, IReadOnlyList<string> instanceIds)
     {
         if (!IsValidCharacter(player) || instanceIds == null)
         {
@@ -167,11 +229,12 @@ public class InventoryEquipmentHandler
         for (int i = 0; i < instanceIds.Count; i++)
         {
             Item item = storage.GetItemByInstanceId(instanceIds[i]);
-            if (item is Equipment equipment && !player.Equipment.Equip(equipment))
+            InventorySlot slot = storage.GetSlot(item);
+            if (item is Equipment equipment
+                && player.Equipment.Equip(equipment))
             {
-                Debug.LogWarning(
-                    $"Equipment {equipment.InstanceId} no longer meets Player {player.name} requirements."
-                );
+                // Save cu de equipment trong kho; load mot lan se tach no ra khoi slot.
+                slot?.RemoveItem(1);
             }
         }
     }

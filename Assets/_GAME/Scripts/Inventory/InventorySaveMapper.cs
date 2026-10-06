@@ -34,7 +34,6 @@ public static class InventorySaveMapper
 
         if (!PlayerRosterSaveMapper.TryCreate(
             playerManager,
-            storage,
             out PlayerRosterSaveData rosterSaveData))
         {
             saveData = null;
@@ -76,7 +75,9 @@ public static class InventorySaveMapper
         equipmentHandler.RestoreEquippedItems(
             saveData.playerRoster,
             saveData.playerEquipments,
-            saveData.equippedItemInstanceIds
+            saveData.equippedItemInstanceIds,
+            itemDatabase,
+            loadedInstanceIds
         );
         playerManager?.RestoreAllCharactersHealth();
         playerManager?.RefreshTeamActiveStates();
@@ -115,10 +116,7 @@ public static class InventorySaveMapper
 
     private static bool CanApplySaveData(InventorySaveData saveData, ItemDatabaseSO itemDatabase)
     {
-        return saveData != null
-            && (saveData.slots == null
-                || saveData.slots.Count == 0
-                || itemDatabase != null);
+        return saveData != null && itemDatabase != null;
     }
 
     private static void RestoreSlots(

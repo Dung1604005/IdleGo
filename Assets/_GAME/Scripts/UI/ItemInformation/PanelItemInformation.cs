@@ -15,6 +15,9 @@ public class PanelItemInformation : PanelView
     [SerializeField] private Button unequipButton;
 
     private Equipment displayedEquipment;
+    private Color defaultLevelRequirementColor = Color.white;
+    private Color defaultCharacterRequirementColor = Color.white;
+    private bool hasCachedRequirementColors;
 
     public override void OnInit()
     {
@@ -23,6 +26,7 @@ public class PanelItemInformation : PanelView
 
     public void OnInit(Equipment equipment)
     {
+        CacheRequirementColors();
         displayedEquipment = equipment;
         bool hasEquipment = displayedEquipment?.Data != null;
         gameObject.SetActive(hasEquipment);
@@ -77,16 +81,36 @@ public class PanelItemInformation : PanelView
         SetText(mainStatsText,
             EquipmentInformationText.BuildMainStats(displayedEquipment));
         statsContent?.Refresh(displayedEquipment);
-        SetText(levelRequirementText, $"Level Required: {data.LevelRequired}");
-        SetCharacterRequirement(data.CharacterRequirement);
+        Player selectedPlayer = DataManager.Ins.SelectedCharacter;
+        SetLevelRequirement(data.LevelRequired, selectedPlayer);
+        SetCharacterRequirement(data.CharacterRequirement, selectedPlayer);
     }
 
-    private void SetCharacterRequirement(CharacterRequirementType requirement)
+    private void SetLevelRequirement(int requiredLevel, Player selectedPlayer)
     {
-        string characterType = EquipmentInformationText.GetRequirementName(requirement);
-        SetText(characterRequirementText, string.IsNullOrEmpty(characterType)
+        bool meetsRequirement = selectedPlayer != null
+            && selectedPlayer.Stats.CurrentLevel >= requiredLevel;
+        SetColoredText(
+            levelRequirementText,
+            $"Level Required: {requiredLevel}",
+            meetsRequirement ? defaultLevelRequirementColor : Color.red);
+    }
+
+    private void SetCharacterRequirement(
+        CharacterRequirementType requirement,
+        Player selectedPlayer)
+    {
+        string requirementName = EquipmentInformationText.GetRequirementName(requirement);
+        bool meetsRequirement = selectedPlayer != null
+            && CharacaterClassTypeUtility.Matches(
+                requirement,
+                selectedPlayer.CharacaterClassType);
+        SetColoredText(
+            characterRequirementText,
+            string.IsNullOrEmpty(requirementName)
             ? string.Empty
-            : $"Class Required: {characterType}");
+            : $"Class Required: {requirementName}",
+            meetsRequirement ? defaultCharacterRequirementColor : Color.red);
     }
 
     private void SetIcon(Sprite icon)
@@ -107,6 +131,24 @@ public class PanelItemInformation : PanelView
             source == EquipmentSelectionSource.INVENTORY_SLOT);
         SetButtonActive(unequipButton,
             source == EquipmentSelectionSource.EQUIPMENT_SLOT);
+    }
+
+    private void CacheRequirementColors()
+    {
+        if (hasCachedRequirementColors)
+        {
+            return;
+        }
+
+        if (levelRequirementText != null)
+        {
+            defaultLevelRequirementColor = levelRequirementText.color;
+        }
+        if (characterRequirementText != null)
+        {
+            defaultCharacterRequirementColor = characterRequirementText.color;
+        }
+        hasCachedRequirementColors = true;
     }
 
     private static void SetButtonActive(Button button, bool isActive)

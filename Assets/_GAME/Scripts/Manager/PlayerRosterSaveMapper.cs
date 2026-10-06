@@ -5,11 +5,10 @@ public static class PlayerRosterSaveMapper
 {
     public static bool TryCreate(
         PlayerManager playerManager,
-        InventoryStorage storage,
         out PlayerRosterSaveData saveData)
     {
         saveData = new PlayerRosterSaveData();
-        if (playerManager == null || storage == null)
+        if (playerManager == null)
         {
             return false;
         }
@@ -21,7 +20,6 @@ public static class PlayerRosterSaveMapper
             if (!TryCreateCharacterSave(
                 characters[i],
                 playerManager,
-                storage,
                 savedCharacterIds,
                 out PlayerCharacterSaveData characterSave,
                 out bool isUnlocked))
@@ -66,7 +64,6 @@ public static class PlayerRosterSaveMapper
     private static bool TryCreateCharacterSave(
         Player player,
         PlayerManager playerManager,
-        InventoryStorage storage,
         HashSet<string> savedIds,
         out PlayerCharacterSaveData saveData,
         out bool isUnlocked)
@@ -85,23 +82,44 @@ public static class PlayerRosterSaveMapper
             return false;
         }
 
-        saveData = CreateCharacterSave(player, storage);
+        if (!TryCreateCharacterSaveData(player, out saveData))
+        {
+            return false;
+        }
+
         isUnlocked = playerManager.IsCharacterUnlocked(player);
         return true;
     }
 
-    private static PlayerCharacterSaveData CreateCharacterSave(
+    private static bool TryCreateCharacterSaveData(
         Player player,
-        InventoryStorage storage)
+        out PlayerCharacterSaveData saveData)
     {
-        PlayerCharacterSaveData saveData = new PlayerCharacterSaveData
+        saveData = new PlayerCharacterSaveData
         {
             characterId = player.CharacterId
         };
         player.Stats.CopyProgressTo(saveData.currentStats);
-        AddEquipmentIds(player, storage, saveData.equippedItemInstanceIds);
+        IReadOnlyList<Equipment> equipments = player.Equipment.EquippedItems;
+        for (int i = 0; i < equipments.Count; i++)
+        {
+            if (equipments[i] == null)
+            {
+                continue;
+            }
+
+            if (!EquipmentInstanceSaveMapper.TryCreate(
+                equipments[i],
+                out EquippedEquipmentSaveData equipmentSave))
+            {
+                return false;
+            }
+
+            saveData.equippedEquipments.Add(equipmentSave);
+        }
+
         PlayerSkillSaveMapper.AddLoadout(player, saveData.equippedSkills);
-        return saveData;
+        return true;
     }
 
     private static void AddTeamIds(
@@ -113,22 +131,6 @@ public static class PlayerRosterSaveMapper
             if (team[i] != null)
             {
                 output.Add(team[i].CharacterId);
-            }
-        }
-    }
-
-    private static void AddEquipmentIds(
-        Player player,
-        InventoryStorage storage,
-        List<string> output)
-    {
-        IReadOnlyList<Equipment> equipments = player.Equipment.EquippedItems;
-        for (int i = 0; i < equipments.Count; i++)
-        {
-            Equipment equipment = equipments[i];
-            if (equipment != null && storage.GetSlot(equipment) != null)
-            {
-                output.Add(equipment.InstanceId);
             }
         }
     }
