@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BeginCoat_Common
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
   itemId: 24be3442fcab44789cfc238dbd46d95b
-  nameItem: Beginner Boot
+  nameItem: Beginner Coat
   rarityType: 0
   itemType: 0
   icon: {fileID: -8689749505063999675, guid: b574e0c6f05ba474db019f38176ac3a0, type: 3}
@@ -28,3 +28,4 @@ MonoBehaviour:
   - statType: 1
     value: 0.3333
     operation: 1
+  attacksPerSecond: 1
