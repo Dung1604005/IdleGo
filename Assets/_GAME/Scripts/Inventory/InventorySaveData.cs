@@ -6,6 +6,7 @@ public class InventorySaveData
 {
     public int capacity;
     public int globalPlayerLevel = 1;
+    public List<float> globalStats = new List<float>();
     public List<InventorySlotSaveData> slots = new List<InventorySlotSaveData>();
     public PlayerRosterSaveData playerRoster = new PlayerRosterSaveData();
 
@@ -35,6 +36,25 @@ public class PlayerCharacterSaveData
     // Field cu chi dung de migrate save khi equipment con nam trong InventorySlot.
     public List<string> equippedItemInstanceIds = new List<string>();
     public List<EquippedSkillSaveData> equippedSkills = new List<EquippedSkillSaveData>();
+    public CharacterStatProgressSaveData statProgress =
+        new CharacterStatProgressSaveData();
+}
+
+[Serializable]
+public class CharacterStatProgressSaveData
+{
+    public int version;
+    public int availableStatPoints;
+    public List<int> statUpgradeCounts = new List<int>();
+    public List<CharacterSkillProgressSaveData> skillLevels =
+        new List<CharacterSkillProgressSaveData>();
+}
+
+[Serializable]
+public class CharacterSkillProgressSaveData
+{
+    public string skillId;
+    public int level;
 }
 
 [Serializable]

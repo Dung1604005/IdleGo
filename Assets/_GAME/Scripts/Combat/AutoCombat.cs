@@ -96,12 +96,13 @@ public class AutoCombat : MonoBehaviour
     {
         if (character is Player)
         {
-            return EnemyManager.Ins.GetNearestTarget(character.transform.position);
+            return DataManager.Ins.GetNearestEnemy(character.transform.position);
         }
 
         if (character is Enemy)
         {
-            return PlayerManager.Ins.GetNearestTarget(character.transform.position);
+            return DataManager.Ins.GetNearestTeamPlayer(
+                character.transform.position);
         }
 
         return null;

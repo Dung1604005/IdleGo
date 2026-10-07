@@ -48,7 +48,13 @@ public class CharacterMovement
             return true;
         }
 
-        float step = character.Stats.GetCurrentStat(StatType.RUN_SPEED) * Time.deltaTime;
+        float runSpeed = character.Stats.GetCurrentStat(StatType.RUN_SPEED);
+        if (character is Player)
+        {
+            runSpeed *= DataManager.Ins.GetGlobalStatMultiplier(
+                GlobalStatType.SPEED_BUFF);
+        }
+        float step = runSpeed * Time.deltaTime;
         if (step <= 0.01f)
         {
             Stop();

@@ -13,6 +13,14 @@ public partial class EnemyManager
         }
     }
 
+    public EnemyDataSO GetEnemyData(Enemy enemy)
+    {
+        return enemy != null
+            && enemyLootData.TryGetValue(enemy, out EnemyDataSO enemyData)
+            ? enemyData
+            : null;
+    }
+
     private void DropLootForDefeatedEnemy(Enemy enemy)
     {
         if (enemy == null || !enemyLootData.TryGetValue(enemy, out EnemyDataSO enemyData))

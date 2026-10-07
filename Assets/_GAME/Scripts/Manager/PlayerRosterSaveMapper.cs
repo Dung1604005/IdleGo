@@ -100,6 +100,7 @@ public static class PlayerRosterSaveMapper
             characterId = player.CharacterId
         };
         player.Stats.CopyProgressTo(saveData.currentStats);
+        player.StatProgress.CopyTo(saveData.statProgress);
         IReadOnlyList<Equipment> equipments = player.Equipment.EquippedItems;
         for (int i = 0; i < equipments.Count; i++)
         {
@@ -152,6 +153,9 @@ public static class PlayerRosterSaveMapper
 
             // Stat phai co truoc skill vi dieu kien trang bi skill phu thuoc level.
             player.Stats.RestoreProgress(savedCharacter.currentStats);
+            player.StatProgress.Restore(
+                savedCharacter.statProgress,
+                player.Stats.CurrentLevel);
             PlayerSkillSaveMapper.RestoreLoadout(player, savedCharacter.equippedSkills);
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public partial class CharacterCombat
 {
@@ -20,6 +21,7 @@ public partial class CharacterCombat
         return IsInitialized
             && combatSkillStates.Count < MaxEquippedSkillCount
             && IsSkillAvailable(skill)
+            && HasSkillProgress(skill)
             && skill.CanEquip(character)
             && GetSkillState(skill) == null;
     }
@@ -123,6 +125,7 @@ public partial class CharacterCombat
     {
         if (skill == null
             || combatSkillStates.Count >= MaxEquippedSkillCount
+            || !HasSkillProgress(skill)
             || !skill.CanEquip(character)
             || GetSkillState(skill) != null)
         {
@@ -132,8 +135,28 @@ public partial class CharacterCombat
         // Chi skill dat dieu kien moi duoc tao state chien dau.
         CombatSkillState state = new CombatSkillState();
         state.OnInit(skill, character.Stats.CurrentLevel);
+        state.SetLevel(GetRuntimeSkillLevel(skill));
         combatSkillStates.Add(state);
         return true;
+    }
+
+    private bool HasSkillProgress(CombatSkill skill)
+    {
+        return character is not Player player
+            || DataManager.Ins.GetCharacterSkillLevel(
+                player.CharacterId,
+                skill) > 0;
+    }
+
+    private int GetRuntimeSkillLevel(CombatSkill skill)
+    {
+        return character is Player player
+            ? Mathf.Max(
+                0,
+                DataManager.Ins.GetCharacterSkillLevel(
+                    player.CharacterId,
+                    skill) - 1)
+            : 0;
     }
 
     private bool IsSkillAvailable(CombatSkill skill)

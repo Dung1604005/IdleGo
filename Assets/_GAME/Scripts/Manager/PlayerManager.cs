@@ -17,6 +17,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public int TeamCount => team.Count;
     public int TeamProgressLevel => team.ProgressLevel;
     public int GlobalLevel => progression.GlobalLevel;
+    internal PlayerProgression Progression => progression;
     public int UnlockedTeamSlotCount => team.UnlockedSlotCount;
     public bool IsInitialized { get; private set; }
 
@@ -150,7 +151,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public bool EquipSkill(Player player, CombatSkill skill)
     {
-        if (!CanChangeSkill(player) || !player.Combat.EquipSkill(skill))
+        if (!CanChangeSkill(player)
+            || player.StatProgress.GetSkillLevel(skill) <= 0
+            || !player.Combat.EquipSkill(skill))
         {
             return false;
         }
@@ -226,10 +229,17 @@ public class PlayerManager : Singleton<PlayerManager>
         roster.RestoreAllHealth();
     }
 
-    internal void RestoreGlobalLevel(int level)
+    internal void RestoreGlobalStats(
+        IReadOnlyList<float> savedStats,
+        int legacyLevel)
     {
         progression ??= new PlayerProgression();
-        progression.SetLevel(level);
+        progression.Restore(savedStats, legacyLevel);
+    }
+
+    internal void CompleteProgressChange()
+    {
+        inventory?.OnPlayerProgressChanged();
     }
 
     private bool CanChangeSkill(Player player)

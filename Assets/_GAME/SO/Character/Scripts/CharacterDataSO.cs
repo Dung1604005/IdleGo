@@ -13,6 +13,7 @@ public class CharacterDataSO : ScriptableObject
     [FormerlySerializedAs("characterType")]
     [SerializeField] private CharacaterClassType characaterClassType;
     [SerializeField] private CharacterStatSO characterStatSO;
+    [SerializeField] private CharacterStatProgressSO characterStatProgressSO;
 
     [SerializeField] private CharacterCombatSO characterCombatSO;
 
@@ -25,6 +26,8 @@ public class CharacterDataSO : ScriptableObject
     public CharacaterClassType CharacaterClassType => characaterClassType;
 
     public CharacterStatSO StatSO => characterStatSO;
+
+    public CharacterStatProgressSO StatProgressSO => characterStatProgressSO;
 
     public CharacterCombatSO CombatSO => characterCombatSO;
 

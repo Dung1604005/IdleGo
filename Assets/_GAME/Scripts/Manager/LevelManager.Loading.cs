@@ -25,7 +25,7 @@ public partial class LevelManager
 
     private bool CanEnterLoadedLevel(LevelDataSO levelData)
     {
-        int globalLevel = PlayerManager.Ins.GlobalLevel;
+        int globalLevel = DataManager.Ins.GetGlobalLevel();
         if (levelData.CanEnter(globalLevel))
         {
             return true;

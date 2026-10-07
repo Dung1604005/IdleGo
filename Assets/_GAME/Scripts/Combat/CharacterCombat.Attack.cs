@@ -114,8 +114,16 @@ public partial class CharacterCombat
         float damage = character.AttackDamage
             * Mathf.Max(0f, multiplier)
             * amplification
-            * criticalMultiplier;
+            * criticalMultiplier
+            * GetGlobalDamageMultiplier();
         return Mathf.Max(0, Mathf.RoundToInt(damage));
+    }
+
+    private float GetGlobalDamageMultiplier()
+    {
+        return character is Player
+            ? DataManager.Ins.GetGlobalStatMultiplier(GlobalStatType.DAMAGE_BUFF)
+            : 1f;
     }
 
     private void ApplyDamageResult(
@@ -130,6 +138,15 @@ public partial class CharacterCombat
         {
             UIManager.Ins.GetUI<CanvasCombat>()
                 .ShowDamage(damage, isCritical, attackTarget.transform);
+        }
+
+        if (healthBeforeHit > 0
+            && attackTarget.IsDead
+            && character is Player killer
+            && attackTarget is Enemy defeatedEnemy)
+        {
+            // CharacterCombat la noi duy nhat biet chinh xac Player gay don ket lieu.
+            DataManager.Ins.RegisterEnemyKill(killer, defeatedEnemy);
         }
 
         float lifeSteal = stats.GetCurrentStat(StatType.LIFE_STEAL);

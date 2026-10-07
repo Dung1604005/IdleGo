@@ -13,6 +13,7 @@ public static class InventorySaveMapper
             capacity = storage.Capacity,
             globalPlayerLevel = playerManager != null ? playerManager.GlobalLevel : 1
         };
+        playerManager?.Progression.CopyTo(saveData.globalStats);
 
         IReadOnlyList<InventorySlot> slots = storage.Slots;
         for (int i = 0; i < slots.Count; i++)
@@ -70,7 +71,9 @@ public static class InventorySaveMapper
         }
 
         storage.Replace(loadedCapacity, loadedSlots, owner);
-        playerManager?.RestoreGlobalLevel(saveData.globalPlayerLevel);
+        playerManager?.RestoreGlobalStats(
+            saveData.globalStats,
+            saveData.globalPlayerLevel);
         PlayerRosterSaveMapper.ApplyProgress(saveData.playerRoster, playerManager);
         equipmentHandler.RestoreEquippedItems(
             saveData.playerRoster,

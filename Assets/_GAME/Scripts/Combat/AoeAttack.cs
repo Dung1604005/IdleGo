@@ -25,11 +25,19 @@ public class AoeAttack : AttackType
         Debug.Log("ATTACK " + colliders.Length);
         if (user.Character is Player)
         {
-            DamageTargets(user, EnemyManager.Ins.Enemies, colliders, damageMultiplier);
+            DamageTargets(
+                user,
+                DataManager.Ins.GetEnemies(),
+                colliders,
+                damageMultiplier);
         }
         else if (user.Character is Enemy)
         {
-            DamageTargets(user, PlayerManager.Ins.Players, colliders, damageMultiplier);
+            DamageTargets(
+                user,
+                DataManager.Ins.GetTeamPlayers(),
+                colliders,
+                damageMultiplier);
         }
     }
 

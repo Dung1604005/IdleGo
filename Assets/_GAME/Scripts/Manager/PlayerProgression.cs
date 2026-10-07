@@ -1,22 +1,40 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class PlayerProgression
 {
-    [SerializeField, Min(1)] private int globalLevel = 1;
+    [SerializeField] private GlobalStat globalStats = new GlobalStat();
 
-    public int GlobalLevel => Mathf.Max(1, globalLevel);
+    public GlobalStat GlobalStats => globalStats ??= new GlobalStat();
+    public int GlobalLevel => GlobalStats.CurrentLevel;
 
     public bool SetLevel(int value)
     {
         int normalizedValue = Mathf.Max(1, value);
-        if (globalLevel == normalizedValue)
+        if (GlobalLevel == normalizedValue)
         {
             return false;
         }
 
-        globalLevel = normalizedValue;
+        GlobalStats.SetStat(GlobalStatType.LEVEL, normalizedValue);
         return true;
+    }
+
+    public int AddEnemyExperience(int baseExperience)
+    {
+        return GlobalStats.AddRewardExperience(baseExperience);
+    }
+
+    public void CopyTo(List<float> output)
+    {
+        GlobalStats.CopyTo(output);
+    }
+
+    public void Restore(IReadOnlyList<float> savedStats, int legacyLevel)
+    {
+        globalStats ??= new GlobalStat();
+        globalStats.Restore(savedStats, legacyLevel);
     }
 }

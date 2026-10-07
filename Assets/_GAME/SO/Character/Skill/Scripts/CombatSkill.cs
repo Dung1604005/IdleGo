@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CombatSkill : ScriptableObject
@@ -6,7 +7,8 @@ public abstract class CombatSkill : ScriptableObject
     [SerializeField] private string skillId;
     [SerializeField, Min(0.01f)] private float cooldown = 3f;
 
-    [SerializeField] protected int maxLevel;
+    [SerializeField, Min(1)] protected int maxLevel = 1;
+    [SerializeField] private List<int> statPointCostByLevel = new List<int>();
 
     [SerializeField] private Sprite iconSkill;
 
@@ -42,10 +44,48 @@ public abstract class CombatSkill : ScriptableObject
 
     public bool CanEquip(Character character)
     {
+        return MeetsCharacterRequirements(character)
+            && IsUnlocked(character.Stats.CurrentLevel);
+    }
+
+    public bool MeetsCharacterRequirements(Character character)
+    {
         return character != null
-            && IsUnlocked(character.Stats.CurrentLevel)
             && CharacaterClassTypeUtility.Matches(
                 characterRequirement,
                 character.CharacaterClassType);
+    }
+
+    public int GetStatPointCost(int targetLevel)
+    {
+        int index = targetLevel - 1;
+        if (index < 0 || index >= MaxLevel)
+        {
+            return 0;
+        }
+
+        return index < statPointCostByLevel.Count
+            ? Mathf.Max(1, statPointCostByLevel[index])
+            : Mathf.Max(1, targetLevel);
+    }
+
+    protected virtual void OnValidate()
+    {
+        maxLevel = Mathf.Max(1, maxLevel);
+        statPointCostByLevel ??= new List<int>();
+        while (statPointCostByLevel.Count < maxLevel)
+        {
+            statPointCostByLevel.Add(statPointCostByLevel.Count + 1);
+        }
+        if (statPointCostByLevel.Count > maxLevel)
+        {
+            statPointCostByLevel.RemoveRange(
+                maxLevel,
+                statPointCostByLevel.Count - maxLevel);
+        }
+        for (int i = 0; i < statPointCostByLevel.Count; i++)
+        {
+            statPointCostByLevel[i] = Mathf.Max(1, statPointCostByLevel[i]);
+        }
     }
 }
