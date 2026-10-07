@@ -91,6 +91,7 @@ public class BuffStatSlotSaveData
 {
     public bool isEmpty = true;
     public StatValueSaveData stat;
+    public BuffStatRaritySaveData sourceRarity;
 
     public BuffStatSlotSaveData()
     {
@@ -100,11 +101,38 @@ public class BuffStatSlotSaveData
     {
         isEmpty = value == null;
         stat = value != null ? new StatValueSaveData(value) : null;
+        if (value is BuffStatValue buffStat)
+        {
+            sourceRarity = new BuffStatRaritySaveData(buffStat.SourceRarity);
+        }
     }
 
     public StatValue ToStatValue()
     {
-        return isEmpty || stat == null ? null : stat.ToStatValue();
+        if (isEmpty || stat == null)
+        {
+            return null;
+        }
+
+        StatValue value = stat.ToStatValue();
+        return sourceRarity != null
+            ? new BuffStatValue(value, sourceRarity.rarity)
+            : value;
+    }
+}
+
+[Serializable]
+public class BuffStatRaritySaveData
+{
+    public RarityType rarity;
+
+    public BuffStatRaritySaveData()
+    {
+    }
+
+    public BuffStatRaritySaveData(RarityType sourceRarity)
+    {
+        rarity = sourceRarity;
     }
 }
 

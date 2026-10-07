@@ -9,24 +9,26 @@ public class CharacterStat
     [SerializeField, StatList] private List<float> currentStats = new List<float>();
     [SerializeField] private int currentHealth;
 
-    private Character character;
-    [NonSerialized] private List<StatModifier> modifiers;
-    [NonSerialized] private List<float> calculatedStats;
-    [NonSerialized] private bool areCalculatedStatsDirty = true;
+    [NonSerialized] private Character character;
+    [NonSerialized] private CharacterStatCalculator calculator;
+    [NonSerialized] private CharacterLevelProgression levelProgression;
+    [NonSerialized] private CharacterHealthController healthController;
 
-    public int CurrentMaxHealth => Mathf.RoundToInt(GetCurrentStat(StatType.MAX_HEALTH));
+    public int CurrentMaxHealth => Mathf.RoundToInt(
+        GetCurrentStat(StatType.MAX_HEALTH));
     public int CurrentHealth => currentHealth;
     public int CurrentLevel => Mathf.RoundToInt(GetCurrentStat(StatType.LEVEL));
-    public int CurrentExperience => Mathf.RoundToInt(GetCurrentStat(StatType.EXPERIENCE));
+    public int CurrentExperience => Mathf.RoundToInt(
+        GetCurrentStat(StatType.EXPERIENCE));
     public bool IsDead => currentHealth <= 0;
-    public IReadOnlyList<StatModifier> Modifiers
-    {
-        get
-        {
-            EnsureRuntimeCollections();
-            return modifiers;
-        }
-    }
+    public IReadOnlyList<StatModifier> Modifiers => Calculator.Modifiers;
+
+    private CharacterStatCalculator Calculator =>
+        calculator ??= new CharacterStatCalculator();
+    private CharacterLevelProgression LevelProgression =>
+        levelProgression ??= new CharacterLevelProgression(this);
+    private CharacterHealthController HealthController =>
+        healthController ??= new CharacterHealthController();
 
     public void OnInit(CharacterStatSO characterStatSO, Character owner)
     {
@@ -38,13 +40,9 @@ public class CharacterStat
     public float GetCurrentStat(StatType statType)
     {
         EnsureCurrentStats();
-        if (!StatTypeUtility.IsValid(statType))
-        {
-            return 0f;
-        }
-
-        RecalculateStatsIfNeeded();
-        return calculatedStats[(int)statType];
+        return StatTypeUtility.IsValid(statType)
+            ? Calculator.GetValue(currentStats, statType)
+            : 0f;
     }
 
     public void SetCurrentStat(StatType statType, float value)
@@ -55,23 +53,22 @@ public class CharacterStat
             return;
         }
 
-        currentStats[(int)statType] = StatTypeUtility.NormalizeValue(statType, value);
-        areCalculatedStatsDirty = true;
+        currentStats[(int)statType] =
+            StatTypeUtility.NormalizeValue(statType, value);
+        Calculator.MarkDirty();
         if (statType == StatType.MAX_HEALTH)
         {
-            currentHealth = Mathf.Min(currentHealth, CurrentMaxHealth);
+            ClampCurrentHealth();
         }
     }
 
     public void AddCurrentStat(StatType statType, float amount)
     {
         EnsureCurrentStats();
-        if (!StatTypeUtility.IsValid(statType))
+        if (StatTypeUtility.IsValid(statType))
         {
-            return;
+            SetCurrentStat(statType, currentStats[(int)statType] + amount);
         }
-
-        SetCurrentStat(statType, currentStats[(int)statType] + amount);
     }
 
     public void CopyProgressTo(List<float> output)
@@ -85,7 +82,7 @@ public class CharacterStat
         output.Clear();
         for (int i = 0; i < StatTypeUtility.StatCount; i++)
         {
-            // Chi luu stat goc da nang. Modifier cua equipment se duoc gan lai sau khi load.
+            // Save chi giu stat goc; modifier se duoc gan lai tu equipment.
             output.Add(currentStats[i]);
         }
     }
@@ -101,41 +98,33 @@ public class CharacterStat
         int count = Mathf.Min(savedStats.Count, StatTypeUtility.StatCount);
         for (int i = 0; i < count; i++)
         {
-            StatType statType = (StatType)i;
-            currentStats[i] = StatTypeUtility.NormalizeValue(statType, savedStats[i]);
+            currentStats[i] = StatTypeUtility.NormalizeValue(
+                (StatType)i,
+                savedStats[i]);
         }
 
-        areCalculatedStatsDirty = true;
-        currentHealth = CurrentMaxHealth;
+        Calculator.MarkDirty();
+        RestoreHealthToMax();
     }
 
     public bool AddModifier(StatModifier modifier)
     {
-        EnsureRuntimeCollections();
-        if (!IsValidModifier(modifier))
+        if (!Calculator.AddModifier(modifier))
         {
             return false;
         }
 
-        modifiers.Add(modifier);
-        OnModifiersChanged();
+        ClampCurrentHealth();
         return true;
     }
 
     public int RemoveModifiersFromSource(IStatModifierSource source)
     {
-        EnsureRuntimeCollections();
-        if (source == null)
-        {
-            return 0;
-        }
-
-        int removedCount = RemoveModifiersFromSourcesInternal(new[] { source });
+        int removedCount = Calculator.RemoveModifiersFromSource(source);
         if (removedCount > 0)
         {
-            OnModifiersChanged();
+            ClampCurrentHealth();
         }
-
         return removedCount;
     }
 
@@ -143,34 +132,18 @@ public class CharacterStat
         IReadOnlyList<IStatModifierSource> sourcesToReplace,
         IReadOnlyList<StatModifier> replacementModifiers)
     {
-        EnsureRuntimeCollections();
-        RemoveModifiersFromSourcesInternal(sourcesToReplace);
-
-        if (replacementModifiers != null)
-        {
-            for (int i = 0; i < replacementModifiers.Count; i++)
-            {
-                StatModifier modifier = replacementModifiers[i];
-                if (IsValidModifier(modifier))
-                {
-                    modifiers.Add(modifier);
-                }
-            }
-        }
-
-        OnModifiersChanged();
+        Calculator.ReplaceModifiers(
+            sourcesToReplace,
+            replacementModifiers);
+        ClampCurrentHealth();
     }
 
     public void ClearAllModifiers()
     {
-        EnsureRuntimeCollections();
-        if (modifiers.Count == 0)
+        if (Calculator.ClearModifiers())
         {
-            return;
+            ClampCurrentHealth();
         }
-
-        modifiers.Clear();
-        OnModifiersChanged();
     }
 
     public void RestoreHealthToMax()
@@ -186,197 +159,63 @@ public class CharacterStat
             return;
         }
 
+        statBaseData = characterStatSO;
         EnsureCurrentStats();
-        EnsureRuntimeCollections();
-        modifiers.Clear();
-        areCalculatedStatsDirty = true;
+        Calculator.ClearModifiers();
         for (int i = 0; i < StatTypeUtility.StatCount; i++)
         {
-            StatType statType = (StatType)i;
-            SetCurrentStat(statType, characterStatSO.GetBaseStat(statType));
+            StatType type = (StatType)i;
+            currentStats[i] = StatTypeUtility.NormalizeValue(
+                type,
+                characterStatSO.GetBaseStat(type));
         }
 
-        currentHealth = CurrentMaxHealth;
+        Calculator.MarkDirty();
+        RestoreHealthToMax();
     }
 
     public int GetExpToNextLevel(int level)
     {
-        return Mathf.RoundToInt(
-            GameConfig.BASE_EXP * Mathf.Pow(level, GameConfig.POWER_EXP)
-        );
-    }
-
-    public bool TakeDamage(int incomingDamage)
-    {
-        if (IsDead || incomingDamage <= 0)
-        {
-            return false;
-        }
-
-        if (CanDodge())
-        {
-            return false;
-        }
-
-        // Armor được đổi thành phần trăm giảm damage; một đòn đánh trúng vẫn gây ít nhất 1 damage.
-        character.ChangeAnim(GameConfig.ANIM_HURT);
-        float damageReduction = CombatFormula.CalculateArmorDamageReduction(
-            GetCurrentStat(StatType.ARMOR));
-        int effectiveDamage = Mathf.Max(
-            1,
-            Mathf.RoundToInt(incomingDamage * (1f - damageReduction)));
-        currentHealth = Mathf.Max(0, currentHealth - effectiveDamage);
-        return IsDead;
-    }
-
-    public bool CanDodge()
-    {
-        return GetCurrentStat(StatType.DODGE_CHANCE) >= 1f || UnityEngine.Random.value < GetCurrentStat(StatType.DODGE_CHANCE);
-    }
-
-    public void Heal(int amount)
-    {
-        if (IsDead || amount <= 0)
-        {
-            return;
-        }
-
-        currentHealth += Mathf.Min(CurrentMaxHealth - currentHealth, amount);
+        return LevelProgression.GetExpToNextLevel(level);
     }
 
     public void AddExperience(int amount)
     {
-        if (amount > 0)
-        {
-            AddCurrentStat(StatType.EXPERIENCE, amount);
-        }
+        LevelProgression.AddExperience(amount);
     }
 
     public void CheckLevelUp()
     {
-        for (int i = 1; i <= 100000; i++)
-        {
-            int requiredExperience = GetExpToNextLevel(CurrentLevel);
-            if (CurrentExperience < requiredExperience)
-            {
-                return;
-            }
-            SetCurrentStat(StatType.EXPERIENCE,CurrentExperience - requiredExperience);
-            SetCurrentStat(StatType.LEVEL, CurrentLevel + 1);
+        LevelProgression.CheckLevelUp();
+    }
 
-        }
+    public bool TakeDamage(int incomingDamage)
+    {
+        return HealthController.TakeDamage(
+            this,
+            character,
+            ref currentHealth,
+            incomingDamage);
+    }
+
+    public bool CanDodge()
+    {
+        return HealthController.CanDodge(this);
+    }
+
+    public void Heal(int amount)
+    {
+        HealthController.Heal(this, ref currentHealth, amount);
     }
 
     private void EnsureCurrentStats()
     {
-        if (currentStats == null)
-        {
-            currentStats = new List<float>();
-        }
-
+        currentStats ??= new List<float>();
         StatTypeUtility.EnsureListSize(currentStats);
     }
 
-    private void EnsureRuntimeCollections()
+    private void ClampCurrentHealth()
     {
-        if (modifiers == null)
-        {
-            modifiers = new List<StatModifier>();
-        }
-
-        if (calculatedStats == null)
-        {
-            calculatedStats = new List<float>();
-            areCalculatedStatsDirty = true;
-        }
-
-        StatTypeUtility.EnsureListSize(calculatedStats);
-    }
-
-    private void RecalculateStatsIfNeeded()
-    {
-        EnsureRuntimeCollections();
-        if (!areCalculatedStatsDirty)
-        {
-            return;
-        }
-
-        for (int statIndex = 0; statIndex < StatTypeUtility.StatCount; statIndex++)
-        {
-            StatType statType = (StatType)statIndex;
-            float flatValue = 0f;
-            float additivePercent = 0f;
-            float multiplicativePercent = 1f;
-
-            for (int modifierIndex = 0; modifierIndex < modifiers.Count; modifierIndex++)
-            {
-                StatModifier modifier = modifiers[modifierIndex];
-                if (modifier.StatType != statType)
-                {
-                    continue;
-                }
-
-                switch (modifier.Operation)
-                {
-                    case StatModifierOperation.FLAT:
-                        flatValue += modifier.Value;
-                        break;
-                    case StatModifierOperation.PERCENT_ADD:
-                        additivePercent += modifier.Value;
-                        break;
-                    case StatModifierOperation.PERCENT_MULTIPLY:
-                        multiplicativePercent *= 1f + modifier.Value;
-                        break;
-                }
-            }
-
-            float calculatedValue = (currentStats[statIndex] + flatValue)
-                * (1f + additivePercent)
-                * multiplicativePercent;
-            calculatedStats[statIndex] = StatTypeUtility.NormalizeValue(statType, calculatedValue);
-        }
-
-        areCalculatedStatsDirty = false;
-    }
-
-    private int RemoveModifiersFromSourcesInternal(IReadOnlyList<IStatModifierSource> sources)
-    {
-        if (sources == null || sources.Count == 0)
-        {
-            return 0;
-        }
-
-        int removedCount = 0;
-        for (int modifierIndex = modifiers.Count - 1; modifierIndex >= 0; modifierIndex--)
-        {
-            IStatModifierSource modifierSource = modifiers[modifierIndex].Source;
-            for (int sourceIndex = 0; sourceIndex < sources.Count; sourceIndex++)
-            {
-                if (!ReferenceEquals(modifierSource, sources[sourceIndex]))
-                {
-                    continue;
-                }
-
-                modifiers.RemoveAt(modifierIndex);
-                removedCount++;
-                break;
-            }
-        }
-
-        return removedCount;
-    }
-
-    private void OnModifiersChanged()
-    {
-        areCalculatedStatsDirty = true;
         currentHealth = Mathf.Min(currentHealth, CurrentMaxHealth);
-    }
-
-    private static bool IsValidModifier(StatModifier modifier)
-    {
-        return modifier != null
-            && modifier.Source != null
-            && StatTypeUtility.CanHaveModifiers(modifier.StatType)
-            && Enum.IsDefined(typeof(StatModifierOperation), modifier.Operation);
     }
 }

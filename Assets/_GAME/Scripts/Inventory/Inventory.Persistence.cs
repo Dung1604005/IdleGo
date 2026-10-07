@@ -95,6 +95,7 @@ public partial class Inventory
     {
         equipmentHandler = new InventoryEquipmentHandler(storage, playerManager, this);
         itemHandler = new InventoryItemHandler(storage, equipmentHandler);
+        enchantHandler = new InventoryEnchantHandler(storage);
     }
 
     private void CompleteDataFlow()

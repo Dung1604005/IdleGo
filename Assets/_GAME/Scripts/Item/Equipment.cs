@@ -241,9 +241,7 @@ public partial class Equipment : Item, IStatModifierSource
         for (int i = 0; i < source.Count; i++)
         {
             StatValue stat = source[i];
-            target.Add(stat == null
-                ? null
-                : new StatValue(stat.StatType, stat.Value, stat.Operation));
+            target.Add(CloneBuffStat(stat));
         }
     }
 }

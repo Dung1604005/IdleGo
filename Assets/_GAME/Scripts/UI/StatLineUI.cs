@@ -28,14 +28,27 @@ public class StatLineUI : GameUnit
 
     public void OnInitEnhancement(StatValue stat, RarityType rarityType)
     {
+        OnInitEnhancement(stat, (RarityType?)rarityType);
+    }
+
+    public void OnInitEnhancement(StatValue stat)
+    {
+        RarityType? rarityType = stat is BuffStatValue buffStat
+            ? buffStat.SourceRarity
+            : null;
+        OnInitEnhancement(stat, rarityType);
+    }
+
+    private void OnInitEnhancement(StatValue stat, RarityType? rarityType)
+    {
         ResetRankVisual();
         SetStatText(stat == null
             ? "Empty"
             : EquipmentInformationText.FormatStat(stat));
 
-        if (stat != null)
+        if (stat != null && rarityType.HasValue)
         {
-            SetEnhancementRank(rarityType);
+            SetEnhancementRank(rarityType.Value);
         }
     }
 
@@ -73,6 +86,7 @@ public class StatLineUI : GameUnit
         if (textRankStat != null)
         {
             textRankStat.text = $"T{(int)rarityType + 1}";
+            textRankStat.color = rarityColor;
         }
     }
 

@@ -12,6 +12,7 @@ public partial class Inventory
     [NonSerialized] private PlayerManager playerManager;
     [NonSerialized] private InventoryItemHandler itemHandler;
     [NonSerialized] private InventoryEquipmentHandler equipmentHandler;
+    [NonSerialized] private InventoryEnchantHandler enchantHandler;
     [NonSerialized] private int dataVersion;
     [NonSerialized] private bool lastSaveSucceeded;
     [NonSerialized] private bool canSave;
@@ -62,6 +63,7 @@ public partial class Inventory
         playerManager = null;
         itemHandler = null;
         equipmentHandler = null;
+        enchantHandler = null;
         inventoryViews?.Clear();
         canSave = false;
         IsInitialized = false;
@@ -147,6 +149,27 @@ public partial class Inventory
 
         CompleteDataFlow();
         return true;
+    }
+
+    public bool ApplyEnchantMaterial(
+        EnchantMaterial material,
+        Equipment targetEquipment)
+    {
+        if (!IsInitialized || !enchantHandler.Apply(material, targetEquipment))
+        {
+            return false;
+        }
+
+        CompleteDataFlow();
+        return true;
+    }
+
+    public bool CanApplyEnchantMaterial(
+        EnchantMaterial material,
+        Equipment targetEquipment)
+    {
+        return IsInitialized
+            && enchantHandler.CanApply(material, targetEquipment, out _);
     }
 
     public bool IncreaseCapacity(int additionalSlots)

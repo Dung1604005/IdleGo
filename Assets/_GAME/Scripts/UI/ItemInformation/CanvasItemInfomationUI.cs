@@ -19,10 +19,11 @@ public class CanvasItemInfomationUI : UICanvas, IInventoryView
 
     public void RefreshInventory()
     {
-        Equipment selectedEquipment = DataManager.Ins.SelectedEquipment;
+        Item selectedItem = DataManager.Ins.SelectedItem;
+        Equipment selectedEquipment = selectedItem as Equipment;
         Equipment equippedEquipment = GetEquippedComparison(selectedEquipment);
-        selectedItemPanel?.OnInit(selectedEquipment);
-        equippedComparisonPanel?.OnInit(equippedEquipment);
+        selectedItemPanel?.OnInit(selectedItem);
+        equippedComparisonPanel?.OnInit((Item)equippedEquipment);
         RefreshPanelPositions(equippedEquipment?.Data != null);
     }
 
@@ -31,7 +32,7 @@ public class CanvasItemInfomationUI : UICanvas, IInventoryView
         DataManager.Ins.InventoryData?.UnregisterView(this);
         selectedItemPanel?.OnDespawn();
         equippedComparisonPanel?.OnDespawn();
-        DataManager.Ins.ClearSelectedEquipment();
+        DataManager.Ins.ClearSelectedItem();
     }
 
     public void OnButtonClose()

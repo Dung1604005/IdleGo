@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : Singleton<DataManager>
+public partial class DataManager : Singleton<DataManager>
 {
    [SerializeField] private List<MapDataSO> listMapData = new List<MapDataSO>();
 
@@ -17,13 +17,14 @@ public class DataManager : Singleton<DataManager>
    private PlayerManager playerData;
    private ChestManager chestData;
    private string selectedCharacterId;
-   private Equipment selectedEquipment;
+   private Item selectedItem;
    private EquipmentSelectionSource selectedEquipmentSource;
 
    public Inventory InventoryData => inventoryData;
    public PlayerManager PlayerData => playerData;
    public ChestManager ChestData => chestData;
-   public Equipment SelectedEquipment => selectedEquipment;
+   public Item SelectedItem => selectedItem;
+   public Equipment SelectedEquipment => selectedItem as Equipment;
    public EquipmentSelectionSource SelectedEquipmentSource => selectedEquipmentSource;
    public Player SelectedCharacter => GetCharacter(selectedCharacterId);
 
@@ -104,21 +105,33 @@ public class DataManager : Singleton<DataManager>
        Equipment equipment,
        EquipmentSelectionSource selectionSource)
    {
-       selectedEquipment = equipment;
+       selectedItem = equipment;
        selectedEquipmentSource = equipment != null
            ? selectionSource
            : EquipmentSelectionSource.NONE;
    }
 
+   public void SetSelectedItem(Item item)
+   {
+       selectedItem = item;
+       selectedEquipmentSource = EquipmentSelectionSource.NONE;
+   }
+
    public void ClearSelectedEquipment()
    {
-       selectedEquipment = null;
+       ClearSelectedItem();
+   }
+
+   public void ClearSelectedItem()
+   {
+       selectedItem = null;
        selectedEquipmentSource = EquipmentSelectionSource.NONE;
    }
 
    public bool EquipSelectedEquipment()
    {
        Player player = SelectedCharacter;
+       Equipment selectedEquipment = SelectedEquipment;
        if (selectedEquipmentSource != EquipmentSelectionSource.INVENTORY_SLOT
            || player == null
            || selectedEquipment == null
@@ -142,6 +155,7 @@ public class DataManager : Singleton<DataManager>
    public bool UnequipSelectedEquipment()
    {
        Player player = SelectedCharacter;
+       Equipment selectedEquipment = SelectedEquipment;
        if (selectedEquipmentSource != EquipmentSelectionSource.EQUIPMENT_SLOT
            || player == null
            || selectedEquipment == null

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipmentStatsContentUI : MonoBehaviour
+public partial class EquipmentStatsContentUI : MonoBehaviour
 {
     [Header("Dynamic Content")]
     [SerializeField] private RectTransform dynamicContent;
@@ -116,7 +116,7 @@ public class EquipmentStatsContentUI : MonoBehaviour
         {
             StatValue stat = stats != null && i < stats.Count ? stats[i] : null;
             StatLineUI line = SpawnStatLine(siblingIndex++);
-            line?.OnInitEnhancement(stat, equipment.RarityType);
+            line?.OnInitEnhancement(stat);
         }
         return siblingIndex;
     }

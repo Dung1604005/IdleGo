@@ -51,15 +51,27 @@ public class ItemSlotUI : GameUnit
         if (inventory == null
             || SlotIndex < 0
             || SlotIndex >= inventory.Slots.Count
-            || inventory.Slots[SlotIndex].Item is not Equipment equipment)
+            || inventory.Slots[SlotIndex].Item == null)
         {
             return;
         }
 
-        // Slot chi chon data; Canvas se tu doc equipment qua DataManager.
-        DataManager.Ins.SetSelectedEquipment(
-            equipment,
-            EquipmentSelectionSource.INVENTORY_SLOT);
+        Item selectedItem = inventory.Slots[SlotIndex].Item;
+        if (selectedItem is Equipment equipment)
+        {
+            DataManager.Ins.SetSelectedEquipment(
+                equipment,
+                EquipmentSelectionSource.INVENTORY_SLOT);
+        }
+        else if (selectedItem is EnchantMaterial)
+        {
+            DataManager.Ins.SetSelectedItem(selectedItem);
+        }
+        else
+        {
+            return;
+        }
+
         UIManager.Ins.OpenUI<CanvasItemInfomationUI>();
     }
 

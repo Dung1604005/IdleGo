@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelItemInformation : PanelView
+public partial class PanelItemInformation : PanelView
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemNameText;
@@ -21,7 +21,7 @@ public class PanelItemInformation : PanelView
 
     public override void OnInit()
     {
-        OnInit(null);
+        OnInit((Equipment)null);
     }
 
     public void OnInit(Equipment equipment)
@@ -66,6 +66,7 @@ public class PanelItemInformation : PanelView
 
     private void RefreshInformation()
     {
+        ResetMaterialVisual();
         EquipmentDataSO data = displayedEquipment?.Data;
         if (data == null)
         {
@@ -187,6 +188,7 @@ public class PanelItemInformation : PanelView
 
     private void ClearView()
     {
+        ResetMaterialVisual();
         SetIcon(null);
         SetText(itemNameText, string.Empty);
         SetText(rarityText, string.Empty);

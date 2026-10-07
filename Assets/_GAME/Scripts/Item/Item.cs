@@ -46,6 +46,11 @@ public class Item
             return new Equipment(equipmentData);
         }
 
+        if (itemData is EnchantMaterialDataSO enchantMaterialData)
+        {
+            return new EnchantMaterial(enchantMaterialData);
+        }
+
         return new Item(itemData);
     }
 
