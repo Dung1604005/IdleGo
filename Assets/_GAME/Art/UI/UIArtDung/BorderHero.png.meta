@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3211f68312f526b4a9b446a88e609514
+guid: 4f02de39ba454f545b073e1b0e80384c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -836860002880307038
-    second: MooniPortrait-NoBG_0
+      213: 1157481838500594885
+    second: BorderHero_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MooniPortrait-NoBG_0
+      name: BorderHero_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a04691e240e264f0800000000000000
-      internalID: -836860002880307038
+      spriteID: 5c44bc97993301010800000000000000
+      internalID: 1157481838500594885
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 727ab6e3aa0e75e418d0bc9d72a621e0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MooniPortrait-NoBG_0: -836860002880307038
+      BorderHero_0: 1157481838500594885
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

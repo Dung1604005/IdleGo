@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3211f68312f526b4a9b446a88e609514
+guid: 6b5eca6aafd19e941a3f8ed97dd2d2d9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -836860002880307038
-    second: MooniPortrait-NoBG_0
+      213: -6344822300541585302
+    second: BorderSkill-BG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MooniPortrait-NoBG_0
+      name: BorderSkill-BG_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 1
+        y: 1
+        width: 30
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a04691e240e264f0800000000000000
-      internalID: -836860002880307038
+      spriteID: a68fd35ebb9a2f7a0800000000000000
+      internalID: -6344822300541585302
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 727ab6e3aa0e75e418d0bc9d72a621e0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MooniPortrait-NoBG_0: -836860002880307038
+      BorderSkill-BG_0: -6344822300541585302
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

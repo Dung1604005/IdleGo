@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 206cf88061cf61046857ffff54db0f8f
+guid: c85c2a053a05ed444bb3d75da048a998
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4559203394322302271
-    second: BackgroundMainMenu_0
+      213: 3329472508564627217
+    second: BorderSkill_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackgroundMainMenu_0
+      name: BorderSkill_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 16, z: 16, w: 16}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1caf9a62ba47ab0c0800000000000000
-      internalID: -4559203394322302271
+      spriteID: 11f5c623b99a43e20800000000000000
+      internalID: 3329472508564627217
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: db9c86078a51abd41b6fe4688374ece3
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BackgroundMainMenu_0: -4559203394322302271
+      BorderSkill_0: 3329472508564627217
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
