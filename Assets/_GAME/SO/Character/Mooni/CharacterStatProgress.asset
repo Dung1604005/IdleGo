@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8e8c37f47f4db3a67d3508d6db4565, type: 3}
+  m_Name: CharacterStatProgress
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStatProgressSO
+  statUpgradeRules:
+  - statType: 0
+    valuePerUpgrade: 10
+    statPointCost: 1
+  - statType: 2
+    valuePerUpgrade: 1
+    statPointCost: 1
+  - statType: 9
+    valuePerUpgrade: 1
+    statPointCost: 1
+  - statType: 6
+    valuePerUpgrade: 0.01
+    statPointCost: 2
+  - statType: 7
+    valuePerUpgrade: 0.1
+    statPointCost: 2
+  combatSkills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

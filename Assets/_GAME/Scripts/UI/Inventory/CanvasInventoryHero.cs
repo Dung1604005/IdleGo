@@ -39,6 +39,11 @@ public class CanvasInventoryHero : UICanvas, IInventoryView
             && panelInventoryView.RequestIncreaseCapacity(additionalSlots);
     }
 
+    public void OnButtonHeroStatus()
+    {
+        UIManager.Ins.OpenUI<CanvasHeroStatus>();
+    }
+
     public void RefreshInventory()
     {
         panelInventoryView?.RefreshInventory();

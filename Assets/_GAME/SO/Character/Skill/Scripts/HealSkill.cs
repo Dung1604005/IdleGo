@@ -21,4 +21,17 @@ public class HealSkill : CombatSkill
             user.Character.Heal(Mathf.Max(1, healAmountByLevel[level]));
         }
     }
+
+    public override string GetLevelDescription(int targetLevel)
+    {
+        int index = targetLevel - 1;
+        if (index < 0
+            || healAmountByLevel == null
+            || index >= healAmountByLevel.Count)
+        {
+            return base.GetLevelDescription(targetLevel);
+        }
+
+        return $"Healing: {Mathf.Max(1, healAmountByLevel[index])}";
+    }
 }

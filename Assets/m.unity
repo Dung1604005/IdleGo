@@ -168,6 +168,7 @@ MonoBehaviour:
   rarityBGData: {fileID: 11400000, guid: 113dad35f59c5154ab1887d7ea35354a, type: 2}
   rarityColorData: {fileID: 11400000, guid: 8851adeb4636bba49921c57e407bd118, type: 2}
   buffStatVisualSO: {fileID: 11400000, guid: e402b434a21e03e4aa0e13c658f3be6b, type: 2}
+  statIconSO: {fileID: 11400000, guid: 389360cd6bd5b4644b75977f782363ea, type: 2}
 --- !u!1001 &142326099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 524592405}
-  - component: {fileID: 524592404}
+  - component: {fileID: 524592406}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -326,19 +327,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &524592404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524592403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b494362841f46fc881b0a4df13e36d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ToolSave
-  inventorySaveKey: PLAYER_INVENTORY
 --- !u!4 &524592405
 Transform:
   m_ObjectHideFlags: 0
@@ -354,6 +342,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524592406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524592403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b494362841f46fc881b0a4df13e36d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolSave
+  inventorySaveKey: PLAYER_INVENTORY
 --- !u!4 &693940068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 674105552961696737, guid: 274f86bbf93f51443befc097b98db19c, type: 3}
@@ -1079,6 +1080,10 @@ PrefabInstance:
       value: Canvas-MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4915662494888153416, guid: a1df9c7e2b890184383c229cd2667584, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045650238375652999, guid: a1df9c7e2b890184383c229cd2667584, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

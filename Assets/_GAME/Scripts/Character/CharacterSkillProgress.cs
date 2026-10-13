@@ -34,7 +34,7 @@ public sealed class CharacterSkillProgress
         statPointCost = 0;
         if (progressData == null
             || !progressData.ContainsSkill(skill)
-            || !skill.MeetsCharacterRequirements(owner)
+            || !skill.CanEquip(owner)
             || nextLevel > skill.MaxLevel)
         {
             return false;

@@ -33,4 +33,17 @@ public class DamageSkill : CombatSkill
         // Skill cũ chưa gán AttackType vẫn hoạt động như một đòn đánh đơn.
         user.DealDamage(target, damageMultiplier);
     }
+
+    public override string GetLevelDescription(int targetLevel)
+    {
+        int index = targetLevel - 1;
+        if (index < 0
+            || damageMultiplierByLevel == null
+            || index >= damageMultiplierByLevel.Count)
+        {
+            return base.GetLevelDescription(targetLevel);
+        }
+
+        return $"Damage: {damageMultiplierByLevel[index]:0.##}x";
+    }
 }

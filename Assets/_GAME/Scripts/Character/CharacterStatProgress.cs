@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 [Serializable]
 public sealed class CharacterStatProgress : IStatModifierSource
 {
@@ -9,7 +8,6 @@ public sealed class CharacterStatProgress : IStatModifierSource
     [SerializeField] private List<int> statUpgradeCounts = new List<int>();
     [SerializeField] private CharacterSkillProgress skillProgress =
         new CharacterSkillProgress();
-
     [NonSerialized] private CharacterStatProgressSO progressData;
     [NonSerialized] private Player owner;
     [NonSerialized] private List<StatModifier> modifierBuffer;
@@ -28,7 +26,6 @@ public sealed class CharacterStatProgress : IStatModifierSource
         EnsureUpgradeCounts();
         ApplyStatModifiers();
     }
-
     public void OnDespawn()
     {
         owner = null;
@@ -43,10 +40,23 @@ public sealed class CharacterStatProgress : IStatModifierSource
             ? Mathf.Max(0, statUpgradeCounts[(int)statType])
             : 0;
     }
-
     public int GetSkillLevel(CombatSkill skill)
     {
         return skillProgress != null ? skillProgress.GetLevel(skill) : 0;
+    }
+    public bool TryGetSkillUpgrade(
+        CombatSkill skill,
+        out int nextLevel,
+        out int pointCost)
+    {
+        nextLevel = 0;
+        pointCost = 0;
+        return skillProgress != null
+            && skillProgress.TryGetUpgrade(
+                skill,
+                owner,
+                out nextLevel,
+                out pointCost);
     }
     public bool TryUpgradeStat(StatType statType)
     {
@@ -55,7 +65,6 @@ public sealed class CharacterStatProgress : IStatModifierSource
         {
             return false;
         }
-
         availableStatPoints -= rule.StatPointCost;
         statUpgradeCounts[(int)statType]++;
         ApplyStatModifiers();
@@ -68,13 +77,11 @@ public sealed class CharacterStatProgress : IStatModifierSource
         {
             return false;
         }
-
         statUpgradeCounts[(int)statType]--;
         availableStatPoints += rule.StatPointCost;
         ApplyStatModifiers();
         return true;
     }
-
     public bool ResetStatPoints()
     {
         int refundedPoints = CalculateStatPointRefund();
@@ -82,35 +89,29 @@ public sealed class CharacterStatProgress : IStatModifierSource
         {
             return false;
         }
-
         for (int i = 0; i < statUpgradeCounts.Count; i++)
         {
             statUpgradeCounts[i] = 0;
         }
-
         availableStatPoints += refundedPoints;
         ApplyStatModifiers();
         return true;
     }
-
     public bool TryUpgradeSkill(CombatSkill skill)
     {
-        if (!skillProgress.TryGetUpgrade(
+        if (!TryGetSkillUpgrade(
                 skill,
-                owner,
                 out int nextLevel,
                 out int pointCost)
             || availableStatPoints < pointCost)
         {
             return false;
         }
-
         availableStatPoints -= pointCost;
         skillProgress.SetLevel(skill, nextLevel);
         owner?.Combat.SetEquippedSkillLevel(skill, nextLevel - 1);
         return true;
     }
-
     public void AddLevelStatPoints(int gainedLevels)
     {
         if (gainedLevels > 0)
@@ -118,7 +119,6 @@ public sealed class CharacterStatProgress : IStatModifierSource
             availableStatPoints += gainedLevels;
         }
     }
-
     public void CopyTo(CharacterStatProgressSaveData output)
     {
         if (output == null)

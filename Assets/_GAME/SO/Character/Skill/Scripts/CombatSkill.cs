@@ -12,6 +12,9 @@ public abstract class CombatSkill : ScriptableObject
 
     [SerializeField] private Sprite iconSkill;
 
+    [SerializeField] private string displayName;
+    [SerializeField, TextArea(2, 5)] private string description;
+
     [SerializeField] private String nameAnim;
 
     [SerializeField] private int levelRequire;
@@ -26,13 +29,17 @@ public abstract class CombatSkill : ScriptableObject
 
     public Sprite IconSkill => iconSkill;
 
+    public string DisplayName => string.IsNullOrWhiteSpace(displayName)
+        ? name
+        : displayName.Trim();
+
+    public string Description => description ?? string.Empty;
+
     public String NameAnim => nameAnim;
 
     public int MaxLevel => maxLevel;
 
     public int LevelRequire => Mathf.Max(0, levelRequire);
-
-    public CharacterRequirementType CharacterRequirement => characterRequirement;
 
     public abstract bool CanUse(CharacterCombat user, Character target);
     public abstract void Execute(CharacterCombat user, Character target, int level);
@@ -67,6 +74,13 @@ public abstract class CombatSkill : ScriptableObject
         return index < statPointCostByLevel.Count
             ? Mathf.Max(1, statPointCostByLevel[index])
             : Mathf.Max(1, targetLevel);
+    }
+
+    public virtual string GetLevelDescription(int targetLevel)
+    {
+        return targetLevel >= 1 && targetLevel <= MaxLevel
+            ? $"Level {targetLevel}"
+            : string.Empty;
     }
 
     protected virtual void OnValidate()

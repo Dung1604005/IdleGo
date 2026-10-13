@@ -1,0 +1,1859 @@
+fileFormatVersion: 2
+guid: 240e93d109fbafd409a0964c3237fe16
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2023342728902687302
+    second: Aluca_0
+  - first:
+      213: -6509369425891032763
+    second: Aluca_1
+  - first:
+      213: 1296617359648641058
+    second: Aluca_2
+  - first:
+      213: 1291135974640393504
+    second: Aluca_3
+  - first:
+      213: 506577459713828647
+    second: Aluca_4
+  - first:
+      213: -6941112975087324837
+    second: Aluca_5
+  - first:
+      213: 2237466182604204510
+    second: Aluca_6
+  - first:
+      213: -802390926119000204
+    second: Aluca_7
+  - first:
+      213: 5201769873646372924
+    second: Aluca_8
+  - first:
+      213: 4324394895930590948
+    second: Aluca_9
+  - first:
+      213: 1234030926573402937
+    second: Aluca_10
+  - first:
+      213: -2256523075382418497
+    second: Aluca_11
+  - first:
+      213: 3967185035504600655
+    second: Aluca_12
+  - first:
+      213: -278907091299320345
+    second: Aluca_13
+  - first:
+      213: 113360075496093977
+    second: Aluca_14
+  - first:
+      213: 6794324496005276240
+    second: Aluca_15
+  - first:
+      213: -722372011541932199
+    second: Aluca_16
+  - first:
+      213: -1943186279281216082
+    second: Aluca_17
+  - first:
+      213: 8100106451292755586
+    second: Aluca_18
+  - first:
+      213: -1977684178286633898
+    second: Aluca_19
+  - first:
+      213: 2192311702975090389
+    second: Aluca_20
+  - first:
+      213: 4660863863374935526
+    second: Aluca_21
+  - first:
+      213: 2613471756445777726
+    second: Aluca_22
+  - first:
+      213: -4169835267404240036
+    second: Aluca_23
+  - first:
+      213: -4395401434521575187
+    second: Aluca_24
+  - first:
+      213: 4501210869793150939
+    second: Aluca_25
+  - first:
+      213: 9001019046829354764
+    second: Aluca_26
+  - first:
+      213: -239921333191590275
+    second: Aluca_27
+  - first:
+      213: -4804157487738608738
+    second: Aluca_28
+  - first:
+      213: -283189042411095346
+    second: Aluca_29
+  - first:
+      213: -2234710365536669511
+    second: Aluca_30
+  - first:
+      213: -3931566245869710526
+    second: Aluca_31
+  - first:
+      213: -1069089069352768159
+    second: Aluca_32
+  - first:
+      213: -2181073814766376082
+    second: Aluca_33
+  - first:
+      213: -2005222702772948978
+    second: Aluca_34
+  - first:
+      213: 5537514283609145892
+    second: Aluca_35
+  - first:
+      213: -4171532140483018528
+    second: Aluca_36
+  - first:
+      213: 4207847120722430192
+    second: Aluca_37
+  - first:
+      213: -1307203845329336682
+    second: Aluca_38
+  - first:
+      213: -6785333455894133381
+    second: Aluca_39
+  - first:
+      213: 8205787538010252870
+    second: Aluca_40
+  - first:
+      213: 3385629031130031141
+    second: Aluca_41
+  - first:
+      213: -3944103745662673862
+    second: Aluca_42
+  - first:
+      213: -2566538701136662586
+    second: Aluca_43
+  - first:
+      213: 9054824401893167533
+    second: Aluca_44
+  - first:
+      213: -6862235876312996989
+    second: Aluca_45
+  - first:
+      213: 7081714526493896162
+    second: Aluca_46
+  - first:
+      213: -6986275567810290403
+    second: Aluca_47
+  - first:
+      213: 3531766726029580608
+    second: Aluca_48
+  - first:
+      213: -8414812134221017214
+    second: Aluca_49
+  - first:
+      213: -7707802025276632057
+    second: Aluca_50
+  - first:
+      213: -2957020221732699112
+    second: Aluca_51
+  - first:
+      213: -7579851192429518915
+    second: Aluca_52
+  - first:
+      213: -7216188984990288359
+    second: Aluca_53
+  - first:
+      213: 3508113436992085051
+    second: Aluca_54
+  - first:
+      213: 4060173137178650537
+    second: Aluca_55
+  - first:
+      213: 5922894539492940722
+    second: Aluca_56
+  - first:
+      213: 7236500406993902484
+    second: Aluca_57
+  - first:
+      213: -6282528692775027543
+    second: Aluca_58
+  - first:
+      213: -6712424177664204829
+    second: Aluca_59
+  - first:
+      213: 7715548588356488391
+    second: Aluca_60
+  - first:
+      213: 6775555384656304636
+    second: Aluca_61
+  - first:
+      213: 8054759790534354010
+    second: Aluca_62
+  - first:
+      213: -8369645737406560928
+    second: Aluca_63
+  - first:
+      213: -6216242396953711094
+    second: Aluca_64
+  - first:
+      213: 3312975486160202949
+    second: Aluca_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Aluca_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1254
+        height: 1224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64a3d17ed7b541c10800000000000000
+      internalID: 2023342728902687302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_1
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1223
+        width: 24
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5410af9cef21aa5a0800000000000000
+      internalID: -6509369425891032763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_2
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 1179
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 220567b6e928ef110800000000000000
+      internalID: 1296617359648641058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_3
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 1175
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d1b2504590be110800000000000000
+      internalID: 1291135974640393504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_4
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 1179
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72766710489b70700800000000000000
+      internalID: 506577459713828647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_5
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 1152
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b51b01656863caf90800000000000000
+      internalID: -6941112975087324837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_6
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 1181
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9a21373a31d0f10800000000000000
+      internalID: 2237466182604204510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 1183
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4772ea534b55dd4f0800000000000000
+      internalID: -802390926119000204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_8
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 853
+        width: 243
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c384502d326603840800000000000000
+      internalID: 5201769873646372924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_9
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 994
+        width: 194
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e684780f36530c30800000000000000
+      internalID: 4324394895930590948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_10
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 1158
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93bf04ce698202110800000000000000
+      internalID: 1234030926573402937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_11
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1152
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb3eb50f7383fa0e0800000000000000
+      internalID: -2256523075382418497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_12
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 1148
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f464f7f45c54e0730800000000000000
+      internalID: 3967185035504600655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_13
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 1134
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed34c96a7f112cf0800000000000000
+      internalID: -278907091299320345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_14
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 1140
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 919f7a7536cb29100800000000000000
+      internalID: 113360075496093977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_15
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 1138
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0522129912a4a4e50800000000000000
+      internalID: 6794324496005276240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_16
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 1133
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 957db589b7e99f5f0800000000000000
+      internalID: -722372011541932199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_17
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 789
+        width: 102
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5b70bdf5a6805e0800000000000000
+      internalID: -1943186279281216082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_18
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 718
+        width: 23
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2869728b6eb596070800000000000000
+      internalID: 8100106451292755586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_19
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 770
+        width: 55
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c9053d7badd84e0800000000000000
+      internalID: -1977684178286633898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 779
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5de03c4e0e7ac6e10800000000000000
+      internalID: 2192311702975090389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_21
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 742
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e5faea4df6bea040800000000000000
+      internalID: 4660863863374935526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_22
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 745
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3f777937bae44420800000000000000
+      internalID: 2613471756445777726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_23
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 722
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b6972cae4c126c0800000000000000
+      internalID: -4169835267404240036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_24
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 687
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de06912eea56003c0800000000000000
+      internalID: -4395401434521575187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_25
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 657
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd7d5290073877e30800000000000000
+      internalID: 4501210869793150939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_26
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 260
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0fe9c6322b0aec70800000000000000
+      internalID: 9001019046829354764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_27
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 254
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7eb31191d0abacf0800000000000000
+      internalID: -239921333191590275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_28
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 216
+        width: 13
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e93ae4ae734345db0800000000000000
+      internalID: -4804157487738608738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_29
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 81
+        width: 130
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecabdcaf019e11cf0800000000000000
+      internalID: -283189042411095346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_30
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 178
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b0bd4633c6bcf0e0800000000000000
+      internalID: -2234710365536669511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_31
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 192
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 243150864554079c0800000000000000
+      internalID: -3931566245869710526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_32
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 175
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16da9fbd725d921f0800000000000000
+      internalID: -1069089069352768159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_33
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 128
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6ba1f9dbe44bb1e0800000000000000
+      internalID: -2181073814766376082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_34
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 97
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e007ba173940c24e0800000000000000
+      internalID: -2005222702772948978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_35
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 93
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 422cc25e6e339dc40800000000000000
+      internalID: 5537514283609145892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_36
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 73
+        width: 29
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e08265be9dbb16c0800000000000000
+      internalID: -4171532140483018528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_37
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 99
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f88fc389a6456a30800000000000000
+      internalID: 4207847120722430192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_38
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 87
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 696ce1e4701ebdde0800000000000000
+      internalID: -1307203845329336682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_39
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 103
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b754bde0c27a5d1a0800000000000000
+      internalID: -6785333455894133381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_40
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 81
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646ad692a40d0e170800000000000000
+      internalID: 8205787538010252870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_41
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 82
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52461cd7aab2cfe20800000000000000
+      internalID: 3385629031130031141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_42
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 93
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3c1d724a8ab349c0800000000000000
+      internalID: -3944103745662673862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_43
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 89
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cfe47046a2d16cd0800000000000000
+      internalID: -2566538701136662586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_44
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 61
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da1916aa1d239ad70800000000000000
+      internalID: 9054824401893167533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_45
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 79
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3832c6304d074c0a0800000000000000
+      internalID: -6862235876312996989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_46
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 81
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ed646067dd474260800000000000000
+      internalID: 7081714526493896162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_47
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 78
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1d5dadc263cb0f90800000000000000
+      internalID: -6986275567810290403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_48
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 55
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 049998e002b530130800000000000000
+      internalID: 3531766726029580608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_49
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 49
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f0c1092f4983b80800000000000000
+      internalID: -8414812134221017214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_50
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 49
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704995c45e2680590800000000000000
+      internalID: -7707802025276632057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_51
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 55
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 814c9f976cd86f6d0800000000000000
+      internalID: -2957020221732699112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_52
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 37
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbfdae01085fec690800000000000000
+      internalID: -7579851192429518915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_53
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 51
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9163195e952fadb90800000000000000
+      internalID: -7216188984990288359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_54
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 47
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c10bb85925fa030800000000000000
+      internalID: 3508113436992085051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_55
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 39
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7ed10e4f1a85830800000000000000
+      internalID: 4060173137178650537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_56
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 41
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bbd39ce339523250800000000000000
+      internalID: 5922894539492940722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_57
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 31
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49b57df87c63d6460800000000000000
+      internalID: 7236500406993902484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_58
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 33
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9acf1ffa079ffc8a0800000000000000
+      internalID: -6282528692775027543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_59
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 41
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3efd49c36cda8d2a0800000000000000
+      internalID: -6712424177664204829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_60
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 43
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cc4148ff82231b60800000000000000
+      internalID: 7715548588356488391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_61
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 23
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf99c6259bb970e50800000000000000
+      internalID: 6775555384656304636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_62
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 19
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5466e18a5148cf60800000000000000
+      internalID: 8054759790534354010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_63
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 33
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 065050ecb8b09db80800000000000000
+      internalID: -8369645737406560928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_64
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 23
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0ee9db99787bb9a0800000000000000
+      internalID: -6216242396953711094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aluca_65
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 20
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cce72ad6ad0afd20800000000000000
+      internalID: 3312975486160202949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Aluca_0: 2023342728902687302
+      Aluca_1: -6509369425891032763
+      Aluca_10: 1234030926573402937
+      Aluca_11: -2256523075382418497
+      Aluca_12: 3967185035504600655
+      Aluca_13: -278907091299320345
+      Aluca_14: 113360075496093977
+      Aluca_15: 6794324496005276240
+      Aluca_16: -722372011541932199
+      Aluca_17: -1943186279281216082
+      Aluca_18: 8100106451292755586
+      Aluca_19: -1977684178286633898
+      Aluca_2: 1296617359648641058
+      Aluca_20: 2192311702975090389
+      Aluca_21: 4660863863374935526
+      Aluca_22: 2613471756445777726
+      Aluca_23: -4169835267404240036
+      Aluca_24: -4395401434521575187
+      Aluca_25: 4501210869793150939
+      Aluca_26: 9001019046829354764
+      Aluca_27: -239921333191590275
+      Aluca_28: -4804157487738608738
+      Aluca_29: -283189042411095346
+      Aluca_3: 1291135974640393504
+      Aluca_30: -2234710365536669511
+      Aluca_31: -3931566245869710526
+      Aluca_32: -1069089069352768159
+      Aluca_33: -2181073814766376082
+      Aluca_34: -2005222702772948978
+      Aluca_35: 5537514283609145892
+      Aluca_36: -4171532140483018528
+      Aluca_37: 4207847120722430192
+      Aluca_38: -1307203845329336682
+      Aluca_39: -6785333455894133381
+      Aluca_4: 506577459713828647
+      Aluca_40: 8205787538010252870
+      Aluca_41: 3385629031130031141
+      Aluca_42: -3944103745662673862
+      Aluca_43: -2566538701136662586
+      Aluca_44: 9054824401893167533
+      Aluca_45: -6862235876312996989
+      Aluca_46: 7081714526493896162
+      Aluca_47: -6986275567810290403
+      Aluca_48: 3531766726029580608
+      Aluca_49: -8414812134221017214
+      Aluca_5: -6941112975087324837
+      Aluca_50: -7707802025276632057
+      Aluca_51: -2957020221732699112
+      Aluca_52: -7579851192429518915
+      Aluca_53: -7216188984990288359
+      Aluca_54: 3508113436992085051
+      Aluca_55: 4060173137178650537
+      Aluca_56: 5922894539492940722
+      Aluca_57: 7236500406993902484
+      Aluca_58: -6282528692775027543
+      Aluca_59: -6712424177664204829
+      Aluca_6: 2237466182604204510
+      Aluca_60: 7715548588356488391
+      Aluca_61: 6775555384656304636
+      Aluca_62: 8054759790534354010
+      Aluca_63: -8369645737406560928
+      Aluca_64: -6216242396953711094
+      Aluca_65: 3312975486160202949
+      Aluca_7: -802390926119000204
+      Aluca_8: 5201769873646372924
+      Aluca_9: 4324394895930590948
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

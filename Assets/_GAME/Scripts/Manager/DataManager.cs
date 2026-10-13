@@ -11,6 +11,8 @@ public partial class DataManager : Singleton<DataManager>
 
    [SerializeField] private BuffStatVisualSO buffStatVisualSO;
 
+   [SerializeField] private StatIconSO statIconSO;
+
 
 
    private Inventory inventoryData;
@@ -29,6 +31,15 @@ public partial class DataManager : Singleton<DataManager>
    public Player SelectedCharacter => GetCharacter(selectedCharacterId);
 
    public BuffStatVisualSO BuffStatVisualSO => buffStatVisualSO;
+
+   public Sprite GetStatIcon(StatType statType)
+   {
+       if (statIconSO == null)
+       {
+           statIconSO = Resources.Load<StatIconSO>("Data/StatIconData");
+       }
+       return statIconSO != null ? statIconSO.GetIcon(statType) : null;
+   }
 
    public void SetInventoryData(Inventory inventory)
    {

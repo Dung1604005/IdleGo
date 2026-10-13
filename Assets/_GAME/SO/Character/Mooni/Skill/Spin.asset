@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3976f81c10544e68fc9c31902d53bef, type: 3}
+  m_Name: Spin
+  m_EditorClassIdentifier: Assembly-CSharp::DamageSkill
+  skillId: mooni_thrust
+  cooldown: 4
+  maxLevel: 5
+  statPointCostByLevel: 0100000002000000030000000400000005000000
+  iconSkill: {fileID: -7012151887548525605, guid: efcbecde69422fc40b84394856c5e223, type: 3}
+  nameAnim: spin
+  levelRequire: 10
+  characterRequirement: 0
+  damageMultiplierByLevel:
+  - 1.5
+  - 1.7
+  - 1.9
+  - 2
+  - 2.4
+  range: 1.5
+  attackType: {fileID: 11400000, guid: edc62a5496d93a94481ee419ad5c3926, type: 2}
