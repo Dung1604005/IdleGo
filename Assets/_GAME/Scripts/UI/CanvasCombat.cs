@@ -1,9 +1,13 @@
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CanvasCombat : UICanvas
 {
     [Header("Damage Popup")]
-    [SerializeField] private DamagePopup damagePopupPrefab;
+    [FormerlySerializedAs("damagePopupPrefab")]
+    [SerializeField] private TextPopUp textPopupPrefab;
     [SerializeField, Min(0)] private int preloadAmount = 15;
     [SerializeField, Min(0f)] private float spawnRadius = 0.5f;
     [SerializeField] private Camera worldCamera;
@@ -12,25 +16,105 @@ public class CanvasCombat : UICanvas
 
     [SerializeField]private RectTransform canvasRect;
 
+    [Header("Level Result")]
+    [SerializeField] private GameObject levelResultOverlay;
+    [SerializeField] private TextMeshProUGUI levelResultText;
+    [SerializeField, Min(0.01f)] private float resultScaleDuration = 0.4f;
+
+    private Sequence levelResultSequence;
+    private readonly TextPopUpPool textPopups = new TextPopUpPool();
+
     public override void SetUp()
     {
         base.SetUp();
         gameObject.SetActive(true);
         SetUpCamera();
-        if (damagePopupPrefab != null)
+        if (textPopupPrefab != null)
         {
-            SimplePool.PreLoad(damagePopupPrefab, preloadAmount, transform);
+            SimplePool.PreLoad(textPopupPrefab, preloadAmount, transform);
         }
+        HideLevelResult();
     }
 
     public override void CloseDirectly()
     {
+        HideLevelResult();
         base.CloseDirectly();
-         if (damagePopupPrefab != null)
-        {
-            SimplePool.Collect(damagePopupPrefab);
-        }
+        textPopups.OnDespawn(transform);
     }
+
+    public void OnLevelStart()
+    {
+        HideLevelResult();
+    }
+
+    public void OnLevelFail(float displayDuration)
+    {
+        PlayLevelResult("You Failed", displayDuration);
+    }
+
+    public void OnLevelComplete(float displayDuration)
+    {
+        PlayLevelResult("Level Completed", displayDuration);
+    }
+
+    private void PlayLevelResult(string message, float displayDuration)
+    {
+        KillLevelResultSequence();
+        if (levelResultOverlay == null || levelResultText == null)
+        {
+            return;
+        }
+
+        // Damage popup duoc spawn dong, nen overlay luon phai nam tren cung khi hien ket qua.
+        levelResultOverlay.transform.SetAsLastSibling();
+        levelResultOverlay.SetActive(true);
+        levelResultText.text = message;
+        levelResultText.rectTransform.localScale = Vector3.zero;
+        float totalDuration = Mathf.Max(0f, displayDuration);
+        float scaleDuration = Mathf.Min(resultScaleDuration, totalDuration);
+        levelResultSequence = DOTween.Sequence();
+        if (scaleDuration > 0f)
+        {
+            levelResultSequence.Append(levelResultText.rectTransform
+                .DOScale(1f, scaleDuration).SetEase(Ease.OutBack));
+        }
+        else
+        {
+            levelResultText.rectTransform.localScale = Vector3.one;
+        }
+        levelResultSequence.AppendInterval(
+            Mathf.Max(0f, totalDuration - scaleDuration));
+        levelResultSequence.OnComplete(CompleteLevelResultVisual);
+    }
+
+    private void CompleteLevelResultVisual()
+    {
+        levelResultSequence = null;
+        SetLevelResultVisible(false);
+    }
+
+    private void HideLevelResult()
+    {
+        KillLevelResultSequence();
+        SetLevelResultVisible(false);
+    }
+
+    private void KillLevelResultSequence()
+    {
+        levelResultSequence?.Kill();
+        levelResultSequence = null;
+    }
+
+    private void SetLevelResultVisible(bool visible)
+    {
+        if (levelResultText != null)
+        {
+            levelResultText.rectTransform.localScale = Vector3.one;
+        }
+        levelResultOverlay?.SetActive(visible);
+    }
+
     public void ShowDamage(int damage, bool isCritical, Transform target)
     {
         if ( target == null || damage <= 0)
@@ -38,12 +122,12 @@ public class CanvasCombat : UICanvas
             return;
         }
 
-        SpawnDamagePopup(damage, isCritical, target.position);
+        SpawnTextPopUp(damage, isCritical, target.position);
     }
 
-    private void SpawnDamagePopup(int damage, bool isCritical, Vector3 targetWorldPosition)
+    private void SpawnTextPopUp(int damage, bool isCritical, Vector3 targetWorldPosition)
     {
-        if (!CanSpawnDamagePopup())
+        if (!CanSpawnTextPopUp())
         {
             return;
         }
@@ -53,12 +137,12 @@ public class CanvasCombat : UICanvas
             return;
         }
 
-        CreateDamagePopup(damage, isCritical, popupPosition);
+        CreateTextPopUp(damage, isCritical, popupPosition);
     }
 
-    private bool CanSpawnDamagePopup()
+    private bool CanSpawnTextPopUp()
     {
-        if (damagePopupPrefab != null && canvasRect != null)
+        if (textPopupPrefab != null && canvasRect != null)
         {
             return true;
         }
@@ -81,18 +165,13 @@ public class CanvasCombat : UICanvas
         );
     }
 
-    private void CreateDamagePopup(int damage, bool isCritical, Vector2 popupPosition)
+    private void CreateTextPopUp(int damage, bool isCritical, Vector2 popupPosition)
     {
-        DamagePopup popup = SimplePool.Spawn(
-            damagePopupPrefab,
-            transform.position,
-            Quaternion.identity,
-            transform
-        );
+        TextPopUp popup = textPopups.Spawn(textPopupPrefab, transform);
 
         if (popup != null)
         {
-            popup.Play(damage, isCritical, popupPosition);
+            popup.PlayDamage(damage, isCritical, popupPosition);
         }
     }
 

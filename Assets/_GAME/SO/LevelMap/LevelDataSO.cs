@@ -8,6 +8,10 @@ public class LevelDataSO : ScriptableObject
     [SerializeField] private int levelIndex;
     [SerializeField] private String nameLevel;
     [SerializeField, Min(1)] private int levelRequired = 1;
+
+    [Header("Team Spawn")]
+    [SerializeField] private Vector3 teamSpawnPosition;
+
     [SerializeField] private List<WaveData> waves = new List<WaveData>();
 
     [Header("Equipment Sources")]
@@ -17,6 +21,7 @@ public class LevelDataSO : ScriptableObject
 
     public int LevelIndex => levelIndex;
     public int LevelRequired => Mathf.Max(1, levelRequired);
+    public Vector3 TeamSpawnPosition => teamSpawnPosition;
 
     public int WaveCount => waves != null ? waves.Count : 0;
 

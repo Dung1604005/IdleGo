@@ -46,9 +46,15 @@ public partial class CharacterCombat
 
     public void ClearEquippedSkills()
     {
-        if (combatSkillStates == null || isAttacking)
+        if (combatSkillStates == null)
         {
             return;
+        }
+
+        if (isAttacking)
+        {
+            // Reset skill phai ket thuc don hien tai truoc khi huy cac runtime state.
+            EndAttack();
         }
 
         for (int i = 0; i < combatSkillStates.Count; i++)

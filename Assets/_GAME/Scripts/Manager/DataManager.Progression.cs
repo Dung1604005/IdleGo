@@ -141,9 +141,16 @@ public partial class DataManager
     public bool ResetCharacterStatPoints(string characterId)
     {
         Player player = GetTeamProgressCharacter(characterId);
+        if (player == null)
+        {
+            return false;
+        }
+
+        // Loadout phai rong truoc khi level skill bi reset va diem duoc hoan tra.
+        player.Combat.ClearEquippedSkills();
         return CompleteCharacterProgressChange(
             player,
-            player != null && player.StatProgress.ResetStatPoints());
+            player.StatProgress.ResetStatPoints());
     }
 
     public bool UpgradeCharacterSkill(string characterId, CombatSkill skill)

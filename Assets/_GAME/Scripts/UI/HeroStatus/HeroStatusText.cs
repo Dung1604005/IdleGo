@@ -4,23 +4,7 @@ public static class HeroStatusText
 {
     public static string GetStatName(StatType statType)
     {
-        return statType switch
-        {
-            StatType.MAX_HEALTH => "Max Health",
-            StatType.RUN_SPEED => "Run Speed",
-            StatType.DAMAGE => "Damage",
-            StatType.LEVEL => "Level",
-            StatType.EXPERIENCE => "Experience",
-            StatType.ATTACK_SPEED => "Attack Speed",
-            StatType.CRITICAL_CHANCE => "Critical Chance",
-            StatType.CRITICAL_DAMAGE => "Critical Damage",
-            StatType.COOLDOWN_REDUCTION => "Cooldown Reduction",
-            StatType.ARMOR => "Armor",
-            StatType.LIFE_STEAL => "Life Steal",
-            StatType.DODGE_CHANCE => "Dodge Chance",
-            StatType.DAMAGE_AMPLIFICATION => "Damage Amplification",
-            _ => statType.ToString()
-        };
+        return StatTypeUtility.GetDisplayName(statType);
     }
 
     public static string FormatStat(StatType statType, float value)

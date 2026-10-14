@@ -15,6 +15,7 @@ MonoBehaviour:
   levelIndex: 0
   nameLevel: 1_1
   levelRequired: 1
+  teamSpawnPosition: {x: -85.56917, y: 4.65, z: 0}
   waves:
   - waveIndex: 0
     enemies:

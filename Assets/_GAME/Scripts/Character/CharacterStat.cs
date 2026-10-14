@@ -146,6 +146,14 @@ public class CharacterStat
         }
     }
 
+    public void ClearTemporaryModifiers()
+    {
+        if (Calculator.RemoveTemporaryModifiers() > 0)
+        {
+            ClampCurrentHealth();
+        }
+    }
+
     public void RestoreHealthToMax()
     {
         currentHealth = CurrentMaxHealth;

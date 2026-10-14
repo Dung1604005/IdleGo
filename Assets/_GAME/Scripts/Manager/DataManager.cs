@@ -34,11 +34,23 @@ public partial class DataManager : Singleton<DataManager>
 
    public Sprite GetStatIcon(StatType statType)
    {
+       EnsureStatVisualData();
+       return statIconSO != null ? statIconSO.GetIcon(statType) : null;
+   }
+
+   public Color GetStatFeedbackColor(StatType statType)
+   {
+       EnsureStatVisualData();
+       return statIconSO != null ? statIconSO.GetFeedbackColor(statType)
+           : StatIconSO.GetDefaultFeedbackColor(statType);
+   }
+
+   private void EnsureStatVisualData()
+   {
        if (statIconSO == null)
        {
            statIconSO = Resources.Load<StatIconSO>("Data/StatIconData");
        }
-       return statIconSO != null ? statIconSO.GetIcon(statType) : null;
    }
 
    public void SetInventoryData(Inventory inventory)

@@ -43,6 +43,9 @@ internal static class HeroStatusLinePrefabBuilder
         HeroStatusEditorUI.SetObject(line, "currentValueText", current);
         HeroStatusEditorUI.SetObject(line, "increaseValueText", increase);
         HeroStatusEditorUI.SetObject(line, "increaseButton", button);
+        HeroStatusEditorUI.SetObject(line, "valueFeedback.popupPrefab",
+            AssetDatabase.LoadAssetAtPath<TextPopUp>(
+                "Assets/_GAME/Prefabs/UI/TextPopUp.prefab"));
         return SavePrefab(root, StatLinePath)
             .GetComponent<StatProgressLineUI>();
     }

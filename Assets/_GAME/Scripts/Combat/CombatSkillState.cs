@@ -85,4 +85,12 @@ public class CombatSkillState
         cooldownDuration = Mathf.Max(0.01f, skill.Cooldown * (1f - Mathf.Clamp01(cooldownReduction)));
         currentCooldown = cooldownDuration;
     }
+
+    public void ResetForLevelStart(int characterLevel, double now)
+    {
+        currentCooldown = 0f;
+        cooldownDuration = 0f;
+        isUnlocked = skill != null && skill.IsUnlocked(characterLevel);
+        lastReadyAt = isUnlocked ? now : double.NegativeInfinity;
+    }
 }

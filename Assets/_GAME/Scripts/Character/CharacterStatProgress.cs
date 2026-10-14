@@ -84,7 +84,8 @@ public sealed class CharacterStatProgress : IStatModifierSource
     }
     public bool ResetStatPoints()
     {
-        int refundedPoints = CalculateStatPointRefund();
+        int refundedPoints = CalculateStatPointRefund() +
+            (skillProgress?.ResetAndGetRefund() ?? 0);
         if (refundedPoints <= 0)
         {
             return false;
@@ -125,7 +126,6 @@ public sealed class CharacterStatProgress : IStatModifierSource
         {
             return;
         }
-
         EnsureUpgradeCounts();
         output.version = 1;
         output.availableStatPoints = AvailableStatPoints;

@@ -127,7 +127,7 @@ public static class EquipmentInformationText
             || IsRatioStat(stat.StatType);
         float displayValue = isPercent ? stat.Value * 100f : stat.Value;
         string suffix = isPercent ? "%" : string.Empty;
-        return $"{GetStatName(stat.StatType)} {displayValue:+0.##;-0.##;0}{suffix}";
+        return $"{StatTypeUtility.GetDisplayName(stat.StatType)} {displayValue:+0.##;-0.##;0}{suffix}";
     }
 
     private static bool IsRatioStat(StatType statType)
@@ -140,22 +140,4 @@ public static class EquipmentInformationText
             || statType == StatType.DAMAGE_AMPLIFICATION;
     }
 
-    private static string GetStatName(StatType statType)
-    {
-        switch (statType)
-        {
-            case StatType.MAX_HEALTH: return "Max Health";
-            case StatType.RUN_SPEED: return "Run Speed";
-            case StatType.DAMAGE: return "Damage";
-            case StatType.ATTACK_SPEED: return "Attack Speed";
-            case StatType.CRITICAL_CHANCE: return "Critical Chance";
-            case StatType.CRITICAL_DAMAGE: return "Critical Damage";
-            case StatType.COOLDOWN_REDUCTION: return "Cooldown Reduction";
-            case StatType.ARMOR: return "Armor";
-            case StatType.LIFE_STEAL: return "Life Steal";
-            case StatType.DODGE_CHANCE: return "Dodge Chance";
-            case StatType.DAMAGE_AMPLIFICATION: return "Damage Amplification";
-            default: return statType.ToString();
-        }
-    }
 }

@@ -9,12 +9,16 @@ public sealed class StatProgressLineUI : GameUnit
     [SerializeField] private TextMeshProUGUI currentValueText;
     [SerializeField] private TextMeshProUGUI increaseValueText;
     [SerializeField] private Button increaseButton;
+    [SerializeField] private StatValueFeedback valueFeedback = new StatValueFeedback();
 
     private string characterId;
     private StatType statType;
+    private int lastUpgradeCount;
+    private bool hasData;
 
     public override void OnSpawn()
     {
+        valueFeedback.OnInit(currentValueText);
         Clear();
     }
 
@@ -27,14 +31,18 @@ public sealed class StatProgressLineUI : GameUnit
         string targetCharacterId,
         StatType targetStatType)
     {
+        bool sameStat = hasData && characterId == targetCharacterId && statType == targetStatType;
+        if (!sameStat) valueFeedback.OnDespawn();
         characterId = targetCharacterId;
         statType = targetStatType;
+        int upgradeCount = DataManager.Ins.GetCharacterStatUpgradeCount(characterId, statType);
         Sprite icon = DataManager.Ins.GetStatIcon(statType);
         SetIcon(icon);
         SetText(statNameText, HeroStatusText.GetStatName(statType));
-        SetText(currentValueText, HeroStatusText.FormatStat(
-            statType,
-            DataManager.Ins.GetCharacterStat(characterId, statType)));
+        valueFeedback.SetValue(statType, DataManager.Ins.GetCharacterStat(characterId, statType),
+            sameStat && upgradeCount > lastUpgradeCount);
+        lastUpgradeCount = upgradeCount;
+        hasData = true;
         RefreshUpgradeVisual();
     }
 
@@ -52,18 +60,22 @@ public sealed class StatProgressLineUI : GameUnit
             out CharacterStatUpgradeRule rule);
         int points = DataManager.Ins.GetCharacterAvailableStatPoints(characterId);
         string increase = hasRule
-            ? $"+{HeroStatusText.FormatStat(statType, rule.ValuePerUpgrade)}  •  {rule.StatPointCost} SP"
-            : "No upgrade";
+            ? $"+{HeroStatusText.FormatStat(statType, rule.ValuePerUpgrade)} / {rule.StatPointCost} SP"
+            : "";
         SetText(increaseValueText, increase);
         if (increaseButton != null)
         {
-            increaseButton.interactable = hasRule
-                && points >= rule.StatPointCost;
+            // Stat khong co rule chi de xem va khong duoc hien thao tac tang.
+            increaseButton.gameObject.SetActive(hasRule);
+            increaseButton.interactable = hasRule && points >= rule.StatPointCost;
         }
     }
 
     private void Clear()
     {
+        valueFeedback.OnDespawn();
+        hasData = false;
+        lastUpgradeCount = 0;
         characterId = string.Empty;
         SetIcon(null);
         SetText(statNameText, string.Empty);
@@ -71,6 +83,7 @@ public sealed class StatProgressLineUI : GameUnit
         SetText(increaseValueText, string.Empty);
         if (increaseButton != null)
         {
+            increaseButton.gameObject.SetActive(false);
             increaseButton.interactable = false;
         }
     }

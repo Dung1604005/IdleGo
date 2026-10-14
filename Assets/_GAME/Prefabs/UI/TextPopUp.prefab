@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4032105964496668283}
   - component: {fileID: 5537469226423049636}
   m_Layer: 5
-  m_Name: Text (TMP)-Damage
+  m_Name: TextPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,9 +149,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fc0f4fd3eb34c54a0fc558e4cd638f0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamagePopup
+  m_EditorClassIdentifier: Assembly-CSharp::TextPopUp
   tf: {fileID: 1303410644580786207}
-  damageText: {fileID: 4032105964496668283}
+  popupText: {fileID: 4032105964496668283}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   criticalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   growDuration: 0.12

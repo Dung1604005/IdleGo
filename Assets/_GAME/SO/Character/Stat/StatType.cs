@@ -35,6 +35,28 @@ public static class StatTypeUtility
             && statType != StatType.EXPERIENCE;
     }
 
+    public static string GetDisplayName(StatType statType)
+    {
+        // Ten UI dung chung de Equipment va Hero Status khong hien thi lech nhau.
+        return statType switch
+        {
+            StatType.MAX_HEALTH => "Max Health",
+            StatType.RUN_SPEED => "Run Speed",
+            StatType.DAMAGE => "Damage",
+            StatType.LEVEL => "Level",
+            StatType.EXPERIENCE => "Experience",
+            StatType.ATTACK_SPEED => "Attack Speed",
+            StatType.CRITICAL_CHANCE => "Critical Chance",
+            StatType.CRITICAL_DAMAGE => "Critical Damage",
+            StatType.COOLDOWN_REDUCTION => "CD",
+            StatType.ARMOR => "Armor",
+            StatType.LIFE_STEAL => "Life Steal",
+            StatType.DODGE_CHANCE => "Dodge Chance",
+            StatType.DAMAGE_AMPLIFICATION => "DA",
+            _ => statType.ToString()
+        };
+    }
+
     public static void EnsureListSize(List<float> stats)
     {
         if (stats == null)

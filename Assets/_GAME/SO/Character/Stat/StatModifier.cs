@@ -5,6 +5,11 @@ public interface IStatModifierSource
     string ModifierSourceId { get; }
 }
 
+// Nguon buff co thoi han implement marker nay de duoc xoa khi bat dau level.
+public interface ITemporaryStatModifierSource : IStatModifierSource
+{
+}
+
 public enum StatModifierOperation
 {
     FLAT = 0,

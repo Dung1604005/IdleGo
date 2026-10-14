@@ -101,6 +101,21 @@ public abstract class Character : GameUnit
         }
     }
 
+    public virtual void PrepareForLevelStart()
+    {
+        if (!IsInitialized)
+        {
+            return;
+        }
+
+        movement.Stop();
+        stats.ClearTemporaryModifiers();
+        stats.RestoreHealthToMax();
+        combat.ResetForLevelStart();
+        ChangeAnim(GameConfig.ANIM_IDLE);
+        healthBar?.OnInit();
+    }
+
     protected virtual void Die()
     {
         movement.Stop();

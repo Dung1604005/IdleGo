@@ -62,6 +62,29 @@ public sealed class CharacterSkillProgress
         return true;
     }
 
+    public int ResetAndGetRefund()
+    {
+        int refund = 0;
+        for (int i = 0; i < skillLevels.Count; i++)
+        {
+            CharacterSkillLevel state = skillLevels[i];
+            CombatSkill skill = GetSkill(state?.SkillId);
+            if (state == null)
+            {
+                continue;
+            }
+
+            // Moi level da mua co cost rieng, nen phai cong lai tu level 1.
+            int paidLevel = skill != null ? Mathf.Min(state.Level, skill.MaxLevel) : 0;
+            for (int level = 1; level <= paidLevel; level++)
+            {
+                refund += skill.GetStatPointCost(level);
+            }
+            state.SetLevel(0);
+        }
+        return refund;
+    }
+
     public void CopyTo(List<CharacterSkillProgressSaveData> output)
     {
         output.Clear();

@@ -83,6 +83,24 @@ public partial class CharacterCombat
         SetPlayerTargetSorting(target, true);
     }
 
+    public void ResetForLevelStart()
+    {
+        if (!IsInitialized || character == null)
+        {
+            return;
+        }
+
+        SetTarget(null);
+        ResetRuntimeState();
+        double now = Time.timeAsDouble;
+        for (int i = 0; i < combatSkillStates.Count; i++)
+        {
+            combatSkillStates[i]?.ResetForLevelStart(
+                character.Stats.CurrentLevel,
+                now);
+        }
+    }
+
     private void ResetRuntimeState()
     {
         target = null;

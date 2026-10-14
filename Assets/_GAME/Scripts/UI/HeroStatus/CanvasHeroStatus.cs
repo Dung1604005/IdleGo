@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasHeroStatus : UICanvas, IInventoryView
+public partial class CanvasHeroStatus : UICanvas, IInventoryView
 {
     [Header("Hero")]
     [SerializeField] private Image heroAvatar;
@@ -113,23 +113,6 @@ public class CanvasHeroStatus : UICanvas, IInventoryView
         }
     }
 
-    private void RefreshStatLines(string characterId)
-    {
-        // Level va EXP da nam o header; cac stat con lai dung chung pooled line.
-        ClearStatLines();
-        for (int i = 0; i < StatTypeUtility.StatCount; i++)
-        {
-            StatType statType = (StatType)i;
-            if (!StatTypeUtility.CanHaveModifiers(statType))
-            {
-                continue;
-            }
-
-            StatProgressLineUI line = SpawnStatLine();
-            line?.SetData(characterId, statType);
-        }
-    }
-
     private void RefreshSkillSlots(string characterId)
     {
         ClearSkillSlots();
@@ -147,18 +130,6 @@ public class CanvasHeroStatus : UICanvas, IInventoryView
         }
     }
 
-    private StatProgressLineUI SpawnStatLine()
-    {
-        StatProgressLineUI line = SimplePool.Spawn(
-            statLinePrefab, Vector3.zero, Quaternion.identity, statContent);
-        if (line != null)
-        {
-            line.TF.SetParent(statContent, false);
-            activeStatLines.Add(line);
-        }
-        return line;
-    }
-
     private HeroStatusSkillSlotUI SpawnSkillSlot()
     {
         HeroStatusSkillSlotUI slot = SimplePool.Spawn(
@@ -166,18 +137,11 @@ public class CanvasHeroStatus : UICanvas, IInventoryView
         if (slot != null)
         {
             slot.TF.SetParent(skillContent, false);
+            // Sibling order phai trung voi thu tu skill duoc khai bao trong ProgressSO.
+            slot.TF.SetAsLastSibling();
             activeSkillSlots.Add(slot);
         }
         return slot;
-    }
-
-    private void ClearStatLines()
-    {
-        for (int i = activeStatLines.Count - 1; i >= 0; i--)
-        {
-            SimplePool.Despawn(activeStatLines[i]);
-        }
-        activeStatLines.Clear();
     }
 
     private void ClearSkillSlots()

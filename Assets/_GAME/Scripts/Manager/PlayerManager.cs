@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : Singleton<PlayerManager>
+public partial class PlayerManager : Singleton<PlayerManager>
 {
     public const int MaxTeamSize = 3;
 

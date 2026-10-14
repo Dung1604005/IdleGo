@@ -37,6 +37,7 @@ public partial class LevelManager : Singleton<LevelManager>
 
     public void OnDespawn()
     {
+        CancelPendingLevelTransition();
         if (loadLevelCoroutine != null)
         {
             StopCoroutine(loadLevelCoroutine);
@@ -62,6 +63,12 @@ public partial class LevelManager : Singleton<LevelManager>
             return;
         }
 
+        if (CanResolveLevelResult() && PlayerManager.Ins.IsTeamDefeated)
+        {
+            OnLevelFail(levelFailDisplayDuration);
+            return;
+        }
+
         if (State == LevelPlayState.PlayingWave && !EnemyManager.Ins.HasAliveEnemies)
         {
             // Không dùng event: LevelManager kiểm tra bộ đếm enemy để bắt đầu thời gian nghỉ giữa wave.
@@ -74,7 +81,7 @@ public partial class LevelManager : Singleton<LevelManager>
         {
             if (!StartNextWave())
             {
-                CompleteLevel();
+                OnLevelComplete(levelCompleteDisplayDuration);
             }
         }
     }
@@ -169,12 +176,7 @@ public partial class LevelManager : Singleton<LevelManager>
         levelInfo.SetLevelData(currentLevelHandle.Result);
         levelInfo.SetWaveData(-1);
         LootManager.Ins.SetLevelData(currentLevelHandle.Result);
-        EnemyManager.Ins.OnInit();
-
-        if (!StartNextWave())
-        {
-            CompleteLevel();
-        }
+        OnLevelStart();
     }
 
     private void UnloadCurrentLevel()
@@ -201,11 +203,6 @@ public partial class LevelManager : Singleton<LevelManager>
         hasCurrentLevelHandle = false;
     }
 
-    private void CompleteLevel()
-    {
-        State = LevelPlayState.Completed;
-    }
-
 }
 
 public enum LevelPlayState
@@ -214,5 +211,6 @@ public enum LevelPlayState
     Loading,
     PlayingWave,
     WaitingNextWave,
-    Completed
+    Completed,
+    Failed
 }

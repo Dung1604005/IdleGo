@@ -69,6 +69,26 @@ public sealed class CharacterStatCalculator
         return true;
     }
 
+    public int RemoveTemporaryModifiers()
+    {
+        int removedCount = 0;
+        for (int i = modifiers.Count - 1; i >= 0; i--)
+        {
+            if (modifiers[i].Source is not ITemporaryStatModifierSource)
+            {
+                continue;
+            }
+
+            modifiers.RemoveAt(i);
+            removedCount++;
+        }
+        if (removedCount > 0)
+        {
+            MarkDirty();
+        }
+        return removedCount;
+    }
+
     public void MarkDirty()
     {
         isDirty = true;
