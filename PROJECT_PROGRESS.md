@@ -466,6 +466,7 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Assign real sprites in `Assets/_GAME/Resources/Data/StatIconData.asset`; the generated asset only guarantees entries exist.
 - Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, and save reload in Unity Play Mode.
 - Verify stat pop/color/ticker and floating `+delta` visually in Play Mode, including rapid clicks, percentage stats, reset, hero switching, close/reopen and concurrent damage popup reuse.
+- Correct the current user-edited stat popup canvas-parent positioning: convert TMP local bounds into the popup parent's centered-anchor coordinates before PlayFloating. Also pass the actual popup parent to cleanup; current cleanup still checks valueText.rectTransform. Diagnosis only; runtime code has not been changed.
 - Decide and implement the final chest loot reveal particle effect later. The prior particle implementation was intentionally removed.
 - Validate all `LevelDataSO` Addressable addresses follow `Level_<map>-<level>` and that each level has the required equipment sources.
 - Verify level fail/restart and level complete/next-level timing, overlays, team spawn position, enemy cleanup, health, temporary modifiers and skill cooldown reset in Unity Play Mode.
@@ -533,6 +534,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-14 - Diagnosed canvas-parent stat popup offset
+
+- Current user code spawns stat popups under CanvasHeroStatus and sets their world position, but PlayFloating/Prepare immediately overwrites it with anchoredPosition calculated from TMP-local textBounds.
+- The popup position must be converted from value-text local space to the new parent's centered-anchor space. Cleanup also needs the new parent because TextPopUpPool filters by parent identity.
+- Verification: read current StatValueFeedback, TextPopUp and TextPopUpPool; no runtime edits, build or Play Mode checks were performed for this diagnosis.
+- Remaining: coordinate conversion and cleanup correction are recorded in Open TODO.
 
 ### 2026-10-14 - Reviewed stat feedback lifecycle
 

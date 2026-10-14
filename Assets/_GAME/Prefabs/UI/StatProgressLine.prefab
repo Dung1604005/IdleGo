@@ -198,13 +198,14 @@ MonoBehaviour:
   increaseButton: {fileID: 6440695602229453718}
   valueFeedback:
     popupPrefab: {fileID: 5537469226423049636, guid: 44bb7342a991a5546ae25044e3fd6c00, type: 3}
-    peakScale: 1.28
+    parentTF: {fileID: 0}
+    peakScale: 1.313
     popDuration: 0.2
     tickerDuration: 0.15
     floatingDuration: 0.6
     floatingDistance: 40
     floatingOffset: 22
-    floatingFontScale: 0.65
+    floatingFontScale: 1
 --- !u!1 &2938298471746189959
 GameObject:
   m_ObjectHideFlags: 0

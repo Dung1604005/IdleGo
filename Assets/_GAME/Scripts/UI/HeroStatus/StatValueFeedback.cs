@@ -7,6 +7,8 @@ using UnityEngine;
 public sealed class StatValueFeedback
 {
     [SerializeField] private TextPopUp popupPrefab;
+
+    [SerializeField] private Transform parentTF;
     [SerializeField, Range(1f, 1.5f)] private float peakScale = 1.28f;
     [SerializeField, Min(0.01f)] private float popDuration = 0.2f;
     [SerializeField, Min(0.01f)] private float tickerDuration = 0.15f;
@@ -28,6 +30,7 @@ public sealed class StatValueFeedback
     public void OnInit(TextMeshProUGUI text)
     {
         popupPool ??= new TextPopUpPool();
+        parentTF = UIManager.Ins.GetUI<CanvasHeroStatus>().transform;
         valueText = text;
         if (text == null) return;
         originalScale = text.rectTransform.localScale;
@@ -58,7 +61,7 @@ public sealed class StatValueFeedback
         KillTweens();
         if (valueText != null)
         {
-            popupPool?.OnDespawn(valueText.rectTransform);
+            popupPool?.OnDespawn(parentTF);
             valueText.rectTransform.localScale = originalScale;
             valueText.color = originalColor;
         }
@@ -111,11 +114,22 @@ public sealed class StatValueFeedback
     private void ShowIncrease(StatType statType, float delta, Color color)
     {
         popupPool ??= new TextPopUpPool();
-        TextPopUp popup = popupPool.Spawn(popupPrefab, valueText.rectTransform);
+        TextPopUp popup = popupPool.Spawn(popupPrefab, parentTF);
         if (popup == null) return;
+        popup.transform.position = valueText.rectTransform.position;
         valueText.ForceMeshUpdate();
         Bounds bounds = valueText.textBounds;
-        Vector2 position = new Vector2(bounds.center.x, bounds.max.y + floatingOffset);
+
+        // Đổi vị trí phía trên chữ sang world, rồi sang local của parent popup.
+        Vector3 worldPosition = valueText.rectTransform.TransformPoint(
+            new Vector3(bounds.center.x, bounds.max.y + floatingOffset, 0f));
+
+        RectTransform parentRect = (RectTransform)parentTF;
+        Vector3 localPosition = parentRect.InverseTransformPoint(worldPosition);
+
+        // Prepare dùng anchor giữa nên vị trí phải tính từ tâm rect của parent.
+        Vector2 position = new Vector2(localPosition.x, localPosition.y)
+            - parentRect.rect.center;
         popup.PlayFloating($"+{HeroStatusText.FormatStat(statType, delta)}", color,
             position, floatingDuration, floatingDistance,
             valueText.fontSize * floatingFontScale, valueText.font);
