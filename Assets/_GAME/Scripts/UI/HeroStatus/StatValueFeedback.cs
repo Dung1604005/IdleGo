@@ -15,7 +15,7 @@ public sealed class StatValueFeedback
     [SerializeField, Min(0f)] private float floatingOffset = 22f;
     [SerializeField, Range(0.1f, 1f)] private float floatingFontScale = 0.65f;
 
-    private readonly TextPopUpPool popupPool = new TextPopUpPool();
+    [NonSerialized] private TextPopUpPool popupPool;
     private TextMeshProUGUI valueText;
     private Vector3 originalScale;
     private Color originalColor;
@@ -27,6 +27,7 @@ public sealed class StatValueFeedback
 
     public void OnInit(TextMeshProUGUI text)
     {
+        popupPool ??= new TextPopUpPool();
         valueText = text;
         if (text == null) return;
         originalScale = text.rectTransform.localScale;
@@ -57,7 +58,7 @@ public sealed class StatValueFeedback
         KillTweens();
         if (valueText != null)
         {
-            popupPool.OnDespawn(valueText.rectTransform);
+            popupPool?.OnDespawn(valueText.rectTransform);
             valueText.rectTransform.localScale = originalScale;
             valueText.color = originalColor;
         }
@@ -67,7 +68,7 @@ public sealed class StatValueFeedback
     private void SnapValue(StatType statType, float value)
     {
         KillTweens();
-        popupPool.OnDespawn(valueText.rectTransform);
+        popupPool?.OnDespawn(valueText.rectTransform);
         displayedValue = value;
         hasValue = true;
         valueText.rectTransform.localScale = originalScale;
@@ -80,7 +81,8 @@ public sealed class StatValueFeedback
         popSequence?.Kill();
         valueText.rectTransform.localScale = originalScale;
         valueText.color = color;
-        popSequence = DOTween.Sequence().SetUpdate(true);
+        popSequence = DOTween.Sequence().SetUpdate(true)
+            .SetLink(valueText.gameObject, LinkBehaviour.KillOnDisable);
         popSequence.Append(valueText.rectTransform
             .DOScale(originalScale * peakScale, popDuration * 0.3f).SetEase(Ease.OutQuad));
         popSequence.Append(valueText.rectTransform
@@ -97,6 +99,7 @@ public sealed class StatValueFeedback
             displayedValue = next;
             valueText.text = HeroStatusText.FormatStat(statType, next);
         }, value, tickerDuration).SetEase(Ease.OutQuad).SetUpdate(true)
+            .SetLink(valueText.gameObject, LinkBehaviour.KillOnDisable)
             .OnComplete(() =>
             {
                 displayedValue = value;
@@ -107,6 +110,7 @@ public sealed class StatValueFeedback
 
     private void ShowIncrease(StatType statType, float delta, Color color)
     {
+        popupPool ??= new TextPopUpPool();
         TextPopUp popup = popupPool.Spawn(popupPrefab, valueText.rectTransform);
         if (popup == null) return;
         valueText.ForceMeshUpdate();

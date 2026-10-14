@@ -7,9 +7,10 @@
 
 IdleGo is a Unity 2D idle combat game. The current playable foundation includes automatic combat, multi-character teams, Addressable level data, pooled enemies, inventory and per-character equipment, enchant materials, queued chests, item information UI, and character/global progression.
 
-Main runtime scene:
+Scene status:
 
-- `Assets/_GAME/Scenes/SampleScene.unity`
+- `Assets/_GAME/Scenes/SampleScene.unity` is the only enabled scene in `EditorBuildSettings`.
+- `Assets/m.unity` currently contains the populated gameplay managers but is not in `EditorBuildSettings`; treat it as the active development scene until build-scene setup is finalized.
 
 Main bootstrap:
 
@@ -343,6 +344,7 @@ Current implementation:
 - Hero Status stat names use the same shared display-name mapping as equipment, including `CD` and `DA`.
 - Stat rows persist across ordinary refreshes. A confirmed increase in upgrade count and actual current value triggers DOTween value pop (1.28x), color return (0.2s), number ticker (0.15s), and a pooled `+delta` popup (0.6s).
 - Both the value flash and popup read the stat's feedback color through `DataManager.GetStatFeedbackColor`; the colors are authored alongside icons in `StatIconSO`.
+- Runtime-only popup helpers are recreated after Unity serialization/domain reload, and value tweens are linked to their text GameObject so disabling a row cannot leave an orphan tween running.
 - Initial display, switching heroes, rejected upgrades and unrelated refreshes do not trigger upgrade feedback. Rapid upgrades resume from the displayed number; popup delta uses the actual previous/new data values. Reset/close/switch clears owned feedback and restores text scale/color.
 - A stat upgrade uses its `CharacterStatUpgradeRule`: value per upgrade and point cost.
 - A stat without a matching `CharacterStatUpgradeRule` remains visible for inspection but its `+` button is hidden. A valid rule with insufficient points keeps the button visible but non-interactable.
@@ -460,6 +462,7 @@ Read only the relevant detailed document after this file when working on those s
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
 
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
+- Finalize the startup scene: either add the populated `Assets/m.unity` scene to `EditorBuildSettings` or move its gameplay managers into the enabled `SampleScene`.
 - Assign real sprites in `Assets/_GAME/Resources/Data/StatIconData.asset`; the generated asset only guarantees entries exist.
 - Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, and save reload in Unity Play Mode.
 - Verify stat pop/color/ticker and floating `+delta` visually in Play Mode, including rapid clicks, percentage stats, reset, hero switching, close/reopen and concurrent damage popup reuse.
@@ -470,6 +473,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-14 Stat feedback review and lifecycle hardening
+
+- Re-read the shared popup, stat feedback, Hero Status refresh, DataManager mutation/save flow, pool lifecycle and all serialized prefab references.
+- `dotnet build Assembly-CSharp-Editor.csproj --no-restore -v:q -clp:ErrorsOnly` passed with 0 warnings and 0 errors.
+- Verified the preserved 32-character TextPopUp script/prefab GUIDs and confirmed both Canvas-Combat and StatProgressLine reference the same popup prefab/component fileID.
+- Confirmed the affected `StatValueFeedback.cs` remains below 250 lines and its methods remain below 45 lines; Unity Play Mode visual verification was not performed.
 
 ### 2026-10-14 Stat upgrade feedback and shared TextPopUp
 
@@ -523,6 +533,14 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-14 - Reviewed stat feedback lifecycle
+
+- Changed: hardened `StatValueFeedback` against Unity domain reload by lazily restoring its runtime-only popup pool and linked both value tweens to the value text GameObject lifecycle.
+- Corrected context: recorded the difference between the enabled SampleScene build scene and the populated `Assets/m.unity` development scene.
+- Data/save: none.
+- Setup: none; the existing TextPopUp references and per-stat feedback colors remain assigned.
+- Verification: Editor C# build and prefab GUID/reference checks passed; Play Mode visual checks remain in Open TODO.
 
 ### 2026-10-14 - Stat upgrade feedback and shared TextPopUp
 
