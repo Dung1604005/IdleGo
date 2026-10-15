@@ -7,14 +7,9 @@ public partial class LevelManager : Singleton<LevelManager>
 {
     [Header("Addressables")]
     [SerializeField] private string levelAddressPrefix = "Level_";
-    [SerializeField] private MapType firstMapType;
-    [SerializeField, Min(0)] private int firstLevelIndex;
 
     [Header("Wave")]
     [SerializeField, Min(0f)] private float waveTransitionDelay = 1f;
-
-    [Header("Map")]
-    [SerializeField] private Transform mapContainer;
 
     [SerializeField] private LevelInfo levelInfo;
 
@@ -22,6 +17,8 @@ public partial class LevelManager : Singleton<LevelManager>
     private Coroutine loadLevelCoroutine;
     private bool hasCurrentLevelHandle;
     private float nextWaveStartTime;
+    private DifficultType activeDifficulty;
+    private MapType activeMapType = MapType.NONE;
 
     public bool IsInitialized { get; private set; }
     public LevelPlayState State { get; private set; }
@@ -31,8 +28,9 @@ public partial class LevelManager : Singleton<LevelManager>
     public void OnInit()
     {
         OnDespawn();
+        if (!MapManager.Ins.IsInitialized) MapManager.Ins.OnInit();
         IsInitialized = true;
-        StartLevel(firstMapType, firstLevelIndex);
+        StartLevel(MapManager.Ins.CurrentLevelIndex);
     }
 
     public void OnDespawn()
@@ -48,9 +46,10 @@ public partial class LevelManager : Singleton<LevelManager>
         EnemyManager.Ins.OnDespawn();
         LootManager.Ins.ClearLevelData();
         ReleaseCurrentLevel();
-        DespawnCurrentMap();
 
         levelInfo.OnDespawn();
+        activeDifficulty = DifficultType.EASY;
+        activeMapType = MapType.NONE;
         nextWaveStartTime = 0f;
         State = LevelPlayState.None;
         IsInitialized = false;
@@ -86,47 +85,33 @@ public partial class LevelManager : Singleton<LevelManager>
         }
     }
 
-    public bool StartLevel(MapType mapType, int levelIndex)
+    public bool StartLevel(int levelIndex)
     {
-        if (!IsInitialized || mapType == MapType.NONE || levelIndex < 0 || loadLevelCoroutine != null)
+        if (!IsInitialized
+            || loadLevelCoroutine != null
+            || !MapManager.Ins.IsLevelUnlocked(
+                MapManager.Ins.CurrentDifficulty,
+                MapManager.Ins.CurrentMapType,
+                levelIndex))
         {
             return false;
         }
 
-        loadLevelCoroutine = StartCoroutine(LoadLevelRoutine(mapType, levelIndex));
+        loadLevelCoroutine = StartCoroutine(LoadLevelRoutine(levelIndex));
         return true;
-    }
-
-    public bool StartMap(MapType mapType)
-    {
-        return StartLevel(mapType, 0);
     }
 
     public bool StartNextLevel()
     {
-        if (!IsInitialized || State == LevelPlayState.Loading)
+        if (!IsInitialized
+            || State == LevelPlayState.Loading
+            || activeDifficulty != MapManager.Ins.CurrentDifficulty
+            || activeMapType != MapManager.Ins.CurrentMapType)
         {
             return false;
         }
 
-        return StartLevel(levelInfo.CurrentMapType, levelInfo.CurrentLevelIndex + 1);
-    }
-
-    public bool StartNextMap()
-    {
-        if (!IsInitialized || State == LevelPlayState.Loading)
-        {
-            return false;
-        }
-
-        int nextMapValue = (int)levelInfo.CurrentMapType + 1;
-        if (!System.Enum.IsDefined(typeof(MapType), nextMapValue))
-        {
-            return false;
-        }
-
-        // Map mới luôn bắt đầu từ level đầu tiên.
-        return StartLevel((MapType)nextMapValue, 0);
+        return StartLevel(levelInfo.CurrentLevelIndex + 1);
     }
 
     public bool StartNextWave()
@@ -150,11 +135,13 @@ public partial class LevelManager : Singleton<LevelManager>
         return true;
     }
 
-    private IEnumerator LoadLevelRoutine(MapType mapType, int levelIndex)
+    private IEnumerator LoadLevelRoutine(int levelIndex)
     {
         State = LevelPlayState.Loading;
         UnloadCurrentLevel();
 
+        DifficultType difficulty = MapManager.Ins.CurrentDifficulty;
+        MapType mapType = MapManager.Ins.CurrentMapType;
         string levelAddress = GetLevelAddress(mapType, levelIndex);
         currentLevelHandle = Addressables.LoadAssetAsync<LevelDataSO>(levelAddress);
         hasCurrentLevelHandle = true;
@@ -166,14 +153,20 @@ public partial class LevelManager : Singleton<LevelManager>
             yield break;
         }
 
-        if (!CanUseLoadedLevel(levelAddress, mapType))
+        if (!CanUseLoadedLevel(levelAddress, difficulty, mapType, levelIndex))
         {
             AbortLevelLoad();
             yield break;
         }
 
-        levelInfo.SetMapData(mapType);
+        if (!MapManager.Ins.CommitLevelSelection(levelIndex))
+        {
+            AbortLevelLoad();
+            yield break;
+        }
         levelInfo.SetLevelData(currentLevelHandle.Result);
+        activeDifficulty = difficulty;
+        activeMapType = mapType;
         levelInfo.SetWaveData(-1);
         LootManager.Ins.SetLevelData(currentLevelHandle.Result);
         OnLevelStart();

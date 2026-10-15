@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab23cadc1304137bb55066ab282b96f, type: 3}
+  m_Name: DifficultyMapVisualData
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyMapVisualSO
+  visuals:
+  - difficulty: 0
+    border: {fileID: 2739368774193971347, guid: 3a043cfbfd4eaac4f9270e5779fd550c, type: 3}
+    nameBackground: {fileID: 4535416734741245248, guid: 7ee168c5772e7dd4185d244982243536, type: 3}
+  - difficulty: 1
+    border: {fileID: 1622441304310123339, guid: 32448547349592342a36ec0487ecf8b2, type: 3}
+    nameBackground: {fileID: -3553740168676559210, guid: d293572e1e7582e46b58f8b0b6662eb7, type: 3}
+  - difficulty: 2
+    border: {fileID: -268372348043448779, guid: 6482d950af3b96243b0269ad1e7a7232, type: 3}
+    nameBackground: {fileID: 6082606151478160264, guid: 7c8b5b19be9f18f49898ef95b2f65b8d, type: 3}
+  - difficulty: 3
+    border: {fileID: 452113920920547274, guid: a31e34e128eabfb4db0f3761e0ba94d3, type: 3}
+    nameBackground: {fileID: -3466645426359807800, guid: 54540d27604558644bcad0ff106d5979, type: 3}
+  - difficulty: 4
+    border: {fileID: -6261198556117721737, guid: b209f523797bb6549b43babc9a9217da, type: 3}
+    nameBackground: {fileID: -3915653961429630347, guid: 994b3a81e70953b45b8e194e31ba3969, type: 3}

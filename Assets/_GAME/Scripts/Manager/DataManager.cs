@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class DataManager : Singleton<DataManager>
 {
-   [SerializeField] private List<MapDataSO> listMapData = new List<MapDataSO>();
-
    [SerializeField] private RarityBGSO rarityBGData;
 
    [SerializeField] private RarityColorSO rarityColorData;
@@ -12,6 +9,8 @@ public partial class DataManager : Singleton<DataManager>
    [SerializeField] private BuffStatVisualSO buffStatVisualSO;
 
    [SerializeField] private StatIconSO statIconSO;
+
+   [SerializeField] private DifficultyMapVisualSO difficultyMapVisualSO;
 
 
 
@@ -32,6 +31,22 @@ public partial class DataManager : Singleton<DataManager>
 
    public BuffStatVisualSO BuffStatVisualSO => buffStatVisualSO;
 
+   public Sprite GetDifficultyBorder(DifficultType difficulty)
+   {
+       EnsureDifficultyMapVisualData();
+       return difficultyMapVisualSO != null
+           ? difficultyMapVisualSO.GetBorder(difficulty)
+           : null;
+   }
+
+   public Sprite GetDifficultyNameBackground(DifficultType difficulty)
+   {
+       EnsureDifficultyMapVisualData();
+       return difficultyMapVisualSO != null
+           ? difficultyMapVisualSO.GetNameBackground(difficulty)
+           : null;
+   }
+
    public Sprite GetStatIcon(StatType statType)
    {
        EnsureStatVisualData();
@@ -50,6 +65,15 @@ public partial class DataManager : Singleton<DataManager>
        if (statIconSO == null)
        {
            statIconSO = Resources.Load<StatIconSO>("Data/StatIconData");
+       }
+   }
+
+   private void EnsureDifficultyMapVisualData()
+   {
+       if (difficultyMapVisualSO == null)
+       {
+           difficultyMapVisualSO = Resources.Load<DifficultyMapVisualSO>(
+               "Data/DifficultyMapVisualData");
        }
    }
 
@@ -198,12 +222,6 @@ public partial class DataManager : Singleton<DataManager>
        selectedEquipmentSource = previousSource;
        return false;
    }
-
-   public MapDataSO GetMapData(MapType mapType)
-    {
-        
-        return mapType == MapType.NONE ? null: listMapData[(int)mapType];
-    }
 
     public Sprite GetRarityBGSprite(RarityType rarityType)
     {

@@ -1,23 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "MapDataSO", menuName = "IdleGo/Level/MapDataSO")]
 public class MapDataSO : ScriptableObject
 {
     [SerializeField] private MapType mapType;
-    [SerializeField] private Sprite miniMap;
+    [FormerlySerializedAs("miniMap")]
+    [SerializeField] private MapSelectUI miniMapPrefab;
 
     [SerializeField] private MapController mapPrefab;
 
     [SerializeField] private Vector3 spawnPos;
 
-    [SerializeField] private int totalLevel;
+    [SerializeField, Min(1)] private int totalLevel = 1;
 
     public MapType MapType => mapType;
 
+    public MapSelectUI MiniMapPrefab => miniMapPrefab;
+
     public Vector3 SpawnPos => spawnPos;
 
-    public int TotalLevel => totalLevel;
+    public int TotalLevel => Mathf.Max(0, totalLevel);
 
     public MapController GetMapPrefab()
     {
@@ -32,4 +35,17 @@ public enum MapType
     FOREST = 0,
 
     LAVA = 1
+}
+
+public enum DifficultType
+{
+    EASY = 0,
+
+    NORMAL = 1,
+
+    HARD = 2,
+
+    NIGHTMARE = 3,
+
+    LEGEND = 4
 }

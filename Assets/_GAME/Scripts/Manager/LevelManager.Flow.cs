@@ -54,6 +54,11 @@ public partial class LevelManager
         }
 
         float duration = Mathf.Max(0f, displayDuration);
+        // Clear progress được lưu trước khi chuyển level để lần load sau mở khóa đúng.
+        MapManager.Ins.CompleteLevel(
+            activeDifficulty,
+            activeMapType,
+            levelInfo.CurrentLevelIndex);
         State = LevelPlayState.Completed;
         GetCombatCanvas()?.OnLevelComplete(duration);
         CancelPendingLevelTransition();

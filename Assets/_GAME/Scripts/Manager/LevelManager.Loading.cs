@@ -3,7 +3,11 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class LevelManager
 {
-    private bool CanUseLoadedLevel(string levelAddress, MapType mapType)
+    private bool CanUseLoadedLevel(
+        string levelAddress,
+        DifficultType difficulty,
+        MapType mapType,
+        int requestedLevelIndex)
     {
         bool loadSucceeded = currentLevelHandle.Status == AsyncOperationStatus.Succeeded
             && currentLevelHandle.Result != null;
@@ -13,8 +17,18 @@ public partial class LevelManager
             return false;
         }
 
+        if (MapManager.Ins.CurrentDifficulty != difficulty
+            || MapManager.Ins.CurrentMapType != mapType
+            || currentLevelHandle.Result.LevelIndex != requestedLevelIndex)
+        {
+            Debug.LogWarning(
+                $"Loaded level '{levelAddress}' no longer matches the selected map/level.",
+                this);
+            return false;
+        }
+
         return CanEnterLoadedLevel(currentLevelHandle.Result)
-            && SpawnMapIfNeeded(mapType);
+            && MapManager.Ins.EnsureCurrentMapSpawned();
     }
 
     private void AbortLevelLoad()

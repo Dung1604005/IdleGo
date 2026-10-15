@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Map1
   m_EditorClassIdentifier: Assembly-CSharp::MapDataSO
   mapType: 0
-  miniMap: {fileID: 0}
+  miniMapPrefab: {fileID: 8882392801850261105, guid: 7aeea37887e8b1244a70e2835f48d21f, type: 3}
   mapPrefab: {fileID: 1140519659440781956, guid: faa10d9be88e4ae4999651368af3e20c, type: 3}
   spawnPos: {x: -81.1, y: 4.77544, z: 0}
-  totalLevel: 1
+  totalLevel: 10

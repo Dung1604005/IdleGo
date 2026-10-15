@@ -1,6 +1,6 @@
 # IdleGo project context and progress
 
-> Last code scan: 2026-10-14  
+> Last code scan: 2026-10-15
 > Purpose: this is the starting point for future development. Read this file before inspecting feature code. Update it after every project task according to the root `AGENTS.md`.
 
 ## 1. Project snapshot
@@ -15,7 +15,7 @@ Scene status:
 Main bootstrap:
 
 - `Assets/_GAME/Scripts/Manager/GameManager.cs`
-- Startup order in `Start()`: `PlayerManager.OnInit()` -> `ChestManager.OnInit()` -> `LootManager.OnInit()` -> open Combat, Inventory/Hero and Navigation canvases -> `LevelManager.OnInit()`.
+- Startup order in `Start()`: `PlayerManager.OnInit()` -> `ChestManager.OnInit()` -> `LootManager.OnInit()` -> `MapManager.OnInit()` -> open Combat, Inventory/Hero and Navigation canvases -> `LevelManager.OnInit()`.
 
 Important packages:
 
@@ -53,12 +53,14 @@ Current working-tree note at the 2026-10-14 scan:
 | Per-character stat/skill upgrades | `CharacterStatProgress` | mutations through `DataManager` |
 | Global level, EXP and buffs | `PlayerProgression.GlobalStats` | `DataManager.Progression` |
 | Equipped combat skill runtime states | `CharacterCombat.combatSkillStates` | `CharacterCombat` |
-| Current level/map/wave | `LevelInfo` inside `LevelManager` | `LevelManager` |
+| Selected difficulty/map, map clear progress and map instance | `MapManager` + `MapProgressState` | system via `MapManager`; UI via `DataManager` |
+| Loaded level and current wave | `LevelInfo` inside `LevelManager` | `LevelManager` |
 | Active enemies and enemy-to-data mapping | `EnemyManager` | `EnemyManager.Ins` or `DataManager` target queries |
 | Loot rules for current level | `LootManager` + `LevelLootController` | `LootManager.Ins` |
 | Chest queues/settings/open state | `ChestManager` + `ChestState` | `DataManager.Ins.ChestData` |
 | Current UI item/hero selection | `DataManager` | `DataManager.Ins` |
 | Rarity colors/backgrounds, buff visuals, stat icons | serialized SO references in `DataManager` | `DataManager` getter methods |
+| Difficulty border/name backgrounds | `DifficultyMapVisualSO` | `DataManager.GetDifficultyBorder/GetDifficultyNameBackground` |
 
 `DataManager` is a gateway and coordinator. It does not replace the domain owners above. UI code should ask it for data and send commands through it.
 
@@ -109,6 +111,17 @@ Rules:
 - PlayerPrefs key: `PLAYER_CHESTS` by default.
 - Saved separately with `ChestSaveSystem`/`ChestSaveMapper`.
 - Saves each queue, storage limit, auto-open unlock/enabled flags, interval, remaining timer and rolled equipment reward data.
+
+### Map, difficulty and level progress
+
+- PlayerPrefs key: `PLAYER_MAP_PROGRESS` by default.
+- Serializer: Unity `JsonUtility` in `MapProgressSaveSystem`.
+- Saved separately from inventory and chests:
+  - current `DifficultType`;
+  - current `MapType`;
+  - current zero-based level index;
+  - highest cleared level index for each difficulty/map pair.
+- Sequential progress is derived from highest-cleared indices: level N requires N-1, a map requires the previous map to be complete, and a difficulty requires every configured map in the previous difficulty to be complete.
 
 ## 6. Core runtime flows
 
@@ -172,21 +185,49 @@ Key behavior:
 
 Source files:
 
+- `Assets/_GAME/Scripts/Manager/MapManager.cs`
+- `Assets/_GAME/Scripts/Manager/MapUnlockRules.cs`
+- `Assets/_GAME/Scripts/Manager/MapCatalogValidator.cs`
+- `Assets/_GAME/Scripts/Manager/MapProgressState.cs`
+- `Assets/_GAME/Scripts/Manager/MapProgressSave*.cs`
 - `Assets/_GAME/Scripts/Manager/LevelManager*.cs`
 - `Assets/_GAME/Scripts/Manager/LevelInfo.cs`
 - `Assets/_GAME/Scripts/Manager/EnemyManager*.cs`
+- `Assets/_GAME/Scripts/UI/CanvasLevelSelect.cs`
+- `Assets/_GAME/Scripts/UI/LevelSelect/*.cs`
 - `Assets/_GAME/SO/LevelMap/LevelDataSO.cs`
 - `Assets/_GAME/SO/LevelMap/MapDataSO.cs`
+- `Assets/_GAME/SO/LevelMap/DifficultyMapVisualSO.cs`
 
 Flow:
 
 ```text
-LevelManager.StartLevel(mapType, zero-based levelIndex)
+GameManager
+  -> MapManager.OnInit
+  -> load PLAYER_MAP_PROGRESS
+  -> normalize saved difficulty/map/level against current unlock rules
+
+Difficulty selection
+  -> DataManager.SelectDifficulty
+  -> MapManager validates difficulty unlock and saves selection
+  -> MapManager refreshes registered map-progress views
+
+Map selection
+  -> DataManager.SelectMap
+  -> MapManager validates map unlock and saves selection
+  -> MapManager refreshes CanvasLevelSelect from saved runtime state
+  -> current gameplay map prefab remains until a level is selected successfully
+
+Level selection
+  -> DataManager.SelectLevel(zero-based levelIndex)
+  -> LevelManager validates the level through MapManager
   -> build Addressable key: "Level_" + mapNumber + "-" + levelNumber
   -> load only that LevelDataSO
   -> require global level >= LevelDataSO.LevelRequired
-  -> spawn/change MapController from MapDataSO when map changes
-  -> LevelInfo stores current map instance, level and wave
+  -> MapManager keeps the current MapController when MapType is unchanged
+  -> MapManager destroys/spawns the map prefab when MapType changed
+  -> MapManager commits and saves the selected level
+  -> LevelInfo stores only the loaded level and wave
   -> LootManager receives current LevelDataSO
   -> LevelManager.OnLevelStart
   -> clear the old result overlay
@@ -205,6 +246,7 @@ All active team members dead
 
 No next wave remains
   -> LevelManager.OnLevelComplete(displayDuration)
+  -> MapManager records the cleared difficulty/map/level and saves
   -> CanvasCombat shows black overlay + "Level Completed"
   -> LevelManager.Invoke(OnNextLevel, displayDuration)
 ```
@@ -217,6 +259,13 @@ Level attempt reset:
 - `CanvasCombat` owns only result visuals. It never starts/restarts a level or mutates game data.
 - The result text scales from zero with DOTween `Ease.OutBack`; the result overlay is moved to the top UI sibling while visible.
 - Result durations are serialized on `LevelManager`; result text scale duration is serialized on `CanvasCombat`.
+- `MapManager` owns the ordered `MapDataSO` catalog and the active map instance. `LevelManager` owns Addressable level loading, waves and level results.
+- `CanvasLevelSelect` registers as `IMapProgressView`; UI commands go through `DataManager`, while `MapManager` saves before refreshing the canvas.
+- The level-select canvas has two horizontal map-selector rows. Map buttons are distributed between the rows in catalog order, and the selected map's pooled `MapSelectUI` comes from `MapDataSO.MiniMapPrefab`.
+- Difficulty uses a custom popup with five ordered options. The selected difficulty changes `MapSelectUI` border/name background through `DifficultyMapVisualSO`.
+- Each `LevelSelectButtonUI` stores a one-based level number. It swaps normal/selected/locked sprites directly and starts `DataManager.SelectLevel`; Unity Button's Selected Sprite is not used.
+- Selecting another map or difficulty does not replace the combat map immediately. The prefab changes only after the requested level loads and passes validation.
+- `LevelManager` snapshots the difficulty/map of the loaded battle so a late selection change cannot credit a clear to the wrong progress entry.
 
 Addressable convention:
 
@@ -224,6 +273,7 @@ Addressable convention:
 - Map enum index and zero-based level index are converted to one-based display numbers.
 - Example: `MapType.FOREST = 0`, level index `0` -> address `Level_1-1`.
 - The Addressable address must match this generated key. The asset filename itself is not used by loading once the address is set.
+- Difficulty currently shares the same `LevelDataSO` address; it controls selection, saving and unlock progression. Difficulty-specific enemy scaling remains a separate future step.
 - Only `LevelDataSO` needs to be Addressable for this flow. Referenced wave/enemy/equipment-source assets are dependencies.
 
 Enemy spawning:
@@ -401,6 +451,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `BuffStatType`: `SOCKET(0)`, `ENCHANTMENT(1)`, `DECORATION(2)`.
 - `ChestType`: `NORMAL(0)`, `ELITE(1)`, `BOSS(2)`. Numeric order drives the chest carousel.
 - `EnemyType`: `NORMAL(0)`, `ELITE(1)`, `BOSS(2)`.
+- `DifficultType`: `EASY(0)`, `NORMAL(1)`, `HARD(2)`, `NIGHTMARE(3)`, `LEGEND(4)`. Numeric order drives sequential difficulty unlocks and is persisted.
 - `CharacaterClassType`: `MELEE(0)`, `RANGER(1)`, `MAGE(2)`.
 
 ## 8. Important ScriptableObject setup
@@ -416,7 +467,8 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `EquipmentSourceSO`: one common required level and weighted equipment entries of that level.
 - `EnemyDataSO`: prefab, enemy type and EXP reward.
 - `LevelDataSO`: zero-based level index, global level requirement, world-space team spawn position, waves and three equipment sources.
-- `MapDataSO`: map enum, map prefab, spawn position and level count; currently referenced by `DataManager.listMapData` by enum index.
+- `MapDataSO`: map enum, pooled `MapSelectUI` mini-map prefab, gameplay map prefab, spawn position and level count. Every map must be assigned once to `MapManager.maps` in progression order.
+- `DifficultyMapVisualSO`: one border and name-background sprite per `DifficultType`; loaded through `DataManager` with Resources fallback `Data/DifficultyMapVisualData`.
 - `RarityColorSO`, `RarityBGSO`, `BuffStatVisualSO`, and `StatIconSO`: referenced by `DataManager`; `StatIconSO` stores per-stat icons and feedback colors and falls back to Resources path `Data/StatIconData`.
 
 ## 9. Editor and design tools
@@ -446,7 +498,8 @@ Read only the relevant detailed document after this file when working on those s
 | Auto combat | Implemented | Nearest target, skill priority, MoveTowards, animation-timed damage/cooldown |
 | Attack types | Implemented | Single target and AOE separated for extension |
 | Team/roster | Implemented | Many characters, max three active, unlockable slots, persistent per-character state |
-| Level/wave/map | Core flow implemented | Addressable load, pooled waves, team defeat/restart, completion/next-level result flow |
+| Map/difficulty progress | UI prototype implemented | Five difficulties, ordered maps, sequential unlocks, save, pooled mini-map view, two map rows and difficulty popup |
+| Level/wave | Core flow implemented | Addressable load, pooled waves, team defeat/restart, completion/next-level result flow |
 | Inventory | Implemented | Capacity, add/remove/sort, pooled UI, save/load |
 | Equipment | Implemented | Requirements, per-character equip data, quality, modifiers, comparison UI |
 | Enchant materials | Implemented | Matching slot validation, one random allowed stat, persistence/display |
@@ -463,6 +516,11 @@ Read only the relevant detailed document after this file when working on those s
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
 
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
+- Visually tune `Canvas-LevelSelect.prefab`, `Button-MapSelect.prefab`, and `MapSelect-Forest.prefab` in Unity after checking the portrait layout.
+- Add every future `MapDataSO` to `MapManager.maps` in progression order and set a correct `TotalLevel`; only Forest is currently configured in `Assets/m.unity`.
+- Define and apply gameplay stat scaling/reward changes for `DifficultType`; current difficulty logic covers selection, save/load and unlock progression only.
+- Verify map progress in Play Mode: save reload, sequential level/map/difficulty unlocks, keeping the same map prefab and replacing it when MapType changes.
+- Verify the level-select UI in Play Mode: Navigation open/close, both horizontal rows, difficulty popup locks, map switching, level lock/selected sprites and Addressable level start.
 - Finalize the startup scene: either add the populated `Assets/m.unity` scene to `EditorBuildSettings` or move its gameplay managers into the enabled `SampleScene`.
 - Assign real sprites in `Assets/_GAME/Resources/Data/StatIconData.asset`; the generated asset only guarantees entries exist.
 - Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, locked/eligible/max skill upgrade labels, and save reload in Unity Play Mode.
@@ -475,6 +533,21 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-15 Map, difficulty and level selection UI
+
+- Unity Editor compiled the new runtime/editor setup code and generated the final UI assets without logged C# errors; the temporary one-shot asset builder was removed afterward.
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` and the matching `Assembly-CSharp-Editor.csproj` build both passed with 0 errors.
+- Confirmed all affected runtime C# files remain at or below 250 lines; `MapManager.cs` is the longest at 239 lines.
+- Confirmed `Canvas-LevelSelect.prefab` has two horizontal ScrollRects, five difficulty options and assigned runtime references; `MapSelect-Forest.prefab` has exactly ten indexed level-button components; Map1 points to that prefab with `TotalLevel = 10`; Navigation points to the authored `Button-Map`.
+- Unity Play Mode interaction and portrait-layout verification were not performed.
+
+### 2026-10-15 Map selection and progression logic
+
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` passed with 0 errors and the existing project warning. New source entries were added temporarily to Unity's generated project because the open Editor had not regenerated it, then those generated-file edits were removed.
+- Confirmed all affected C# files are at or below 250 lines and methods are at or below 45 lines; `MapManager.cs` is the longest new file at 225 lines and `LoadLevelRoutine` is the longest affected method at 36 lines.
+- Validated seven new 32-character meta GUIDs, unique YAML anchors in `Assets/m.unity`, one MapManager component, and its existing Forest map-instance reference.
+- `git diff --check` passed for the affected runtime code and scene after cleanup. Unity Play Mode save/unlock/map-switch verification was not performed.
 
 ### 2026-10-15 Hero skill level requirement feedback
 
@@ -542,6 +615,24 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-15 - Map, difficulty and level selection UI
+
+- Changed: added `CanvasLevelSelect` with two horizontal pooled map-button rows, a five-option difficulty popup and a pooled selected-map view sourced from `MapDataSO.MiniMapPrefab`. The existing Forest map art and ten authored level-button positions were preserved in `MapSelect-Forest.prefab`.
+- Flow: Navigation's authored `Button-Map` opens the canvas. Map/difficulty commands go through `DataManager`; `MapManager` saves and refreshes registered `IMapProgressView` views. Level buttons call `DataManager.SelectLevel` and close the canvas after loading begins.
+- Visual state: each level button owns its one-based level number and directly swaps normal/selected/locked sprites; Button Selected Sprite is not used. Difficulty border and name background come from `DifficultyMapVisualSO` through `DataManager`.
+- Data/save: no schema or PlayerPrefs-key change. `Map1.asset` now assigns `MapSelect-Forest.prefab` and declares ten levels.
+- Setup: `DifficultyMapVisualData.asset` has five entries and uses the supplied Easy, Normal, Hard, Nightmare and Legend border/name-background sprites.
+- Verification: Unity asset generation/import and both runtime/editor C# builds passed; Play Mode and final visual tuning remain in Open TODO.
+
+### 2026-10-15 - Map selection, difficulty and clear progression
+
+- Changed: added singleton `MapManager` as owner of the ordered map catalog, current map instance, five-difficulty selection and sequential map/difficulty unlock rules. `LevelManager` now selects only levels and reports clears using the loaded battle's map/difficulty snapshot.
+- Map behavior: selecting map/difficulty updates saved selection; a successful level load asks MapManager to keep the current prefab for the same MapType or replace it for a different MapType.
+- Data/save: added `PLAYER_MAP_PROGRESS` JSON containing current difficulty/map/level and the highest cleared level for every difficulty/map pair.
+- Scene setup: moved the Forest `MapDataSO`, map container and existing Forest instance reference from the old owners into MapManager on `Assets/m.unity`. Future maps must be appended in progression order.
+- Verification: runtime C# build, file limits, meta GUIDs, scene anchors/references and targeted diff checks passed; Play Mode verification remains in Open TODO.
+- Remaining: selection UI and difficulty-specific combat/reward scaling are intentionally deferred.
 
 ### 2026-10-15 - Hero skill level requirement feedback
 

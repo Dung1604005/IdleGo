@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasNavigation : UICanvas
 {
     
    [SerializeField] private PanelChestView panelChestView;
     [SerializeField] private ChestRuntimeTestTool chestRuntimeTestTool;
+    [SerializeField] private Button levelSelectButton;
 
     public override void SetUp()
     {
@@ -14,6 +16,8 @@ public class CanvasNavigation : UICanvas
 
     public void OnInit()
     {
+        levelSelectButton?.onClick.RemoveListener(OnButtonOpenLevelSelect);
+        levelSelectButton?.onClick.AddListener(OnButtonOpenLevelSelect);
         chestRuntimeTestTool?.OnDespawn();
         panelChestView?.OnDespawn();
         panelChestView?.OnInit();
@@ -28,8 +32,14 @@ public class CanvasNavigation : UICanvas
 
     public override void CloseDirectly()
     {
+        levelSelectButton?.onClick.RemoveListener(OnButtonOpenLevelSelect);
         chestRuntimeTestTool?.OnDespawn();
         panelChestView?.OnDespawn();
         base.CloseDirectly();
+    }
+
+    public void OnButtonOpenLevelSelect()
+    {
+        UIManager.Ins.OpenUI<CanvasLevelSelect>();
     }
 }
