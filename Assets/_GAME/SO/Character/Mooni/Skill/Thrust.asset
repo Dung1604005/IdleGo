@@ -17,6 +17,8 @@ MonoBehaviour:
   maxLevel: 5
   statPointCostByLevel: 0100000002000000030000000400000005000000
   iconSkill: {fileID: -7012151887548525605, guid: efcbecde69422fc40b84394856c5e223, type: 3}
+  displayName: Final Thrust
+  description: 
   nameAnim: thrust
   levelRequire: 1
   characterRequirement: 0

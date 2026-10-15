@@ -18,3 +18,4 @@ MonoBehaviour:
   listCombatSkill:
   - {fileID: 11400000, guid: bcc0995d1e5c8c04fa7d3e6b3dbdc2ca, type: 2}
   - {fileID: 11400000, guid: 73aaa50ad65e5f64a849432fff66cb60, type: 2}
+  - {fileID: 11400000, guid: 9f2a733bfd296fe438764319a5d8e9af, type: 2}

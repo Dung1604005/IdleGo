@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3976f81c10544e68fc9c31902d53bef, type: 3}
   m_Name: Aluca
   m_EditorClassIdentifier: Assembly-CSharp::DamageSkill
-  skillId: mooni_thrust
-  cooldown: 2.5
+  skillId: mooni_aluca
+  cooldown: 5
   maxLevel: 5
   statPointCostByLevel: 0100000002000000030000000400000005000000
-  iconSkill: {fileID: -7012151887548525605, guid: efcbecde69422fc40b84394856c5e223, type: 3}
-  nameAnim: thrust
-  levelRequire: 1
+  iconSkill: {fileID: 2023342728902687302, guid: 240e93d109fbafd409a0964c3237fe16, type: 3}
+  displayName: Aluca
+  description: 
+  nameAnim: aluca
+  levelRequire: 75
   characterRequirement: 0
   damageMultiplierByLevel:
-  - 1.2
-  - 1.35
-  - 1.6
-  - 1.85
-  - 2
-  range: 1.5
+  - 3
+  - 3.5
+  - 4
+  - 4.5
+  - 6
+  range: 3
   attackType: {fileID: 11400000, guid: edc62a5496d93a94481ee419ad5c3926, type: 2}
