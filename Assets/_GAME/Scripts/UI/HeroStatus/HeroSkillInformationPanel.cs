@@ -18,6 +18,8 @@ public sealed class HeroSkillInformationPanel : PanelView
     private CanvasHeroStatus owner;
     private string characterId;
     private CombatSkill skill;
+    private Color defaultUpgradeCostColor = Color.white;
+    private bool hasCachedUpgradeCostColor;
 
     public void Refresh(
         CanvasHeroStatus canvas,
@@ -42,6 +44,7 @@ public sealed class HeroSkillInformationPanel : PanelView
         SetText(currentLevelText,
             $"Current Level: {currentLevel} / {skill.MaxLevel}");
         SetText(levelDetailsText, BuildLevelDetails(skill, currentLevel));
+        CacheUpgradeCostColor();
         RefreshButtons(currentLevel);
     }
 
@@ -83,9 +86,7 @@ public sealed class HeroSkillInformationPanel : PanelView
             out int pointCost);
         int availablePoints = DataManager.Ins.GetCharacterAvailableStatPoints(
             characterId);
-        SetText(upgradeCostText, canUpgrade
-            ? $"Upgrade Lv.{nextLevel}: {pointCost} Stat Points"
-            : "Max Level");
+        RefreshUpgradeCost(currentLevel, canUpgrade, nextLevel, pointCost);
         SetButton(upgradeButton, true,
             canUpgrade && availablePoints >= pointCost);
         bool isEquipped = DataManager.Ins.IsCharacterSkillEquipped(
@@ -96,6 +97,43 @@ public sealed class HeroSkillInformationPanel : PanelView
         SetButton(unequipButton, isEquipped, isEquipped);
     }
 
+    private void RefreshUpgradeCost(
+        int currentSkillLevel,
+        bool canUpgrade,
+        int nextLevel,
+        int pointCost)
+    {
+        int characterLevel = Mathf.RoundToInt(DataManager.Ins.GetCharacterStat(
+            characterId, StatType.LEVEL));
+        bool isMaxLevel = currentSkillLevel >= skill.MaxLevel;
+        if (!isMaxLevel && !skill.IsUnlocked(characterLevel))
+        {
+            SetColoredText(upgradeCostText,
+                $"Level Require: {skill.LevelRequire}", Color.red);
+            return;
+        }
+
+        SetColoredText(upgradeCostText,
+            canUpgrade
+                ? $"Upgrade Lv.{nextLevel}: {pointCost} Stat Points"
+                : "Max Level",
+            defaultUpgradeCostColor);
+    }
+
+    private void CacheUpgradeCostColor()
+    {
+        if (hasCachedUpgradeCostColor)
+        {
+            return;
+        }
+
+        if (upgradeCostText != null)
+        {
+            defaultUpgradeCostColor = upgradeCostText.color;
+        }
+        hasCachedUpgradeCostColor = true;
+    }
+
     private static string BuildLevelDetails(
         CombatSkill targetSkill,
         int currentLevel)
@@ -103,11 +141,10 @@ public sealed class HeroSkillInformationPanel : PanelView
         StringBuilder builder = new StringBuilder();
         for (int level = 1; level <= targetSkill.MaxLevel; level++)
         {
-            string marker = level == currentLevel ? "  < Current" : string.Empty;
             builder.Append("Lv.").Append(level).Append(": ")
                 .Append(targetSkill.GetLevelDescription(level))
                 .Append("  |  ").Append(targetSkill.GetStatPointCost(level))
-                .Append(" SP").Append(marker);
+                .Append(" SP");
             if (level < targetSkill.MaxLevel)
             {
                 builder.AppendLine();
@@ -130,6 +167,18 @@ public sealed class HeroSkillInformationPanel : PanelView
         if (text != null)
         {
             text.text = value ?? string.Empty;
+        }
+    }
+
+    private static void SetColoredText(
+        TextMeshProUGUI text,
+        string value,
+        Color color)
+    {
+        SetText(text, value);
+        if (text != null)
+        {
+            text.color = color;
         }
     }
 

@@ -103,7 +103,7 @@ public partial class CanvasHeroStatus : UICanvas, IInventoryView
         SetText(levelText, $"Level {level}");
         SetText(experienceText, $"EXP {experience} / {required}");
         SetText(statPointText,
-            $"Stat Points: {DataManager.Ins.GetCharacterAvailableStatPoints(characterId)}");
+            $"x{DataManager.Ins.GetCharacterAvailableStatPoints(characterId)}");
         SetImage(heroAvatar, DataManager.Ins.GetCharacterPortrait(characterId));
         if (experienceFill != null)
         {

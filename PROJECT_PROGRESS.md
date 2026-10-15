@@ -351,6 +351,7 @@ Current implementation:
 - Reset first ends the current attack when necessary and unequips every skill, then refunds points spent on both stat upgrades and every purchased skill level. Character level and EXP remain unchanged.
 - Skill refund is cumulative by purchased level: a level 2 skill refunds the configured costs for level 1 plus level 2, then returns the learned skill level to 0.
 - Skill level costs are authored per target level in `CombatSkill`.
+- The skill upgrade label shows `Max Level` only at the skill cap. Before the hero reaches `CombatSkill.LevelRequire`, it instead shows `Level Require: <level>` in red and keeps the upgrade button disabled; the authored text color returns after the requirement is met.
 - A learned eligible skill can be equipped; each character can equip at most two.
 - Skill cooldown UI in the regular hero panel reads progress from `CharacterCombat`; UI does not run its own cooldown clock.
 - Prototype generator menu: `IdleGo/UI/Build Hero Status Prototype`.
@@ -464,7 +465,7 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
 - Finalize the startup scene: either add the populated `Assets/m.unity` scene to `EditorBuildSettings` or move its gameplay managers into the enabled `SampleScene`.
 - Assign real sprites in `Assets/_GAME/Resources/Data/StatIconData.asset`; the generated asset only guarantees entries exist.
-- Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, and save reload in Unity Play Mode.
+- Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, locked/eligible/max skill upgrade labels, and save reload in Unity Play Mode.
 - Verify stat pop/color/ticker and floating `+delta` visually in Play Mode, including rapid clicks, percentage stats, reset, hero switching, close/reopen and concurrent damage popup reuse.
 - Correct the current user-edited stat popup canvas-parent positioning: convert TMP local bounds into the popup parent's centered-anchor coordinates before PlayFloating. Also pass the actual popup parent to cleanup; current cleanup still checks valueText.rectTransform. Diagnosis only; runtime code has not been changed.
 - Decide and implement the final chest loot reveal particle effect later. The prior particle implementation was intentionally removed.
@@ -474,6 +475,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-15 Hero skill level requirement feedback
+
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:minimal` passed with 0 warnings and 0 errors.
+- `dotnet build Assembly-CSharp-Editor.csproj --no-restore` could not complete its project-reference step in the sandbox: the diagnostic run reported compiler-server `UnauthorizedAccessException`, while the command summary reported 0 warnings and 0 errors.
+- `git diff --check` passed for `HeroSkillInformationPanel.cs`; the file is 196 lines and the added methods remain below 45 lines.
+- Unity Play Mode visual verification was not performed and remains covered by the existing Hero Status TODO.
 
 ### 2026-10-14 Stat feedback review and lifecycle hardening
 
@@ -534,6 +542,14 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-15 - Hero skill level requirement feedback
+
+- Changed: the Hero Skill detail panel now distinguishes a maxed skill from an unmet hero-level requirement. A non-max skill below `CombatSkill.LevelRequire` shows `Level Require: <level>` in red; max and upgrade-cost states use the text's original authored color.
+- Data/save: none.
+- Setup: none.
+- Verification: runtime C# build and diff/file-size checks passed; the Editor aggregate project remained blocked by sandbox compiler-server access, and Unity Play Mode was not run.
+- Remaining: visually verify the locked, eligible and max-level label states in the existing Hero Status Play Mode pass.
 
 ### 2026-10-14 - Diagnosed canvas-parent stat popup offset
 
