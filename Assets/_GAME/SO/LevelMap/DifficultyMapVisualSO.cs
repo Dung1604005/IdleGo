@@ -22,6 +22,16 @@ public sealed class DifficultyMapVisualSO : ScriptableObject
         return visual != null ? visual.NameBackground : null;
     }
 
+    public Sprite GetButtonNormal(DifficultType difficulty)
+    {
+        return FindVisual(difficulty)?.ButtonNormal;
+    }
+
+    public Sprite GetButtonHighlighted(DifficultType difficulty)
+    {
+        return FindVisual(difficulty)?.ButtonHighlighted;
+    }
+
     private DifficultyMapVisual FindVisual(DifficultType difficulty)
     {
         for (int i = 0; i < visuals.Count; i++)
@@ -41,8 +51,12 @@ public sealed class DifficultyMapVisual
     [SerializeField] private DifficultType difficulty;
     [SerializeField] private Sprite border;
     [SerializeField] private Sprite nameBackground;
+    [SerializeField] private Sprite buttonNormal;
+    [SerializeField] private Sprite buttonHighlighted;
 
     public DifficultType Difficulty => difficulty;
     public Sprite Border => border;
     public Sprite NameBackground => nameBackground;
+    public Sprite ButtonNormal => buttonNormal;
+    public Sprite ButtonHighlighted => buttonHighlighted;
 }

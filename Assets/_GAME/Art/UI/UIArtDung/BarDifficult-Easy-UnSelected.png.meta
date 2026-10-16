@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ffbde928ba377ca4d8e13d6232cce287
+guid: 55cf141ca8be5ee46906b7aeedf66040
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 632062371168147759
-    second: BarDifficult-Easy-UnSelected_0
+      213: 6340708926167861620
+    second: BarDifficult-Normal-UnSelected_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BarDifficult-Easy-UnSelected_0
+      name: BarDifficult-Normal-UnSelected_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f295e55b06985c800800000000000000
-      internalID: 632062371168147759
+      spriteID: 47942608c29bef750800000000000000
+      internalID: 6340708926167861620
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BarDifficult-Easy-UnSelected_0: 632062371168147759
+      BarDifficult-Normal-UnSelected_0: 6340708926167861620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

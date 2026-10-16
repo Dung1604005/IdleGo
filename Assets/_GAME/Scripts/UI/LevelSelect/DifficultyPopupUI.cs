@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public sealed class DifficultyPopupUI : MonoBehaviour
 {
     [SerializeField] private Button popupButton;
+    [SerializeField] private Image popupButtonImage;
     [SerializeField] private TextMeshProUGUI selectedDifficultyText;
     [SerializeField] private GameObject popupPanel;
     [SerializeField] private List<DifficultyOptionBinding> options =
@@ -29,7 +30,9 @@ public sealed class DifficultyPopupUI : MonoBehaviour
 
     public void Refresh()
     {
-        DifficultType current = DataManager.Ins.CurrentDifficulty;
+        DifficultType current = owner != null
+            ? owner.SelectedDifficulty : DataManager.Ins.CurrentDifficulty;
+        RefreshButtonVisual(current);
         if (selectedDifficultyText != null)
         {
             selectedDifficultyText.text = GetDisplayName(current);
@@ -38,6 +41,25 @@ public sealed class DifficultyPopupUI : MonoBehaviour
         {
             options[i]?.Refresh(current);
         }
+    }
+
+    private void RefreshButtonVisual(DifficultType difficulty)
+    {
+        if (popupButton == null || popupButtonImage == null) return;
+        Sprite normal = DataManager.Ins.GetDifficultyButtonNormal(difficulty);
+        Sprite highlighted = DataManager.Ins.GetDifficultyButtonHighlighted(difficulty);
+        if (normal == null && highlighted == null) return;
+        highlighted = highlighted != null ? highlighted : normal;
+        // Normal goes on the Image; hover/press/selection use the matching highlight.
+        popupButtonImage.overrideSprite = null;
+        if (normal != null) popupButtonImage.sprite = normal;
+        popupButton.targetGraphic = popupButtonImage;
+        SpriteState state = popupButton.spriteState;
+        state.highlightedSprite = highlighted;
+        state.pressedSprite = highlighted;
+        state.selectedSprite = highlighted;
+        popupButton.spriteState = state;
+        popupButton.transition = Selectable.Transition.SpriteSwap;
     }
 
     public void RequestDifficulty(DifficultType difficulty)
@@ -60,6 +82,12 @@ public sealed class DifficultyPopupUI : MonoBehaviour
     private void TogglePopup()
     {
         if (popupPanel != null) popupPanel.SetActive(!popupPanel.activeSelf);
+    }
+
+    private bool CanSelectDifficulty(DifficultType difficulty)
+    {
+        return owner != null ? owner.CanSelectDifficulty(difficulty)
+            : DataManager.Ins.IsDifficultyUnlocked(difficulty);
     }
 
     private static string GetDisplayName(DifficultType difficulty)
@@ -90,7 +118,9 @@ public sealed class DifficultyPopupUI : MonoBehaviour
 
         public void Refresh(DifficultType current)
         {
-            bool unlocked = DataManager.Ins.IsDifficultyUnlocked(difficulty);
+            bool unlocked = owner != null
+                ? owner.CanSelectDifficulty(difficulty)
+                : DataManager.Ins.IsDifficultyUnlocked(difficulty);
             if (button != null) button.interactable = unlocked;
             if (lockedIcon != null) lockedIcon.SetActive(!unlocked);
             if (selectedIcon != null) selectedIcon.SetActive(difficulty == current);

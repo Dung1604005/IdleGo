@@ -1,7 +1,22 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public partial class DataManager
 {
+    public Sprite GetDifficultyButtonNormal(DifficultType difficulty)
+    {
+        EnsureDifficultyMapVisualData();
+        return difficultyMapVisualSO != null
+            ? difficultyMapVisualSO.GetButtonNormal(difficulty) : null;
+    }
+
+    public Sprite GetDifficultyButtonHighlighted(DifficultType difficulty)
+    {
+        EnsureDifficultyMapVisualData();
+        return difficultyMapVisualSO != null
+            ? difficultyMapVisualSO.GetButtonHighlighted(difficulty) : null;
+    }
+
     public DifficultType CurrentDifficulty =>
         MapManager.Ins.CurrentDifficulty;
 

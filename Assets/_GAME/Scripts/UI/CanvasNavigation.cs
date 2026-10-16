@@ -40,6 +40,7 @@ public class CanvasNavigation : UICanvas
 
     public void OnButtonOpenLevelSelect()
     {
+        UIManager.Ins.CloseUIDirectly<CanvasInventoryHero>();
         UIManager.Ins.OpenUI<CanvasLevelSelect>();
     }
 }

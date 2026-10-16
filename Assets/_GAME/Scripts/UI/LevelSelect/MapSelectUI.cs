@@ -13,10 +13,12 @@ public sealed class MapSelectUI : GameUnit
         new List<LevelSelectButtonUI>();
 
     private MapDataSO mapData;
+    private CanvasLevelSelect selectionView;
 
     public override void OnSpawn()
     {
         mapData = null;
+        selectionView = null;
     }
 
     public void AttachTo(RectTransform parent)
@@ -31,14 +33,15 @@ public sealed class MapSelectUI : GameUnit
         target.localScale = Vector3.one;
     }
 
-    public void SetData(MapDataSO sourceMap)
+    public void SetData(MapDataSO sourceMap, CanvasLevelSelect sourceView = null)
     {
         mapData = sourceMap;
+        selectionView = sourceView;
         for (int i = 0; i < levelButtons.Count; i++)
         {
             levelButtons[i]?.OnInit(sourceMap != null
                 ? sourceMap.MapType
-                : MapType.NONE);
+                : MapType.NONE, selectionView);
         }
         Refresh();
     }
@@ -46,7 +49,8 @@ public sealed class MapSelectUI : GameUnit
     public void Refresh()
     {
         if (mapData == null) return;
-        DifficultType difficulty = DataManager.Ins.CurrentDifficulty;
+        DifficultType difficulty = selectionView != null
+            ? selectionView.SelectedDifficulty : DataManager.Ins.CurrentDifficulty;
         if (mapNameText != null) mapNameText.text = GetMapName(mapData.MapType);
         if (borderImage != null)
         {
@@ -70,6 +74,7 @@ public sealed class MapSelectUI : GameUnit
             levelButtons[i]?.OnDespawn();
         }
         mapData = null;
+        selectionView = null;
     }
 
     private static string GetMapName(MapType mapType)

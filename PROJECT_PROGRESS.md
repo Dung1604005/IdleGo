@@ -1,6 +1,6 @@
 # IdleGo project context and progress
 
-> Last code scan: 2026-10-15
+> Last code scan: 2026-10-16
 > Purpose: this is the starting point for future development. Read this file before inspecting feature code. Update it after every project task according to the root `AGENTS.md`.
 
 ## 1. Project snapshot
@@ -60,7 +60,7 @@ Current working-tree note at the 2026-10-14 scan:
 | Chest queues/settings/open state | `ChestManager` + `ChestState` | `DataManager.Ins.ChestData` |
 | Current UI item/hero selection | `DataManager` | `DataManager.Ins` |
 | Rarity colors/backgrounds, buff visuals, stat icons | serialized SO references in `DataManager` | `DataManager` getter methods |
-| Difficulty border/name backgrounds | `DifficultyMapVisualSO` | `DataManager.GetDifficultyBorder/GetDifficultyNameBackground` |
+| Difficulty border/name backgrounds and button sprites | `DifficultyMapVisualSO` | `DataManager.GetDifficultyBorder/GetDifficultyNameBackground/GetDifficultyButtonNormal/GetDifficultyButtonHighlighted` |
 
 `DataManager` is a gateway and coordinator. It does not replace the domain owners above. UI code should ask it for data and send commands through it.
 
@@ -261,8 +261,9 @@ Level attempt reset:
 - Result durations are serialized on `LevelManager`; result text scale duration is serialized on `CanvasCombat`.
 - `MapManager` owns the ordered `MapDataSO` catalog and the active map instance. `LevelManager` owns Addressable level loading, waves and level results.
 - `CanvasLevelSelect` registers as `IMapProgressView`; UI commands go through `DataManager`, while `MapManager` saves before refreshing the canvas.
-- The level-select canvas has two horizontal map-selector rows. Map buttons are distributed between the rows in catalog order, and the selected map's pooled `MapSelectUI` comes from `MapDataSO.MiniMapPrefab`.
-- Difficulty uses a custom popup with five ordered options. The selected difficulty changes `MapSelectUI` border/name background through `DifficultyMapVisualSO`.
+- The level-select canvas uses Previous/Next arrow buttons. `MapSelectionNavigation` finds adjacent configured maps by numeric `MapType`, independently of catalog Inspector order. Navigation stops at the ends and disables an arrow when its adjacent map is locked or unavailable. The selected map's pooled `MapSelectUI` comes from `MapDataSO.MiniMapPrefab`.
+- Difficulty uses a custom popup with five ordered options. The selected difficulty changes `MapSelectUI` border/name background and the header Button-Difficulty normal/highlighted sprites through `DifficultyMapVisualSO` and DataManager. `popupButtonImage` references the authored child background Image, not the transparent button hit area.
+- `MapSelectionRuntimeTestTool` is attached to CanvasLevelSelect and has a runtime `Unlock All UI` button (Editor/development builds) plus Enable/Disable/Toggle context menus. It calls only the view. While enabled, temporary nonserialized map/difficulty/level choices and unlocked visuals remain in the canvas; level clicks preview the selected sprite without starting a level. No test input reaches MapManager, LevelManager, progression mutations or saves. Turning it off, closing, or reopening the canvas restores real saved state. Ordinary gameplay progress can continue independently while this UI preview is open.
 - Each `LevelSelectButtonUI` stores a one-based level number. It swaps normal/selected/locked sprites directly and starts `DataManager.SelectLevel`; Unity Button's Selected Sprite is not used.
 - Selecting another map or difficulty does not replace the combat map immediately. The prefab changes only after the requested level loads and passes validation.
 - `LevelManager` snapshots the difficulty/map of the loaded battle so a late selection change cannot credit a clear to the wrong progress entry.
@@ -468,7 +469,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `EnemyDataSO`: prefab, enemy type and EXP reward.
 - `LevelDataSO`: zero-based level index, global level requirement, world-space team spawn position, waves and three equipment sources.
 - `MapDataSO`: map enum, pooled `MapSelectUI` mini-map prefab, gameplay map prefab, spawn position and level count. Every map must be assigned once to `MapManager.maps` in progression order.
-- `DifficultyMapVisualSO`: one border and name-background sprite per `DifficultType`; loaded through `DataManager` with Resources fallback `Data/DifficultyMapVisualData`.
+- `DifficultyMapVisualSO`: one border, name-background sprite, `Button Normal` sprite and `Button Highlighted` sprite per `DifficultType`; loaded through `DataManager` with Resources fallback `Data/DifficultyMapVisualData`. The two new button fields are left unassigned for user authoring; when both are empty the authored button visual remains as-is.
 - `RarityColorSO`, `RarityBGSO`, `BuffStatVisualSO`, and `StatIconSO`: referenced by `DataManager`; `StatIconSO` stores per-stat icons and feedback colors and falls back to Resources path `Data/StatIconData`.
 
 ## 9. Editor and design tools
@@ -478,6 +479,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - Item Information setup tools: `Assets/_GAME/Editor/ItemInformationUISetup*.cs`.
 - Hero Status prototype builder: `Assets/_GAME/Editor/HeroStatus*Builder.cs`.
 - Runtime chest test: `Assets/_GAME/Scripts/UI/Chest/ChestRuntimeTestTool.cs`.
+- Runtime map UI test: `Assets/_GAME/Scripts/UI/LevelSelect/MapSelectionRuntimeTestTool.cs`; open Level Select in Play Mode and click `Unlock All UI: OFF/ON`, or use the component's context menu. Preview mode never loads a battle or persists unlocks/selections.
 - Save reset context menu: `Assets/_GAME/Scripts/ToolSave.cs`.
 
 Detailed balance references:
@@ -498,7 +500,7 @@ Read only the relevant detailed document after this file when working on those s
 | Auto combat | Implemented | Nearest target, skill priority, MoveTowards, animation-timed damage/cooldown |
 | Attack types | Implemented | Single target and AOE separated for extension |
 | Team/roster | Implemented | Many characters, max three active, unlockable slots, persistent per-character state |
-| Map/difficulty progress | UI prototype implemented | Five difficulties, ordered maps, sequential unlocks, save, pooled mini-map view, two map rows and difficulty popup |
+| Map/difficulty progress | UI prototype implemented | Five difficulties, sequential unlocks/save, pooled mini-map view, enum-ordered arrows, skinnable difficulty popup and runtime UI-only unlock preview |
 | Level/wave | Core flow implemented | Addressable load, pooled waves, team defeat/restart, completion/next-level result flow |
 | Inventory | Implemented | Capacity, add/remove/sort, pooled UI, save/load |
 | Equipment | Implemented | Requirements, per-character equip data, quality, modifiers, comparison UI |
@@ -516,11 +518,11 @@ Read only the relevant detailed document after this file when working on those s
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
 
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
-- Visually tune `Canvas-LevelSelect.prefab`, `Button-MapSelect.prefab`, and `MapSelect-Forest.prefab` in Unity after checking the portrait layout.
+- Tune only the newly added Previous/Next arrow and runtime test-button positions on `Canvas-LevelSelect.prefab`; the existing user-authored layout was preserved. Assign `Button Normal` and `Button Highlighted` for all five difficulties in `DifficultyMapVisualData.asset`.
 - Add every future `MapDataSO` to `MapManager.maps` in progression order and set a correct `TotalLevel`; only Forest is currently configured in `Assets/m.unity`.
 - Define and apply gameplay stat scaling/reward changes for `DifficultType`; current difficulty logic covers selection, save/load and unlock progression only.
 - Verify map progress in Play Mode: save reload, sequential level/map/difficulty unlocks, keeping the same map prefab and replacing it when MapType changes.
-- Verify the level-select UI in Play Mode: Navigation open/close, both horizontal rows, difficulty popup locks, map switching, level lock/selected sprites and Addressable level start.
+- Verify the level-select UI in Play Mode: Navigation open/close, enum-ordered map arrows/endpoints/locks, difficulty popup locks and normal/highlighted sprites, map switching, level lock/selected sprites and Addressable level start. Toggle the UI-only unlock tool, preview all difficulties/levels, then turn it off or close/reopen and confirm real state returns with PLAYER_MAP_PROGRESS unchanged by preview inputs. Only Forest is currently configured, so a second MapDataSO is required to visually exercise map switching.
 - Finalize the startup scene: either add the populated `Assets/m.unity` scene to `EditorBuildSettings` or move its gameplay managers into the enabled `SampleScene`.
 - Assign real sprites in `Assets/_GAME/Resources/Data/StatIconData.asset`; the generated asset only guarantees entries exist.
 - Verify Hero Status buttons, pooling, horizontal skill scrolling, stat upgrades, reset, skill upgrade/equip/unequip, locked/eligible/max skill upgrade labels, and save reload in Unity Play Mode.
@@ -533,6 +535,14 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-16 Level Select arrows, difficulty button visuals and UI-only unlock tool
+
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` passed with 0 errors and 41 existing project/package warnings. The matching Editor build passed with 0 warnings and 0 errors. Two source entries were temporarily added to the generated runtime csproj for compilation, then removed.
+- Snapshot comparison confirmed all 147 pre-existing prefab YAML objects were retained verbatim except four narrowly scoped component/reference-list updates. Added 28 YAML objects/components for arrows and the runtime test control; all local fileIDs resolve and no anchor is duplicated.
+- Confirmed all eight affected/new C# files satisfy 250-line file and 45-line method limits (longest file 194 lines, longest method 20 lines), and checked for prohibited runtime initialization/search APIs. Targeted runtime `git diff --check` passed.
+- Confirmed all five visual-data entries expose two empty button sprite references for user assignment, and the popup is wired to its authored background Image.
+- Unity Play Mode and visual testing were not performed; concrete checks remain in Open TODO.
 
 ### 2026-10-15 Map, difficulty and level selection UI
 
@@ -615,6 +625,14 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-16 - Level Select navigation and temporary unlock preview
+
+- Changed: replaced map-button spawning with Previous/Next arrows that follow numeric MapType for configured maps. Added and wired both arrow objects to the existing canvas without deleting or repositioning authored UI.
+- Visuals: each difficulty now has `buttonNormal` and `buttonHighlighted` sprite fields. DifficultyPopupUI reads them through DataManager and changes the header's existing background Image and Button sprite state. The new fields remain empty for user assignment.
+- Tool: added MapSelectionRuntimeTestTool and the `Unlock All UI` runtime button, visible in Editor/development builds. Test mode directly previews unlocked maps, difficulties and levels in nonserialized UI state. It does not start gameplay or write selection/unlock/progression data; disable or close/reopen restores real data.
+- Data/save: no save schema, key or domain unlock-rule changes. Normal UI commands retain DataManager -> owner -> save -> refresh.
+- Verification: runtime/Editor builds, authored-prefab preservation, local references and code-size checks passed. Unity Play Mode validation and new-control positioning remain in Open TODO.
 
 ### 2026-10-15 - Map, difficulty and level selection UI
 

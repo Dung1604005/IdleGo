@@ -18,12 +18,14 @@ public sealed class LevelSelectButtonUI : MonoBehaviour,
     private MapType mapType = MapType.NONE;
     private bool isUnlocked;
     private bool isSelected;
+    private CanvasLevelSelect selectionView;
 
     public int LevelIndex => Mathf.Max(0, levelNumber - 1);
 
-    public void OnInit(MapType ownerMapType)
+    public void OnInit(MapType ownerMapType, CanvasLevelSelect sourceView = null)
     {
         mapType = ownerMapType;
+        selectionView = sourceView;
         if (button != null)
         {
             button.transition = Selectable.Transition.None;
@@ -36,10 +38,14 @@ public sealed class LevelSelectButtonUI : MonoBehaviour,
     public void Refresh()
     {
         DifficultType difficulty = DataManager.Ins.CurrentDifficulty;
-        isUnlocked = DataManager.Ins.IsLevelUnlocked(
-            difficulty, mapType, LevelIndex);
-        isSelected = mapType == DataManager.Ins.CurrentMapType
-            && LevelIndex == DataManager.Ins.CurrentLevelIndex;
+        isUnlocked = selectionView != null
+            ? selectionView.CanSelectLevel(mapType, LevelIndex)
+            : DataManager.Ins.IsLevelUnlocked(difficulty, mapType, LevelIndex);
+        MapType selectedMap = selectionView != null
+            ? selectionView.SelectedMapType : DataManager.Ins.CurrentMapType;
+        int selectedLevel = selectionView != null
+            ? selectionView.SelectedLevelIndex : DataManager.Ins.CurrentLevelIndex;
+        isSelected = mapType == selectedMap && LevelIndex == selectedLevel;
         if (button != null) button.interactable = isUnlocked;
         if (levelText != null)
         {
@@ -50,6 +56,11 @@ public sealed class LevelSelectButtonUI : MonoBehaviour,
 
     public void OnButtonSelectLevel()
     {
+        if (selectionView != null)
+        {
+            selectionView.OnLevelRequested(mapType, LevelIndex);
+            return;
+        }
         if (!isUnlocked || mapType != DataManager.Ins.CurrentMapType) return;
         if (DataManager.Ins.SelectLevel(LevelIndex))
         {
@@ -74,6 +85,7 @@ public sealed class LevelSelectButtonUI : MonoBehaviour,
     {
         button?.onClick.RemoveListener(OnButtonSelectLevel);
         mapType = MapType.NONE;
+        selectionView = null;
     }
 
     private void ApplyCurrentSprite()
