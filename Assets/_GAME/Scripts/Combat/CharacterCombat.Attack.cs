@@ -10,7 +10,23 @@ public partial class CharacterCombat
     public void MarkAction(double now)
     {
         float attackSpeed = character.Stats.GetCurrentStat(StatType.ATTACK_SPEED);
-        nextActionAt = now + delayAttack / Mathf.Max(0.01f, attackSpeed);
+        nextActionAt = now + GetBaseAttackInterval() / Mathf.Max(0.01f, attackSpeed);
+    }
+
+    private float GetBaseAttackInterval()
+    {
+        if (character is Player player)
+        {
+            // Read the current main weapon each action so equip/unequip needs no cache reset.
+            Equipment weapon = player.Equipment?.GetEquipment(EquipmentType.MAIN_WEAPON);
+            if (weapon?.Data != null && weapon.Data.HasAttacksPerSecond)
+            {
+                // Weapon APS is a rate; convert it to seconds before applying character speed.
+                return 1f / weapon.Data.AttacksPerSecond;
+            }
+        }
+
+        return delayAttack;
     }
 
     public void StartAttack(

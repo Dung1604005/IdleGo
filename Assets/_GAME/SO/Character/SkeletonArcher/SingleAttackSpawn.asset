@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttackSpawn
   projectilePrefab: {fileID: 11400000, guid: 06d24c1b2d9a475dba04714c2ed65b99, type: 3}
   spawnOrigin: 0
-  ownerOffset: {x: 0, y: 0.5, z: 0}
-  targetOffset: {x: 0, y: 0.5, z: 0}
-  verticalSpawnDistance: 4
+  ownerOffset: {x: 0, y: 0, z: 0}
+  targetOffset: {x: 0, y: 0, z: 0}
+  verticalSpawnDistance: 5
   targetLayers:
     serializedVersion: 2
     m_Bits: 64

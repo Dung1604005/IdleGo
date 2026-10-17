@@ -165,7 +165,7 @@ Key behavior:
 - `AutoCombat` contains execution logic and no character reference; the caller passes `CharacterCombat`.
 - `CharacterCombat` owns up to two `CombatSkillState` objects.
 - Skill priority is the ready skill that became ready most recently (`LastReadyAt` highest).
-- `nextActionAt` is the shared attack cadence gate derived from attack speed and combat delay. It is separate from skill cooldown.
+- `nextActionAt` is the shared attack cadence gate, separate from skill cooldown. For a Player with a MAIN_WEAPON, the interval is `1 / (weapon.AttacksPerSecond * max(0.01, current ATTACK_SPEED))`; CharacterCombatSO.DelayAttack is ignored in this case. Enemies and Players without a main weapon retain `DelayAttack / max(0.01, current ATTACK_SPEED)`. OFF_HAND_WEAPON has no APS and does not replace the fallback delay. MarkAction reads the currently equipped weapon each action, so changing/removing it needs no combat reinitialization.
 - Damage must not happen when the animation starts. It happens only at the `ExecuteAttack` Animation Event.
 - Skill cooldown starts only at the `EndAttack` Animation Event.
 - `hasExecutedAttack` prevents one animation from applying damage twice.
@@ -476,7 +476,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `CharacterDataSO`: stable ID, display data, class, `CharacterStatSO`, `CharacterCombatSO`, and `CharacterStatProgressSO`.
 - `CharacterStatSO`: base character stat list indexed by `StatType`.
 - `CharacterStatProgressSO`: allowed stat upgrade rules and all progress skills for one character.
-- `CharacterCombatSO`: basic range/type/delay and available starting combat skills.
+- `CharacterCombatSO`: basic range/type/delay and available starting combat skills. DelayAttack supplies base attack timing for enemies and unarmed Players; a Player's equipped MAIN_WEAPON APS overrides that base interval.
 - `CombatSkill`: stable `SkillId`, cooldown, level count/costs, requirement, animation name and subclass-specific level data.
 - Spawn AttackType SOs: assign `AttackProjectile` prefab, `AttackSpawnOrigin`, owner/target offsets, vertical spawn distance, target layers and AOE radius when applicable. Sample assets are `Assets/_GAME/SO/Combat/SingleAttackSpawn-Arrow.asset` and `AoeAttackSpawn-Impact.asset`; both use `Assets/_GAME/Prefabs/Combat/AttackProjectile-Arrow.prefab` and are not automatically equipped by existing characters.
 - `EquipmentDataSO`: stable item ID, rarity/type, requirements, enhancement slot counts, main stat at index zero, substats afterward, and attacks/second for main weapons.
@@ -536,6 +536,8 @@ Read only the relevant detailed document after this file when working on those s
 
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
 
+- Verify attack cadence in Play Mode for enemies, unarmed Players, main-weapon equip/swap/unequip and attack-speed buffs. Expected interval: enemy/unarmed = DelayAttack / AttackSpeed; armed = 1 / (weapon APS * AttackSpeed). Animation EndAttack still gates completion independently.
+
 - Run `IdleGo/Tests/Verify Attack Types` in Unity Edit Mode. The eight checks compiled but were not executed in this session; no controllable Unity Editor execution was available. Then verify spawned attacks in Play Mode: all three origins, single-hit timing, AOE overlaps/deduplication, both factions, fast-flight collision, masks/offsets, hit/miss/lifetime, owner/target death, pooled reuse and level restart/unload. Tune the sample prefab visual/speed/offsets before assigning a spawn SO to a character or skill.
 
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
@@ -556,6 +558,12 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-17 Equipped weapon attack cadence
+
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` passed with 0 errors and 41 existing project/package warnings.
+- Targeted `git diff --check` passed. CharacterCombat.Attack.cs is 174 lines; MarkAction is 5 lines and GetBaseAttackInterval is 15 lines. Only this combat source and PROJECT_PROGRESS.md changed.
+- Unity Play Mode timing was not tested; equip/swap/unequip, fallback delay and attack-speed modifier checks are recorded in Open TODO.
 
 ### 2026-10-17 Four attack types and pooled spawned damage
 
@@ -653,6 +661,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-17 - Use equipped main weapon APS for attack cadence
+
+- Changed: MarkAction now reads the Player's current MAIN_WEAPON every action. Its reciprocal APS replaces CharacterCombatSO.DelayAttack as the base interval; current ATTACK_SPEED still modifies the resulting cadence. Enemies/unarmed Players retain the existing delay-based formula. An off-hand weapon has no APS and does not override timing.
+- Data/save/setup: none; uses existing equipped-item data and authored weapon APS. Equip/swap/unequip applies on the next MarkAction without reinitializing combat.
+- Verification: runtime build and targeted diff/file/method-size checks passed; Unity Play Mode was not run.
+- Remaining: verify timing and animation duration together in Play Mode as listed in Open TODO.
 
 ### 2026-10-17 - Four attack types and owner-aware pooled projectiles
 
