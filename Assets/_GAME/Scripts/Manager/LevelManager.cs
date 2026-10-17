@@ -43,6 +43,7 @@ public partial class LevelManager : Singleton<LevelManager>
         }
 
         // Pool dùng prefab là dependency của LevelData nên phải dọn trước khi release Addressable.
+        AttackProjectilePool.ReleaseAll();
         EnemyManager.Ins.OnDespawn();
         LootManager.Ins.ClearLevelData();
         ReleaseCurrentLevel();
@@ -174,6 +175,8 @@ public partial class LevelManager : Singleton<LevelManager>
 
     private void UnloadCurrentLevel()
     {
+        // Projectile prefabs may be dependencies of the Addressable level too.
+        AttackProjectilePool.ReleaseAll();
         EnemyManager.Ins.OnDespawn();
         LootManager.Ins.ClearLevelData();
         ReleaseCurrentLevel();

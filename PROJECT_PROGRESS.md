@@ -1,6 +1,6 @@
 # IdleGo project context and progress
 
-> Last code scan: 2026-10-16
+> Last code scan: 2026-10-17
 > Purpose: this is the starting point for future development. Read this file before inspecting feature code. Update it after every project task according to the root `AGENTS.md`.
 
 ## 1. Project snapshot
@@ -132,6 +132,9 @@ Source files:
 - `Assets/_GAME/Scripts/Combat/AutoCombat.cs`
 - `Assets/_GAME/Scripts/Combat/CharacterCombat*.cs`
 - `Assets/_GAME/Scripts/Combat/CombatSkillState.cs`
+- `Assets/_GAME/Scripts/Combat/SingleAttackMelee.cs` and `AoeAttackMelee.cs`
+- `Assets/_GAME/Scripts/Combat/SingleAttackSpawn.cs`, `AoeAttackSpawn.cs`, and `SpawnAttackType.cs`
+- `Assets/_GAME/Scripts/Combat/AttackProjectile.cs`, `AttackProjectilePool.cs`, `AttackHitQuery.cs`, and `AttackTargetUtility.cs`
 - `Assets/_GAME/Scripts/Character/CharacterMovement.cs`
 - `Assets/_GAME/Scripts/Character/CharacterAnimationEvent.cs`
 
@@ -147,7 +150,12 @@ Character.Update
   -> stop movement
   -> CharacterCombat.StartAttack (stores target + skill and starts animation)
   -> Animation Event: CharacterAnimationEvent.ExecuteAttack
-  -> CharacterCombat.ExecuteAttack -> skill/AttackType deals damage
+  -> CharacterCombat.ExecuteAttack -> skill/AttackType executes
+  -> melee type deals damage immediately at this animation event
+  -> spawn type creates pooled AttackProjectile with owner, target and multiplier
+  -> projectile moves toward the selected target and checks swept circle collision
+  -> impact deals single-target damage or OverlapCircleAll AOE through owner combat
+  -> projectile returns to SimplePool
   -> Animation Event: CharacterAnimationEvent.EndAttack
   -> CharacterCombat.EndAttack -> start selected skill cooldown and unlock combat
 ```
@@ -164,7 +172,14 @@ Key behavior:
 - Movement uses `Vector3.MoveTowards`; attacking immediately stops movement.
 - Players target nearest active enemy through `EnemyManager`; enemies target nearest active team player through `PlayerManager` via `DataManager`.
 - Player target selection raises the selected enemy's configured SpriteRenderer sorting orders, including its health bar, and restores them when target changes.
-- Single-target and AOE behavior are separate `AttackType` classes. AOE uses overlap-circle logic.
+- The four concrete `AttackType` classes are `SingleAttackMelee`, `SingleAttackSpawn`, `AoeAttackMelee`, and `AoeAttackSpawn`. `SpawnAttackType` contains shared spawn configuration; runtime per-shot state is stored on `AttackProjectile : GameUnit`.
+- The former `SingleTargetAttack`/`AoeAttack` scripts were renamed to the melee types while preserving both meta GUIDs and existing SO references/radius/layer settings. Their asset filenames/names were preserved; `MovedFrom` records the previous class names.
+- Melee single attacks damage the selected nearest opponent. Melee AOE remains centered on that opponent. Spawn attacks launch one prefab from the owner, above the target or below it; movement uses MoveTowards toward that target's current position plus Target Offset.
+- `AttackProjectile.Owner` and `Target` identify the participants. Only opposite Player/Enemy factions can be hit. A single projectile only collides with its selected target; the AOE version detonates on that target's collider and calls OverlapCircleAll around the impact position. Opponent manager lists deduplicate characters with multiple colliders and exclude the owner/allies.
+- `AttackHitQuery` matches colliders to explicit character transforms/children without GetComponent or scene searches. It checks initial overlap and sweeps the whole movement step with CircleCastAll to prevent fast shots tunneling. Target collider layers must be included in the SO mask. Reaching the aim point without a collider contact is a miss.
+- Spawn damage still calls the owner's CharacterCombat.DealDamage at impact, retaining crit/dodge/armor/life steal/damage popup/kill EXP. It evaluates current damage stats at impact. ExecuteAttack spawns only; EndAttack still starts cooldown independently of projectile flight.
+- `CharacterCombat.RuntimeVersion` increments on init, despawn and level-attempt reset. Projectiles capture owner/target versions and cancel if either participant dies, despawns or changes version, protecting against pooled-character reuse. Each projectile resolves at most one impact and clears all runtime references/state on OnDespawn.
+- `AttackProjectilePool` tracks only projectile prefab pools. LevelManager collects active projectiles before restarting an attempt and releases their pools before releasing Addressable level data on unload/despawn. A projectile also returns to the pool on hit, miss or lifetime expiry.
 - On a player killing blow, `CharacterCombat` calls `DataManager.RegisterEnemyKill` before the enemy death animation despawns it.
 
 ### 6.2 Damage, health and progression reward
@@ -454,6 +469,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `EnemyType`: `NORMAL(0)`, `ELITE(1)`, `BOSS(2)`.
 - `DifficultType`: `EASY(0)`, `NORMAL(1)`, `HARD(2)`, `NIGHTMARE(3)`, `LEGEND(4)`. Numeric order drives sequential difficulty unlocks and is persisted.
 - `CharacaterClassType`: `MELEE(0)`, `RANGER(1)`, `MAGE(2)`.
+- `AttackSpawnOrigin`: `FROM_OWNER(0)`, `ABOVE_TARGET(1)`, `BELOW_TARGET(2)`; serialized in spawn AttackType assets, not player progress.
 
 ## 8. Important ScriptableObject setup
 
@@ -462,6 +478,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - `CharacterStatProgressSO`: allowed stat upgrade rules and all progress skills for one character.
 - `CharacterCombatSO`: basic range/type/delay and available starting combat skills.
 - `CombatSkill`: stable `SkillId`, cooldown, level count/costs, requirement, animation name and subclass-specific level data.
+- Spawn AttackType SOs: assign `AttackProjectile` prefab, `AttackSpawnOrigin`, owner/target offsets, vertical spawn distance, target layers and AOE radius when applicable. Sample assets are `Assets/_GAME/SO/Combat/SingleAttackSpawn-Arrow.asset` and `AoeAttackSpawn-Impact.asset`; both use `Assets/_GAME/Prefabs/Combat/AttackProjectile-Arrow.prefab` and are not automatically equipped by existing characters.
 - `EquipmentDataSO`: stable item ID, rarity/type, requirements, enhancement slot counts, main stat at index zero, substats afterward, and attacks/second for main weapons.
 - `EnchantMaterialDataSO`: rarity inherited from `ItemSO`, buff type, and possible stat roll list.
 - `ItemDatabaseSO`: must include every item ID that can exist in inventory, equipped data or chest saves.
@@ -480,6 +497,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - Hero Status prototype builder: `Assets/_GAME/Editor/HeroStatus*Builder.cs`.
 - Runtime chest test: `Assets/_GAME/Scripts/UI/Chest/ChestRuntimeTestTool.cs`.
 - Runtime map UI test: `Assets/_GAME/Scripts/UI/LevelSelect/MapSelectionRuntimeTestTool.cs`; open Level Select in Play Mode and click `Unlock All UI: OFF/ON`, or use the component's context menu. Preview mode never loads a battle or persists unlocks/selections.
+- Combat Editor checks: `Assets/_GAME/Editor/CombatAttackChecks.cs` and `CombatAttackCheckFixture.cs`; menu `IdleGo/Tests/Verify Attack Types`. Eight isolated checks cover factions, melee targeting, AOE deduplication/both factions, swept collision and layer masks, spawn origins, projectile initialization/cleanup and participant versions. No scene/save assets are written.
 - Save reset context menu: `Assets/_GAME/Scripts/ToolSave.cs`.
 
 Detailed balance references:
@@ -489,6 +507,7 @@ Detailed balance references:
 - `Assets/_GAME/Docs/Stat-Equipment-Modifier-System.md`
 - `Assets/_GAME/Docs/ItemInformationUI-Setup.md`
 - `Assets/_GAME/Docs/StatUpgradeFeedback-Setup.md`
+- `Assets/_GAME/Docs/AttackTypes-Setup.md`
 
 Read only the relevant detailed document after this file when working on those systems.
 
@@ -498,7 +517,7 @@ Read only the relevant detailed document after this file when working on those s
 |---|---|---|
 | Character base/stats | Implemented | Indexed stats, modifiers, health, dodge, armor, life steal, amplification |
 | Auto combat | Implemented | Nearest target, skill priority, MoveTowards, animation-timed damage/cooldown |
-| Attack types | Implemented | Single target and AOE separated for extension |
+| Attack types | Implemented foundation | Four single/AOE melee/spawn types, three flight origins, owner/faction filtering, swept collision, pooled cleanup and sample assets; Physics/Play Mode verification pending |
 | Team/roster | Implemented | Many characters, max three active, unlockable slots, persistent per-character state |
 | Map/difficulty progress | UI prototype implemented | Five difficulties, sequential unlocks/save, pooled mini-map view, enum-ordered arrows, skinnable difficulty popup and runtime UI-only unlock preview |
 | Level/wave | Core flow implemented | Addressable load, pooled waves, team defeat/restart, completion/next-level result flow |
@@ -516,6 +535,8 @@ Read only the relevant detailed document after this file when working on those s
 ## 11. Open TODO
 
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
+
+- Run `IdleGo/Tests/Verify Attack Types` in Unity Edit Mode. The eight checks compiled but were not executed in this session; no controllable Unity Editor execution was available. Then verify spawned attacks in Play Mode: all three origins, single-hit timing, AOE overlaps/deduplication, both factions, fast-flight collision, masks/offsets, hit/miss/lifetime, owner/target death, pooled reuse and level restart/unload. Tune the sample prefab visual/speed/offsets before assigning a spawn SO to a character or skill.
 
 - Visually tune `Canvas-HeroStatus.prefab`, `StatProgressLine.prefab`, and `HeroStatusSkillSlot.prefab` in Unity.
 - Tune only the newly added Previous/Next arrow and runtime test-button positions on `Canvas-LevelSelect.prefab`; the existing user-authored layout was preserved. Assign `Button Normal` and `Button Highlighted` for all five difficulties in `DifficultyMapVisualData.asset`.
@@ -535,6 +556,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-17 Four attack types and pooled spawned damage
+
+- Runtime build `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` passed with 0 errors and 41 existing project/package warnings. Editor build with the matching flags passed with 0 warnings and 0 errors, including the new check fixture/menu. Generated project source entries were temporarily updated for renamed/new scripts and then restored.
+- Checked combat and affected level/editor source files against the 250-line file / 45-line method limits; the longest affected method is the existing 36-line LoadLevelRoutine. New code has no GetComponent, scene-search APIs, Awake or C# events.
+- Verified both migrated melee meta GUIDs and the existing SO references, new sample projectile prefab YAML anchors/local references and targeted code/asset diff checks.
+- Eight repeatable Editor checks were added and compiled. They were not executed; Unity Physics/Edit Mode checks and Play Mode flight/animation verification remain in Open TODO. No user-authored scenes, animations or existing prefab layouts were edited.
 
 ### 2026-10-16 Level Select arrows, difficulty button visuals and UI-only unlock tool
 
@@ -625,6 +653,15 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-17 - Four attack types and owner-aware pooled projectiles
+
+- Changed: migrated the two existing melee attack scripts with preserved GUIDs and added SingleAttackSpawn/AoeAttackSpawn. Spawn SOs choose owner/above-target/below-target origins and create an AttackProjectile using SimplePool at the existing ExecuteAttack animation event.
+- Impact: a swept circle detects the selected target's colliders. Single shots damage that target; AOE shots OverlapCircleAll at impact, deduplicating opposing characters. Owner/allies are excluded, and all damage still routes through CharacterCombat.DealDamage.
+- Lifecycle: projectiles store owner/target combat versions, cancel after death/despawn/reset, clear per-shot state on return and expire by lifetime. LevelManager collects them before restart and releases their pools before Addressable unload.
+- Assets/setup: added an arrow projectile prefab, two sample spawn SOs and `Assets/_GAME/Docs/AttackTypes-Setup.md`. Existing characters keep their current assigned melee SOs until the user assigns a spawn SO. Existing scene/animation/prefab edits were preserved.
+- Data/save: no player-save schema/key change; AttackSpawnOrigin and projectile settings are authored SO/prefab data.
+- Verification: runtime/Editor builds, migration references, prefab fileIDs, code limits and targeted diff checks passed. Eight Editor checks compiled; execution plus visual/Play Mode verification remains in Open TODO.
 
 ### 2026-10-16 - Level Select navigation and temporary unlock preview
 

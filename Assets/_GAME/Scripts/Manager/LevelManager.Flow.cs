@@ -14,6 +14,7 @@ public partial class LevelManager
         }
 
         CancelPendingLevelTransition();
+        AttackProjectilePool.CollectAll();
         GetCombatCanvas()?.OnLevelStart();
         LevelDataSO levelData = levelInfo.GetLevelData();
 

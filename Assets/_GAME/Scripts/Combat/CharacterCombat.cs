@@ -25,6 +25,7 @@ public partial class CharacterCombat
     public bool IsAttacking => isAttacking;
     public float BasicAttackRange => Mathf.Max(0f, basicAttackRange);
     public bool IsInitialized { get; private set; }
+    public int RuntimeVersion { get; private set; }
     public double NextActionAt => nextActionAt;
     public IReadOnlyList<CombatSkillState> EquippedSkillStates => combatSkillStates;
 
@@ -103,6 +104,7 @@ public partial class CharacterCombat
 
     private void ResetRuntimeState()
     {
+        RuntimeVersion++;
         target = null;
         activeAttackTarget = null;
         activeSkillState = null;

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d986e40c46c4e899f3fd7fdb1a36ac4, type: 3}
   m_Name: AoeAttack
-  m_EditorClassIdentifier: Assembly-CSharp::AoeAttack
+  m_EditorClassIdentifier: Assembly-CSharp::AoeAttackMelee
   radius: 1
   targetLayers:
     serializedVersion: 2

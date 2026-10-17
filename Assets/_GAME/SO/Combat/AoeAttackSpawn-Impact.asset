@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8774feacfe4244a5bbc428300f871171, type: 3}
+  m_Name: AoeAttackSpawn-Impact
+  m_EditorClassIdentifier: Assembly-CSharp::AoeAttackSpawn
+  projectilePrefab: {fileID: 11400000, guid: 06d24c1b2d9a475dba04714c2ed65b99, type: 3}
+  spawnOrigin: 1
+  ownerOffset: {x: 0.3, y: 0.5, z: 0}
+  targetOffset: {x: 0, y: 0.5, z: 0}
+  verticalSpawnDistance: 4
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  radius: 2

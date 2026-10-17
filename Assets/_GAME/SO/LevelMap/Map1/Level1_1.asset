@@ -35,13 +35,17 @@ MonoBehaviour:
   - waveIndex: 3
     enemies:
     - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
-      amount: 3
+      amount: 1
+    - enemyData: {fileID: 11400000, guid: b206ed076650cd6479c6b078e0b12d2d, type: 2}
+      amount: 1
     spawnPosition: {x: -12, y: 4.65, z: 0}
   - waveIndex: 4
     enemies:
     - enemyData: {fileID: 11400000, guid: b41f054efbc05794b855b76f88130040, type: 2}
-      amount: 4
+      amount: 3
+    - enemyData: {fileID: 11400000, guid: b206ed076650cd6479c6b078e0b12d2d, type: 2}
+      amount: 1
     spawnPosition: {x: 12, y: 4.65, z: 0}
   normalEquipmentSource: {fileID: 11400000, guid: 8038fe8dfa17871458c2e251de794474, type: 2}
-  eliteEquipmentSource: {fileID: 0}
+  eliteEquipmentSource: {fileID: 11400000, guid: 8038fe8dfa17871458c2e251de794474, type: 2}
   bossEquipmentSource: {fileID: 0}
