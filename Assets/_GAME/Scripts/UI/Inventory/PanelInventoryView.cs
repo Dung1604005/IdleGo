@@ -10,7 +10,7 @@ public class PanelInventoryView : PanelView
     [SerializeField] private ItemSlotUI slotTemplate;
     [SerializeField] private InventoryContentLayout contentLayout = new InventoryContentLayout();
 
-    private readonly List<ItemSlotUI> activeSlotViews = new List<ItemSlotUI>();
+    [SerializeField] private  List<ItemSlotUI> activeSlotViews = new List<ItemSlotUI>();
     private bool isInitialized;
 
     public override void OnInit()
@@ -30,7 +30,6 @@ public class PanelInventoryView : PanelView
         }
 
         contentLayout.OnInit(viewport, content, gridLayout);
-        SimplePool.PreLoad(slotTemplate, inventory.Capacity, content);
         isInitialized = true;
 
     }
@@ -157,12 +156,13 @@ public class PanelInventoryView : PanelView
 
     private bool TrySpawnSlot()
     {
-        ItemSlotUI newSlot = SimplePool.Spawn(
-            slotTemplate,
-            content.position,
-            Quaternion.identity,
-            content
-        );
+        ItemSlotUI newSlot = Instantiate(slotTemplate, content.position, Quaternion.identity, content);
+        // ItemSlotUI newSlot = SimplePool.Spawn(
+        //     slotTemplate,
+        //     content.position,
+        //     Quaternion.identity,
+        //     content
+        // );
         if (newSlot == null)
         {
             Debug.LogError("SimplePool could not spawn an ItemSlotUI.");
@@ -185,7 +185,8 @@ public class PanelInventoryView : PanelView
     {
         for (int i = activeSlotViews.Count - 1; i >= 0; i--)
         {
-            SimplePool.Despawn(activeSlotViews[i]);
+            Destroy(activeSlotViews[i].gameObject);
+            //SimplePool.Despawn(activeSlotViews[i]);
         }
         activeSlotViews.Clear();
     }

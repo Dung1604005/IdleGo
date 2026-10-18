@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3649da8267f4b4aa086690727b83dc3, type: 3}
-  m_Name: SourceLv1
+  m_Name: SourceLv1-Elite
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentSourceSO
   levelRequired: 1
   equipments:
   - equipment: {fileID: 11400000, guid: 44f9c1d7961ce6c4f93ee0f01c4c1092, type: 2}
-    dropRate: 10
+    dropRate: 12
   - equipment: {fileID: 11400000, guid: 4c58ca151c5a3ea4ea73ae4da348640b, type: 2}
     dropRate: 3
   - equipment: {fileID: 11400000, guid: 311d5ceecf766d64caf1ff3ff16bdfbd, type: 2}
-    dropRate: 10
+    dropRate: 12
   - equipment: {fileID: 11400000, guid: be3fd82d8f6866246ae1acb60a63fede, type: 2}
     dropRate: 3
   - equipment: {fileID: 11400000, guid: 3b0faff3e0e349b45a909477fa104983, type: 2}
-    dropRate: 10
+    dropRate: 12
   - equipment: {fileID: 11400000, guid: 5a287d499a9bf6a4dbee25aaa53816da, type: 2}
     dropRate: 3
   - equipment: {fileID: 11400000, guid: 18e73f4355651404fb44fec1ed61fb69, type: 2}
-    dropRate: 10
+    dropRate: 12
   - equipment: {fileID: 11400000, guid: 6790219041a0f674b9be03e782e9de6c, type: 2}
     dropRate: 3
   - equipment: {fileID: 11400000, guid: e1fd7444f436f9949ab7dd95440f47aa, type: 2}

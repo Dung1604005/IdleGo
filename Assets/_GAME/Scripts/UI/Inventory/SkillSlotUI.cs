@@ -32,6 +32,10 @@ public class SkillSlotUI : GameUnit
         {
             // Slot chi hien thi gia tri CharacterCombat cung cap, khong tu chay cooldown.
             skillImage.fillAmount = Mathf.Clamp01(progress);
+            if(progress == 0f)
+            {
+                skillImage.fillAmount = 1f;
+            }
         }
     }
 
