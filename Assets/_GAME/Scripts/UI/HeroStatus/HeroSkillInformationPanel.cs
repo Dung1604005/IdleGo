@@ -11,9 +11,9 @@ public sealed class HeroSkillInformationPanel : PanelView
     [SerializeField] private TextMeshProUGUI currentLevelText;
     [SerializeField] private TextMeshProUGUI levelDetailsText;
     [SerializeField] private TextMeshProUGUI upgradeCostText;
-    [SerializeField] private Button upgradeButton;
-    [SerializeField] private Button equipButton;
-    [SerializeField] private Button unequipButton;
+    [SerializeField] private ButtonUI upgradeButton;
+    [SerializeField] private ButtonUI equipButton;
+    [SerializeField] private ButtonUI unequipButton;
 
     private CanvasHeroStatus owner;
     private string characterId;
@@ -87,14 +87,14 @@ public sealed class HeroSkillInformationPanel : PanelView
         int availablePoints = DataManager.Ins.GetCharacterAvailableStatPoints(
             characterId);
         RefreshUpgradeCost(currentLevel, canUpgrade, nextLevel, pointCost);
-        SetButton(upgradeButton, true,
+        upgradeButton.SetButton(true,
             canUpgrade && availablePoints >= pointCost);
         bool isEquipped = DataManager.Ins.IsCharacterSkillEquipped(
             characterId, skill);
-        SetButton(equipButton, !isEquipped,
+        equipButton.SetButton( !isEquipped,
             currentLevel > 0
             && DataManager.Ins.CanEquipCharacterSkill(characterId, skill));
-        SetButton(unequipButton, isEquipped, isEquipped);
+        unequipButton.SetButton(isEquipped, isEquipped);
     }
 
     private void RefreshUpgradeCost(
@@ -179,18 +179,6 @@ public sealed class HeroSkillInformationPanel : PanelView
         if (text != null)
         {
             text.color = color;
-        }
-    }
-
-    private static void SetButton(
-        Button button,
-        bool visible,
-        bool interactable)
-    {
-        if (button != null)
-        {
-            button.gameObject.SetActive(visible);
-            button.interactable = interactable;
         }
     }
 }

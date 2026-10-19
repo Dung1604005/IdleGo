@@ -242,7 +242,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 7be8ed3c589092a47965b8b74f9c0bc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 1708057510854485779}
   - component: {fileID: 8321299271027602391}
   - component: {fileID: 8735102328460800642}
+  - component: {fileID: 683489899035108504}
   m_Layer: 6
   m_Name: Skeleton-Archer
   m_TagString: Untagged
@@ -434,6 +435,7 @@ MonoBehaviour:
   characterDataSO: {fileID: 11400000, guid: 39f21d7ad817c454db3819b418abf896, type: 2}
   autoCombat: {fileID: 1708057510854485779}
   healthBar: {fileID: 7757289966999191962}
+  damageFlash: {fileID: 683489899035108504}
   animator: {fileID: 3397801756894615851}
   currentAnim: 
   targetSortingRenderers:
@@ -487,3 +489,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &683489899035108504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568994715492857346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519649b8f24b5e04798d9a508f36a2c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  renderer: {fileID: 1813606664041042803}
+  duration: 0.1

@@ -35,10 +35,6 @@ public class LevelInfo
         currentLevelIndex = _levelData == null ? -1: _levelData.LevelIndex;
         currentLevelData = _levelData;
     }
-    public WaveData GetWaveData()
-    {
-        return currentWaveData;
-    }
 
     public void SetWaveData(int waveIndex)
     {

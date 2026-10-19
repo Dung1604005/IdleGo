@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4706288223469402892}
   - component: {fileID: 472605006093533303}
   - component: {fileID: 150573254229118406}
+  - component: {fileID: 7596392941606279287}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
@@ -63,29 +64,21 @@ MonoBehaviour:
   tf: {fileID: 4841899246063340354}
   stats:
     statBaseData: {fileID: 11400000, guid: 2569c8dee3f47af4daab1d7ac5a16c47, type: 2}
+    currentStats: []
     currentHealth: 0
-    currentMaxHealth: 0
-    currentRunSpeed: 0
-    currentDamage: 0
-    currentLevel: 0
-    currentExperience: 0
-    currentAttackSpeed: 0
-    currentCriticalChance: 0
-    currentCriticalDamage: 0
-    currentCooldownReduction: 0
-    currentArmor: 0
-    currentLifeSteal: 0
-    currentDodgeChance: 0
-    currentDamageAmplification: 0
   combat:
     character: {fileID: 472605006093533303}
     basicAttackRange: 0
     combatSkillStates: []
     delayAttack: 0
+    isAttacking: 0
+    hasExecutedAttack: 0
   characterDataSO: {fileID: 11400000, guid: 2f38551caa4a30e419c0383ab6e6d4fc, type: 2}
   autoCombat: {fileID: 4706288223469402892}
   healthBar: {fileID: 5608070355683028361}
+  damageFlash: {fileID: 7596392941606279287}
   animator: {fileID: 6564227330735835081}
+  currentAnim: 
   targetSortingRenderers:
   - {fileID: 1286374615826677948}
   - {fileID: 5220988605389233375}
@@ -137,6 +130,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7596392941606279287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305229305765078877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519649b8f24b5e04798d9a508f36a2c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  renderer: {fileID: 1286374615826677948}
+  duration: 0.1
 --- !u!1 &5569852019352281664
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +204,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 7be8ed3c589092a47965b8b74f9c0bc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

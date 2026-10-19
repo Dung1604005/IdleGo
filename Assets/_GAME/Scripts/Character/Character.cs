@@ -15,9 +15,13 @@ public abstract class Character : GameUnit
 
     [SerializeField] protected CharacterHealthBar healthBar;
 
+    [SerializeField] protected DamageFlash damageFlash;
+
     [SerializeField]protected Animator animator;
 
     [SerializeField]protected String currentAnim;
+
+    public DamageFlash DamageFlash => damageFlash;
 
     public CharacterStat Stats => stats;
 
@@ -50,6 +54,7 @@ public abstract class Character : GameUnit
     public virtual void OnInit()
     {
         IsInitialized = true;
+        damageFlash.OnInit();
         stats.OnInit(characterDataSO.StatSO, this);
         OnStatsInitialized();
         combat.OnInit(characterDataSO.CombatSO);
@@ -65,9 +70,11 @@ public abstract class Character : GameUnit
 
     public override void OnDespawn()
     {
+        damageFlash.OnDespawn();
         combat.OnDespawn();
         movement.OnDespawn();
         healthBar?.OnDespawn();
+
         IsInitialized = false;
     }
 

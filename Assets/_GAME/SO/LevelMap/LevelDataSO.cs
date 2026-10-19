@@ -25,6 +25,7 @@ public class LevelDataSO : ScriptableObject
 
     public int WaveCount => waves != null ? waves.Count : 0;
 
+
     public WaveData GetWave(int waveIndex)
     {
         if (waves == null || waveIndex < 0 || waveIndex >= waves.Count)

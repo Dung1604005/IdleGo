@@ -16,7 +16,7 @@ public sealed class CharacterHealthController
             return false;
         }
 
-        character?.ChangeAnim(GameConfig.ANIM_HURT);
+        character.DamageFlash.Flash();
         // Armor doi thanh phan tram giam damage; don danh trung van gay toi thieu 1 damage.
         float reduction = CombatFormula.CalculateArmorDamageReduction(
             stats.GetCurrentStat(StatType.ARMOR));

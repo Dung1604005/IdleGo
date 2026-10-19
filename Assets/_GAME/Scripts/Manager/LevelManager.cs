@@ -99,6 +99,7 @@ public partial class LevelManager : Singleton<LevelManager>
         }
 
         loadLevelCoroutine = StartCoroutine(LoadLevelRoutine(levelIndex));
+        UIManager.Ins.GetUI<CanvasCombat>().SetLevelProgress(0f);
         return true;
     }
 
@@ -128,6 +129,8 @@ public partial class LevelManager : Singleton<LevelManager>
         {
             return false;
         }
+
+        UIManager.Ins.GetUI<CanvasCombat>().SetLevelProgress((float)nextWaveIndex/levelInfo.GetLevelData().GetTotalWave());
         levelInfo.SetWaveData(nextWaveIndex);
   
         // LevelManager quyết định wave, EnemyManager singleton chịu trách nhiệm spawn và despawn.

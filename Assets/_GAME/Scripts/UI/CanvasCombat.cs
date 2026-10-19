@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class CanvasCombat : UICanvas
 {
@@ -16,7 +17,9 @@ public class CanvasCombat : UICanvas
 
     [SerializeField]private RectTransform canvasRect;
 
-    [Header("Level Result")]
+    [Header("Level Progress")]
+
+    [SerializeField] private Image fillImage;
     [SerializeField] private GameObject levelResultOverlay;
     [SerializeField] private TextMeshProUGUI levelResultText;
     [SerializeField, Min(0.01f)] private float resultScaleDuration = 0.4f;
@@ -113,6 +116,11 @@ public class CanvasCombat : UICanvas
             levelResultText.rectTransform.localScale = Vector3.one;
         }
         levelResultOverlay?.SetActive(visible);
+    }
+
+    public void SetLevelProgress(float amount)
+    {
+        fillImage.fillAmount = amount;
     }
 
     public void ShowDamage(int damage, bool isCritical, Transform target)

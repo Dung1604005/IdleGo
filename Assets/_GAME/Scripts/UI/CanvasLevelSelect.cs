@@ -132,6 +132,7 @@ public sealed class CanvasLevelSelect : UICanvas, IMapProgressView
     {
         CloseDirectly();
         UIManager.Ins.OpenUI<CanvasInventoryHero>();
+        UIManager.Ins.OpenUI<CanvasNavigation>();
     }
 
     public override void CloseDirectly()

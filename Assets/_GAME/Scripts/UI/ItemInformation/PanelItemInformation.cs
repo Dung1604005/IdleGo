@@ -7,6 +7,7 @@ public partial class PanelItemInformation : PanelView
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI rarityText;
+    [SerializeField] private Image borderRarity;
     [SerializeField] private TextMeshProUGUI mainStatsText;
     [SerializeField] private TextMeshProUGUI levelRequirementText;
     [SerializeField] private TextMeshProUGUI characterRequirementText;
@@ -73,7 +74,7 @@ public partial class PanelItemInformation : PanelView
             ClearView();
             return;
         }
-
+        borderRarity.sprite= DataManager.Ins.GetRarityBGSprite(data.RarityType);
         Color rarityColor = DataManager.Ins.GetRarityColor(data.RarityType);
         SetIcon(data.Icon);
         SetColoredText(itemNameText, data.NameItem, rarityColor);

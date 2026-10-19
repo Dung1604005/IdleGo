@@ -419,6 +419,7 @@ Current implementation:
 - Skill level costs are authored per target level in `CombatSkill`.
 - The skill upgrade label shows `Max Level` only at the skill cap. Before the hero reaches `CombatSkill.LevelRequire`, it instead shows `Level Require: <level>` in red and keeps the upgrade button disabled; the authored text color returns after the requirement is met.
 - A learned eligible skill can be equipped; each character can equip at most two.
+- Selected-hero level reset is a separate Editor tool: `ToolResetCharacterLevel` calls `DataManager.CharacterLevelReset.cs` -> `PlayerManager.CharacterLevelReset.cs` -> `Inventory.CompleteDataFlow` (JSON/PlayerPrefs save, then registered-view refresh). It resolves the current Inventory/Hero selection at click time and changes only that hero's level to 1 and EXP to 0. Global progression, stat points and purchased stat/skill upgrades remain unchanged. Equipment/skills requiring level > 1 must be unequipped first, because normal save loading revalidates their requirements.
 - Skill cooldown UI in the regular hero panel reads progress from `CharacterCombat`; UI does not run its own cooldown clock.
 - Prototype generator menu: `IdleGo/UI/Build Hero Status Prototype`.
 - Generated assets:
@@ -499,6 +500,7 @@ Do not reorder or insert existing enum values without a save migration. Lists us
 - Runtime map UI test: `Assets/_GAME/Scripts/UI/LevelSelect/MapSelectionRuntimeTestTool.cs`; open Level Select in Play Mode and click `Unlock All UI: OFF/ON`, or use the component's context menu. Preview mode never loads a battle or persists unlocks/selections.
 - Combat Editor checks: `Assets/_GAME/Editor/CombatAttackChecks.cs` and `CombatAttackCheckFixture.cs`; menu `IdleGo/Tests/Verify Attack Types`. Eight isolated checks cover factions, melee targeting, AOE deduplication/both factions, swept collision and layer masks, spawn origins, projectile initialization/cleanup and participant versions. No scene/save assets are written.
 - Save reset context menu: `Assets/_GAME/Scripts/ToolSave.cs`.
+- Selected hero level reset: standalone `Assets/_GAME/Editor/ToolResetCharacterLevel.cs`; menu `IdleGo/Tools/Reset Selected Hero Level`. Enter Play Mode, select the hero in Inventory/Hero, then click `Reset to Level 1 / 0 EXP`. No scene component or prefab setup is needed. The tool displays the selected hero, current level/EXP, validation reason and save result; it cannot execute outside Play Mode. Domain mutation remains behind DataManager/PlayerManager, not in the tool or PanelHeroView.
 
 Detailed balance references:
 
@@ -536,6 +538,7 @@ Read only the relevant detailed document after this file when working on those s
 
 These are known unfinished or unverified items, not automatic permission to change unrelated code.
 
+- Verify the selected-hero reset tool in Play Mode: switch between two heroes, reset the selected hero, confirm only its level/EXP changed, verify registered UI refresh and PlayerPrefs reload, and confirm level-gated equipment/skills block reset until unequipped. Check the no-selection/already-reset states and save-failure feedback. This task did not execute a live reset or modify existing player saves.
 - Verify attack cadence in Play Mode for enemies, unarmed Players, main-weapon equip/swap/unequip and attack-speed buffs. Expected interval: enemy/unarmed = DelayAttack / AttackSpeed; armed = 1 / (weapon APS * AttackSpeed). Animation EndAttack still gates completion independently.
 
 - Run `IdleGo/Tests/Verify Attack Types` in Unity Edit Mode. The eight checks compiled but were not executed in this session; no controllable Unity Editor execution was available. Then verify spawned attacks in Play Mode: all three origins, single-hit timing, AOE overlaps/deduplication, both factions, fast-flight collision, masks/offsets, hit/miss/lifetime, owner/target death, pooled reuse and level restart/unload. Tune the sample prefab visual/speed/offsets before assigning a spawn SO to a character or skill.
@@ -558,6 +561,12 @@ These are known unfinished or unverified items, not automatic permission to chan
 - Review legacy `Awake()`/`GetComponent` usage in `UIManager`, `UICanvas`, and `Singleton` only if a dedicated migration task is requested.
 
 ## 12. Verification record
+
+### 2026-10-19 Selected hero level reset tool
+
+- `dotnet build Assembly-CSharp.csproj --no-restore -p:UseSharedCompilation=false -v:q -clp:ErrorsOnly` passed with 42 warnings and 0 errors. The matching Assembly-CSharp-Editor build passed with 0 warnings and 0 errors, including the new standalone EditorWindow and manager command files. The validation script restored generated project files after compilation.
+- All three new C# files satisfy the 250-line file / 45-line method limits (longest file 85 lines, longest method 33 lines); new meta GUIDs are valid. Targeted whitespace checks passed for new sources and PROJECT_PROGRESS.md. New sources contain no Awake, GetComponent, scene-search calls or C# events. Existing user-authored scenes/prefabs/scripts and save data were not edited by this task.
+- Unity Play Mode and live-save mutation were not performed; the concrete verification steps are in Open TODO.
 
 ### 2026-10-17 Equipped weapon attack cadence
 
@@ -661,6 +670,13 @@ These are known unfinished or unverified items, not automatic permission to chan
 ## 13. Recent changes
 
 Use newest entry first. Keep entries focused on behavior, ownership, data/save changes and setup requirements.
+
+### 2026-10-19 - Separate selected-hero level reset tool
+
+- Added: standalone ToolResetCharacterLevel EditorWindow with current hero/level/EXP and a Play Mode reset button. Menu: IdleGo/Tools/Reset Selected Hero Level. PanelHeroView and existing scenes/prefabs are unchanged.
+- Flow: tool -> DataManager -> PlayerManager -> change the selected hero's LEVEL/EXPERIENCE -> existing inventory save -> registered-view refresh. Focused manager partial files keep existing files within size limits; they contain no tool UI.
+- Behavior: level becomes 1 and EXP becomes 0; existing stat points, stat/skill purchases and global progression are kept. Reset rejects equipped items/skills requiring level > 1 to avoid a loadout that normal save loading cannot restore. Save failure is reported separately from runtime mutation success.
+- Verification: runtime and Editor builds passed; new-source size, meta GUID and targeted whitespace checks passed. Unity Play Mode and live reset were not run. Remaining interaction/save-reload checks are recorded in Open TODO.
 
 ### 2026-10-17 - Use equipped main weapon APS for attack cadence
 
