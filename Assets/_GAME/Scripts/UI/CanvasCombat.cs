@@ -20,6 +20,10 @@ public class CanvasCombat : UICanvas
     [Header("Level Progress")]
 
     [SerializeField] private Image fillImage;
+
+    [SerializeField] private RectTransform fillTF;
+
+    [SerializeField] private RectTransform arrowTF;
     [SerializeField] private GameObject levelResultOverlay;
     [SerializeField] private TextMeshProUGUI levelResultText;
     [SerializeField, Min(0.01f)] private float resultScaleDuration = 0.4f;
@@ -121,6 +125,19 @@ public class CanvasCombat : UICanvas
     public void SetLevelProgress(float amount)
     {
         fillImage.fillAmount = amount;
+
+        SetPositionArrow(amount);
+    }
+
+    public void SetPositionArrow(float amount)
+    {
+        float width = fillTF.rect.width;
+
+        Vector2 arrowPos = arrowTF.anchoredPosition;
+
+        arrowPos.x = fillTF.anchoredPosition.x + amount*width;
+
+        arrowTF.anchoredPosition= arrowPos;
     }
 
     public void ShowDamage(int damage, bool isCritical, Transform target)
